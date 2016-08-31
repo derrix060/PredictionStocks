@@ -2,17 +2,21 @@ package process;
 
 import java.util.ArrayList;
 
+
 import types.Ticker;
 
 public class Normalize {
 	private final static float defaultMargin = 0.5f;
+	private final static double maxLimit = 1;
+	private final static double minLimit = -1;
 	
 	public static ArrayList<Ticker> normalizeValues(ArrayList<Ticker> tickers){
 		return normalizeValues(tickers, defaultMargin);
 	}
 	public static ArrayList<Ticker> normalizeValues(ArrayList<Ticker> tickers, float margin){
-		float minValue = minimumValue(tickers);
-		float maxValue = maximumValue(tickers);
+		
+		float minValue = new Float(tickers.stream().mapToDouble(t -> t.getClosePrice()).min().getAsDouble());
+		float maxValue = new Float(tickers.stream().mapToDouble(t -> t.getClosePrice()).max().getAsDouble());
 		
 		for (Ticker tick : tickers){
 			tick.setNormalizedValue(getNormalizedValue(tick, minValue, maxValue, margin));
@@ -24,34 +28,14 @@ public class Normalize {
 	private static double getNormalizedValue(Ticker t, float minValue, float maxValue, float margin){
 		//extracted from: https://www.mql5.com/pt/articles/497
 		
+		double adjustedMaxLimit = maxLimit - margin;
+		double adjustedMinLimit = margin + minLimit;
+		
 		double norm;
-		margin /= 2;
 		norm = t.getClosePrice() - minValue;
-		norm *= (1 - (2*margin));
+		norm *= (adjustedMaxLimit - adjustedMinLimit); //maxLimit - minLimit
 		norm /= (maxValue - minValue);
-		norm += margin;
+		norm += adjustedMinLimit;
 		return norm;
-	}
-	
-	private static float maximumValue(ArrayList<Ticker> tickers){
-		float ret = Float.MIN_NORMAL;
-		
-		for(Ticker ticker : tickers){
-			if (ticker.getClosePrice() > ret)
-				ret = ticker.getClosePrice();
-		}
-		
-		return ret;
-	}
-	
-	private static float minimumValue(ArrayList<Ticker> tickers){
-		float ret = Float.MAX_VALUE;
-		
-		for(Ticker ticker : tickers){
-			if (ticker.getClosePrice() < ret)
-				ret = ticker.getClosePrice();
-		}
-		
-		return ret;
 	}
 }
