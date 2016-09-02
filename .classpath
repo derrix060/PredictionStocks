@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/mario/git/PredictionStocks/lib/YahooFinanceAPI-3.5.0.jar"/>
+	<classpathentry kind="src" path="/encog-java-core"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
