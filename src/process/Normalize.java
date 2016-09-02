@@ -11,7 +11,7 @@ import types.Ticker;
 public class Normalize {
 	private final static float defaultMargin = 0.5f;
 	private final static double maxLimit = 1;
-	private final static double minLimit = -1;
+	private final static double minLimit = 0;
 	
 	public static ArrayList<Ticker> normalizeValues(ArrayList<Ticker> tickers){
 		return normalizeValues(tickers, defaultMargin);
@@ -36,7 +36,7 @@ public class Normalize {
 		
 		double norm;
 		norm = t.getClosePrice() - minValue;
-		norm *= (adjustedMaxLimit - adjustedMinLimit); //maxLimit - minLimit
+		norm *= (adjustedMaxLimit - adjustedMinLimit);
 		norm /= (maxValue - minValue);
 		norm += adjustedMinLimit;
 		return norm;
