@@ -6,7 +6,7 @@ public class ActivationFunctionFactory {
 	public enum enumActivationFuncion{
 		BiPolar, BipolarSteepenedSigmoid, ClippedLinear, Competitive, Elliott, ElliottSymmetric, Gaussian, Linear, LOG, Ramp, Sigmoid, SIN, SoftMax, SteepenedSigmoid, Step, TANH;
 	}
-	//test
+	//teste
 	public ActivationFunction create (enumActivationFuncion activationType){
 		if (activationType.equals(enumActivationFuncion.BiPolar)) return new ActivationBiPolar();
 		if (activationType.equals(enumActivationFuncion.BipolarSteepenedSigmoid)) return new ActivationBipolarSteepenedSigmoid();
