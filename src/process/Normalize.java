@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import types.Ticker;
 
+//example
+//https://github.com/surmenok/MNISTNeuralNetwork/tree/master/src/main/java/com/surmenok/pavel/mnist
+
 public class Normalize {
 	private final static float defaultMargin = 0.5f;
 	private final static double maxLimit = 1;
