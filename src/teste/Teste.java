@@ -56,14 +56,14 @@ public class Teste {
 			System.out.println("\nTicker: " + symbol);
 			System.out.println("Before");
 			for (Ticker tick : tickers){
-				System.out.println("Ticker: " + tick.getTicker() + " Normalized value: " + tick.getNormalizedValue());
+				System.out.println(tick);
 			}
 			
 			Normalize.normalizeValues(tickers);
 			
 			System.out.println("After");
 			for (Ticker tick : tickers){
-				System.out.println("Ticker: " + tick.getTicker() + " Normalized value: " + tick.getNormalizedValue());
+				System.out.println(tick);
 			}
 		}
 	}
