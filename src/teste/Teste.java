@@ -10,7 +10,6 @@ import java.util.Set;
 
 import imports.YahooExtractor;
 import process.Normalize;
-import process.PropagationFactory.trainingType;
 import types.Ticker;
 
 public class Teste {
