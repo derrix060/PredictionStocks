@@ -2,16 +2,44 @@ package teste;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import imports.YahooExtractor;
 import process.Normalize;
+import process.PropagationFactory.trainingType;
 import types.Ticker;
 
 public class Teste {
 	
+	public static void toDo(){
+		//dropout -> protect the overfitting
+		//bias -> permit a better adaptation, increesing the freedom.
+		
+	}
+	
+	
+	
 	public static void main(String[] args) throws IOException {
+		//testeCamadas();
+		testeNormalize();
+	}
+	
+	public static Set<Integer> testeCamadas(){
+		String entrada = "1, 2,3,4,5, 6,7,8,9,10";
+		Set<String> camadasStr = new HashSet<>();
+		Set<Integer> camadas = new HashSet<>();
+		
+		camadasStr.addAll(Arrays.asList(entrada.replaceAll(" ", "").split(",")));
+		
+		camadasStr.forEach(qtde -> camadas.add(new Integer(qtde)));
+		return camadas;
+	}
+	
+	public static void testeNormalize() throws IOException{
 		String[] ticker = {"ABCB4.SA", "DTEX3.SA"};
 		Calendar from = Calendar.getInstance();
 		Calendar to = Calendar.getInstance();
