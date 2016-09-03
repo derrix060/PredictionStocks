@@ -8,13 +8,22 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.encog.ml.data.MLDataSet;
+import org.encog.ml.data.basic.BasicMLDataSet;
+import org.encog.neural.networks.BasicNetwork;
+
+import imports.Normalize;
 import imports.YahooExtractor;
-import process.Normalize;
+import process.NetworkFactory;
+import process.ActivationFunctionFactory.enumActivationFuncion;
 import types.Ticker;
 
 public class Teste {
 	
 	public static void toDo(){
+		//implement the input and output DataSet.
+		//maybe the output will be the close price from the next day, or the variation...
+		
 		//dropout -> protect the overfitting
 		//bias -> permit a better adaptation, increesing the freedom.
 		
@@ -25,6 +34,12 @@ public class Teste {
 	public static void main(String[] args) throws IOException {
 		//testeCamadas();
 		testeNormalize();
+	}
+	
+	public static void testeNetwork(){
+		BasicNetwork network = new NetworkFactory().getNetwork(testeCamadas(), true, 0.5, enumActivationFuncion.Sigmoid);
+		
+		//MLDataSet trainingSet = new BasicMLDataSet(input, ideal)
 	}
 	
 	public static Set<Integer> testeCamadas(){
