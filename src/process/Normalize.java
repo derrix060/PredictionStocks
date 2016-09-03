@@ -17,26 +17,74 @@ public class Normalize {
 		return normalizeValues(tickers, defaultMargin);
 	}
 	public static ArrayList<Ticker> normalizeValues(ArrayList<Ticker> tickers, float margin){
+		tickers = normalizeOpenPrice(tickers, margin);
+		tickers = normalizeHighPrice(tickers, margin);
+		tickers = normalizeLowPrice(tickers, margin);
+		tickers = normalizeClosePrice(tickers, margin);
+		tickers = normalizeVolume(tickers, margin);
 		
-		float minValue = new Float(tickers.stream().mapToDouble(t -> t.getClosePrice()).min().getAsDouble());
-		float maxValue = new Float(tickers.stream().mapToDouble(t -> t.getClosePrice()).max().getAsDouble());
+		return tickers;
+	}
+	private static ArrayList<Ticker> normalizeOpenPrice(ArrayList<Ticker> tickers, float margin){
+		double minValue = tickers.stream().mapToDouble(t -> t.getOpenPrice()).min().getAsDouble();
+		double maxValue = tickers.stream().mapToDouble(t -> t.getOpenPrice()).max().getAsDouble();
 		
 		for (Ticker tick : tickers){
-			tick.setNormalizedValue(getNormalizedValue(tick, minValue, maxValue, margin));
+			tick.setOpenPrice(getNormalizedValue(tick.getOpenPrice(), minValue, maxValue, margin));
+		}
+		
+		return tickers;
+	}
+	private static ArrayList<Ticker> normalizeHighPrice(ArrayList<Ticker> tickers, float margin){
+		double minValue = tickers.stream().mapToDouble(t -> t.getHighPrice()).min().getAsDouble();
+		double maxValue = tickers.stream().mapToDouble(t -> t.getHighPrice()).max().getAsDouble();
+		
+		for (Ticker tick : tickers){
+			tick.setHighPrice(getNormalizedValue(tick.getHighPrice(), minValue, maxValue, margin));
+		}
+		
+		return tickers;
+	}
+	private static ArrayList<Ticker> normalizeLowPrice(ArrayList<Ticker> tickers, float margin){
+		double minValue = tickers.stream().mapToDouble(t -> t.getLowPrice()).min().getAsDouble();
+		double maxValue = tickers.stream().mapToDouble(t -> t.getLowPrice()).max().getAsDouble();
+		
+		for (Ticker tick : tickers){
+			tick.setLowPrice(getNormalizedValue(tick.getLowPrice(), minValue, maxValue, margin));
+		}
+		
+		return tickers;
+	}
+	private static ArrayList<Ticker> normalizeClosePrice(ArrayList<Ticker> tickers, float margin){
+		double minValue = tickers.stream().mapToDouble(t -> t.getClosePrice()).min().getAsDouble();
+		double maxValue = tickers.stream().mapToDouble(t -> t.getClosePrice()).max().getAsDouble();
+		
+		for (Ticker tick : tickers){
+			tick.setClosePrice(getNormalizedValue(tick.getClosePrice(), minValue, maxValue, margin));
+		}
+		
+		return tickers;
+	}
+	private static ArrayList<Ticker> normalizeVolume(ArrayList<Ticker> tickers, float margin){
+		double minValue = tickers.stream().mapToDouble(t -> t.getVolume()).min().getAsDouble();
+		double maxValue = tickers.stream().mapToDouble(t -> t.getVolume()).max().getAsDouble();
+		
+		for (Ticker tick : tickers){
+			tick.setVolume(getNormalizedValue(tick.getVolume(), minValue, maxValue, margin));
 		}
 		
 		return tickers;
 	}
 	
-	private static double getNormalizedValue(Ticker t, float minValue, float maxValue, float margin){
+	private static double getNormalizedValue(double oldValue, double minValue, double maxValue, float margin){
 		//extracted from: https://www.mql5.com/pt/articles/497
 		
 		double adjustedMaxLimit = maxLimit - margin;
 		double adjustedMinLimit = margin + minLimit;
 		
 		double norm;
-		norm = t.getClosePrice() - minValue;
-		norm *= (adjustedMaxLimit - adjustedMinLimit);
+		norm = oldValue - minValue;
+		norm *= (adjustedMaxLimit - adjustedMinLimit); //maxLimit - minLimit
 		norm /= (maxValue - minValue);
 		norm += adjustedMinLimit;
 		return norm;
