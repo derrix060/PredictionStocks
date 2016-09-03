@@ -35,7 +35,11 @@ public class YahooExtractor {
 				Ticker tick = new Ticker();
 				tick.setTicker(symbol);
 				tick.setDate(quote.getDate());
-				tick.setClosePrice(quote.getAdjClose().floatValue());
+				tick.setOpenPrice(quote.getOpen().doubleValue());
+				tick.setHighPrice(quote.getHigh().doubleValue());
+				tick.setLowPrice(quote.getLow().doubleValue());
+				tick.setClosePrice(quote.getAdjClose().doubleValue());
+				tick.setVolume(quote.getVolume().doubleValue());
 				
 				historicals.add(tick);
 			}
