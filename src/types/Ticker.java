@@ -1,12 +1,16 @@
 package types;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Ticker {
 	private Calendar date;
 	private String ticker;
-	private float closePrice;
-	private double normalizedValue;
+	private double openPrice;
+	private double highPrice;
+	private double lowPrice;
+	private double closePrice;
+	private double volume;
 	
 	
 	//constructor
@@ -18,22 +22,16 @@ public class Ticker {
 	
 	
 	public String toString(){
-		return "Ticker: " + getTicker() + " Date: " + getDate() + " closePrice: " + getClosePrice() + " normPrice: " + normalizedValue;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		return "Ticker: " + getTicker() + " Date: " + format.format(getDate().getTime())+ " openPrice: " + getOpenPrice() + " highPrice: " + getHighPrice() + " lowPrice: " + getLowPrice() + " closePrice: " + getClosePrice() + " Volume: " + getVolume();
 	}
 
 	//getters and setters
-	public void setNormalizedValue (double normalizedValue){
-		this.normalizedValue = normalizedValue;
-	}
 	public Calendar getDate() {
 		return date;
 	}
 	public void setDate(Calendar date) {
 		this.date = date;
-	}
-
-	public double getNormalizedValue() {
-		return normalizedValue;
 	}
 	public String getTicker() {
 		return ticker;
@@ -43,12 +41,35 @@ public class Ticker {
 		this.ticker = ticker;
 	}
 
-	public float getClosePrice() {
+	public double getClosePrice() {
 		return closePrice;
 	}
-
-	public void setClosePrice(float closePrice) {
-		this.closePrice = closePrice;
+	public void setClosePrice(double d) {
+		this.closePrice = d;
+	}
+	public double getOpenPrice() {
+		return openPrice;
+	}
+	public void setOpenPrice(double openPrice) {
+		this.openPrice = openPrice;
+	}
+	public double getHighPrice() {
+		return highPrice;
+	}
+	public void setHighPrice(double highPrice) {
+		this.highPrice = highPrice;
+	}
+	public double getLowPrice() {
+		return lowPrice;
+	}
+	public void setLowPrice(double lowPrice) {
+		this.lowPrice = lowPrice;
+	}
+	public double getVolume() {
+		return volume;
+	}
+	public void setVolume(double volume) {
+		this.volume = volume;
 	}
 	
 	
