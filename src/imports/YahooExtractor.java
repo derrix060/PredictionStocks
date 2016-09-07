@@ -28,27 +28,37 @@ public class YahooExtractor {
 		for (String symbol: stocks.keySet()){
 			Stock stock = stocks.get(symbol);
 			List<HistoricalQuote> historical = new ArrayList<>();
-			HashSet<Ticker> historicals = new HashSet<>();
-			
-			historical = stock.getHistory(from, to, Interval.DAILY);
-			
-			for(HistoricalQuote quote : historical){
-				Ticker tick = new Ticker();
-				tick.setTicker(symbol);
-				tick.setDate(quote.getDate());
-				tick.setOpenPrice(quote.getOpen().doubleValue());
-				tick.setHighPrice(quote.getHigh().doubleValue());
-				tick.setLowPrice(quote.getLow().doubleValue());
-				tick.setClosePrice(quote.getAdjClose().doubleValue());
-				tick.setVolume(quote.getVolume().doubleValue());
-				
-				historicals.add(tick);
-			}
+			HashSet<Ticker> historicals = getHistorical(symbol, from, to);
 			
 			ret.put(symbol, historicals);
 		}
 		
 		return ret;
+	}
+	
+	public static HashSet<Ticker> getHistorical(String ticker, Calendar from, Calendar to) throws IOException{
+		Stock stock = YahooFinance.get(ticker);
+		
+		List<HistoricalQuote> historical = new ArrayList<>();
+		HashSet<Ticker> historicals = new HashSet<>();
+		
+		historical = stock.getHistory(from, to, Interval.DAILY);
+		
+		for(HistoricalQuote quote : historical){
+			Ticker tick = new Ticker();
+			tick.setTicker(ticker);
+			tick.setDate(quote.getDate());
+			tick.setOpenPrice(quote.getOpen().doubleValue());
+			tick.setHighPrice(quote.getHigh().doubleValue());
+			tick.setLowPrice(quote.getLow().doubleValue());
+			tick.setClosePrice(quote.getAdjClose().doubleValue());
+			tick.setVolume(quote.getVolume().doubleValue());
+			
+			historicals.add(tick);
+		}
+		
+		
+		return historicals;
 	}
 	
 }
