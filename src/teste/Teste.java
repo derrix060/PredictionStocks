@@ -18,18 +18,8 @@ import process.NetworkFactory;
 import process.ActivationFunctionFactory.enumActivationFuncion;
 import types.Ticker;
 
+@SuppressWarnings("unused")
 public class Teste {
-	
-	public static void toDo(){
-		//implement the input and output DataSet.
-		//maybe the output will be the close price from the next day, or the variation...
-		
-		//dropout -> protect the overfitting
-		//bias -> permit a better adaptation, increesing the freedom.
-		
-	}
-	
-	
 	
 	public static void main(String[] args) throws IOException {
 		//testeCamadas();
@@ -61,10 +51,10 @@ public class Teste {
 		from.add(Calendar.DAY_OF_MONTH, -8);
 		to.add(Calendar.DAY_OF_MONTH, -1);
 		
-		Map <String, ArrayList<Ticker>> historicals = YahooExtractor.getHistorical(ticker, from, to);
+		Map <String, HashSet<Ticker>> historicals = YahooExtractor.getHistorical(ticker, from, to);
 		
 		for (String symbol : historicals.keySet()){
-			ArrayList<Ticker> tickers = new ArrayList<>();
+			HashSet<Ticker> tickers = new HashSet<>();
 			tickers = historicals.get(symbol);
 			
 			System.out.println("\nTicker: " + symbol);
