@@ -8,7 +8,8 @@ Some considerations:
 
 
 To do:
-- Implement input and output DataSet. (output can be next day close price)
+- Implement input and output DataSet. (output can be next day close price).
+- Implement next util day.
 - dropout -> protect the overfitting.
 - bias -> better adaptation, incresing the freedom.
 - Change Interval as parameter to get Historical.

@@ -13,6 +13,7 @@ import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.neural.networks.BasicNetwork;
 
 import imports.Normalize;
+import imports.TrainingFactory;
 import imports.YahooExtractor;
 import process.NetworkFactory;
 import process.ActivationFunctionFactory.enumActivationFuncion;
@@ -22,14 +23,36 @@ import types.Ticker;
 public class Teste {
 	
 	public static void main(String[] args) throws IOException {
+		
+		testeNetwork();
 		//testeCamadas();
-		testeNormalize();
+		//testeNormalize();
 	}
 	
-	public static void testeNetwork(){
+	
+	public static void testeNetwork() throws IOException{
 		BasicNetwork network = new NetworkFactory().getNetwork(testeCamadas(), true, 0.5, enumActivationFuncion.Sigmoid);
 		
-		//MLDataSet trainingSet = new BasicMLDataSet(input, ideal)
+		Calendar from = Calendar.getInstance();
+		Calendar to = Calendar.getInstance();
+
+		from.add(Calendar.DAY_OF_MONTH, -12);
+		to.add(Calendar.DAY_OF_MONTH, -5);
+		TrainingFactory training = new TrainingFactory("PETR4.SA", from, to);
+		double[][] input = training.getInput(0.4f);
+		
+		for (int i = 0; i< input.length; i++){
+			for (int j=0; j< 4; j++){
+				System.out.println("i: " + i + " j: " + j + " value: " + input[i][j]);
+			}
+		}
+		
+		System.out.println("Output");
+		double[][] output = training.getOutput(0.4f);
+		for (int i=0; i<output.length; i++)
+			System.out.println("i: " + i + " value: " + output[i][0]);
+		
+		
 	}
 	
 	public static Set<Integer> testeCamadas(){
