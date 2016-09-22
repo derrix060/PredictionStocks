@@ -22,19 +22,39 @@ import types.Ticker;
 @SuppressWarnings("unused")
 public class Teste {
 	
+	static Calendar from = Calendar.getInstance();
+	static Calendar to = Calendar.getInstance();
+	
 	public static void main(String[] args) throws IOException {
-		
-		testeNetwork();
+		Calendar dt = Calendar.getInstance();
+		dt.add(Calendar.DAY_OF_MONTH, -4);
+		Calendar data = testeNextDay(dt);
+		System.out.println(data);
+		//testeNetwork();
 		//testeCamadas();
 		//testeNormalize();
+	}
+	
+	public static Calendar testeNextDay(Calendar date) throws IOException{
+		
+			try{
+				HashSet<Ticker> historico = YahooExtractor.getHistorical("ABCB4.SA", date, date);
+			}
+			catch(IOException e){
+				//not found
+				date.add(Calendar.DAY_OF_MONTH, 1);
+				System.out.println("teste date: " + date);
+				return testeNextDay(date);
+			}
+			
+			return date;
 	}
 	
 	
 	public static void testeNetwork() throws IOException{
 		BasicNetwork network = new NetworkFactory().getNetwork(testeCamadas(), true, 0.5, enumActivationFuncion.Sigmoid);
 		
-		Calendar from = Calendar.getInstance();
-		Calendar to = Calendar.getInstance();
+		
 
 		from.add(Calendar.DAY_OF_MONTH, -12);
 		to.add(Calendar.DAY_OF_MONTH, -5);
@@ -68,8 +88,6 @@ public class Teste {
 	
 	public static void testeNormalize() throws IOException{
 		String[] ticker = {"ABCB4.SA", "DTEX3.SA"};
-		Calendar from = Calendar.getInstance();
-		Calendar to = Calendar.getInstance();
 
 		from.add(Calendar.DAY_OF_MONTH, -8);
 		to.add(Calendar.DAY_OF_MONTH, -1);
