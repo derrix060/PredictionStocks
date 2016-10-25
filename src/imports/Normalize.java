@@ -79,14 +79,14 @@ public class Normalize {
 	private static double getNormalizedValue(double oldValue, double minValue, double maxValue, float margin){
 		//extracted from: https://www.mql5.com/pt/articles/497
 		
-		double adjustedMaxLimit = maxLimit - margin;
-		double adjustedMinLimit = margin + minLimit;
+		double adjustedMaxValue = maxValue * (1 + margin);
+		double adjustedMinValue = minValue * (1 - margin);
 		
 		double norm;
-		norm = oldValue - minValue;
-		norm *= (adjustedMaxLimit - adjustedMinLimit);
-		norm /= (maxValue - minValue);
-		norm += adjustedMinLimit;
+		norm = oldValue - adjustedMinValue;
+		norm *= (maxLimit - minLimit);
+		norm /= (adjustedMaxValue - adjustedMinValue);
+		norm += minLimit;
 		return norm;
 	}
 }
