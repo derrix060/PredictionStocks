@@ -42,7 +42,7 @@ public class TrainingFactory {
 		return resp;
 	}
 	
-	public double[][] getOutput(float margin) throws IOException{
+	public double[][] getIdealOutput(float margin) throws IOException{
 		Calendar newTo = to;
 		Calendar newFrom = from;
 		
@@ -53,11 +53,14 @@ public class TrainingFactory {
 		HashSet<Ticker> historical = YahooExtractor.getHistorical(ticker, newFrom, newTo);
 		Normalize.normalizeValues(historical, margin);
 		double[][] resp = new double[historical.size()][1];
-		ArrayList<Ticker> historicalArray = new ArrayList<Ticker> (historical);
+		//ArrayList<Ticker> historicalArray = new ArrayList<Ticker> (historical);
 		
-		for(int i=0;i<historical.size();i++)
+		int i = 0;
 		
-		
+		for (Ticker t : historical){
+			resp [i][0] = t.getClosePrice();
+			i ++;
+		}
 		return resp;		
 	}
 	

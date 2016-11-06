@@ -26,10 +26,7 @@ public class YahooExtractor {
 		Map<String, HashSet<Ticker>> ret = new HashMap<String, HashSet<Ticker>>();
 		
 		for (String symbol: stocks.keySet()){
-			Stock stock = stocks.get(symbol);
-			List<HistoricalQuote> historical = new ArrayList<>();
 			HashSet<Ticker> historicals = getHistorical(symbol, from, to);
-			
 			ret.put(symbol, historicals);
 		}
 		
