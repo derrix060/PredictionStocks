@@ -1,11 +1,8 @@
 package imports;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
-import java.util.stream.Stream;
-
 import types.Ticker;
 
 public class TrainingFactory {

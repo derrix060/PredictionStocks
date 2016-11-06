@@ -1,6 +1,5 @@
 package imports;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import types.Ticker;
