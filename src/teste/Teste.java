@@ -79,6 +79,7 @@ public class Teste {
 			System.out.println("Camada " + i + ", qtde neuronios: " + network.getLayerNeuronCount(i) + ", total: " + network.getLayerTotalNeuronCount(i));
 		}
 	}
+	
 	public static BasicNetwork getTesteNetwork() throws IOException{
 		return new NetworkFactory().getNetwork(testeCamadas(), false, 0.5, enumActivationFuncion.Sigmoid);
 		
@@ -200,5 +201,10 @@ public class Teste {
 				System.out.println("Ligacao " + i + ", peso: " + weights1[i]);
 		}
 		System.out.println("Rede treinada!\nIteracoes: " + iteration +"\nErro: " + rprop.getError());
+		
+		
+		System.out.println("Validacao!");
+		
+		
 	}
 }
