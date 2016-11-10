@@ -15,6 +15,7 @@ public class Normalize {
 	public static HashSet<Ticker> normalizeValues(HashSet<Ticker> tickers){
 		return normalizeValues(tickers, defaultMargin);
 	}
+	
 	public static HashSet<Ticker> normalizeValues(HashSet<Ticker> tickers, float margin){
 		tickers = normalizeOpenPrice(tickers, margin);
 		tickers = normalizeHighPrice(tickers, margin);
@@ -24,6 +25,7 @@ public class Normalize {
 		
 		return tickers;
 	}
+	
 	private static HashSet<Ticker> normalizeOpenPrice(HashSet<Ticker> tickers, float margin){
 		double minValue = tickers.stream().mapToDouble(t -> t.getOpenPrice()).min().getAsDouble();
 		double maxValue = tickers.stream().mapToDouble(t -> t.getOpenPrice()).max().getAsDouble();
@@ -34,6 +36,7 @@ public class Normalize {
 		
 		return tickers;
 	}
+	
 	private static HashSet<Ticker> normalizeHighPrice(HashSet<Ticker> tickers, float margin){
 		double minValue = tickers.stream().mapToDouble(t -> t.getHighPrice()).min().getAsDouble();
 		double maxValue = tickers.stream().mapToDouble(t -> t.getHighPrice()).max().getAsDouble();
@@ -44,6 +47,7 @@ public class Normalize {
 		
 		return tickers;
 	}
+	
 	private static HashSet<Ticker> normalizeLowPrice(HashSet<Ticker> tickers, float margin){
 		double minValue = tickers.stream().mapToDouble(t -> t.getLowPrice()).min().getAsDouble();
 		double maxValue = tickers.stream().mapToDouble(t -> t.getLowPrice()).max().getAsDouble();
@@ -54,6 +58,7 @@ public class Normalize {
 		
 		return tickers;
 	}
+	
 	private static HashSet<Ticker> normalizeClosePrice(HashSet<Ticker> tickers, float margin){
 		double minValue = tickers.stream().mapToDouble(t -> t.getClosePrice()).min().getAsDouble();
 		double maxValue = tickers.stream().mapToDouble(t -> t.getClosePrice()).max().getAsDouble();
@@ -64,6 +69,7 @@ public class Normalize {
 		
 		return tickers;
 	}
+	
 	private static HashSet<Ticker> normalizeVolume(HashSet<Ticker> tickers, float margin){
 		double minValue = tickers.stream().mapToDouble(t -> t.getVolume()).min().getAsDouble();
 		double maxValue = tickers.stream().mapToDouble(t -> t.getVolume()).max().getAsDouble();
@@ -76,7 +82,14 @@ public class Normalize {
 	}
 	
 	private static double getNormalizedValue(double oldValue, double minValue, double maxValue, float margin){
-		//extracted from: https://www.mql5.com/pt/articles/497
+		/*
+		 *      (X - Xmin) (D2 - D1)  
+		 * Y =	--------------------   +  D1
+		 * 		    (Xmax - Xmin)
+		 */
+		
+		//Adjuste margin when it's 100 %
+		margin = margin == 1f?1.001f:margin;
 		
 		double adjustedMaxValue = maxValue * (1 + margin);
 		double adjustedMinValue = minValue * (1 - margin);
@@ -87,5 +100,27 @@ public class Normalize {
 		norm /= (adjustedMaxValue - adjustedMinValue);
 		norm += minLimit;
 		return norm;
+	}
+	
+	private static double getDenomarlizedValue(double normalizedValue, double minValue, double maxValue, float margin){
+		/*
+		 *       Y (Xmax - Xmin) - D1
+		 * X =  --------------------   +  Xmin
+		 * 			(D2 - D1)
+		 */
+		
+
+		//Adjuste margin when it's 100 %
+		margin = margin == 1f?1.001f:margin;
+		
+		double adjustedMaxValue = maxValue * (1 + margin);
+		double adjustedMinValue = minValue * (1 - margin);
+		
+		double denorm;
+		denorm = normalizedValue * (adjustedMaxValue - adjustedMinValue);
+		denorm -= minLimit;
+		denorm /= (maxLimit - minLimit);
+		denorm += adjustedMinValue;
+		return denorm;
 	}
 }
