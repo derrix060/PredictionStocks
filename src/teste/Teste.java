@@ -81,8 +81,8 @@ public class Teste {
 	}
 	
 	public static BasicNetwork getTesteNetwork() throws IOException{
-		return new NetworkFactory().getNetwork(testeCamadas(), false, 0.5, enumActivationFuncion.Sigmoid);
-		
+		//return new NetworkFactory().getNetwork(testeCamadas(), false, 0.5, enumActivationFuncion.Sigmoid);
+		return null;
 	}
 	
 	public static List<Integer> testeCamadas(){
