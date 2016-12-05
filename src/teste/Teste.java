@@ -81,8 +81,7 @@ public class Teste {
 	}
 	
 	public static BasicNetwork getTesteNetwork() throws IOException{
-		//return new NetworkFactory().getNetwork(testeCamadas(), false, 0.5, enumActivationFuncion.Sigmoid);
-		return null;
+		return new NetworkFactory().getNetwork(testeCamadas(), false, 0.5, enumActivationFuncion.Sigmoid);
 	}
 	
 	public static List<Integer> testeCamadas(){
@@ -148,6 +147,7 @@ public class Teste {
 
 	public static void testeTrain(boolean verbose) throws IOException{
 		BasicNetwork network = getTesteNetwork();
+		
 		
 		from.add(Calendar.DAY_OF_MONTH, -12);
 		to.add(Calendar.DAY_OF_MONTH, -5);
