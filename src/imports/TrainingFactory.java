@@ -3,17 +3,15 @@ package imports;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashSet;
+
+import types.Datas;
 import types.Ticker;
 
 public class TrainingFactory {
 	private String ticker;
 	private Calendar from;
 	private Calendar to;
-	
-	//qty atributes
-	public static final int qtyAtrInput = 3; 	//closePrice, highPrice, lowPrice, openPrice, volume
-	public static final int qtyAtrOutput = 3; 	//closePrice, highPrice, lowPrice
-	
+		
 	//constructor
 	public TrainingFactory(String ticker, Calendar from, Calendar to) {
 		this.ticker = ticker;
@@ -22,10 +20,10 @@ public class TrainingFactory {
 	}
 
 	
-	public double[][] getInput(float margin, double minValue, double maxValue) throws IOException{		
+	public double[][] getInput(float margin) throws IOException{		
 		HashSet<Ticker> historical = YahooExtractor.getHistorical(ticker, from, to);
-		Normalize.normalizeValues(historical, minValue, maxValue, margin);
-		double[][] resp = new double[historical.size()][qtyAtrInput];
+		Normalize.normalizeValues(historical, margin);
+		double[][] resp = new double[historical.size()][Datas.qtyAtr];
 		
 		int i=0;
 		for (Ticker t : historical){
@@ -39,14 +37,8 @@ public class TrainingFactory {
 		}
 		return resp;
 	}
-
 	
-	public double[][] getInput(float margin) throws IOException{		
-		
-		return getInput(margin, 0, 0);
-	}
-	
-	public double[][] getIdealOutput(float margin, double minValue, double maxValue) throws IOException{
+	public double[][] getIdealOutput(float margin) throws IOException{
 		Calendar newTo = to;
 		Calendar newFrom = from;
 		
@@ -55,8 +47,8 @@ public class TrainingFactory {
 		
 		
 		HashSet<Ticker> historical = YahooExtractor.getHistorical(ticker, newFrom, newTo);
-		Normalize.normalizeValues(historical, minValue, maxValue, margin);
-		double[][] resp = new double[historical.size()][qtyAtrOutput];
+		Normalize.normalizeValues(historical, margin);
+		double[][] resp = new double[historical.size()][Datas.qtyAtr];
 		//ArrayList<Ticker> historicalArray = new ArrayList<Ticker> (historical);
 		
 		int i = 0;
@@ -65,6 +57,8 @@ public class TrainingFactory {
 			resp [i][0] = t.getClosePrice();
 			resp[i][1] = t.getHighPrice();
 			resp[i][2] = t.getLowPrice();
+			//resp[i][3] = t.getOpenPrice();
+			//resp[i][4] = t.getVolume();
 			i ++;
 		}
 		return resp;		

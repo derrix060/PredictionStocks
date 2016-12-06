@@ -1,28 +1,49 @@
 package types;
 
+import java.util.Arrays;
+import java.util.Set;
+import imports.Normalize;
+
 public class Datas {
 	
+	public static final int qtyAtr = 3;
+
 	private double maxValue;
 	private double minValue;
 	private double maxNormalizedValue;
 	private double minNormalizedValue;
+	private float margin;
 	private double[][] values;
 	private double[][] normalizedValues;
 	
-	public Datas() {
+	public Datas(Set<Ticker> tickers, float margin) {
+		setValues(tickerToDouble(tickers));
+		setMaxValue(Arrays.stream(getValues()).flatMapToDouble(Arrays::stream).max().getAsDouble());
+		setMinValue(Arrays.stream(getValues()).flatMapToDouble(Arrays::stream).min().getAsDouble());
+		
+		tickers = Normalize.normalizeValues(tickers, margin);
+		setNormalizedValues(tickerToDouble(tickers));
+		setMaxNormalizedValue(Arrays.stream(getNormalizedValues()).flatMapToDouble(Arrays::stream).max().getAsDouble());
+		setMinNormalizedValue(Arrays.stream(getNormalizedValues()).flatMapToDouble(Arrays::stream).min().getAsDouble());
+		
 	}
 	
-	public void updateMaxValue(){
+	private double[][] tickerToDouble (Set<Ticker> tickers){
+		double[][] rtn = new double[tickers.size()][qtyAtr];
 		
-	}
-	public void updateMinValue(){
+		int i=0;
 		
-	}
-	public void updateMaxNormValue(){
+		for (Ticker t : tickers){
+			rtn[i][0] = t.getClosePrice();
+			rtn[i][1] = t.getHighPrice();
+			rtn[i][2] = t.getLowPrice();
+			//resp[i][3] = t.getOpenPrice();
+			//resp[i][4] = t.getVolume();
+			
+			i++;
+		}
 		
-	}
-	public void updateMinNormValue(){
-		
+		return rtn;
 	}
 	
 	
@@ -63,6 +84,14 @@ public class Datas {
 	}
 	public void setNormalizedValues(double[][] normalizedValues) {
 		this.normalizedValues = normalizedValues;
+	}
+
+	public float getMargin() {
+		return margin;
+	}
+
+	public void setMargin(float margin) {
+		this.margin = margin;
 	}
 	
 }
