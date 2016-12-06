@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.encog.mathutil.randomize.ConsistentRandomizer;
+import org.encog.ml.data.MLData;
+import org.encog.ml.data.MLDataPair;
 import org.encog.ml.data.MLDataSet;
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.train.MLTrain;
@@ -23,6 +25,7 @@ import org.encog.neural.networks.training.propagation.back.Backpropagation;
 import org.encog.neural.networks.training.propagation.manhattan.ManhattanPropagation;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 import org.encog.util.simple.EncogUtility;
+import org.omg.CORBA.TRANSACTION_MODE;
 
 import imports.Normalize;
 import imports.TrainingFactory;
@@ -36,11 +39,14 @@ public class Teste {
 	
 	static Calendar from = Calendar.getInstance();
 	static Calendar to = Calendar.getInstance();
-	static String ticker = "PETR4.SA";
+	static String ticker = "PRIO3.SA";
 	static int maxIteration = 5000;
 	public static void main(String[] args) throws IOException {
-		to.add(Calendar.DATE,-2);
-		from.add(Calendar.DATE, -23);
+		from.set(2016, 9, 5);
+		to.set(2016, 9, 24);
+		
+		//to.add(Calendar.DATE,-2);
+		//from.add(Calendar.DATE, -23);
 		//testCompleteTrain();
 		//testeNetwork();
 		//testeCamadas();
@@ -85,7 +91,7 @@ public class Teste {
 	}
 	
 	public static List<Integer> testeCamadas(){
-		String entrada = "5,2,1";
+		String entrada = TrainingFactory.qtyAtrInput + ",2," + TrainingFactory.qtyAtrOutput;
 		List<String> camadasStr = Arrays.asList(entrada.replaceAll(" ", "").split(","));
 		List<Integer> camadas = new ArrayList<>();
 		
@@ -111,7 +117,7 @@ public class Teste {
 				System.out.println(tick);
 			}
 			
-			Normalize.normalizeValues(hashTickers);
+			//Normalize.normalizeValues(hashTickers);
 			
 			System.out.println("After");
 			for (Ticker tick : hashTickers){
@@ -147,14 +153,14 @@ public class Teste {
 
 	public static void testeTrain(boolean verbose) throws IOException{
 		BasicNetwork network = getTesteNetwork();
+		float margin = 0.4f;
+		double maxValue = 0;
+		double minValue = 0;
 		
-		
-		from.add(Calendar.DAY_OF_MONTH, -12);
-		to.add(Calendar.DAY_OF_MONTH, -5);
 		TrainingFactory training = new TrainingFactory(ticker, from, to);
 		
 		//input
-		double[][] input = training.getInput(0.4f);
+		double[][] input = training.getInput(margin);
 		
 		if (verbose){
 			System.out.println("Input");
@@ -166,7 +172,11 @@ public class Teste {
 		}
 		
 		//output
-		double[][] output = training.getIdealOutput(0.4f);
+		double[][] output = training.getIdealOutput(0.4f, minValue, maxValue);
+
+		System.out.println("------------------------ TESTE ------------------------");
+		System.out.println("MinValue: " + minValue + "\nMaxValue: " + maxValue);
+		System.out.println("------------------------ TESTE ------------------------");
 		
 		if(verbose){
 			System.out.println("Output");
@@ -193,7 +203,7 @@ public class Teste {
 			rprop.iteration();
 			iteration ++;
 		}
-		while(iteration < maxIteration && rprop.getError() > 0.01);
+		while(iteration < maxIteration && rprop.getError() > 0.001);
 		
 		if(verbose){
 			System.out.println("Peso depois!");
@@ -205,6 +215,17 @@ public class Teste {
 		
 		System.out.println("Validacao!");
 		
+		for (MLDataPair pair : trainingData){
+			MLData out = network.compute(pair.getInput());
+			
+			System.out.println("Input = " + pair.getInput());
+			System.out.println("Actual = " + out);
+			System.out.println("Ideal = " + pair.getIdeal());
+			System.out.println("-----------------------------------------");
+			
+		}
+		
 		
 	}
+
 }
