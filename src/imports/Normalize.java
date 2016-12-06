@@ -2,6 +2,7 @@ package imports;
 
 import java.util.Set;
 
+import types.Datas;
 import types.Ticker;
 
 //example
@@ -9,11 +10,27 @@ import types.Ticker;
 
 public class Normalize {
 	private final static float defaultMargin = 0.5f;
+	
 	private final static double maxLimit = 1;
 	private final static double minLimit = 0;
 	
 	public static Set<Ticker> normalizeValues(Set<Ticker> tickers){
 		return normalizeValues(tickers,  defaultMargin);
+	}
+	
+	public static void normalizeValues (Datas data){
+		double[][] values = data.getValues();
+		double maxValue = data.getMaxValue();
+		double minValue = data.getMinValue();
+		float margin = data.getMargin();
+		
+		for (double[] atr : values){
+			for (double value : atr){
+				value = getNormalizedValue(value, minValue, maxValue, margin);
+			}
+		}
+		
+		data.setNormalizedValues(values);
 	}
 	
 	public static Set<Ticker> normalizeValues(Set<Ticker> tickers, float margin){
@@ -31,7 +48,7 @@ public class Normalize {
 		double maxValue = tickers.stream().mapToDouble(t -> t.getOpenPrice()).max().getAsDouble();
 		
 		for (Ticker tick : tickers){
-			tick.setOpenPrice(getNormalizedValue(tick.getOpenPrice(),  margin));
+			tick.setOpenPrice(getNormalizedValue(tick.getOpenPrice(), minValue, maxValue,  margin));
 		}
 		
 		return tickers;
@@ -42,7 +59,7 @@ public class Normalize {
 		double maxValue = tickers.stream().mapToDouble(t -> t.getHighPrice()).max().getAsDouble();
 		
 		for (Ticker tick : tickers){
-			tick.setHighPrice(getNormalizedValue(tick.getHighPrice(),  margin));
+			tick.setHighPrice(getNormalizedValue(tick.getHighPrice(), minValue, maxValue,  margin));
 		}
 		
 		return tickers;
@@ -53,7 +70,7 @@ public class Normalize {
 		double maxValue = tickers.stream().mapToDouble(t -> t.getLowPrice()).max().getAsDouble();
 		
 		for (Ticker tick : tickers){
-			tick.setLowPrice(getNormalizedValue(tick.getLowPrice(),  margin));
+			tick.setLowPrice(getNormalizedValue(tick.getLowPrice(), minValue, maxValue,  margin));
 		}
 		
 		return tickers;

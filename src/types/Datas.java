@@ -16,13 +16,17 @@ public class Datas {
 	private double[][] values;
 	private double[][] normalizedValues;
 	
+	
 	public Datas(Set<Ticker> tickers, float margin) {
 		setValues(tickerToDouble(tickers));
 		setMaxValue(Arrays.stream(getValues()).flatMapToDouble(Arrays::stream).max().getAsDouble());
 		setMinValue(Arrays.stream(getValues()).flatMapToDouble(Arrays::stream).min().getAsDouble());
 		
-		tickers = Normalize.normalizeValues(tickers, margin);
-		setNormalizedValues(tickerToDouble(tickers));
+		updateNormalized();
+	}
+	
+	public void updateNormalized(){
+		Normalize.normalizeValues(this);
 		setMaxNormalizedValue(Arrays.stream(getNormalizedValues()).flatMapToDouble(Arrays::stream).max().getAsDouble());
 		setMinNormalizedValue(Arrays.stream(getNormalizedValues()).flatMapToDouble(Arrays::stream).min().getAsDouble());
 		
