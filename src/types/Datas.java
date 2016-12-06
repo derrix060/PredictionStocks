@@ -10,7 +10,6 @@ public class Datas {
 	private double[][] normalizedValues;
 	
 	public Datas() {
-		
 	}
 	
 	public void updateMaxValue(){
