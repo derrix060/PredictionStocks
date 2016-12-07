@@ -1,28 +1,34 @@
 package imports;
 
-import java.util.Set;
+import java.io.IOException;
 
-import types.Datas;
-import types.Ticker;
+import types.Data;
 
 //example
 //https://github.com/surmenok/MNISTNeuralNetwork/tree/master/src/main/java/com/surmenok/pavel/mnist
 
 public class Normalize {
-	private final static float defaultMargin = 0.5f;
 	
 	private final static double maxLimit = 1;
 	private final static double minLimit = 0;
-	
+	 /*
 	public static Set<Ticker> normalizeValues(Set<Ticker> tickers){
 		return normalizeValues(tickers,  defaultMargin);
 	}
+	*/
 	
-	public static void normalizeValues (Datas data){
+	public static void normalizeValues (Data data) throws IOException{
 		double[][] values = data.getValues();
 		double maxValue = data.getMaxValue();
 		double minValue = data.getMinValue();
 		float margin = data.getMargin();
+
+		System.out.println("normalizeValues");
+		System.out.println("MaxValue: " + maxValue);
+		System.out.println("MinValue: " + minValue);
+		System.out.println("Margin: " + margin);
+		
+		if (maxValue == 0) throw new IOException("Valor nulo");
 		
 		for (double[] atr : values){
 			for (double value : atr){
@@ -33,6 +39,7 @@ public class Normalize {
 		data.setNormalizedValues(values);
 	}
 	
+	/*
 	public static Set<Ticker> normalizeValues(Set<Ticker> tickers, float margin){
 		tickers = normalizeOpenPrice(tickers,  margin);
 		tickers = normalizeHighPrice(tickers,  margin);
@@ -97,6 +104,7 @@ public class Normalize {
 		
 		return tickers;
 	}
+	*/
 	
 	private static double getNormalizedValue(double oldValue, double minValue, double maxValue, float margin){
 		/*
@@ -119,6 +127,7 @@ public class Normalize {
 		return norm;
 	}
 	
+	@SuppressWarnings("unused")
 	private static double getDenomarlizedValue(double normalizedValue, double minValue, double maxValue, float margin){
 		/*
 		 *       Y (Xmax - Xmin) - D1

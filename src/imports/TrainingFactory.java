@@ -2,67 +2,57 @@ package imports;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.HashSet;
 
-import types.Datas;
-import types.Ticker;
+import types.Data;
 
 public class TrainingFactory {
 	private String ticker;
 	private Calendar from;
 	private Calendar to;
+	private float margin;
+	private double maxValue;
+	private double minValue;
+	private double maxNormalizedValue;
+	private double minNormalizedValue;
 		
 	//constructor
-	public TrainingFactory(String ticker, Calendar from, Calendar to) {
-		this.ticker = ticker;
-		this.from = from;
-		this.to = to;
+	public TrainingFactory(String ticker, Calendar from, Calendar to, float margin) {
+		setTicker(ticker);
+		setFrom(from);
+		setTo(to);
+		setMargin(margin);
 	}
 
-	
-	public double[][] getInput(float margin) throws IOException{		
-		HashSet<Ticker> historical = YahooExtractor.getHistorical(ticker, from, to);
-		Normalize.normalizeValues(historical, margin);
-		double[][] resp = new double[historical.size()][Datas.qtyAtr];
+	public Data getInput() throws IOException{
+		Data resp = new Data(getTicker(),getFrom(), getTo(), getMargin());
 		
-		int i=0;
-		for (Ticker t : historical){
-			resp[i][0] = t.getClosePrice();
-			resp[i][1] = t.getHighPrice();
-			resp[i][2] = t.getLowPrice();
-			//resp[i][3] = t.getOpenPrice();
-			//resp[i][4] = t.getVolume();
-			
-			i++;
-		}
+		setMaxValue(resp.getMaxValue());
+		setMinValue(resp.getMinValue());
+		setMaxNormalizedValue(resp.getMaxNormalizedValue());
+		setMinNormalizedValue(resp.getMinNormalizedValue());
+		
 		return resp;
 	}
 	
-	public double[][] getIdealOutput(float margin) throws IOException{
-		Calendar newTo = to;
-		Calendar newFrom = from;
+	public Data getIdealOutput() throws IOException{
+		Calendar newFrom = getFrom();
+		Calendar newTo = getTo();
+
+		//TODO: implementar proximo dia util
+		newFrom.add(Calendar.DAY_OF_MONTH, 1);
+		newTo.add(Calendar.DAY_OF_MONTH, 1);
 		
-		newTo.add(Calendar.DAY_OF_MONTH, 1); //correct This
-		newFrom.add(Calendar.DAY_OF_MONTH, 1); //correct This
+
+		System.out.println("TrainingFactory.getIdealOutput");
+		System.out.println("MaxValue: " + getMaxValue());
+		System.out.println("MinValue: " + getMinValue());
+		System.out.println("Margin: " + getMargin());
+		Data resp = new Data(getTicker(), newFrom, newTo, getMargin(), getMaxValue(), getMinValue(), maxNormalizedValue, minNormalizedValue, true);
 		
 		
-		HashSet<Ticker> historical = YahooExtractor.getHistorical(ticker, newFrom, newTo);
-		Normalize.normalizeValues(historical, margin);
-		double[][] resp = new double[historical.size()][Datas.qtyAtr];
-		//ArrayList<Ticker> historicalArray = new ArrayList<Ticker> (historical);
-		
-		int i = 0;
-		
-		for (Ticker t : historical){
-			resp [i][0] = t.getClosePrice();
-			resp[i][1] = t.getHighPrice();
-			resp[i][2] = t.getLowPrice();
-			//resp[i][3] = t.getOpenPrice();
-			//resp[i][4] = t.getVolume();
-			i ++;
-		}
-		return resp;		
+		return resp;
 	}
+	
 	
 	
 	//getters and setters
@@ -88,6 +78,46 @@ public class TrainingFactory {
 
 	public void setTo(Calendar to) {
 		this.to = to;
+	}
+
+	public float getMargin() {
+		return margin;
+	}
+
+	public void setMargin(float margin) {
+		this.margin = margin;
+	}
+
+	public double getMaxValue() {
+		return maxValue;
+	}
+
+	public void setMaxValue(double maxValue) {
+		this.maxValue = maxValue;
+	}
+
+	public double getMinValue() {
+		return minValue;
+	}
+
+	public void setMinValue(double minValue) {
+		this.minValue = minValue;
+	}
+
+	public double getMaxNormalizedValue() {
+		return maxNormalizedValue;
+	}
+
+	public void setMaxNormalizedValue(double maxNormalizedValue) {
+		this.maxNormalizedValue = maxNormalizedValue;
+	}
+
+	public double getMinNormalizedValue() {
+		return minNormalizedValue;
+	}
+
+	public void setMinNormalizedValue(double minNormalizedValue) {
+		this.minNormalizedValue = minNormalizedValue;
 	}
 	
 	

@@ -32,6 +32,7 @@ import imports.TrainingFactory;
 import imports.YahooExtractor;
 import process.NetworkFactory;
 import process.ActivationFunctionFactory.enumActivationFuncion;
+import types.Data;
 import types.Ticker;
 
 @SuppressWarnings("unused")
@@ -91,7 +92,7 @@ public class Teste {
 	}
 	
 	public static List<Integer> testeCamadas(){
-		String entrada = TrainingFactory.qtyAtrInput + ",2," + TrainingFactory.qtyAtrOutput;
+		String entrada = Data.qtyAtr + ",2," + Data.qtyAtr;
 		List<String> camadasStr = Arrays.asList(entrada.replaceAll(" ", "").split(","));
 		List<Integer> camadas = new ArrayList<>();
 		
@@ -156,27 +157,27 @@ public class Teste {
 		float margin = 0.4f;
 		double maxValue = 0;
 		double minValue = 0;
+		Data dataInput;
+		Data dataIdealOutput;
+		TrainingFactory training = new TrainingFactory(ticker, from, to, margin);
 		
-		TrainingFactory training = new TrainingFactory(ticker, from, to);
+		dataInput = training.getInput();
+		dataIdealOutput = training.getIdealOutput();
 		
 		//input
-		double[][] input = training.getInput(margin);
+		double[][] input = dataInput.getNormalizedValues();
 		
 		if (verbose){
 			System.out.println("Input");
 			for (int i = 0; i< input.length; i++){
-				for (int j=0; j< 4; j++){
+				for (int j=0; j< Data.qtyAtr; j++){
 					System.out.println("i: " + i + " j: " + j + " value: " + input[i][j]);
 				}
 			}
 		}
 		
 		//output
-		double[][] output = training.getIdealOutput(0.4f, minValue, maxValue);
-
-		System.out.println("------------------------ TESTE ------------------------");
-		System.out.println("MinValue: " + minValue + "\nMaxValue: " + maxValue);
-		System.out.println("------------------------ TESTE ------------------------");
+		double[][] output = dataIdealOutput.getNormalizedValues();
 		
 		if(verbose){
 			System.out.println("Output");
