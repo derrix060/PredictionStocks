@@ -31,6 +31,7 @@ public class NetworkFactory {
 		}
 		
 		network.getStructure().finalizeStructure();
+		network.reset();
 		
 		return network;
 	}
