@@ -52,11 +52,23 @@ public class Teste {
 		//testeNetwork();
 		//testeCamadas();
 		//testeNormalize();
-		testeTrain(false);
+		//testeTrain(true);
+		testeNormalizeValue();
 		
 	}
 	
-	
+	public static void testeNormalizeValue() throws IOException{
+		Data teste = new Data(ticker, from, from, 1f);
+		
+		Normalize.normalizeValues(teste);
+		
+		for (double[] atr : teste.getNormalizedValues()){
+			for (double value : atr){
+				System.out.println("Norm value teste: " + value);
+			}
+		}
+		
+	}
 	
 	public static Calendar testeNextDay(Calendar date, String ticker) throws IOException{
 		int size = 0;

@@ -45,7 +45,13 @@ public class Data {
 			setMinNormalizedValue(minNormalizedValue);
 		}
 		
-		Normalize.normalizeValues(this);
+		normalizeValues();
+		
+		for (double[] atr : getNormalizedValues()){
+			for (double value : atr){
+				System.out.println("Norm value: " + value);
+			}
+		}
 		
 		if (!isIdealOutput){
 			setMaxNormalizedValue(Arrays.stream(getNormalizedValues()).flatMapToDouble(Arrays::stream).max().getAsDouble());
@@ -80,9 +86,12 @@ public class Data {
 		return rtn;
 	}
 	
+	public void normalizeValues() throws IOException{
+		setNormalizedValues(Normalize.normalizeValues(this));
+	}
+	
 	
 	//Getters and setters
-	
 	public double getMaxValue() {
 		return maxValue;
 	}
