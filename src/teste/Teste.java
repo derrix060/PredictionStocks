@@ -154,17 +154,21 @@ public class Teste {
 
 	public static void testeTrain(boolean verbose) throws IOException{
 		BasicNetwork network = getTesteNetwork();
-		float margin = 0.4f;
+		float margin = 1f;
 		double maxValue = 0;
 		double minValue = 0;
 		Data dataInput;
 		Data dataIdealOutput;
 		TrainingFactory training = new TrainingFactory(ticker, from, to, margin);
-		
+
+		System.out.println("\nlog: get input raw");
 		dataInput = training.getInput();
+		
+		System.out.println("\nlog: get ideal input raw");
 		dataIdealOutput = training.getIdealOutput();
 		
 		//input
+		System.out.println("\nlog: get input normalized");
 		double[][] input = dataInput.getNormalizedValues();
 		
 		if (verbose){
@@ -177,6 +181,7 @@ public class Teste {
 		}
 		
 		//output
+		System.out.println("\nlog: get output normalized");
 		double[][] output = dataIdealOutput.getNormalizedValues();
 		
 		if(verbose){

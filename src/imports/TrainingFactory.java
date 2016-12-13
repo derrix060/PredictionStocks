@@ -47,7 +47,7 @@ public class TrainingFactory {
 		System.out.println("MaxValue: " + getMaxValue());
 		System.out.println("MinValue: " + getMinValue());
 		System.out.println("Margin: " + getMargin());
-		Data resp = new Data(getTicker(), newFrom, newTo, getMargin(), getMaxValue(), getMinValue(), maxNormalizedValue, minNormalizedValue, true);
+		Data resp = new Data(getTicker(), newFrom, newTo, getMargin(), getMaxValue(), getMinValue(), getMaxNormalizedValue(), getMinNormalizedValue(), true);
 		
 		
 		return resp;
@@ -55,7 +55,7 @@ public class TrainingFactory {
 	
 	
 	
-	//getters and setters
+	//Simple getters and setters
 	public String getTicker() {
 		return ticker;
 	}

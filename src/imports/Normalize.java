@@ -22,13 +22,13 @@ public class Normalize {
 		double maxValue = data.getMaxValue();
 		double minValue = data.getMinValue();
 		float margin = data.getMargin();
-
+		
 		System.out.println("normalizeValues");
 		System.out.println("MaxValue: " + maxValue);
 		System.out.println("MinValue: " + minValue);
 		System.out.println("Margin: " + margin);
 		
-		if (maxValue == 0) throw new IOException("Valor nulo");
+		if (maxValue == 0) throw new IOException("Valor máximo nulo");
 		
 		for (double[] atr : values){
 			for (double value : atr){
