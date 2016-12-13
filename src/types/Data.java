@@ -38,6 +38,12 @@ public class Data {
 			setMaxValue(Arrays.stream(getValues()).flatMapToDouble(Arrays::stream).max().getAsDouble());
 			setMinValue(Arrays.stream(getValues()).flatMapToDouble(Arrays::stream).min().getAsDouble());
 		}
+		else{
+			setMaxValue(maxValue);
+			setMinValue(minValue);
+			setMaxNormalizedValue(maxNormalizedValue);
+			setMinNormalizedValue(minNormalizedValue);
+		}
 		
 		Normalize.normalizeValues(this);
 		
