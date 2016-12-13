@@ -17,7 +17,7 @@ public class Normalize {
 	}
 	*/
 	
-	public static void normalizeValues (Data data) throws IOException{
+	public static double[][] normalizeValues (Data data) throws IOException{
 		double[][] values = data.getValues();
 		double maxValue = data.getMaxValue();
 		double minValue = data.getMinValue();
@@ -36,7 +36,7 @@ public class Normalize {
 			}
 		}
 		
-		data.setNormalizedValues(values);
+		return values;
 	}
 	
 	/*
