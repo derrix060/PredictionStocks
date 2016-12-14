@@ -30,9 +30,12 @@ public class Normalize {
 		
 		if (maxValue == 0) throw new IOException("Valor máximo nulo");
 		
-		for (double[] atr : values){
-			for (double value : atr){
-				value = getNormalizedValue(value, minValue, maxValue, margin);
+		
+		for (int i=0; i<values.length; i++){
+			double[] atr = values[i];
+			
+			for (int j=0; j< atr.length; j++){
+				values[i][j] = getNormalizedValue(values[i][j], minValue, maxValue, margin);
 			}
 		}
 		
@@ -128,7 +131,7 @@ public class Normalize {
 	}
 	
 	@SuppressWarnings("unused")
-	private static double getDenomarlizedValue(double normalizedValue, double minValue, double maxValue, float margin){
+	public static double getDenomarlizedValue(double normalizedValue, double minValue, double maxValue, float margin){
 		/*
 		 *       Y (Xmax - Xmin) - D1
 		 * X =  --------------------   +  Xmin

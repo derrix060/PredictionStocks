@@ -52,21 +52,7 @@ public class Teste {
 		//testeNetwork();
 		//testeCamadas();
 		//testeNormalize();
-		//testeTrain(true);
-		testeNormalizeValue();
-		
-	}
-	
-	public static void testeNormalizeValue() throws IOException{
-		Data teste = new Data(ticker, from, from, 1f);
-		
-		Normalize.normalizeValues(teste);
-		
-		for (double[] atr : teste.getNormalizedValues()){
-			for (double value : atr){
-				System.out.println("Norm value teste: " + value);
-			}
-		}
+		testeTrain(true);
 		
 	}
 	
@@ -235,10 +221,13 @@ public class Teste {
 		
 		for (MLDataPair pair : trainingData){
 			MLData out = network.compute(pair.getInput());
+			double[] tempInput = pair.getInputArray();
+			double[] tempActual = out.getData();
+			double[] tempIdeal = pair.getIdealArray();
 			
-			System.out.println("Input = " + pair.getInput());
-			System.out.println("Actual = " + out);
-			System.out.println("Ideal = " + pair.getIdeal());
+			System.out.println("Input = " + Normalize.getDenomarlizedValue(tempInput[0], minValue, maxValue, margin) tempInput[0] + ", " + tempInput[1] + ", " + tempInput[2]);
+			System.out.println("Actual = " + tempActual[0] + ", " + tempActual[1] + ", " + tempActual[2]);
+			System.out.println("Ideal = " + tempIdeal[0] + ", " + tempIdeal[1] + ", " + tempIdeal[2]);
 			System.out.println("-----------------------------------------");
 			
 		}
