@@ -43,7 +43,7 @@ public class Teste {
 	static String ticker = "PRIO3.SA";
 	static int maxIteration = 5000;
 	public static void main(String[] args) throws IOException {
-		from.set(2016, 9, 5);
+		from.set(2016, 0, 5);
 		to.set(2016, 9, 24);
 		
 		//to.add(Calendar.DATE,-2);
@@ -153,8 +153,6 @@ public class Teste {
 	public static void testeTrain(boolean verbose) throws IOException{
 		BasicNetwork network = getTesteNetwork();
 		float margin = 1f;
-		double maxValue = 0;
-		double minValue = 0;
 		Data dataInput;
 		Data dataIdealOutput;
 		TrainingFactory training = new TrainingFactory(ticker, from, to, margin);
@@ -219,15 +217,28 @@ public class Teste {
 		
 		System.out.println("Validacao!");
 		
+		Normalize normalizer = new Normalize();
+		normalizer.setMargin(margin);
+		normalizer.setMaxValue(dataInput.getMaxValue());
+		normalizer.setMinValue(dataInput.getMinValue());
+		
 		for (MLDataPair pair : trainingData){
 			MLData out = network.compute(pair.getInput());
 			double[] tempInput = pair.getInputArray();
 			double[] tempActual = out.getData();
 			double[] tempIdeal = pair.getIdealArray();
 			
-			System.out.println("Input = " + Normalize.getDenomarlizedValue(tempInput[0], minValue, maxValue, margin) tempInput[0] + ", " + tempInput[1] + ", " + tempInput[2]);
-			System.out.println("Actual = " + tempActual[0] + ", " + tempActual[1] + ", " + tempActual[2]);
-			System.out.println("Ideal = " + tempIdeal[0] + ", " + tempIdeal[1] + ", " + tempIdeal[2]);
+			System.out.println("Input = " + normalizer.getDenormalizedValueFrom(tempInput[0])  + 
+					", " + normalizer.getDenormalizedValueFrom(tempInput[1])  +  
+					", " + normalizer.getDenormalizedValueFrom(tempInput[2]));
+			
+			System.out.println("Actual = " + normalizer.getDenormalizedValueFrom(tempActual[0]) +
+					", " + normalizer.getDenormalizedValueFrom(tempActual[1]) +
+					", " + normalizer.getDenormalizedValueFrom(tempActual[2]));
+			
+			System.out.println("Ideal = " + normalizer.getDenormalizedValueFrom(tempIdeal[0]) + 
+					", " + normalizer.getDenormalizedValueFrom(tempIdeal[1]) + 
+					", " + normalizer.getDenormalizedValueFrom(tempIdeal[2]));
 			System.out.println("-----------------------------------------");
 			
 		}

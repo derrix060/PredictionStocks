@@ -11,6 +11,11 @@ public class Normalize {
 	
 	private final static double maxLimit = 1;
 	private final static double minLimit = 0;
+	
+	private double maxValue;
+	private double minValue;
+	private float margin;
+	
 	 /*
 	public static Set<Ticker> normalizeValues(Set<Ticker> tickers){
 		return normalizeValues(tickers,  defaultMargin);
@@ -130,7 +135,6 @@ public class Normalize {
 		return norm;
 	}
 	
-	@SuppressWarnings("unused")
 	public static double getDenomarlizedValue(double normalizedValue, double minValue, double maxValue, float margin){
 		/*
 		 *       Y (Xmax - Xmin) - D1
@@ -151,6 +155,42 @@ public class Normalize {
 		denorm /= (maxLimit - minLimit);
 		denorm += adjustedMinValue;
 		return denorm;
+	}
+	
+	//not static
+	public double getDenormalizedValueFrom (double normalizedValue){
+		double vlr =  Normalize.getDenomarlizedValue(normalizedValue, getMinValue(), getMaxValue(), getMargin());
+		
+		//round in 2 precision
+		vlr *= 100;
+		vlr = Math.round(vlr);
+		vlr /= 100;
+		
+		return vlr;
+	}
+
+	public double getMaxValue() {
+		return maxValue;
+	}
+
+	public void setMaxValue(double maxValue) {
+		this.maxValue = maxValue;
+	}
+
+	public float getMargin() {
+		return margin;
+	}
+
+	public void setMargin(float margin) {
+		this.margin = margin;
+	}
+
+	public double getMinValue() {
+		return minValue;
+	}
+
+	public void setMinValue(double minValue) {
+		this.minValue = minValue;
 	}
 
 }
