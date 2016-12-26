@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 import types.Data;
 
-public class TrainingFactory {
+public class Trainer {
 	private String ticker;
 	private Calendar from;
 	private Calendar to;
@@ -16,7 +16,7 @@ public class TrainingFactory {
 	private double minNormalizedValue;
 		
 	//constructor
-	public TrainingFactory(String ticker, Calendar from, Calendar to, float margin) {
+	public Trainer(String ticker, Calendar from, Calendar to, float margin) {
 		setTicker(ticker);
 		setFrom(from);
 		setTo(to);

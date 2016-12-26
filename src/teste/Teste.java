@@ -28,7 +28,7 @@ import org.encog.util.simple.EncogUtility;
 import org.omg.CORBA.TRANSACTION_MODE;
 
 import imports.Normalize;
-import imports.TrainingFactory;
+import imports.Trainer;
 import imports.YahooExtractor;
 import process.NetworkFactory;
 import process.ActivationFunctionFactory.enumActivationFuncion;
@@ -41,7 +41,7 @@ public class Teste {
 	static Calendar from = Calendar.getInstance();
 	static Calendar to = Calendar.getInstance();
 	static String ticker = "PRIO3.SA";
-	static int maxIteration = 5000;
+	static int maxIteration = 500000;
 	public static void main(String[] args) throws IOException {
 		from.set(2016, 0, 5);
 		to.set(2016, 9, 24);
@@ -52,7 +52,8 @@ public class Teste {
 		//testeNetwork();
 		//testeCamadas();
 		//testeNormalize();
-		testeTrain(true);
+		
+		testeTrain(false);
 		
 	}
 	
@@ -155,7 +156,7 @@ public class Teste {
 		float margin = 1f;
 		Data dataInput;
 		Data dataIdealOutput;
-		TrainingFactory training = new TrainingFactory(ticker, from, to, margin);
+		Trainer training = new Trainer(ticker, from, to, margin);
 
 		System.out.println("\nlog: get input raw");
 		dataInput = training.getInput();
