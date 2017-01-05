@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
@@ -22,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
@@ -72,33 +74,33 @@ public class MainView extends JFrame {
 		lblFrom.setBounds(25, 29, 109, 14);
 		panelInput.add(lblFrom);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(25, 43, 109, 20);
-		panelInput.add(formattedTextField);
+		JFormattedTextField txtFrom = new JFormattedTextField();
+		txtFrom.setBounds(25, 43, 109, 20);
+		panelInput.add(txtFrom);
 		
-		JLabel lblNewLabel = new JLabel("To");
-		lblNewLabel.setBounds(25, 74, 109, 14);
-		panelInput.add(lblNewLabel);
+		JLabel lblTo = new JLabel("To");
+		lblTo.setBounds(25, 74, 109, 14);
+		panelInput.add(lblTo);
 		
-		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
-		formattedTextField_1.setBounds(25, 88, 109, 20);
-		panelInput.add(formattedTextField_1);
+		JFormattedTextField txtTo = new JFormattedTextField();
+		txtTo.setBounds(25, 88, 109, 20);
+		panelInput.add(txtTo);
 		
 		JLabel lblStock = new JLabel("Stock");
 		lblStock.setBounds(25, 164, 46, 14);
 		panelInput.add(lblStock);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(25, 181, 109, 20);
-		panelInput.add(comboBox);
+		JComboBox cmbStock = new JComboBox();
+		cmbStock.setBounds(25, 181, 109, 20);
+		panelInput.add(cmbStock);
 		
-		JLabel lblNumberOfDays = new JLabel("Data interval in days");
-		lblNumberOfDays.setBounds(25, 119, 109, 14);
-		panelInput.add(lblNumberOfDays);
+		JLabel lblDataInterval = new JLabel("Data interval in days");
+		lblDataInterval.setBounds(25, 119, 109, 14);
+		panelInput.add(lblDataInterval);
 		
-		JFormattedTextField formattedTextField_6 = new JFormattedTextField();
-		formattedTextField_6.setBounds(25, 133, 109, 20);
-		panelInput.add(formattedTextField_6);
+		JFormattedTextField txtDataInterval = new JFormattedTextField();
+		txtDataInterval.setBounds(25, 133, 109, 20);
+		panelInput.add(txtDataInterval);
 		
 		JPanel panelInputDataType = new JPanel();
 		panelInputDataType.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -107,9 +109,9 @@ public class MainView extends JFrame {
 		panelInputDataType.setLayout(null);
 		panelInputDataType.setBorder(BorderFactory.createTitledBorder("Stock Attribute"));
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Close Price");
-		chckbxNewCheckBox.setBounds(15, 25, 77, 23);
-		panelInputDataType.add(chckbxNewCheckBox);
+		JCheckBox chckbxClosePrice = new JCheckBox("Close Price");
+		chckbxClosePrice.setBounds(15, 25, 77, 23);
+		panelInputDataType.add(chckbxClosePrice);
 		
 		JCheckBox chckbxHighPrice = new JCheckBox("High Price");
 		chckbxHighPrice.setBounds(15, 53, 73, 23);
@@ -139,13 +141,13 @@ public class MainView extends JFrame {
 		lblNeurons.setBounds(10, 25, 44, 14);
 		panelNetworkConf.add(lblNeurons);
 		
-		JFormattedTextField formattedTextField_2 = new JFormattedTextField();
-		formattedTextField_2.setBounds(10, 39, 44, 20);
-		panelNetworkConf.add(formattedTextField_2);
+		JFormattedTextField txtNeurons = new JFormattedTextField();
+		txtNeurons.setBounds(10, 39, 44, 20);
+		panelNetworkConf.add(txtNeurons);
 		
-		JLabel lblBiasPerLayer = new JLabel("Has Bias?");
-		lblBiasPerLayer.setBounds(64, 25, 51, 14);
-		panelNetworkConf.add(lblBiasPerLayer);
+		JLabel lblBias = new JLabel("Has Bias?");
+		lblBias.setBounds(64, 25, 51, 14);
+		panelNetworkConf.add(lblBias);
 		
 		JLabel lblNewLabel_1 = new JLabel("Activation Function");
 		lblNewLabel_1.setBounds(125, 25, 97, 14);
@@ -155,17 +157,17 @@ public class MainView extends JFrame {
 		lblDropoutRate.setBounds(232, 25, 73, 14);
 		panelNetworkConf.add(lblDropoutRate);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(64, 39, 51, 20);
-		panelNetworkConf.add(comboBox_1);
+		JComboBox cmbBias = new JComboBox();
+		cmbBias.setBounds(64, 39, 51, 20);
+		panelNetworkConf.add(cmbBias);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(125, 39, 97, 20);
-		panelNetworkConf.add(comboBox_3);
+		JComboBox cmbActivationFunction = new JComboBox();
+		cmbActivationFunction.setBounds(125, 39, 97, 20);
+		panelNetworkConf.add(cmbActivationFunction);
 		
-		JFormattedTextField formattedTextField_3 = new JFormattedTextField();
-		formattedTextField_3.setBounds(232, 39, 73, 20);
-		panelNetworkConf.add(formattedTextField_3);
+		JFormattedTextField txtDropOut = new JFormattedTextField();
+		txtDropOut.setBounds(232, 39, 73, 20);
+		panelNetworkConf.add(txtDropOut);
 		
 		JButton button = new JButton("");
 		button.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
@@ -184,17 +186,81 @@ public class MainView extends JFrame {
 		panelNetworkConf.add(button_2);
 		
 		
-		tableLayers = new JTable(10,4);
-		tableLayers.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tableLayers.setBounds(10, 390, 295, -272);
-		
-		DefaultTableModel model = (DefaultTableModel) tableLayers.getModel();
-		
-		Object[] row = {1, true, enumActivationFuncion.BiPolar, 0.5f};
-		model.addRow(row);
-		
-		panelNetworkConf.add(tableLayers);
-		
+		//Start create JTable
+			
+			tableLayers = new JTable();
+			tableLayers.setModel(new DefaultTableModel(
+				new Object[][] {
+					{Integer.valueOf(1), Boolean.TRUE, enumActivationFuncion.BiPolar, new Double(5.2)},
+					{Integer.valueOf(2), Boolean.TRUE, enumActivationFuncion.Elliott, new Double(5.2)},
+					{Integer.valueOf(3), Boolean.TRUE, enumActivationFuncion.Ramp, new Double(5.2)},
+				},
+				new String[] {
+					"Neurons", "HasBias?", "Activation Function", "DropOut Rate"
+				}
+			) {
+				Class[] columnTypes = new Class[] {
+					Integer.class, Boolean.class, enumActivationFuncion.class, Double.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			});
+			
+			//comboBox Activation
+				JComboBox<enumActivationFuncion> comboAct = new JComboBox<>();
+				comboAct.addItem(enumActivationFuncion.BiPolar);
+				comboAct.addItem(enumActivationFuncion.BipolarSteepenedSigmoid);
+				comboAct.addItem(enumActivationFuncion.ClippedLinear);
+				comboAct.addItem(enumActivationFuncion.Competitive);
+				comboAct.addItem(enumActivationFuncion.Elliott);
+				comboAct.addItem(enumActivationFuncion.ElliottSymmetric);
+				comboAct.addItem(enumActivationFuncion.Gaussian);
+				comboAct.addItem(enumActivationFuncion.Linear);
+				comboAct.addItem(enumActivationFuncion.LOG);
+				comboAct.addItem(enumActivationFuncion.Ramp);
+				comboAct.addItem(enumActivationFuncion.Sigmoid);
+				comboAct.addItem(enumActivationFuncion.SIN);
+				comboAct.addItem(enumActivationFuncion.SoftMax);
+				comboAct.addItem(enumActivationFuncion.SteepenedSigmoid);
+				comboAct.addItem(enumActivationFuncion.Step);
+				comboAct.addItem(enumActivationFuncion.TANH);
+			
+			//Modify Activation Column
+				tableLayers.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboAct));
+				
+				
+				
+			tableLayers.getColumnModel().getColumn(0).setResizable(false);
+			tableLayers.getColumnModel().getColumn(1).setResizable(false);
+			tableLayers.getColumnModel().getColumn(2).setResizable(false);
+			tableLayers.getColumnModel().getColumn(3).setResizable(false);
+			
+			tableLayers.getColumnModel().getColumn(0).setPreferredWidth(54);
+			tableLayers.getColumnModel().getColumn(1).setPreferredWidth(56);
+			tableLayers.getColumnModel().getColumn(2).setPreferredWidth(103);
+			tableLayers.getColumnModel().getColumn(3).setPreferredWidth(77);
+			
+
+			JScrollPane scrollPaneLayers = new JScrollPane(tableLayers);
+			scrollPaneLayers.setSize(338, 385);
+			scrollPaneLayers.setLocation(10, 104);
+			tableLayers.setFillsViewportHeight(true);
+			
+			panelNetworkConf.add(scrollPaneLayers);
+			
+			//tableLayers.setBorder(new LineBorder(new Color(0, 0, 0)));
+			//tableLayers.setBounds(10, 390, 295, -272);
+			
+			//DefaultTableModel model = (DefaultTableModel) tableLayers.getModel();
+			
+			//Object[] row = {1, true, enumActivationFuncion.BiPolar, 0.5f};
+			//model.addRow(row);
+			
+			//panelNetworkConf.add(tableLayers);
+		//End create JTable
+			
+			
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setToolTipText("");
