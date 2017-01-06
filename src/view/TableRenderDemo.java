@@ -140,23 +140,20 @@ public class TableRenderDemo extends JPanel {
          * Don't need to implement this method unless your table's
          * editable.
          */
-        /*
         public boolean isCellEditable(int row, int col) {
             //Note that the data/cell address is constant,
             //no matter where the cell appears onscreen.
-            if (col < 2) {
-                return false;
-            } else {
+            //if (col < 2) {
+            //    return false;
+            //} else {
                 return true;
-            }
+            //}
         }
-        */
 
         /*
          * Don't need to implement this method unless your table's
          * data can change.
          */
-        /*
         public void setValueAt(Object value, int row, int col) {
             if (DEBUG) {
                 System.out.println("Setting value at " + row + "," + col
@@ -173,8 +170,7 @@ public class TableRenderDemo extends JPanel {
                 printDebugData();
             }
         }
-		*/
-        /*
+        
         private void printDebugData() {
             int numRows = getRowCount();
             int numCols = getColumnCount();
@@ -188,7 +184,7 @@ public class TableRenderDemo extends JPanel {
             }
             System.out.println("--------------------------");
         }
-        */
+        
     }
 
     /**
