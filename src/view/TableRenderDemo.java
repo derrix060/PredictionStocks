@@ -102,12 +102,16 @@ public class TableRenderDemo extends JPanel {
 		private static final long serialVersionUID = 1L;
 
 		private String[] columnNames = {"Neurons", "HasBias?", "Activation Function", "DropOut Rate"};
+		public Object[] emptyData = {Integer.valueOf(1), Boolean.TRUE, enumActivationFuncion.BiPolar, new Double(1.1)};
         
         private Object[][] data = {
-				{Integer.valueOf(1), Boolean.TRUE, enumActivationFuncion.BiPolar, new Double(5.2)},
-				{Integer.valueOf(2), Boolean.TRUE, enumActivationFuncion.Elliott, new Double(5.2)},
-				{Integer.valueOf(3), Boolean.TRUE, enumActivationFuncion.Ramp, new Double(5.2)},
-			};
+        		emptyData,
+        		emptyData,
+        		emptyData
+				};
+        
+        
+        
 
         public int getColumnCount() {
             return columnNames.length;
