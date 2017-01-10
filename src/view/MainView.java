@@ -137,53 +137,16 @@ public class MainView extends JFrame {
 		contentPane.add(panelNetworkConf);
 		panelNetworkConf.setBorder(BorderFactory.createTitledBorder("Network Configuration"));
 		
-		JLabel lblNeurons = new JLabel("Neurons");
-		lblNeurons.setBounds(10, 25, 44, 14);
-		panelNetworkConf.add(lblNeurons);
-		
-		JFormattedTextField txtNeurons = new JFormattedTextField();
-		txtNeurons.setBounds(10, 39, 44, 20);
-		panelNetworkConf.add(txtNeurons);
-		
-		JLabel lblBias = new JLabel("Has Bias?");
-		lblBias.setBounds(64, 25, 51, 14);
-		panelNetworkConf.add(lblBias);
-		
-		JLabel lblNewLabel_1 = new JLabel("Activation Function");
-		lblNewLabel_1.setBounds(125, 25, 97, 14);
-		panelNetworkConf.add(lblNewLabel_1);
-		
-		JLabel lblDropoutRate = new JLabel("DropOut Rate");
-		lblDropoutRate.setBounds(232, 25, 73, 14);
-		panelNetworkConf.add(lblDropoutRate);
-		
-		JComboBox cmbBias = new JComboBox();
-		cmbBias.setBounds(64, 39, 51, 20);
-		panelNetworkConf.add(cmbBias);
-		
-		JComboBox cmbActivationFunction = new JComboBox();
-		cmbActivationFunction.setBounds(125, 39, 97, 20);
-		panelNetworkConf.add(cmbActivationFunction);
-		
-		JFormattedTextField txtDropOut = new JFormattedTextField();
-		txtDropOut.setBounds(232, 39, 73, 20);
-		panelNetworkConf.add(txtDropOut);
-		
 		JButton button = new JButton("");
 		button.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
 		button.setForeground(new Color(0, 128, 0));
-		button.setBounds(10, 70, 41, 23);
+		button.setBounds(10, 25, 41, 23);
 		panelNetworkConf.add(button);
 		
 		JButton button_1 = new JButton("");
 		button_1.setIcon(new ImageIcon(MainView.class.getResource("/view/cancel.png")));
-		button_1.setBounds(60, 70, 41, 23);
+		button_1.setBounds(61, 25, 41, 23);
 		panelNetworkConf.add(button_1);
-		
-		JButton button_2 = new JButton("");
-		button_2.setIcon(new ImageIcon(MainView.class.getResource("/view/edit.png")));
-		button_2.setBounds(107, 70, 41, 23);
-		panelNetworkConf.add(button_2);
 		
 		
 		//Start create JTable
@@ -243,11 +206,12 @@ public class MainView extends JFrame {
 			
 
 			JScrollPane scrollPaneLayers = new JScrollPane(tableLayers);
-			scrollPaneLayers.setSize(338, 385);
-			scrollPaneLayers.setLocation(10, 104);
+			scrollPaneLayers.setSize(338, 430);
+			scrollPaneLayers.setLocation(10, 59);
 			tableLayers.setFillsViewportHeight(true);
-			
+
 			panelNetworkConf.add(scrollPaneLayers);
+			panelNetworkConf.add(new TableRenderDemo());
 			
 			//tableLayers.setBorder(new LineBorder(new Color(0, 0, 0)));
 			//tableLayers.setBounds(10, 390, 295, -272);
