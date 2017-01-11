@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -26,6 +27,13 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
@@ -137,81 +145,144 @@ public class MainView extends JFrame {
 		contentPane.add(panelNetworkConf);
 		panelNetworkConf.setBorder(BorderFactory.createTitledBorder("Network Configuration"));
 		
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
-		button.setForeground(new Color(0, 128, 0));
-		button.setBounds(10, 25, 41, 23);
-		panelNetworkConf.add(button);
 		
-		JButton button_1 = new JButton("");
-		button_1.setIcon(new ImageIcon(MainView.class.getResource("/view/cancel.png")));
-		button_1.setBounds(61, 25, 41, 23);
-		panelNetworkConf.add(button_1);
 		
+		// TBL
 		
 		//Start create JTable
-			
+		
 			tableLayers = new JTable();
-			tableLayers.setModel(new DefaultTableModel(
-				new Object[][] {
-					{Integer.valueOf(1), Boolean.TRUE, enumActivationFuncion.BiPolar, new Double(5.2)},
-					{Integer.valueOf(2), Boolean.TRUE, enumActivationFuncion.Elliott, new Double(5.2)},
-					{Integer.valueOf(3), Boolean.TRUE, enumActivationFuncion.Ramp, new Double(5.2)},
-				},
-				new String[] {
-					"Neurons", "HasBias?", "Activation Function", "DropOut Rate"
+			
+			class RowData{
+		    	private Map<Integer, Object> values = new HashMap<Integer, Object>();
+		    	
+		    	public RowData() {
+					// TODO Auto-generated constructor stub
+		    		this.setValueForCol(Integer.valueOf(1), 0);
+		    		this.setValueForCol(Boolean.TRUE, 1);
+		    		this.setValueForCol(enumActivationFuncion.BiPolar, 2);
+		    		this.setValueForCol(new Double(1.1), 3);
 				}
-			) {
-				Class[] columnTypes = new Class[] {
-					Integer.class, Boolean.class, enumActivationFuncion.class, Double.class
-				};
-				public Class getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
+		    	
+		    	public Object getValueForCol(int columnIndex){
+		    		if (values.containsKey(columnIndex)){
+		    			return values.get(columnIndex);
+		    		}
+		    		return "";
+		    	}
+		    	
+		    	public void setValueForCol (Object value, int columnIndex){
+		    		values.put(columnIndex, value);
+		    	}
+		    }
+		
+		    class layerTableModel extends AbstractTableModel {
+		        /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				
+				private String[] columnNames = {"Neurons", "HasBias?", "Activation Function", "DropOut Rate"};
+				private List<RowData> rows = new ArrayList<RowData>();
+				
+		      
+		        @Override
+		        public int getColumnCount() {
+		            return columnNames.length;
+		        }
+		        
+		        @Override
+		        public int getRowCount() {
+		            return rows.size();
+		        }
+		        
+		        @Override
+		        public String getColumnName(int col) {
+		            return columnNames[col];
+		        }
+		        
+		
+		        @SuppressWarnings({ "unchecked", "rawtypes" })
+				public Class getColumnClass(int c) {
+		            return getValueAt(0, c).getClass();
+		        }
+		
+		        @Override
+		        public boolean isCellEditable(int row, int col) {
+		            return true;
+		        }
+		
+		        @Override
+		        public Object getValueAt(int row, int col) {
+		            RowData data = rows.get(row);
+		            //return data.getValueForCol(cols.get(col));
+		            return data.getValueForCol(col);
+		        }
+		        
+		        @Override
+		        public void setValueAt(Object value, int row, int col) {
+		            RowData data = rows.get(row);
+		            //data.setValueForCol(value, cols.get(col));
+		            data.setValueForCol(value, col);
+		            
+		            fireTableCellUpdated(row, col);
+		        }
+		        
+		        public void addRow(){
+		        	rows.add(new RowData());
+		        	fireTableRowsInserted(rows.size(), rows.size());
+		        }
+		        
+		        public void removeRow(int selectedRow){
+		        	rows.remove(selectedRow);
+		        	fireTableRowsDeleted(selectedRow, selectedRow);
+		        }
+		        
+		        
+		    }
+		
+		   
+			
+			
+			layerTableModel model = new layerTableModel();
+			
+			JButton addBtn = new JButton("");
+			addBtn.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
+			addBtn.setForeground(new Color(0, 128, 0));
+			addBtn.setBounds(10, 25, 41, 23);
+			addBtn.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					model.addRow();
 				}
 			});
+			panelNetworkConf.add(addBtn);
 			
-			//comboBox Activation
-				JComboBox<enumActivationFuncion> comboAct = new JComboBox<>();
-				comboAct.addItem(enumActivationFuncion.BiPolar);
-				comboAct.addItem(enumActivationFuncion.BipolarSteepenedSigmoid);
-				comboAct.addItem(enumActivationFuncion.ClippedLinear);
-				comboAct.addItem(enumActivationFuncion.Competitive);
-				comboAct.addItem(enumActivationFuncion.Elliott);
-				comboAct.addItem(enumActivationFuncion.ElliottSymmetric);
-				comboAct.addItem(enumActivationFuncion.Gaussian);
-				comboAct.addItem(enumActivationFuncion.Linear);
-				comboAct.addItem(enumActivationFuncion.LOG);
-				comboAct.addItem(enumActivationFuncion.Ramp);
-				comboAct.addItem(enumActivationFuncion.Sigmoid);
-				comboAct.addItem(enumActivationFuncion.SIN);
-				comboAct.addItem(enumActivationFuncion.SoftMax);
-				comboAct.addItem(enumActivationFuncion.SteepenedSigmoid);
-				comboAct.addItem(enumActivationFuncion.Step);
-				comboAct.addItem(enumActivationFuncion.TANH);
-			
-			//Modify Activation Column
-				tableLayers.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboAct));
+			JButton rmvBtn = new JButton("");
+			rmvBtn.setIcon(new ImageIcon(MainView.class.getResource("/view/cancel.png")));
+			rmvBtn.setBounds(61, 25, 41, 23);
+			rmvBtn.addActionListener(new ActionListener() {
 				
-				
-				
-			tableLayers.getColumnModel().getColumn(0).setResizable(false);
-			tableLayers.getColumnModel().getColumn(1).setResizable(false);
-			tableLayers.getColumnModel().getColumn(2).setResizable(false);
-			tableLayers.getColumnModel().getColumn(3).setResizable(false);
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int selectedRow = tableLayers.getSelectedRow();
+					if (selectedRow != -1){
+						model.removeRow(selectedRow);
+					}
+				}
+			});
+			panelNetworkConf.add(rmvBtn);
 			
-			tableLayers.getColumnModel().getColumn(0).setPreferredWidth(54);
-			tableLayers.getColumnModel().getColumn(1).setPreferredWidth(56);
-			tableLayers.getColumnModel().getColumn(2).setPreferredWidth(103);
-			tableLayers.getColumnModel().getColumn(3).setPreferredWidth(77);
 			
-
+		
 			JScrollPane scrollPaneLayers = new JScrollPane(tableLayers);
 			scrollPaneLayers.setSize(338, 430);
 			scrollPaneLayers.setLocation(10, 59);
 			tableLayers.setFillsViewportHeight(true);
-
+		
 			panelNetworkConf.add(scrollPaneLayers);
-			panelNetworkConf.add(new TableRenderDemo());
+			//panelNetworkConf.add(new TableRenderDemo());
 			
 			//tableLayers.setBorder(new LineBorder(new Color(0, 0, 0)));
 			//tableLayers.setBounds(10, 390, 295, -272);

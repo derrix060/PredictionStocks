@@ -128,7 +128,7 @@ public class TableRenderDemo extends JPanel {
         sportColumn.setCellRenderer(renderer);
     }
     
-    private class RowData{
+    public class RowData{
     	private Map<Integer, Object> values = new HashMap<Integer, Object>();
     	
     	public RowData() {
