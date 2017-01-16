@@ -1,39 +1,40 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
 import process.ActivationFunctionFactory.enumActivationFuncion;
 
 import java.awt.Color;
-import java.awt.Component;
-
-import javax.swing.UIManager;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
-import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
 public class MainView extends JFrame {
 
-	private JPanel contentPane;
-	private JTable tableLayers;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel 					contentPane;
+	private LayerTable 				dtm 			= new LayerTable();
+	private JTable 					tableLayer 		= new JTable();
+	private Object[] 				emptyData 		= {Integer.valueOf(1), Boolean.TRUE, enumActivationFuncion.BiPolar, new Double(1.1)};
+    
 
 	/**
 	 * Launch the application.
@@ -90,7 +91,7 @@ public class MainView extends JFrame {
 		lblStock.setBounds(25, 164, 46, 14);
 		panelInput.add(lblStock);
 		
-		JComboBox cmbStock = new JComboBox();
+		JComboBox<?> cmbStock = new JComboBox<Object>();
 		cmbStock.setBounds(25, 181, 109, 20);
 		panelInput.add(cmbStock);
 		
@@ -137,115 +138,35 @@ public class MainView extends JFrame {
 		contentPane.add(panelNetworkConf);
 		panelNetworkConf.setBorder(BorderFactory.createTitledBorder("Network Configuration"));
 		
-		JLabel lblNeurons = new JLabel("Neurons");
-		lblNeurons.setBounds(10, 25, 44, 14);
-		panelNetworkConf.add(lblNeurons);
 		
-		JFormattedTextField txtNeurons = new JFormattedTextField();
-		txtNeurons.setBounds(10, 39, 44, 20);
-		panelNetworkConf.add(txtNeurons);
-		
-		JLabel lblBias = new JLabel("Has Bias?");
-		lblBias.setBounds(64, 25, 51, 14);
-		panelNetworkConf.add(lblBias);
-		
-		JLabel lblNewLabel_1 = new JLabel("Activation Function");
-		lblNewLabel_1.setBounds(125, 25, 97, 14);
-		panelNetworkConf.add(lblNewLabel_1);
-		
-		JLabel lblDropoutRate = new JLabel("DropOut Rate");
-		lblDropoutRate.setBounds(232, 25, 73, 14);
-		panelNetworkConf.add(lblDropoutRate);
-		
-		JComboBox cmbBias = new JComboBox();
-		cmbBias.setBounds(64, 39, 51, 20);
-		panelNetworkConf.add(cmbBias);
-		
-		JComboBox cmbActivationFunction = new JComboBox();
-		cmbActivationFunction.setBounds(125, 39, 97, 20);
-		panelNetworkConf.add(cmbActivationFunction);
-		
-		JFormattedTextField txtDropOut = new JFormattedTextField();
-		txtDropOut.setBounds(232, 39, 73, 20);
-		panelNetworkConf.add(txtDropOut);
-		
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
-		button.setForeground(new Color(0, 128, 0));
-		button.setBounds(10, 70, 41, 23);
-		panelNetworkConf.add(button);
-		
-		JButton button_1 = new JButton("");
-		button_1.setIcon(new ImageIcon(MainView.class.getResource("/view/cancel.png")));
-		button_1.setBounds(60, 70, 41, 23);
-		panelNetworkConf.add(button_1);
-		
-		JButton button_2 = new JButton("");
-		button_2.setIcon(new ImageIcon(MainView.class.getResource("/view/edit.png")));
-		button_2.setBounds(107, 70, 41, 23);
-		panelNetworkConf.add(button_2);
-		
-		
-		//Start create JTable
-			
-			tableLayers = new JTable();
-			tableLayers.setModel(new DefaultTableModel(
-				new Object[][] {
-					{Integer.valueOf(1), Boolean.TRUE, enumActivationFuncion.BiPolar, new Double(5.2)},
-					{Integer.valueOf(2), Boolean.TRUE, enumActivationFuncion.Elliott, new Double(5.2)},
-					{Integer.valueOf(3), Boolean.TRUE, enumActivationFuncion.Ramp, new Double(5.2)},
-				},
-				new String[] {
-					"Neurons", "HasBias?", "Activation Function", "DropOut Rate"
-				}
-			) {
-				Class[] columnTypes = new Class[] {
-					Integer.class, Boolean.class, enumActivationFuncion.class, Double.class
-				};
-				public Class getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
+		//Add button
+			JButton btnAdd = new JButton("");
+			btnAdd.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
+			btnAdd.setForeground(new Color(0, 128, 0));
+			btnAdd.setBounds(10, 70, 41, 23);
+			btnAdd.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dtm.addRow(emptyData);
+					tableLayer.setModel(dtm);
+					
 				}
 			});
-			
-			//comboBox Activation
-				JComboBox<enumActivationFuncion> comboAct = new JComboBox<>();
-				comboAct.addItem(enumActivationFuncion.BiPolar);
-				comboAct.addItem(enumActivationFuncion.BipolarSteepenedSigmoid);
-				comboAct.addItem(enumActivationFuncion.ClippedLinear);
-				comboAct.addItem(enumActivationFuncion.Competitive);
-				comboAct.addItem(enumActivationFuncion.Elliott);
-				comboAct.addItem(enumActivationFuncion.ElliottSymmetric);
-				comboAct.addItem(enumActivationFuncion.Gaussian);
-				comboAct.addItem(enumActivationFuncion.Linear);
-				comboAct.addItem(enumActivationFuncion.LOG);
-				comboAct.addItem(enumActivationFuncion.Ramp);
-				comboAct.addItem(enumActivationFuncion.Sigmoid);
-				comboAct.addItem(enumActivationFuncion.SIN);
-				comboAct.addItem(enumActivationFuncion.SoftMax);
-				comboAct.addItem(enumActivationFuncion.SteepenedSigmoid);
-				comboAct.addItem(enumActivationFuncion.Step);
-				comboAct.addItem(enumActivationFuncion.TANH);
-			
-			//Modify Activation Column
-				tableLayers.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboAct));
-				
-				
-				
-			tableLayers.getColumnModel().getColumn(0).setResizable(false);
-			tableLayers.getColumnModel().getColumn(1).setResizable(false);
-			tableLayers.getColumnModel().getColumn(2).setResizable(false);
-			tableLayers.getColumnModel().getColumn(3).setResizable(false);
-			
-			tableLayers.getColumnModel().getColumn(0).setPreferredWidth(54);
-			tableLayers.getColumnModel().getColumn(1).setPreferredWidth(56);
-			tableLayers.getColumnModel().getColumn(2).setPreferredWidth(103);
-			tableLayers.getColumnModel().getColumn(3).setPreferredWidth(77);
-			
-
-			JScrollPane scrollPaneLayers = new JScrollPane(tableLayers);
+			panelNetworkConf.add(btnAdd);
+		//Remove button
+			JButton btnRemove = new JButton("");
+			btnRemove.setIcon(new ImageIcon(MainView.class.getResource("/view/cancel.png")));
+			btnRemove.setBounds(60, 70, 41, 23);
+			panelNetworkConf.add(btnRemove);
+		
+		
+		//Start Layer Table
+			initializeLayerTable();
+			JScrollPane scrollPaneLayers = new JScrollPane(tableLayer);
 			scrollPaneLayers.setSize(338, 385);
 			scrollPaneLayers.setLocation(10, 104);
-			tableLayers.setFillsViewportHeight(true);
+			tableLayer.setFillsViewportHeight(true);
 			
 			panelNetworkConf.add(scrollPaneLayers);
 			
@@ -288,8 +209,83 @@ public class MainView extends JFrame {
 		label_5.setBounds(10, 145, 109, 14);
 		panel_2.add(label_5);
 		
-		JComboBox comboBox_2 = new JComboBox();
+		JComboBox<?> comboBox_2 = new JComboBox<Object>();
 		comboBox_2.setBounds(10, 170, 109, 20);
 		panel_2.add(comboBox_2);
 	}
+
+	private void initializeLayerTable(){
+		//private String[] columnNames = {"Neurons", "HasBias?", "Activation Function", "DropOut Rate"};
+		dtm.addColumn("Neurons");
+		dtm.addColumn("HasBias?");
+		dtm.addColumn("Activation Function");
+		dtm.addColumn("DropOut Rate");
+		
+		tableLayer.setModel(dtm);
+		
+		
+		//comboBox Activation
+			JComboBox<enumActivationFuncion> comboAct = new JComboBox<>();
+				comboAct.addItem(enumActivationFuncion.BiPolar);
+				comboAct.addItem(enumActivationFuncion.BipolarSteepenedSigmoid);
+				comboAct.addItem(enumActivationFuncion.ClippedLinear);
+				comboAct.addItem(enumActivationFuncion.Competitive);
+				comboAct.addItem(enumActivationFuncion.Elliott);
+				comboAct.addItem(enumActivationFuncion.ElliottSymmetric);
+				comboAct.addItem(enumActivationFuncion.Gaussian);
+				comboAct.addItem(enumActivationFuncion.Linear);
+				comboAct.addItem(enumActivationFuncion.LOG);
+				comboAct.addItem(enumActivationFuncion.Ramp);
+				comboAct.addItem(enumActivationFuncion.Sigmoid);
+				comboAct.addItem(enumActivationFuncion.SIN);
+				comboAct.addItem(enumActivationFuncion.SoftMax);
+				comboAct.addItem(enumActivationFuncion.SteepenedSigmoid);
+				comboAct.addItem(enumActivationFuncion.Step);
+				comboAct.addItem(enumActivationFuncion.TANH);
+	
+		//Modify Activation Column
+			tableLayer.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboAct));
+		
+			tableLayer.getColumnModel().getColumn(0).setResizable(false);
+			tableLayer.getColumnModel().getColumn(1).setResizable(false);
+			tableLayer.getColumnModel().getColumn(2).setResizable(false);
+			tableLayer.getColumnModel().getColumn(3).setResizable(false);
+	
+			tableLayer.getColumnModel().getColumn(0).setPreferredWidth(54);
+			tableLayer.getColumnModel().getColumn(1).setPreferredWidth(56);
+			tableLayer.getColumnModel().getColumn(2).setPreferredWidth(103);
+			tableLayer.getColumnModel().getColumn(3).setPreferredWidth(77);
+	}
+
+
+
+	private class LayerTable extends DefaultTableModel{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public Class<?> getColumnClass(int columnIndex) {
+			switch (columnIndex) {
+				case 0:
+					return Integer.class;
+				case 1:
+					return Boolean.class;
+				case 2:
+					return enumActivationFuncion.class;
+				case 3:
+					return Double.class;
+				default:
+					return null;
+			}
+		}
+		
+		@Override
+		public boolean isCellEditable(int row, int col){
+			return true;
+		}
+		
+	}
+	
 }
