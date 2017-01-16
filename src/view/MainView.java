@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -139,6 +140,7 @@ public class MainView extends JFrame {
 		panelNetworkConf.setBorder(BorderFactory.createTitledBorder("Network Configuration"));
 		
 		
+
 		//Add button
 			JButton btnAdd = new JButton("");
 			btnAdd.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
@@ -169,17 +171,6 @@ public class MainView extends JFrame {
 			tableLayer.setFillsViewportHeight(true);
 			
 			panelNetworkConf.add(scrollPaneLayers);
-			
-			//tableLayers.setBorder(new LineBorder(new Color(0, 0, 0)));
-			//tableLayers.setBounds(10, 390, 295, -272);
-			
-			//DefaultTableModel model = (DefaultTableModel) tableLayers.getModel();
-			
-			//Object[] row = {1, true, enumActivationFuncion.BiPolar, 0.5f};
-			//model.addRow(row);
-			
-			//panelNetworkConf.add(tableLayers);
-		//End create JTable
 			
 			
 		JPanel panel_2 = new JPanel();
