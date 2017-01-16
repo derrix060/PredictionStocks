@@ -35,6 +35,7 @@ public class MainView extends JFrame {
 	private JTable 					tableLayer 		= new JTable();
 	private Object[] 				emptyData 		= {Integer.valueOf(1), Boolean.TRUE, enumActivationFuncion.BiPolar, new Double(1.1)};
     
+	
 	/**
 	 * Launch the application.
 	 */
