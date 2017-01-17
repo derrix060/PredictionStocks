@@ -1,16 +1,22 @@
 package view;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+
+import net.sourceforge.jdatepicker.JDatePicker;
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import process.ActivationFunctionFactory.enumActivationFuncion;
 
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JLabel;
 import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
@@ -20,7 +26,6 @@ import javax.swing.JCheckBox;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
@@ -58,153 +63,226 @@ public class MainView extends JFrame {
 	 */
 	public MainView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 590, 655);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		//Input Panel
-			JPanel panelInput = new JPanel();
-			panelInput.setToolTipText("");
-			panelInput.setBorder(new LineBorder(new Color(171, 173, 179)));
-			panelInput.setBounds(32, 32, 157, 500);
-			contentPane.add(panelInput);
-			panelInput.setLayout(null);
-			panelInput.setBorder(BorderFactory.createTitledBorder("Input"));
-			
-			JLabel lblFrom = new JLabel("From");
-			lblFrom.setBounds(25, 29, 109, 14);
-			panelInput.add(lblFrom);
-			
-			JFormattedTextField txtFrom = new JFormattedTextField();
-			txtFrom.setBounds(25, 43, 109, 20);
-			panelInput.add(txtFrom);
-			
-			JLabel lblTo = new JLabel("To");
-			lblTo.setBounds(25, 74, 109, 14);
-			panelInput.add(lblTo);
-			
-			JFormattedTextField txtTo = new JFormattedTextField();
-			txtTo.setBounds(25, 88, 109, 20);
-			panelInput.add(txtTo);
-			
-			JLabel lblStock = new JLabel("Stock");
-			lblStock.setBounds(25, 164, 46, 14);
-			panelInput.add(lblStock);
-			
-			JComboBox<?> cmbStock = new JComboBox<Object>();
-			cmbStock.setBounds(25, 181, 109, 20);
-			panelInput.add(cmbStock);
-			
-			JLabel lblDataInterval = new JLabel("Data interval in days");
-			lblDataInterval.setBounds(25, 119, 109, 14);
-			panelInput.add(lblDataInterval);
-			
-			JFormattedTextField txtDataInterval = new JFormattedTextField();
-			txtDataInterval.setBounds(25, 133, 109, 20);
-			panelInput.add(txtDataInterval);
-		
-		//Data	
-		JPanel panelInputDataType = new JPanel();
-		panelInputDataType.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelInputDataType.setBounds(25, 226, 109, 181);
-		panelInput.add(panelInputDataType);
-		panelInputDataType.setLayout(null);
-		panelInputDataType.setBorder(BorderFactory.createTitledBorder("Stock Attribute"));
-		
-		JCheckBox chckbxClosePrice = new JCheckBox("Close Price");
-		chckbxClosePrice.setBounds(15, 25, 77, 23);
-		panelInputDataType.add(chckbxClosePrice);
-		
-		JCheckBox chckbxHighPrice = new JCheckBox("High Price");
-		chckbxHighPrice.setBounds(15, 53, 73, 23);
-		panelInputDataType.add(chckbxHighPrice);
-		
-		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Low Price");
-		chckbxNewCheckBox_1.setBounds(15, 81, 71, 23);
-		panelInputDataType.add(chckbxNewCheckBox_1);
-		
-		JCheckBox chckbxOpenPrice = new JCheckBox("Open Price");
-		chckbxOpenPrice.setBounds(15, 109, 77, 23);
-		panelInputDataType.add(chckbxOpenPrice);
-		
-		JCheckBox chckbxVolume = new JCheckBox("Volume");
-		chckbxVolume.setBounds(15, 138, 59, 23);
-		panelInputDataType.add(chckbxVolume);
-		
-		JPanel panelNetworkConf = new JPanel();
-		panelNetworkConf.setLayout(null);
-		panelNetworkConf.setToolTipText("");
-		panelNetworkConf.setBorder(new LineBorder(new Color(171, 173, 179)));
-		panelNetworkConf.setBounds(199, 32, 358, 500);
-		contentPane.add(panelNetworkConf);
-		panelNetworkConf.setBorder(BorderFactory.createTitledBorder("Network Configuration"));
-		
-		
+			JPanel panelExtactData = new JPanel();
+			panelExtactData.setToolTipText("");
+			panelExtactData.setBorder(new LineBorder(new Color(171, 173, 179)));
+			panelExtactData.setBounds(10, 11, 179, 414);
+			contentPane.add(panelExtactData);
+			panelExtactData.setLayout(null);
+			panelExtactData.setBorder(BorderFactory.createTitledBorder("Extract Data"));
 
-		//Add button
-			JButton btnAdd = new JButton("");
-			btnAdd.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
-			btnAdd.setForeground(new Color(0, 128, 0));
-			btnAdd.setBounds(10, 70, 41, 23);
-			btnAdd.addActionListener(new ActionListener() {
+			//From
+				JLabel lblFrom = new JLabel("From");
+				lblFrom.setBounds(10, 25, 124, 14);
+				panelExtactData.add(lblFrom);
 				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					dtm.addRow(emptyData);
-					tableLayer.setModel(dtm);
+				JDatePicker txtFrom = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
+				((Component) txtFrom).setBounds(10, 43, 159, 29);
+				panelExtactData.add((Component) txtFrom);
+			//To
+				JLabel lblTo = new JLabel("To");
+				lblTo.setBounds(10, 74, 159, 14);
+				panelExtactData.add(lblTo);
+				
+				JDatePicker txtTo = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
+				((Component) txtTo).setBounds(10, 88, 159, 29);
+				panelExtactData.add((Component) txtTo);
+			//Stock
+				JLabel lblStock = new JLabel("Stock");
+				lblStock.setBounds(10, 164, 159, 14);
+				panelExtactData.add(lblStock);
+				
+				JComboBox<?> cmbStock = new JComboBox<Object>();
+				cmbStock.setBounds(10, 181, 159, 20);
+				panelExtactData.add(cmbStock);
+			//Data Interval
+				JLabel lblDataInterval = new JLabel("Data interval in days");
+				lblDataInterval.setBounds(10, 119, 159, 14);
+				panelExtactData.add(lblDataInterval);
+				
+				JFormattedTextField txtDataInterval = new JFormattedTextField();
+				txtDataInterval.setBounds(10, 133, 159, 20);
+				panelExtactData.add(txtDataInterval);
+		
+			//Stock Atribute	
+				JPanel panelStockAtribute = new JPanel();
+				panelStockAtribute.setBorder(new LineBorder(new Color(0, 0, 0)));
+				panelStockAtribute.setBounds(10, 226, 159, 181);
+				panelExtactData.add(panelStockAtribute);
+				panelStockAtribute.setLayout(null);
+				panelStockAtribute.setBorder(BorderFactory.createTitledBorder("Stock Attribute"));
+				
+				JCheckBox chckbxClosePrice = new JCheckBox("Close Price");
+				chckbxClosePrice.setBounds(6, 25, 147, 23);
+				panelStockAtribute.add(chckbxClosePrice);
+				
+				JCheckBox chckbxHighPrice = new JCheckBox("High Price");
+				chckbxHighPrice.setBounds(6, 53, 147, 23);
+				panelStockAtribute.add(chckbxHighPrice);
+				
+				JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Low Price");
+				chckbxNewCheckBox_1.setBounds(6, 81, 147, 23);
+				panelStockAtribute.add(chckbxNewCheckBox_1);
+				
+				JCheckBox chckbxOpenPrice = new JCheckBox("Open Price");
+				chckbxOpenPrice.setBounds(6, 109, 147, 23);
+				panelStockAtribute.add(chckbxOpenPrice);
+				
+				JCheckBox chckbxVolume = new JCheckBox("Volume");
+				chckbxVolume.setBounds(6, 138, 147, 23);
+				panelStockAtribute.add(chckbxVolume);
+			//End Stock Atribute
+				
+		//End Input Panel
+				
+		//Normalization Panel
+			JPanel panelNormalization = new JPanel();
+			panelNormalization.setBounds(10, 436, 179, 173);
+			contentPane.add(panelNormalization);
+			panelNormalization.setBorder(BorderFactory.createTitledBorder("Normalization"));
+			panelNormalization.setLayout(null);
+			
+			//Inferior Limit
+				JLabel lblInferiorLimit = new JLabel("Inferior Limit");
+				lblInferiorLimit.setBounds(10, 25, 159, 14);
+				panelNormalization.add(lblInferiorLimit);
+				
+				JFormattedTextField txtInferiorLimit = new JFormattedTextField();
+				txtInferiorLimit.setBounds(10, 40, 159, 20);
+				panelNormalization.add(txtInferiorLimit);
+			//Superior Limit
+				JLabel lblSuperiorLimit = new JLabel("Superior Limit");
+				lblSuperiorLimit.setBounds(10, 69, 159, 14);
+				panelNormalization.add(lblSuperiorLimit);
+				
+				JFormattedTextField txtSuperiorLimit = new JFormattedTextField();
+				txtSuperiorLimit.setBounds(10, 85, 159, 20);
+				panelNormalization.add(txtSuperiorLimit);
+			//Margin
+				JLabel lblMargin = new JLabel("Margin %");
+				lblMargin.setBounds(10, 116, 159, 14);
+				panelNormalization.add(lblMargin);
+				
+				JFormattedTextField txtMargin = new JFormattedTextField();
+				txtMargin.setBounds(10, 132, 159, 20);
+				panelNormalization.add(txtMargin);
+			
+		//End Normalization Panel
+			
+		//Hidden Layer Panel	
+			JPanel panelHiddenLayer = new JPanel();
+			panelHiddenLayer.setLayout(null);
+			panelHiddenLayer.setToolTipText("");
+			panelHiddenLayer.setBorder(new LineBorder(new Color(171, 173, 179)));
+			panelHiddenLayer.setBounds(199, 11, 372, 214);
+			contentPane.add(panelHiddenLayer);
+			panelHiddenLayer.setBorder(BorderFactory.createTitledBorder("Hidden Layer"));
+			
+			
+	
+			//Add button
+				JButton btnAdd = new JButton("");
+				btnAdd.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
+				btnAdd.setForeground(new Color(0, 128, 0));
+				btnAdd.setBounds(10, 27, 41, 23);
+				btnAdd.addActionListener(new ActionListener() {
 					
-				}
-			});
-			panelNetworkConf.add(btnAdd);
-		//Remove button
-			JButton btnRemove = new JButton("");
-			btnRemove.setIcon(new ImageIcon(MainView.class.getResource("/view/cancel.png")));
-			btnRemove.setBounds(60, 70, 41, 23);
-			panelNetworkConf.add(btnRemove);
-		
-		
-		//Start Layer Table
-			initializeLayerTable();
-			JScrollPane scrollPaneLayers = new JScrollPane(tableLayer);
-			scrollPaneLayers.setSize(338, 385);
-			scrollPaneLayers.setLocation(10, 104);
-			tableLayer.setFillsViewportHeight(true);
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						dtm.addRow(emptyData);
+						tableLayer.setModel(dtm);
+						
+					}
+				});
+				panelHiddenLayer.add(btnAdd);
+			//Remove button
+				JButton btnRemove = new JButton("");
+				btnRemove.setIcon(new ImageIcon(MainView.class.getResource("/view/cancel.png")));
+				btnRemove.setBounds(61, 27, 41, 23);
+				btnRemove.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						dtm.removeRow(tableLayer.getSelectedRow());
+						
+					}
+				});
+				panelHiddenLayer.add(btnRemove);
 			
-			panelNetworkConf.add(scrollPaneLayers);
 			
+			//Start Layer Table
+				initializeLayerTable();
+				JScrollPane scrollPaneLayers = new JScrollPane(tableLayer);
+				scrollPaneLayers.setSize(348, 150);
+				scrollPaneLayers.setLocation(10, 56);
+				tableLayer.setFillsViewportHeight(true);
+				
+				panelHiddenLayer.add(scrollPaneLayers);
+				
+		//End Hidden Layer Panel	
+		
+		//Training Panel
+			JPanel panelTraining = new JPanel();
+			panelTraining.setToolTipText("");
+			panelTraining.setBorder(new LineBorder(new Color(171, 173, 179)));
+			panelTraining.setBounds(199, 236, 179, 373);
+			contentPane.add(panelTraining);
+			panelTraining.setBorder(BorderFactory.createTitledBorder("Training"));
+			panelTraining.setLayout(null);
 			
-		JPanel panel_2 = new JPanel();
-		panel_2.setLayout(null);
-		panel_2.setToolTipText("");
-		panel_2.setBorder(new LineBorder(new Color(171, 173, 179)));
-		panel_2.setBounds(619, 32, 137, 500);
-		contentPane.add(panel_2);
-		
-		JLabel lblMargin = new JLabel("Margin %");
-		lblMargin.setBounds(10, 11, 109, 14);
-		panel_2.add(lblMargin);
-		
-		JFormattedTextField formattedTextField_4 = new JFormattedTextField();
-		formattedTextField_4.setBounds(10, 25, 109, 20);
-		panel_2.add(formattedTextField_4);
-		
-		JLabel label_4 = new JLabel("To");
-		label_4.setBounds(10, 70, 109, 14);
-		panel_2.add(label_4);
-		
-		JFormattedTextField formattedTextField_5 = new JFormattedTextField();
-		formattedTextField_5.setBounds(10, 84, 109, 20);
-		panel_2.add(formattedTextField_5);
-		
-		JLabel label_5 = new JLabel("Stock");
-		label_5.setBounds(10, 145, 109, 14);
-		panel_2.add(label_5);
-		
-		JComboBox<?> comboBox_2 = new JComboBox<Object>();
-		comboBox_2.setBounds(10, 170, 109, 20);
-		panel_2.add(comboBox_2);
+			//Learning Rule
+				JLabel lblLearningRule = new JLabel("Learning Rule");
+				lblLearningRule.setBounds(10, 25, 159, 14);
+				panelTraining.add(lblLearningRule);
+				
+				JComboBox<?> comboBox = new JComboBox<Object>();
+				comboBox.setBounds(10, 44, 159, 20);
+				panelTraining.add(comboBox);
+			//From Training
+				JLabel lblFromT = new JLabel("From");
+				lblFromT.setBounds(10, 75, 159, 14);
+				panelTraining.add(lblFromT);
+				
+				JDatePicker txtFromT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
+				((Component) txtFromT).setBounds(10, 93, 159, 29);
+				panelTraining.add((Component) txtFromT);
+			//To Training
+				JLabel lblToT = new JLabel("To");
+				lblToT.setBounds(10, 124, 159, 14);
+				panelTraining.add(lblToT);
+				
+				JDatePicker txtToT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
+				((Component) txtToT).setBounds(10, 138, 159, 29);
+				panelTraining.add((Component) txtToT);
+			//Max Iteration
+				JLabel lblMaxIteration = new JLabel("Max Iteration");
+				lblMaxIteration.setBounds(10, 169, 159, 14);
+				panelTraining.add(lblMaxIteration);
+				
+				JFormattedTextField txtMaxIteration = new JFormattedTextField();
+				txtMaxIteration.setBounds(10, 185, 159, 20);
+				panelTraining.add(txtMaxIteration);
+			//Min Error
+				JLabel lblMinError = new JLabel("Min Error");
+				lblMinError.setBounds(10, 216, 159, 14);
+				panelTraining.add(lblMinError);
+				
+				JFormattedTextField txtMinError = new JFormattedTextField();
+				txtMinError.setBounds(10, 231, 159, 20);
+				panelTraining.add(txtMinError);
+		//End Training Panel	
+				
+				
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(395, 583, 89, 23);
+		contentPane.add(btnNewButton);
 	}
 
 	private void initializeLayerTable(){
@@ -279,5 +357,4 @@ public class MainView extends JFrame {
 		}
 		
 	}
-	
 }
