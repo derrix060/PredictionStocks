@@ -13,6 +13,7 @@ import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import process.ActivationFunctionFactory.enumActivationFuncion;
+import process.PropagationFactory.enumTrainingType;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -99,7 +100,20 @@ public class MainView extends JFrame {
 				lblStock.setBounds(10, 164, 159, 14);
 				panelExtactData.add(lblStock);
 				
-				JComboBox<?> cmbStock = new JComboBox<Object>();
+				JComboBox<String> cmbStock = new JComboBox<>();
+					cmbStock.addItem("BBDC4.SA");
+					cmbStock.addItem("ABEV3.SA");
+					cmbStock.addItem("PETR4.SA");
+					cmbStock.addItem("VALE5.SA");
+					cmbStock.addItem("PETR3.SA");
+					cmbStock.addItem("VALE3.SA");
+					cmbStock.addItem("BRFS3.SA");
+					cmbStock.addItem("BBAS3.SA");
+					cmbStock.addItem("ITSA4.SA");
+					cmbStock.addItem("BVMF3.SA");
+					cmbStock.addItem("UGPA3.SA");
+					cmbStock.addItem("CIEL3.SA");
+					cmbStock.addItem("ITUB4.SA");
 				cmbStock.setBounds(10, 181, 159, 20);
 				panelExtactData.add(cmbStock);
 			//Data Interval
@@ -242,9 +256,14 @@ public class MainView extends JFrame {
 				lblLearningRule.setBounds(10, 25, 159, 14);
 				panelTraining.add(lblLearningRule);
 				
-				JComboBox<?> comboBox = new JComboBox<Object>();
-				comboBox.setBounds(10, 44, 159, 20);
-				panelTraining.add(comboBox);
+				JComboBox<enumTrainingType> cmbTraining = new JComboBox<>();
+					cmbTraining.addItem(enumTrainingType.Backpropagation);
+					cmbTraining.addItem(enumTrainingType.ManhattanPropagation);
+					cmbTraining.addItem(enumTrainingType.QuickPropagation);
+					cmbTraining.addItem(enumTrainingType.ResilientPropagation);
+					cmbTraining.addItem(enumTrainingType.ScaledConjugateGradient);
+				cmbTraining.setBounds(10, 44, 159, 20);
+				panelTraining.add(cmbTraining);
 			//From Training
 				JLabel lblFromT = new JLabel("From");
 				lblFromT.setBounds(10, 75, 159, 14);
@@ -312,7 +331,6 @@ public class MainView extends JFrame {
 				comboAct.addItem(enumActivationFuncion.SteepenedSigmoid);
 				comboAct.addItem(enumActivationFuncion.Step);
 				comboAct.addItem(enumActivationFuncion.TANH);
-	
 		//Modify Activation Column
 			tableLayer.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboAct));
 		

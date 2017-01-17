@@ -12,18 +12,18 @@ public class PropagationFactory {
 	
 	private final double default_trainingRate = 0.1;
 
-	public enum trainingType{
+	public enum enumTrainingType{
 		ResilientPropagation, Backpropagation, QuickPropagation, ScaledConjugateGradient, ManhattanPropagation;
 	}
 	
-	public Propagation create(trainingType type, BasicNetwork network, MLDataSet trainingSet){
+	public Propagation create(enumTrainingType type, BasicNetwork network, MLDataSet trainingSet){
 		return create(type, network, trainingSet, default_trainingRate);
 	}
-	public Propagation create(trainingType type, BasicNetwork network, MLDataSet trainingSet, double learningRate){
-		if (type.equals(trainingType.ResilientPropagation)) return new ResilientPropagation(network, trainingSet);
-		if (type.equals(trainingType.Backpropagation)) return new Backpropagation(network, trainingSet);
-		if (type.equals(trainingType.QuickPropagation)) return new QuickPropagation(network, trainingSet);
-		if (type.equals(trainingType.ManhattanPropagation)) return new ManhattanPropagation(network, trainingSet, learningRate);
+	public Propagation create(enumTrainingType type, BasicNetwork network, MLDataSet trainingSet, double learningRate){
+		if (type.equals(enumTrainingType.ResilientPropagation)) return new ResilientPropagation(network, trainingSet);
+		if (type.equals(enumTrainingType.Backpropagation)) return new Backpropagation(network, trainingSet);
+		if (type.equals(enumTrainingType.QuickPropagation)) return new QuickPropagation(network, trainingSet);
+		if (type.equals(enumTrainingType.ManhattanPropagation)) return new ManhattanPropagation(network, trainingSet, learningRate);
 		else return null;
 	}
 }
