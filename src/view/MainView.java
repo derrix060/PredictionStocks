@@ -64,46 +64,48 @@ public class MainView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panelInput = new JPanel();
-		panelInput.setToolTipText("");
-		panelInput.setBorder(new LineBorder(new Color(171, 173, 179)));
-		panelInput.setBounds(32, 32, 157, 500);
-		contentPane.add(panelInput);
-		panelInput.setLayout(null);
-		panelInput.setBorder(BorderFactory.createTitledBorder("Input"));
+		//Input Panel
+			JPanel panelInput = new JPanel();
+			panelInput.setToolTipText("");
+			panelInput.setBorder(new LineBorder(new Color(171, 173, 179)));
+			panelInput.setBounds(32, 32, 157, 500);
+			contentPane.add(panelInput);
+			panelInput.setLayout(null);
+			panelInput.setBorder(BorderFactory.createTitledBorder("Input"));
+			
+			JLabel lblFrom = new JLabel("From");
+			lblFrom.setBounds(25, 29, 109, 14);
+			panelInput.add(lblFrom);
+			
+			JFormattedTextField txtFrom = new JFormattedTextField();
+			txtFrom.setBounds(25, 43, 109, 20);
+			panelInput.add(txtFrom);
+			
+			JLabel lblTo = new JLabel("To");
+			lblTo.setBounds(25, 74, 109, 14);
+			panelInput.add(lblTo);
+			
+			JFormattedTextField txtTo = new JFormattedTextField();
+			txtTo.setBounds(25, 88, 109, 20);
+			panelInput.add(txtTo);
+			
+			JLabel lblStock = new JLabel("Stock");
+			lblStock.setBounds(25, 164, 46, 14);
+			panelInput.add(lblStock);
+			
+			JComboBox<?> cmbStock = new JComboBox<Object>();
+			cmbStock.setBounds(25, 181, 109, 20);
+			panelInput.add(cmbStock);
+			
+			JLabel lblDataInterval = new JLabel("Data interval in days");
+			lblDataInterval.setBounds(25, 119, 109, 14);
+			panelInput.add(lblDataInterval);
+			
+			JFormattedTextField txtDataInterval = new JFormattedTextField();
+			txtDataInterval.setBounds(25, 133, 109, 20);
+			panelInput.add(txtDataInterval);
 		
-		JLabel lblFrom = new JLabel("From");
-		lblFrom.setBounds(25, 29, 109, 14);
-		panelInput.add(lblFrom);
-		
-		JFormattedTextField txtFrom = new JFormattedTextField();
-		txtFrom.setBounds(25, 43, 109, 20);
-		panelInput.add(txtFrom);
-		
-		JLabel lblTo = new JLabel("To");
-		lblTo.setBounds(25, 74, 109, 14);
-		panelInput.add(lblTo);
-		
-		JFormattedTextField txtTo = new JFormattedTextField();
-		txtTo.setBounds(25, 88, 109, 20);
-		panelInput.add(txtTo);
-		
-		JLabel lblStock = new JLabel("Stock");
-		lblStock.setBounds(25, 164, 46, 14);
-		panelInput.add(lblStock);
-		
-		JComboBox<?> cmbStock = new JComboBox<Object>();
-		cmbStock.setBounds(25, 181, 109, 20);
-		panelInput.add(cmbStock);
-		
-		JLabel lblDataInterval = new JLabel("Data interval in days");
-		lblDataInterval.setBounds(25, 119, 109, 14);
-		panelInput.add(lblDataInterval);
-		
-		JFormattedTextField txtDataInterval = new JFormattedTextField();
-		txtDataInterval.setBounds(25, 133, 109, 20);
-		panelInput.add(txtDataInterval);
-		
+		//Data	
 		JPanel panelInputDataType = new JPanel();
 		panelInputDataType.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelInputDataType.setBounds(25, 226, 109, 181);
@@ -206,7 +208,6 @@ public class MainView extends JFrame {
 	}
 
 	private void initializeLayerTable(){
-		//private String[] columnNames = {"Neurons", "HasBias?", "Activation Function", "DropOut Rate"};
 		dtm.addColumn("Neurons");
 		dtm.addColumn("HasBias?");
 		dtm.addColumn("Activation Function");
