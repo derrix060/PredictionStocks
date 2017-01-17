@@ -7,6 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.NumberFormatter;
 
 import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -27,6 +28,8 @@ import javax.swing.JCheckBox;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
@@ -121,7 +124,7 @@ public class MainView extends JFrame {
 				lblDataInterval.setBounds(10, 119, 159, 14);
 				panelExtactData.add(lblDataInterval);
 				
-				JFormattedTextField txtDataInterval = new JFormattedTextField();
+				JFormattedTextField txtDataInterval = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
 				txtDataInterval.setBounds(10, 133, 159, 20);
 				panelExtactData.add(txtDataInterval);
 		
@@ -168,7 +171,7 @@ public class MainView extends JFrame {
 				lblInferiorLimit.setBounds(10, 25, 159, 14);
 				panelNormalization.add(lblInferiorLimit);
 				
-				JFormattedTextField txtInferiorLimit = new JFormattedTextField();
+				JFormattedTextField txtInferiorLimit = NumberTextField.newField(Double.class, -1, 0);
 				txtInferiorLimit.setBounds(10, 40, 159, 20);
 				txtInferiorLimit.setValue(new Integer(-1));
 				panelNormalization.add(txtInferiorLimit);
@@ -177,7 +180,7 @@ public class MainView extends JFrame {
 				lblSuperiorLimit.setBounds(10, 69, 159, 14);
 				panelNormalization.add(lblSuperiorLimit);
 				
-				JFormattedTextField txtSuperiorLimit = new JFormattedTextField();
+				JFormattedTextField txtSuperiorLimit = NumberTextField.newField(Double.class, 0, 1);
 				txtSuperiorLimit.setBounds(10, 85, 159, 20);
 				txtSuperiorLimit.setValue(new Integer(1));
 				panelNormalization.add(txtSuperiorLimit);
@@ -186,7 +189,7 @@ public class MainView extends JFrame {
 				lblMargin.setBounds(10, 116, 159, 14);
 				panelNormalization.add(lblMargin);
 				
-				JFormattedTextField txtMargin = new JFormattedTextField();
+				JFormattedTextField txtMargin = NumberTextField.newField(Double.class, Double.MIN_NORMAL, Double.MAX_VALUE);
 				txtMargin.setBounds(10, 132, 159, 20);
 				txtMargin.setValue(new Double(99.9));
 				panelNormalization.add(txtMargin);
@@ -288,7 +291,7 @@ public class MainView extends JFrame {
 				lblMaxIteration.setBounds(10, 169, 159, 14);
 				panelTraining.add(lblMaxIteration);
 				
-				JFormattedTextField txtMaxIteration = new JFormattedTextField();
+				JFormattedTextField txtMaxIteration = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
 				txtMaxIteration.setBounds(10, 185, 159, 20);
 				txtMaxIteration.setValue(new Integer(5000));
 				panelTraining.add(txtMaxIteration);
@@ -297,7 +300,7 @@ public class MainView extends JFrame {
 				lblMinError.setBounds(10, 216, 159, 14);
 				panelTraining.add(lblMinError);
 				
-				JFormattedTextField txtMinError = new JFormattedTextField();
+				JFormattedTextField txtMinError = NumberTextField.newField(Double.class, 0, 1);
 				txtMinError.setBounds(10, 231, 159, 20);
 				txtMinError.setValue(new Double(0.001));
 				panelTraining.add(txtMinError);
@@ -379,5 +382,26 @@ public class MainView extends JFrame {
 			return true;
 		}
 		
+	}
+
+	private static class NumberTextField extends JFormattedTextField{
+		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public static JFormattedTextField newField(Class<?> classe, Comparable<?> minValue, Comparable<?> maxValue){
+			NumberFormatter formatter = new NumberFormatter(NumberFormat.getInstance());
+			formatter.setValueClass(classe);
+			formatter.setMinimum(minValue);
+			formatter.setMaximum(maxValue);
+			formatter.setAllowsInvalid(true);
+			formatter.setCommitsOnValidEdit(true);
+			
+			return new JFormattedTextField(formatter);
+			
+			
+		}
 	}
 }
