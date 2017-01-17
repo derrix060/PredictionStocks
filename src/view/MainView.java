@@ -310,7 +310,9 @@ public class MainView extends JFrame {
 				
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setBounds(395, 583, 89, 23);
+		btnNewButton.addActionListener(new MainButtonAction(this));
 		contentPane.add(btnNewButton);
+		
 	}
 
 	private void initializeLayerTable(){
