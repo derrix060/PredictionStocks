@@ -170,6 +170,7 @@ public class MainView extends JFrame {
 				
 				JFormattedTextField txtInferiorLimit = new JFormattedTextField();
 				txtInferiorLimit.setBounds(10, 40, 159, 20);
+				txtInferiorLimit.setValue(new Integer(-1));
 				panelNormalization.add(txtInferiorLimit);
 			//Superior Limit
 				JLabel lblSuperiorLimit = new JLabel("Superior Limit");
@@ -178,6 +179,7 @@ public class MainView extends JFrame {
 				
 				JFormattedTextField txtSuperiorLimit = new JFormattedTextField();
 				txtSuperiorLimit.setBounds(10, 85, 159, 20);
+				txtSuperiorLimit.setValue(new Integer(1));
 				panelNormalization.add(txtSuperiorLimit);
 			//Margin
 				JLabel lblMargin = new JLabel("Margin %");
@@ -186,6 +188,7 @@ public class MainView extends JFrame {
 				
 				JFormattedTextField txtMargin = new JFormattedTextField();
 				txtMargin.setBounds(10, 132, 159, 20);
+				txtMargin.setValue(new Double(99.9));
 				panelNormalization.add(txtMargin);
 			
 		//End Normalization Panel
@@ -287,6 +290,7 @@ public class MainView extends JFrame {
 				
 				JFormattedTextField txtMaxIteration = new JFormattedTextField();
 				txtMaxIteration.setBounds(10, 185, 159, 20);
+				txtMaxIteration.setValue(new Integer(5000));
 				panelTraining.add(txtMaxIteration);
 			//Min Error
 				JLabel lblMinError = new JLabel("Min Error");
@@ -295,6 +299,7 @@ public class MainView extends JFrame {
 				
 				JFormattedTextField txtMinError = new JFormattedTextField();
 				txtMinError.setBounds(10, 231, 159, 20);
+				txtMinError.setValue(new Double(0.001));
 				panelTraining.add(txtMinError);
 		//End Training Panel	
 				
