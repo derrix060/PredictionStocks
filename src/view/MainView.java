@@ -126,6 +126,7 @@ public class MainView extends JFrame {
 				
 				JFormattedTextField txtDataInterval = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
 				txtDataInterval.setBounds(10, 133, 159, 20);
+				txtDataInterval.setValue(new Integer(5));
 				panelExtactData.add(txtDataInterval);
 		
 			//Stock Atribute	
