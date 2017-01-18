@@ -13,14 +13,39 @@ public class MainButtonAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(null, mview.getTxtFrom());
+		try{
+			checkDates();
+			JOptionPane.showMessageDialog(null, "ok");
+		}
+		catch (Exception ex){
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+		}
+		
 
 	}
 	
-	private boolean isDateCorrect(){
+	private void checkDates() throws Exception{
 		
+		//Data Section
+			if(mview.getFrom().after(mview.getTo())) throw new Exception("In extract data section, 'from' cannot be after than 'to'!");
 		
-		return true;
+		//Training Section
+			if(mview.getFromTraining().before(mview.getFrom())) 
+				throw new Exception("Training 'from' cannot be before than Extract data 'from'!");
+			
+			if(mview.getToTraining().after(mview.getTo())) 
+				throw new Exception("Training 'to' cannot be after than Extract data 'to'!");
+			
+			if(mview.getFromTraining().after(mview.getTo())) 
+				throw new Exception("Training 'from' cannot be after than Extract data 'to'!");
+			
+			if(mview.getFromTraining().after(mview.getToTraining())) 
+				throw new Exception("In training section, 'from' cannot be after than 'to'!");
+	
+	}
+	
+	private void checkStockAtribute(){
+		
 	}
 
 }

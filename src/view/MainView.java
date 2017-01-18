@@ -360,80 +360,80 @@ public class MainView extends JFrame {
 	 * Getter and setters
 	 */
 	
-	public Calendar getTxtFrom() {
+	public Calendar getFrom() {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime((Date) txtFrom.getModel().getValue());
 		return cal;
 	}
 
-	public Calendar getTxtTo() {
+	public Calendar getTo() {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime((Date) txtTo.getModel().getValue());
 		return cal;
 	}
 
-	public JComboBox<String> getCmbStock() {
-		return cmbStock;
+	public String getStock() {
+		return (String) cmbStock.getSelectedItem();
 	}
 
-	public JFormattedTextField getTxtDataInterval() {
-		return txtDataInterval;
+	public Integer getDataInterval() {
+		return (Integer) txtDataInterval.getValue();
 	}
 
-	public JCheckBox getChckbxHighPrice() {
-		return chckbxHighPrice;
+	public Boolean isHighPrice() {
+		return chckbxHighPrice.isSelected();
 	}
 
-	public JCheckBox getChckbxOpenPrice() {
-		return chckbxOpenPrice;
+	public Boolean isOpenPrice() {
+		return chckbxOpenPrice.isSelected();
 	}
 
-	public JCheckBox getChckbxClosePrice() {
-		return chckbxClosePrice;
+	public Boolean isClosePrice() {
+		return chckbxClosePrice.isSelected();
 	}
 
-	public JCheckBox getChckbxLowPrice() {
-		return chckbxLowPrice;
+	public Boolean isLowPrice() {
+		return chckbxLowPrice.isSelected();
 	}
 
-	public JCheckBox getChckbxVolume() {
-		return chckbxVolume;
+	public Boolean isVolume() {
+		return chckbxVolume.isSelected();
 	}
 
-	public JFormattedTextField getTxtSuperiorLimit() {
-		return txtSuperiorLimit;
+	public Double getSuperiorLimit() {
+		return (Double) txtSuperiorLimit.getValue();
 	}
 
-	public JFormattedTextField getTxtInferiorLimit() {
-		return txtInferiorLimit;
+	public Double getInferiorLimit() {
+		return (Double) txtInferiorLimit.getValue();
 	}
 
-	public JFormattedTextField getTxtMargin() {
-		return txtMargin;
+	public Double getMargin() {
+		return (Double) txtMargin.getValue();
 	}
 
-	public JComboBox<enumTrainingType> getCmbTraining() {
-		return cmbTraining;
+	public enumTrainingType getTrainingType() {
+		return (enumTrainingType) cmbTraining.getSelectedItem();
 	}
 
-	public Calendar getTxtFromT() {
+	public Calendar getFromTraining() {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime((Date) txtFromT.getModel().getValue());
 		return cal;
 	}
 
-	public Calendar getTxtToT() {
+	public Calendar getToTraining() {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime((Date) txtToT.getModel().getValue());
 		return cal;
 	}
 
-	public JFormattedTextField getTxtMaxIteration() {
-		return txtMaxIteration;
+	public Integer getMaxIteration() {
+		return (Integer) txtMaxIteration.getValue();
 	}
 
-	public JFormattedTextField getTxtMinError() {
-		return txtMinError;
+	public Double getMinError() {
+		return (Double) txtMinError.getValue();
 	}
 
 	
