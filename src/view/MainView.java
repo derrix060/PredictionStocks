@@ -30,9 +30,6 @@ import process.PropagationFactory.enumTrainingType;
 
 public class MainView extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel 					contentPane;
 	private LayerTable 				dtm 			= new LayerTable();
@@ -41,26 +38,26 @@ public class MainView extends JFrame {
     
 	//Necessary objects to control in other class
 		//Data
-			JDatePicker txtFrom = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
-			JDatePicker txtTo = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
-			JComboBox<String> cmbStock = new JComboBox<>();
-			JFormattedTextField txtDataInterval = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
+			private JDatePicker txtFrom = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
+			private JDatePicker txtTo = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
+			private JComboBox<String> cmbStock = new JComboBox<>();
+			private JFormattedTextField txtDataInterval = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
 		//Stock atributes
-			JCheckBox chckbxHighPrice = new JCheckBox("High Price");
-			JCheckBox chckbxOpenPrice = new JCheckBox("Open Price");
-			JCheckBox chckbxClosePrice = new JCheckBox("Close Price");
-			JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Low Price");
-			JCheckBox chckbxVolume = new JCheckBox("Volume");
+			private JCheckBox chckbxHighPrice = new JCheckBox("High Price");
+			private JCheckBox chckbxOpenPrice = new JCheckBox("Open Price");
+			private JCheckBox chckbxClosePrice = new JCheckBox("Close Price");
+			private JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Low Price");
+			private JCheckBox chckbxVolume = new JCheckBox("Volume");
 		//normalization
-			JFormattedTextField txtSuperiorLimit = NumberTextField.newField(Double.class, 0, 1);
-			JFormattedTextField txtInferiorLimit = NumberTextField.newField(Double.class, -1, 0);
-			JFormattedTextField txtMargin = NumberTextField.newField(Double.class, Double.MIN_NORMAL, Double.MAX_VALUE);
+			private JFormattedTextField txtSuperiorLimit = NumberTextField.newField(Double.class, 0, 1);
+			private JFormattedTextField txtInferiorLimit = NumberTextField.newField(Double.class, -1, 0);
+			private JFormattedTextField txtMargin = NumberTextField.newField(Double.class, Double.MIN_NORMAL, Double.MAX_VALUE);
 		//Training
-			JComboBox<enumTrainingType> cmbTraining = new JComboBox<>();
-			JDatePicker txtFromT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
-			JDatePicker txtToT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
-			JFormattedTextField txtMaxIteration = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
-			JFormattedTextField txtMinError = NumberTextField.newField(Double.class, 0, 1);
+			private JComboBox<enumTrainingType> cmbTraining = new JComboBox<>();
+			private JDatePicker txtFromT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
+			private JDatePicker txtToT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
+			private JFormattedTextField txtMaxIteration = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
+			private JFormattedTextField txtMinError = NumberTextField.newField(Double.class, 0, 1);
 	
 	/**
 	 * Launch the application.
@@ -355,8 +352,151 @@ public class MainView extends JFrame {
 			tableLayer.getColumnModel().getColumn(3).setPreferredWidth(77);
 	}
 
+	
+
+	/**
+	 * Getter and setters
+	 */
+	
+	public JDatePicker getTxtFrom() {
+		return txtFrom;
+	}
+
+	public void setTxtFrom(JDatePicker txtFrom) {
+		this.txtFrom = txtFrom;
+	}
+
+	public JDatePicker getTxtTo() {
+		return txtTo;
+	}
+
+	public void setTxtTo(JDatePicker txtTo) {
+		this.txtTo = txtTo;
+	}
+
+	public JComboBox<String> getCmbStock() {
+		return cmbStock;
+	}
+
+	public void setCmbStock(JComboBox<String> cmbStock) {
+		this.cmbStock = cmbStock;
+	}
+
+	public JFormattedTextField getTxtDataInterval() {
+		return txtDataInterval;
+	}
+
+	public void setTxtDataInterval(JFormattedTextField txtDataInterval) {
+		this.txtDataInterval = txtDataInterval;
+	}
+
+	public JCheckBox getChckbxHighPrice() {
+		return chckbxHighPrice;
+	}
+
+	public void setChckbxHighPrice(JCheckBox chckbxHighPrice) {
+		this.chckbxHighPrice = chckbxHighPrice;
+	}
+
+	public JCheckBox getChckbxOpenPrice() {
+		return chckbxOpenPrice;
+	}
+
+	public void setChckbxOpenPrice(JCheckBox chckbxOpenPrice) {
+		this.chckbxOpenPrice = chckbxOpenPrice;
+	}
+
+	public JCheckBox getChckbxClosePrice() {
+		return chckbxClosePrice;
+	}
+
+	public void setChckbxClosePrice(JCheckBox chckbxClosePrice) {
+		this.chckbxClosePrice = chckbxClosePrice;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_1() {
+		return chckbxNewCheckBox_1;
+	}
+
+	public void setChckbxNewCheckBox_1(JCheckBox chckbxNewCheckBox_1) {
+		this.chckbxNewCheckBox_1 = chckbxNewCheckBox_1;
+	}
+
+	public JCheckBox getChckbxVolume() {
+		return chckbxVolume;
+	}
+
+	public void setChckbxVolume(JCheckBox chckbxVolume) {
+		this.chckbxVolume = chckbxVolume;
+	}
+
+	public JFormattedTextField getTxtSuperiorLimit() {
+		return txtSuperiorLimit;
+	}
+
+	public void setTxtSuperiorLimit(JFormattedTextField txtSuperiorLimit) {
+		this.txtSuperiorLimit = txtSuperiorLimit;
+	}
+
+	public JFormattedTextField getTxtInferiorLimit() {
+		return txtInferiorLimit;
+	}
+
+	public void setTxtInferiorLimit(JFormattedTextField txtInferiorLimit) {
+		this.txtInferiorLimit = txtInferiorLimit;
+	}
+
+	public JFormattedTextField getTxtMargin() {
+		return txtMargin;
+	}
+
+	public void setTxtMargin(JFormattedTextField txtMargin) {
+		this.txtMargin = txtMargin;
+	}
+
+	public JComboBox<enumTrainingType> getCmbTraining() {
+		return cmbTraining;
+	}
+
+	public void setCmbTraining(JComboBox<enumTrainingType> cmbTraining) {
+		this.cmbTraining = cmbTraining;
+	}
+
+	public JDatePicker getTxtFromT() {
+		return txtFromT;
+	}
+
+	public void setTxtFromT(JDatePicker txtFromT) {
+		this.txtFromT = txtFromT;
+	}
+
+	public JDatePicker getTxtToT() {
+		return txtToT;
+	}
+
+	public void setTxtToT(JDatePicker txtToT) {
+		this.txtToT = txtToT;
+	}
+
+	public JFormattedTextField getTxtMaxIteration() {
+		return txtMaxIteration;
+	}
+
+	public void setTxtMaxIteration(JFormattedTextField txtMaxIteration) {
+		this.txtMaxIteration = txtMaxIteration;
+	}
+
+	public JFormattedTextField getTxtMinError() {
+		return txtMinError;
+	}
+
+	public void setTxtMinError(JFormattedTextField txtMinError) {
+		this.txtMinError = txtMinError;
+	}
 
 
+	
+	
 	
 
 }
