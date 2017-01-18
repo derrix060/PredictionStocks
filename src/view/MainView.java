@@ -1,13 +1,25 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.DefaultCellEditor;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.text.NumberFormatter;
 
 import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -15,24 +27,6 @@ import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import process.ActivationFunctionFactory.enumActivationFuncion;
 import process.PropagationFactory.enumTrainingType;
-
-import java.awt.Color;
-import java.awt.Component;
-
-import javax.swing.JLabel;
-import javax.swing.JFormattedTextField;
-import javax.swing.JComboBox;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JCheckBox;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.NumberFormat;
-
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.JTable;
 
 public class MainView extends JFrame {
 
@@ -45,6 +39,28 @@ public class MainView extends JFrame {
 	private JTable 					tableLayer 		= new JTable();
 	private Object[] 				emptyData 		= {Integer.valueOf(1), Boolean.TRUE, enumActivationFuncion.BiPolar, new Double(1.1)};
     
+	//Necessary objects to control in other class
+		//Data
+			JDatePicker txtFrom = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
+			JDatePicker txtTo = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
+			JComboBox<String> cmbStock = new JComboBox<>();
+			JFormattedTextField txtDataInterval = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
+		//Stock atributes
+			JCheckBox chckbxHighPrice = new JCheckBox("High Price");
+			JCheckBox chckbxOpenPrice = new JCheckBox("Open Price");
+			JCheckBox chckbxClosePrice = new JCheckBox("Close Price");
+			JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Low Price");
+			JCheckBox chckbxVolume = new JCheckBox("Volume");
+		//normalization
+			JFormattedTextField txtSuperiorLimit = NumberTextField.newField(Double.class, 0, 1);
+			JFormattedTextField txtInferiorLimit = NumberTextField.newField(Double.class, -1, 0);
+			JFormattedTextField txtMargin = NumberTextField.newField(Double.class, Double.MIN_NORMAL, Double.MAX_VALUE);
+		//Training
+			JComboBox<enumTrainingType> cmbTraining = new JComboBox<>();
+			JDatePicker txtFromT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
+			JDatePicker txtToT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
+			JFormattedTextField txtMaxIteration = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
+			JFormattedTextField txtMinError = NumberTextField.newField(Double.class, 0, 1);
 	
 	/**
 	 * Launch the application.
@@ -87,7 +103,6 @@ public class MainView extends JFrame {
 				lblFrom.setBounds(10, 25, 124, 14);
 				panelExtactData.add(lblFrom);
 				
-				JDatePicker txtFrom = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 				((Component) txtFrom).setBounds(10, 43, 159, 29);
 				panelExtactData.add((Component) txtFrom);
 			//To
@@ -95,7 +110,6 @@ public class MainView extends JFrame {
 				lblTo.setBounds(10, 74, 159, 14);
 				panelExtactData.add(lblTo);
 				
-				JDatePicker txtTo = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 				((Component) txtTo).setBounds(10, 88, 159, 29);
 				panelExtactData.add((Component) txtTo);
 			//Stock
@@ -103,7 +117,6 @@ public class MainView extends JFrame {
 				lblStock.setBounds(10, 164, 159, 14);
 				panelExtactData.add(lblStock);
 				
-				JComboBox<String> cmbStock = new JComboBox<>();
 					cmbStock.addItem("BBDC4.SA");
 					cmbStock.addItem("ABEV3.SA");
 					cmbStock.addItem("PETR4.SA");
@@ -124,7 +137,6 @@ public class MainView extends JFrame {
 				lblDataInterval.setBounds(10, 119, 159, 14);
 				panelExtactData.add(lblDataInterval);
 				
-				JFormattedTextField txtDataInterval = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
 				txtDataInterval.setBounds(10, 133, 159, 20);
 				txtDataInterval.setValue(new Integer(5));
 				panelExtactData.add(txtDataInterval);
@@ -137,23 +149,18 @@ public class MainView extends JFrame {
 				panelStockAtribute.setLayout(null);
 				panelStockAtribute.setBorder(BorderFactory.createTitledBorder("Stock Attribute"));
 				
-				JCheckBox chckbxClosePrice = new JCheckBox("Close Price");
 				chckbxClosePrice.setBounds(6, 25, 147, 23);
 				panelStockAtribute.add(chckbxClosePrice);
 				
-				JCheckBox chckbxHighPrice = new JCheckBox("High Price");
 				chckbxHighPrice.setBounds(6, 53, 147, 23);
 				panelStockAtribute.add(chckbxHighPrice);
 				
-				JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Low Price");
 				chckbxNewCheckBox_1.setBounds(6, 81, 147, 23);
 				panelStockAtribute.add(chckbxNewCheckBox_1);
 				
-				JCheckBox chckbxOpenPrice = new JCheckBox("Open Price");
 				chckbxOpenPrice.setBounds(6, 109, 147, 23);
 				panelStockAtribute.add(chckbxOpenPrice);
 				
-				JCheckBox chckbxVolume = new JCheckBox("Volume");
 				chckbxVolume.setBounds(6, 138, 147, 23);
 				panelStockAtribute.add(chckbxVolume);
 			//End Stock Atribute
@@ -172,7 +179,6 @@ public class MainView extends JFrame {
 				lblInferiorLimit.setBounds(10, 25, 159, 14);
 				panelNormalization.add(lblInferiorLimit);
 				
-				JFormattedTextField txtInferiorLimit = NumberTextField.newField(Double.class, -1, 0);
 				txtInferiorLimit.setBounds(10, 40, 159, 20);
 				txtInferiorLimit.setValue(new Integer(-1));
 				panelNormalization.add(txtInferiorLimit);
@@ -181,7 +187,6 @@ public class MainView extends JFrame {
 				lblSuperiorLimit.setBounds(10, 69, 159, 14);
 				panelNormalization.add(lblSuperiorLimit);
 				
-				JFormattedTextField txtSuperiorLimit = NumberTextField.newField(Double.class, 0, 1);
 				txtSuperiorLimit.setBounds(10, 85, 159, 20);
 				txtSuperiorLimit.setValue(new Integer(1));
 				panelNormalization.add(txtSuperiorLimit);
@@ -190,7 +195,6 @@ public class MainView extends JFrame {
 				lblMargin.setBounds(10, 116, 159, 14);
 				panelNormalization.add(lblMargin);
 				
-				JFormattedTextField txtMargin = NumberTextField.newField(Double.class, Double.MIN_NORMAL, Double.MAX_VALUE);
 				txtMargin.setBounds(10, 132, 159, 20);
 				txtMargin.setValue(new Double(99.9));
 				panelNormalization.add(txtMargin);
@@ -263,7 +267,6 @@ public class MainView extends JFrame {
 				lblLearningRule.setBounds(10, 25, 159, 14);
 				panelTraining.add(lblLearningRule);
 				
-				JComboBox<enumTrainingType> cmbTraining = new JComboBox<>();
 					cmbTraining.addItem(enumTrainingType.Backpropagation);
 					cmbTraining.addItem(enumTrainingType.ManhattanPropagation);
 					cmbTraining.addItem(enumTrainingType.QuickPropagation);
@@ -276,7 +279,6 @@ public class MainView extends JFrame {
 				lblFromT.setBounds(10, 75, 159, 14);
 				panelTraining.add(lblFromT);
 				
-				JDatePicker txtFromT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 				((Component) txtFromT).setBounds(10, 93, 159, 29);
 				panelTraining.add((Component) txtFromT);
 			//To Training
@@ -284,7 +286,6 @@ public class MainView extends JFrame {
 				lblToT.setBounds(10, 124, 159, 14);
 				panelTraining.add(lblToT);
 				
-				JDatePicker txtToT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 				((Component) txtToT).setBounds(10, 138, 159, 29);
 				panelTraining.add((Component) txtToT);
 			//Max Iteration
@@ -292,7 +293,6 @@ public class MainView extends JFrame {
 				lblMaxIteration.setBounds(10, 169, 159, 14);
 				panelTraining.add(lblMaxIteration);
 				
-				JFormattedTextField txtMaxIteration = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
 				txtMaxIteration.setBounds(10, 185, 159, 20);
 				txtMaxIteration.setValue(new Integer(5000));
 				panelTraining.add(txtMaxIteration);
@@ -301,7 +301,6 @@ public class MainView extends JFrame {
 				lblMinError.setBounds(10, 216, 159, 14);
 				panelTraining.add(lblMinError);
 				
-				JFormattedTextField txtMinError = NumberTextField.newField(Double.class, 0, 1);
 				txtMinError.setBounds(10, 231, 159, 20);
 				txtMinError.setValue(new Double(0.001));
 				panelTraining.add(txtMinError);
@@ -358,53 +357,6 @@ public class MainView extends JFrame {
 
 
 
-	private class LayerTable extends DefaultTableModel{
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
+	
 
-		@Override
-		public Class<?> getColumnClass(int columnIndex) {
-			switch (columnIndex) {
-				case 0:
-					return Integer.class;
-				case 1:
-					return Boolean.class;
-				case 2:
-					return enumActivationFuncion.class;
-				case 3:
-					return Double.class;
-				default:
-					return null;
-			}
-		}
-		
-		@Override
-		public boolean isCellEditable(int row, int col){
-			return true;
-		}
-		
-	}
-
-	private static class NumberTextField extends JFormattedTextField{
-		
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-
-		public static JFormattedTextField newField(Class<?> classe, Comparable<?> minValue, Comparable<?> maxValue){
-			NumberFormatter formatter = new NumberFormatter(NumberFormat.getInstance());
-			formatter.setValueClass(classe);
-			formatter.setMinimum(minValue);
-			formatter.setMaximum(maxValue);
-			formatter.setAllowsInvalid(true);
-			formatter.setCommitsOnValidEdit(true);
-			
-			return new JFormattedTextField(formatter);
-			
-			
-		}
-	}
 }
