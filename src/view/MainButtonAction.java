@@ -3,6 +3,8 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 public class MainButtonAction implements ActionListener {
 	private final MainView mview;
 	public MainButtonAction(MainView view) { 
@@ -11,7 +13,7 @@ public class MainButtonAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, mview.getTxtFrom());
 
 	}
 	

@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
@@ -46,7 +48,7 @@ public class MainView extends JFrame {
 			private JCheckBox chckbxHighPrice = new JCheckBox("High Price");
 			private JCheckBox chckbxOpenPrice = new JCheckBox("Open Price");
 			private JCheckBox chckbxClosePrice = new JCheckBox("Close Price");
-			private JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Low Price");
+			private JCheckBox chckbxLowPrice = new JCheckBox("Low Price");
 			private JCheckBox chckbxVolume = new JCheckBox("Volume");
 		//normalization
 			private JFormattedTextField txtSuperiorLimit = NumberTextField.newField(Double.class, 0, 1);
@@ -152,8 +154,8 @@ public class MainView extends JFrame {
 				chckbxHighPrice.setBounds(6, 53, 147, 23);
 				panelStockAtribute.add(chckbxHighPrice);
 				
-				chckbxNewCheckBox_1.setBounds(6, 81, 147, 23);
-				panelStockAtribute.add(chckbxNewCheckBox_1);
+				chckbxLowPrice.setBounds(6, 81, 147, 23);
+				panelStockAtribute.add(chckbxLowPrice);
 				
 				chckbxOpenPrice.setBounds(6, 109, 147, 23);
 				panelStockAtribute.add(chckbxOpenPrice);
@@ -358,12 +360,16 @@ public class MainView extends JFrame {
 	 * Getter and setters
 	 */
 	
-	public JDatePicker getTxtFrom() {
-		return txtFrom;
+	public Calendar getTxtFrom() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime((Date) txtFrom.getModel().getValue());
+		return cal;
 	}
 
-	public JDatePicker getTxtTo() {
-		return txtTo;
+	public Calendar getTxtTo() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime((Date) txtTo.getModel().getValue());
+		return cal;
 	}
 
 	public JComboBox<String> getCmbStock() {
@@ -386,8 +392,8 @@ public class MainView extends JFrame {
 		return chckbxClosePrice;
 	}
 
-	public JCheckBox getChckbxNewCheckBox_1() {
-		return chckbxNewCheckBox_1;
+	public JCheckBox getChckbxLowPrice() {
+		return chckbxLowPrice;
 	}
 
 	public JCheckBox getChckbxVolume() {
@@ -410,12 +416,16 @@ public class MainView extends JFrame {
 		return cmbTraining;
 	}
 
-	public JDatePicker getTxtFromT() {
-		return txtFromT;
+	public Calendar getTxtFromT() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime((Date) txtFromT.getModel().getValue());
+		return cal;
 	}
 
-	public JDatePicker getTxtToT() {
-		return txtToT;
+	public Calendar getTxtToT() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime((Date) txtToT.getModel().getValue());
+		return cal;
 	}
 
 	public JFormattedTextField getTxtMaxIteration() {
@@ -424,7 +434,7 @@ public class MainView extends JFrame {
 
 	public JFormattedTextField getTxtMinError() {
 		return txtMinError;
-
+	}
 
 	
 	
