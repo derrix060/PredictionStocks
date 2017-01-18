@@ -2,6 +2,7 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.chrono.IsoChronology;
 
 import javax.swing.JOptionPane;
 
@@ -15,6 +16,8 @@ public class MainButtonAction implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		try{
 			checkDates();
+			checkStockAtribute();
+			
 			JOptionPane.showMessageDialog(null, "ok");
 		}
 		catch (Exception ex){
@@ -44,8 +47,13 @@ public class MainButtonAction implements ActionListener {
 	
 	}
 	
-	private void checkStockAtribute(){
+	private void checkStockAtribute() throws Exception{
+		
+		//Check if some attribute of stock is checked
+		if(!mview.isClosePrice() && !mview.isHighPrice() && !mview.isLowPrice() && !mview.isOpenPrice() && !mview.isVolume()) 
+			throw new Exception ("You must select at least one attribute of stock!");
 		
 	}
-
+	
+	
 }
