@@ -362,137 +362,68 @@ public class MainView extends JFrame {
 		return txtFrom;
 	}
 
-	public void setTxtFrom(JDatePicker txtFrom) {
-		this.txtFrom = txtFrom;
-	}
-
 	public JDatePicker getTxtTo() {
 		return txtTo;
-	}
-
-	public void setTxtTo(JDatePicker txtTo) {
-		this.txtTo = txtTo;
 	}
 
 	public JComboBox<String> getCmbStock() {
 		return cmbStock;
 	}
 
-	public void setCmbStock(JComboBox<String> cmbStock) {
-		this.cmbStock = cmbStock;
-	}
-
 	public JFormattedTextField getTxtDataInterval() {
 		return txtDataInterval;
-	}
-
-	public void setTxtDataInterval(JFormattedTextField txtDataInterval) {
-		this.txtDataInterval = txtDataInterval;
 	}
 
 	public JCheckBox getChckbxHighPrice() {
 		return chckbxHighPrice;
 	}
 
-	public void setChckbxHighPrice(JCheckBox chckbxHighPrice) {
-		this.chckbxHighPrice = chckbxHighPrice;
-	}
-
 	public JCheckBox getChckbxOpenPrice() {
 		return chckbxOpenPrice;
-	}
-
-	public void setChckbxOpenPrice(JCheckBox chckbxOpenPrice) {
-		this.chckbxOpenPrice = chckbxOpenPrice;
 	}
 
 	public JCheckBox getChckbxClosePrice() {
 		return chckbxClosePrice;
 	}
 
-	public void setChckbxClosePrice(JCheckBox chckbxClosePrice) {
-		this.chckbxClosePrice = chckbxClosePrice;
-	}
-
 	public JCheckBox getChckbxNewCheckBox_1() {
 		return chckbxNewCheckBox_1;
-	}
-
-	public void setChckbxNewCheckBox_1(JCheckBox chckbxNewCheckBox_1) {
-		this.chckbxNewCheckBox_1 = chckbxNewCheckBox_1;
 	}
 
 	public JCheckBox getChckbxVolume() {
 		return chckbxVolume;
 	}
 
-	public void setChckbxVolume(JCheckBox chckbxVolume) {
-		this.chckbxVolume = chckbxVolume;
-	}
-
 	public JFormattedTextField getTxtSuperiorLimit() {
 		return txtSuperiorLimit;
-	}
-
-	public void setTxtSuperiorLimit(JFormattedTextField txtSuperiorLimit) {
-		this.txtSuperiorLimit = txtSuperiorLimit;
 	}
 
 	public JFormattedTextField getTxtInferiorLimit() {
 		return txtInferiorLimit;
 	}
 
-	public void setTxtInferiorLimit(JFormattedTextField txtInferiorLimit) {
-		this.txtInferiorLimit = txtInferiorLimit;
-	}
-
 	public JFormattedTextField getTxtMargin() {
 		return txtMargin;
-	}
-
-	public void setTxtMargin(JFormattedTextField txtMargin) {
-		this.txtMargin = txtMargin;
 	}
 
 	public JComboBox<enumTrainingType> getCmbTraining() {
 		return cmbTraining;
 	}
 
-	public void setCmbTraining(JComboBox<enumTrainingType> cmbTraining) {
-		this.cmbTraining = cmbTraining;
-	}
-
 	public JDatePicker getTxtFromT() {
 		return txtFromT;
-	}
-
-	public void setTxtFromT(JDatePicker txtFromT) {
-		this.txtFromT = txtFromT;
 	}
 
 	public JDatePicker getTxtToT() {
 		return txtToT;
 	}
 
-	public void setTxtToT(JDatePicker txtToT) {
-		this.txtToT = txtToT;
-	}
-
 	public JFormattedTextField getTxtMaxIteration() {
 		return txtMaxIteration;
 	}
 
-	public void setTxtMaxIteration(JFormattedTextField txtMaxIteration) {
-		this.txtMaxIteration = txtMaxIteration;
-	}
-
 	public JFormattedTextField getTxtMinError() {
 		return txtMinError;
-	}
-
-	public void setTxtMinError(JFormattedTextField txtMinError) {
-		this.txtMinError = txtMinError;
-	}
 
 
 	
