@@ -23,6 +23,10 @@ public class Data {
 	private Calendar from;
 	private Calendar to;
 	
+	public enum enumStockAttribute{
+		ClosePrice, HighPrice, LowPrice, OpenPrice, Volume;
+	}
+	
 	//TODO: implementar entrada com Data antiga input
 	public Data(String ticker, Calendar from, Calendar to, float margin, double maxValue, double minValue, double maxNormalizedValue, double minNormalizedValue, boolean isIdealOutput) throws IOException{
 		setFrom(from);
