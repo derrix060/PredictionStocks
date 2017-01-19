@@ -4,7 +4,22 @@ import org.encog.engine.network.activation.*;
 public class ActivationFunctionFactory {
 	
 	public enum enumActivationFuncion{
-		BiPolar, BipolarSteepenedSigmoid, ClippedLinear, Competitive, Elliott, ElliottSymmetric, Gaussian, Linear, LOG, Ramp, Sigmoid, SIN, SoftMax, SteepenedSigmoid, Step, TANH;
+		BiPolar, //-1 or 1
+		BipolarSteepenedSigmoid, 
+		ClippedLinear, 
+		Competitive, //?
+		Elliott, 
+		ElliottSymmetric, 
+		Gaussian, 
+		Linear, //any - return the parameter
+		LOG, //any
+		Ramp, 
+		Sigmoid, // [-1;1]
+		SIN, 
+		SoftMax, //?
+		SteepenedSigmoid, 
+		Step, 
+		TANH; //[-1;1]
 	}
 	
 	public ActivationFunction create (enumActivationFuncion activationType){
