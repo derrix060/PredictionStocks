@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
-import types.Ticker;
+import types.Data;
 
 /**
  * @author mario
@@ -26,7 +26,7 @@ public class Util {
 		while(size == 0){
 			try{
 				resp.add(Calendar.DAY_OF_MONTH, 1);
-				HashSet<Ticker> historico = YahooExtractor.getHistorical(ticker, resp, resp);
+				HashSet<Data> historico = YahooExtractor.getHistorical(ticker, resp, resp);
 				size = historico.size();
 			}
 			catch(FileNotFoundException e){

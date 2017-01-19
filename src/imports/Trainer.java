@@ -3,7 +3,7 @@ package imports;
 import java.io.IOException;
 import java.util.Calendar;
 
-import types.Data;
+import types.DataOLD;
 
 public class Trainer {
 	private String ticker;
@@ -23,8 +23,8 @@ public class Trainer {
 		setMargin(margin);
 	}
 
-	public Data getInput() throws IOException{
-		Data resp = new Data(getTicker(),getFrom(), getTo(), getMargin());
+	public DataOLD getInput() throws IOException{
+		DataOLD resp = new DataOLD(getTicker(),getFrom(), getTo(), getMargin());
 		
 		setMaxValue(resp.getMaxValue());
 		setMinValue(resp.getMinValue());
@@ -34,7 +34,7 @@ public class Trainer {
 		return resp;
 	}
 	
-	public Data getIdealOutput() throws IOException{
+	public DataOLD getIdealOutput() throws IOException{
 		Calendar newFrom = getFrom();
 		Calendar newTo = getTo();
 
@@ -47,7 +47,7 @@ public class Trainer {
 		System.out.println("MaxValue: " + getMaxValue());
 		System.out.println("MinValue: " + getMinValue());
 		System.out.println("Margin: " + getMargin());
-		Data resp = new Data(getTicker(), newFrom, newTo, getMargin(), getMaxValue(), getMinValue(), getMaxNormalizedValue(), getMinNormalizedValue(), true);
+		DataOLD resp = new DataOLD(getTicker(), newFrom, newTo, getMargin(), getMaxValue(), getMinValue(), getMaxNormalizedValue(), getMinNormalizedValue(), true);
 		
 		
 		return resp;

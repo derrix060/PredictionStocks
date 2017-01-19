@@ -2,7 +2,7 @@ package imports;
 
 import java.io.IOException;
 
-import types.Data;
+import types.DataOLD;
 
 //example
 //https://github.com/surmenok/MNISTNeuralNetwork/tree/master/src/main/java/com/surmenok/pavel/mnist
@@ -22,7 +22,7 @@ public class Normalize {
 	}
 	*/
 	
-	public static double[][] normalizeValues (Data data) throws IOException{
+	public static double[][] normalizeValues (DataOLD data) throws IOException{
 		double[][] values = data.getValues();
 		double maxValue = data.getMaxValue();
 		double minValue = data.getMinValue();

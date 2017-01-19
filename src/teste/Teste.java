@@ -32,8 +32,8 @@ import imports.Trainer;
 import imports.YahooExtractor;
 import process.NetworkFactory;
 import process.ActivationFunctionFactory.enumActivationFuncion;
+import types.DataOLD;
 import types.Data;
-import types.Ticker;
 
 @SuppressWarnings("unused")
 public class Teste {
@@ -66,7 +66,7 @@ public class Teste {
 		while(size == 0){
 			try{
 				resp.add(Calendar.DAY_OF_MONTH, 1);
-				HashSet<Ticker> historico = YahooExtractor.getHistorical(ticker, resp, resp);
+				HashSet<Data> historico = YahooExtractor.getHistorical(ticker, resp, resp);
 				size = historico.size();
 			}
 			catch(FileNotFoundException e){
@@ -91,7 +91,7 @@ public class Teste {
 	}
 	
 	public static List<Integer> testeCamadas(){
-		String entrada = Data.qtyAtr + ",2," + Data.qtyAtr;
+		String entrada = DataOLD.qtyAtr + ",2," + DataOLD.qtyAtr;
 		List<String> camadasStr = Arrays.asList(entrada.replaceAll(" ", "").split(","));
 		List<Integer> camadas = new ArrayList<>();
 		
@@ -105,22 +105,22 @@ public class Teste {
 		from.add(Calendar.DAY_OF_MONTH, -8);
 		to.add(Calendar.DAY_OF_MONTH, -1);
 		
-		Map <String, HashSet<Ticker>> historicals = YahooExtractor.getHistorical(tickers, from, to);
+		Map <String, HashSet<Data>> historicals = YahooExtractor.getHistorical(tickers, from, to);
 		
 		for (String symbol : historicals.keySet()){
-			HashSet<Ticker> hashTickers = new HashSet<>();
+			HashSet<Data> hashTickers = new HashSet<>();
 			hashTickers = historicals.get(symbol);
 			
 			System.out.println("\nTicker: " + symbol);
 			System.out.println("Before");
-			for (Ticker tick : hashTickers){
+			for (Data tick : hashTickers){
 				System.out.println(tick);
 			}
 			
 			//Normalize.normalizeValues(hashTickers);
 			
 			System.out.println("After");
-			for (Ticker tick : hashTickers){
+			for (Data tick : hashTickers){
 				System.out.println(tick);
 			}
 		}
@@ -154,8 +154,8 @@ public class Teste {
 	public static void testeTrain(boolean verbose) throws IOException{
 		BasicNetwork network = getTesteNetwork();
 		float margin = 1f;
-		Data dataInput;
-		Data dataIdealOutput;
+		DataOLD dataInput;
+		DataOLD dataIdealOutput;
 		Trainer training = new Trainer(ticker, from, to, margin);
 
 		System.out.println("\nlog: get input raw");
@@ -171,7 +171,7 @@ public class Teste {
 		if (verbose){
 			System.out.println("Input");
 			for (int i = 0; i< input.length; i++){
-				for (int j=0; j< Data.qtyAtr; j++){
+				for (int j=0; j< DataOLD.qtyAtr; j++){
 					System.out.println("i: " + i + " j: " + j + " value: " + input[i][j]);
 				}
 			}
