@@ -1,7 +1,10 @@
 package types;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import imports.YahooExtractor;
 import types.Data.enumAttributesOfData;
 
 public class HistoricalData {
@@ -9,12 +12,10 @@ public class HistoricalData {
 	private int dateInterval;
 	private ArrayList<Data> mapHistorical;
 
-	public HistoricalData(int dt, ArrayList<Data> historical) {
-		dateInterval = dt;
-		mapHistorical = historical;
+	public HistoricalData(String ticker, Calendar from, Calendar to, int dateInterval) throws IOException {
+		this.dateInterval = dateInterval;
+		mapHistorical = YahooExtractor.getHistorical(ticker, from, to);
 	}
-	
-	
 	
 	public ArrayList<Data> getMapHistorical() {
 		return mapHistorical;
