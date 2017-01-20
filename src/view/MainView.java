@@ -88,7 +88,7 @@ public class MainView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		//Input Panel
+		//ExtactData Panel
 			JPanel panelExtactData = new JPanel();
 			panelExtactData.setToolTipText("");
 			panelExtactData.setBorder(new LineBorder(new Color(171, 173, 179)));
