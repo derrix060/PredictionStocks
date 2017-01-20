@@ -59,6 +59,20 @@ public class Data {
 		}
 		return 0;
 	}
+	public void setValue (enumAttributesOfData atr, double value){
+		switch (atr) {
+			case closePrice:
+				setClosePrice(value);		
+			case highPrice:
+				setHighPrice(value);
+			case lowPrice:
+				setLowPrice(value);
+			case openPrice:
+				setOpenPrice(value);
+			case volume:
+				setVolume(value);
+		}
+	}
 	public Calendar getDate() {
 		return date;
 	}
