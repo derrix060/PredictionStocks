@@ -3,18 +3,21 @@ package types;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 
 import imports.YahooExtractor;
 import types.Data.enumAttributesOfData;
 
-public class HistoricalData {
+public class HistoricalData implements Comparator<Data>{
 	
+	public final int size;
 	private int dateInterval;
 	private ArrayList<Data> mapHistorical;
 
 	public HistoricalData(String ticker, Calendar from, Calendar to, int dateInterval) throws IOException {
 		this.dateInterval = dateInterval;
 		mapHistorical = YahooExtractor.getHistorical(ticker, from, to);
+		this.size = mapHistorical.size();
 	}
 	
 	public ArrayList<Data> getMapHistorical() {
@@ -46,5 +49,11 @@ public class HistoricalData {
 		return rtn;
 		
 	}
+
+	@Override
+	public int compare(Data o1, Data o2) {
+		return o1.getDate().compareTo(o2.getDate());
+	}
+
 
 }
