@@ -44,6 +44,21 @@ public class Data {
 	}
 
 	//getters and setters
+	public double getValue (enumAttributesOfData atr){
+		switch (atr) {
+			case closePrice:
+				return getClosePrice();		
+			case highPrice:
+				return getHighPrice();
+			case lowPrice:
+				return getLowPrice();
+			case openPrice:
+				return getOpenPrice();
+			case volume:
+				return getVolume();
+		}
+		return 0;
+	}
 	public Calendar getDate() {
 		return date;
 	}
