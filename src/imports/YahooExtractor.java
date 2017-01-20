@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import types.Data;
 import yahoofinance.Stock;
@@ -33,11 +34,11 @@ public class YahooExtractor {
 	
 	*/
 	
-	public static  HashMap<Calendar, Data> getHistorical(String ticker, Calendar from, Calendar to) throws IOException{
+	public static  ArrayList<Data> getHistorical(String ticker, Calendar from, Calendar to) throws IOException{
 		Stock stock = YahooFinance.get(ticker);
 		
 		List<HistoricalQuote> historical = new ArrayList<>();
-		HashMap<Calendar, Data> historicals = new HashMap<>();
+		ArrayList<Data> historicals = new ArrayList<>();
 		
 		historical = stock.getHistory(from, to, Interval.DAILY);
 		
@@ -51,7 +52,8 @@ public class YahooExtractor {
 			tick.setClosePrice(quote.getAdjClose().doubleValue());
 			tick.setVolume(quote.getVolume().doubleValue());
 			
-			historicals.put(tick.getDate(), tick);
+			historicals.add(tick);
+			//historicals.put(tick.getDate(), tick);
 		}
 		
 		
