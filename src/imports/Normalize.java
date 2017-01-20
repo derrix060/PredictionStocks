@@ -1,8 +1,16 @@
 package imports;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
+import types.Data;
 import types.DataOLD;
+import types.HistoricalData;
+import types.Data.enumAttributesOfData;
 
 //example
 //https://github.com/surmenok/MNISTNeuralNetwork/tree/master/src/main/java/com/surmenok/pavel/mnist
@@ -11,18 +19,69 @@ public class Normalize {
 	
 	private final static double maxLimit = 1;
 	private final static double minLimit = 0;
-	
+
 	private double maxValue;
 	private double minValue;
+	private double maxVolumeValue;
+	private double minVolumeValue;
 	private float margin;
 	
-	 /*
-	public static Set<Ticker> normalizeValues(Set<Ticker> tickers){
-		return normalizeValues(tickers,  defaultMargin);
+	/*
+	public HistoricalData normalizeValues (HistoricalData hd, float margin){
+		getMaxAndMinValues(hd);
+		
+		hd.getMapHistorical().forEach(dt -> {
+			
+		});
+		
 	}
 	*/
 	
-	public static double[][] normalizeValues (DataOLD data) throws IOException{
+	private void getMaxAndMinValues(HistoricalData hd){
+		ArrayList<Double> maxValues = new ArrayList<>();
+		ArrayList<Double> minValues = new ArrayList<>();
+		ArrayList<enumAttributesOfData> attr = hd.getMapHistorical().get(0).getAttributes();
+		enumAttributesOfData atrib;
+		
+		for (int i=0; i<attr.size(); i++){
+			//Add max from every attribute except volume
+			atrib = attr.get(i);
+			
+			//sort by attr
+			switch (atrib) {
+			case closePrice:
+				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getClosePrice(), d2.getClosePrice()));
+				minValues.add(hd.getMapHistorical().get(0).getClosePrice());
+				maxValues.add(hd.getMapHistorical().get(hd.size).getClosePrice());
+				break;
+			case highPrice:
+				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getHighPrice(), d2.getHighPrice()));
+				minValues.add(hd.getMapHistorical().get(0).getHighPrice());
+				maxValues.add(hd.getMapHistorical().get(hd.size).getHighPrice());
+				break;
+			case lowPrice:
+				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getLowPrice(), d2.getLowPrice()));
+				minValues.add(hd.getMapHistorical().get(0).getLowPrice());
+				maxValues.add(hd.getMapHistorical().get(hd.size).getLowPrice());
+				break;
+			case openPrice:
+				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getOpenPrice(), d2.getOpenPrice()));
+				minValues.add(hd.getMapHistorical().get(0).getOpenPrice());
+				maxValues.add(hd.getMapHistorical().get(hd.size).getOpenPrice());
+				break;
+			case volume:
+				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getVolume(), d2.getVolume()));
+				maxVolumeValue = hd.getMapHistorical().get(0).getVolume();
+				minVolumeValue = hd.getMapHistorical().get(hd.size).getVolume();
+				break;
+			}
+		}
+
+		maxValue = Collections.max(maxValues);
+		minValue = Collections.min(minValues);
+	}
+	
+ 	public static double[][] normalizeValues (DataOLD data) throws IOException{
 		double[][] values = data.getValues();
 		double maxValue = data.getMaxValue();
 		double minValue = data.getMinValue();
@@ -47,72 +106,6 @@ public class Normalize {
 		return values;
 	}
 	
-	/*
-	public static Set<Ticker> normalizeValues(Set<Ticker> tickers, float margin){
-		tickers = normalizeOpenPrice(tickers,  margin);
-		tickers = normalizeHighPrice(tickers,  margin);
-		tickers = normalizeLowPrice(tickers,  margin);
-		tickers = normalizeClosePrice(tickers,  margin);
-		tickers = normalizeVolume(tickers,  margin);
-		
-		return tickers;
-	}
-	
-	private static Set<Ticker> normalizeOpenPrice(Set<Ticker> tickers,  float margin){
-		double minValue = tickers.stream().mapToDouble(t -> t.getOpenPrice()).min().getAsDouble();
-		double maxValue = tickers.stream().mapToDouble(t -> t.getOpenPrice()).max().getAsDouble();
-		
-		for (Ticker tick : tickers){
-			tick.setOpenPrice(getNormalizedValue(tick.getOpenPrice(), minValue, maxValue,  margin));
-		}
-		
-		return tickers;
-	}
-	
-	private static Set<Ticker> normalizeHighPrice(Set<Ticker> tickers,  float margin){
-		double minValue = tickers.stream().mapToDouble(t -> t.getHighPrice()).min().getAsDouble();
-		double maxValue = tickers.stream().mapToDouble(t -> t.getHighPrice()).max().getAsDouble();
-		
-		for (Ticker tick : tickers){
-			tick.setHighPrice(getNormalizedValue(tick.getHighPrice(), minValue, maxValue,  margin));
-		}
-		
-		return tickers;
-	}
-	
-	private static Set<Ticker> normalizeLowPrice(Set<Ticker> tickers,  float margin){
-		double minValue = tickers.stream().mapToDouble(t -> t.getLowPrice()).min().getAsDouble();
-		double maxValue = tickers.stream().mapToDouble(t -> t.getLowPrice()).max().getAsDouble();
-		
-		for (Ticker tick : tickers){
-			tick.setLowPrice(getNormalizedValue(tick.getLowPrice(), minValue, maxValue,  margin));
-		}
-		
-		return tickers;
-	}
-	
-	private static Set<Ticker> normalizeClosePrice(Set<Ticker> tickers,  float margin){
-		double minValue = tickers.stream().mapToDouble(t -> t.getClosePrice()).min().getAsDouble();
-		double maxValue = tickers.stream().mapToDouble(t -> t.getClosePrice()).max().getAsDouble();
-		
-		for (Ticker tick : tickers){
-			tick.setClosePrice(getNormalizedValue(tick.getClosePrice(), minValue, maxValue,  margin));
-		}
-		
-		return tickers;
-	}
-	
-	private static Set<Ticker> normalizeVolume(Set<Ticker> tickers,  float margin){
-		double minValue = tickers.stream().mapToDouble(t -> t.getVolume()).min().getAsDouble();
-		double maxValue = tickers.stream().mapToDouble(t -> t.getVolume()).max().getAsDouble();
-		
-		for (Ticker tick : tickers){
-			tick.setVolume(getNormalizedValue(tick.getVolume(), minValue, maxValue,  margin));
-		}
-		
-		return tickers;
-	}
-	*/
 	
 	private static double getNormalizedValue(double oldValue, double minValue, double maxValue, float margin){
 		/*
