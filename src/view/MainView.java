@@ -44,7 +44,7 @@ public class MainView extends JFrame {
 			private JDatePicker txtTo = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 			private JComboBox<String> cmbStock = new JComboBox<>();
 			private JFormattedTextField txtDataInterval = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
-		//Stock atributes
+		//Stock attributes
 			private JCheckBox chckbxHighPrice = new JCheckBox("High Price");
 			private JCheckBox chckbxOpenPrice = new JCheckBox("Open Price");
 			private JCheckBox chckbxClosePrice = new JCheckBox("Close Price");
@@ -140,7 +140,7 @@ public class MainView extends JFrame {
 				txtDataInterval.setValue(new Integer(5));
 				panelExtactData.add(txtDataInterval);
 		
-			//Stock Atribute	
+			//Stock Attribute	
 				JPanel panelStockAtribute = new JPanel();
 				panelStockAtribute.setBorder(new LineBorder(new Color(0, 0, 0)));
 				panelStockAtribute.setBounds(10, 226, 159, 181);

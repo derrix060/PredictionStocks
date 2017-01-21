@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.List;
 
 import imports.YahooExtractor;
 import types.Data.enumAttributesOfData;
@@ -14,9 +15,9 @@ public class HistoricalData implements Comparator<Data>{
 	private int dateInterval;
 	private ArrayList<Data> mapHistorical;
 
-	public HistoricalData(String ticker, Calendar from, Calendar to, int dateInterval) throws IOException {
+	public HistoricalData(String ticker, Calendar from, Calendar to, int dateInterval, List<enumAttributesOfData> attributes) throws IOException {
 		this.dateInterval = dateInterval;
-		mapHistorical = YahooExtractor.getHistorical(ticker, from, to);
+		mapHistorical = YahooExtractor.getHistorical(ticker, from, to, attributes);
 		this.size = mapHistorical.size();
 	}
 	

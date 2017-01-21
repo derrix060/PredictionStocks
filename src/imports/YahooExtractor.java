@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import process.ActivationFunctionFactory.enumActivationFuncion;
 import types.Data;
+import types.Data.enumAttributesOfData;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
@@ -17,7 +19,8 @@ import yahoofinance.histquotes.Interval;
  */
 public class YahooExtractor {
 	
-	public static  ArrayList<Data> getHistorical(String ticker, Calendar from, Calendar to) throws IOException{
+	public static  ArrayList<Data> getHistorical(String ticker, Calendar from, Calendar to, List<enumAttributesOfData> attributes) throws IOException{
+		
 		Stock stock = YahooFinance.get(ticker);
 		
 		List<HistoricalQuote> historical = new ArrayList<>();
@@ -29,12 +32,27 @@ public class YahooExtractor {
 			Data tick = new Data();
 			tick.setTicker(ticker);
 			tick.setDate(quote.getDate());
-			tick.setOpenPrice(quote.getOpen().doubleValue());
-			tick.setHighPrice(quote.getHigh().doubleValue());
-			tick.setLowPrice(quote.getLow().doubleValue());
-			tick.setClosePrice(quote.getAdjClose().doubleValue());
-			tick.setVolume(quote.getVolume().doubleValue());
 			
+			for(enumAttributesOfData atr : attributes){
+				switch (atr) {
+				case openPrice:
+					tick.setOpenPrice(quote.getOpen().doubleValue());
+					break;
+				case closePrice:
+					tick.setClosePrice(quote.getAdjClose().doubleValue());
+					break;
+				case highPrice:
+					tick.setHighPrice(quote.getHigh().doubleValue());
+					break;
+				case lowPrice:
+					tick.setLowPrice(quote.getLow().doubleValue());
+					break;
+				case volume:
+					tick.setVolume(quote.getVolume().doubleValue());
+					break;
+				}
+				
+			}
 			historicals.add(tick);
 		}
 		

@@ -3,11 +3,14 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.chrono.IsoChronology;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import imports.Normalize;
 import types.HistoricalData;
+import types.Data.enumAttributesOfData;
 
 public class MainButtonAction implements ActionListener {
 	private final MainView mview;
@@ -22,6 +25,8 @@ public class MainButtonAction implements ActionListener {
 			checkDates();
 			checkStockAtribute();
 			
+			List<enumAttributesOfData> attributes = new ArrayList<>();
+			//continue
 			//datas
 			HistoricalData normalData = new HistoricalData(mview.getStock(), mview.getFrom(), mview.getTo(), mview.getDataInterval());
 			Normalize normal = new Normalize();
@@ -33,7 +38,7 @@ public class MainButtonAction implements ActionListener {
 			JOptionPane.showMessageDialog(null, "ok");
 		}
 		catch (Exception ex){
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, ex.getClass() + "\n\n" +  ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
 		}
 		
 
