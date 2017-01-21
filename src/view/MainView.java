@@ -53,7 +53,7 @@ public class MainView extends JFrame {
 		//normalization
 			private JFormattedTextField txtSuperiorLimit = NumberTextField.newField(Double.class, 0, 1);
 			private JFormattedTextField txtInferiorLimit = NumberTextField.newField(Double.class, -1, 0);
-			private JFormattedTextField txtMargin = NumberTextField.newField(Double.class, Double.MIN_NORMAL, Double.MAX_VALUE);
+			private JFormattedTextField txtMargin = NumberTextField.newField(Float.class, Float.MIN_NORMAL, Float.MAX_VALUE);
 		//Training
 			private JComboBox<enumTrainingType> cmbTraining = new JComboBox<>();
 			private JDatePicker txtFromT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
@@ -195,7 +195,7 @@ public class MainView extends JFrame {
 				panelNormalization.add(lblMargin);
 				
 				txtMargin.setBounds(10, 132, 159, 20);
-				txtMargin.setValue(new Double(99.9));
+				txtMargin.setValue(new Float(99.9));
 				panelNormalization.add(txtMargin);
 			
 		//End Normalization Panel
@@ -408,8 +408,8 @@ public class MainView extends JFrame {
 		return (Double) txtInferiorLimit.getValue();
 	}
 
-	public Double getMargin() {
-		return (Double) txtMargin.getValue();
+	public Float getMargin() {
+		return (Float) txtMargin.getValue();
 	}
 
 	public enumTrainingType getTrainingType() {
