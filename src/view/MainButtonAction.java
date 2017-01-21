@@ -18,14 +18,17 @@ public class MainButtonAction implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try{
+			//checks
 			checkDates();
 			checkStockAtribute();
 			
+			//datas
 			HistoricalData normalData = new HistoricalData(mview.getStock(), mview.getFrom(), mview.getTo(), mview.getDataInterval());
-			
 			Normalize normal = new Normalize();
-			
 			HistoricalData normalizedData = normal.getHistoricalDataNormalized(normalData, mview.getMargin());
+			
+			
+			
 			
 			JOptionPane.showMessageDialog(null, "ok");
 		}
