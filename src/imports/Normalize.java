@@ -3,14 +3,11 @@ package imports;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
 
 import types.Data;
+import types.Data.enumAttributesOfData;
 import types.DataOLD;
 import types.HistoricalData;
-import types.Data.enumAttributesOfData;
 
 //example
 //https://github.com/surmenok/MNISTNeuralNetwork/tree/master/src/main/java/com/surmenok/pavel/mnist
@@ -26,29 +23,49 @@ public class Normalize {
 	private double minVolumeValue;
 	private float margin;
 	
-	/*
-	public HistoricalData normalizeValues (HistoricalData hd, float margin){
+	
+	public HistoricalData getHistoricalDataNormalized (HistoricalData hd, float margin){
 		getMaxAndMinValues(hd);
 		
 		hd.getMapHistorical().forEach(dt -> {
-			
+			for (int i=0; i<dt.getAttributes().size(); i++){
+				enumAttributesOfData atr = dt.getAttributes().get(i);
+				if(atr.equals(enumAttributesOfData.volume))
+					dt.setVolume(getNormalizedValue(dt.getVolume(), minVolumeValue, maxVolumeValue, margin));
+				else
+					dt.setValue(atr, getNormalizedValue(dt.getValue(atr), minValue, maxValue, margin));
+			}
 		});
 		
+		return hd;
+		
 	}
-	*/
+	
+	public HistoricalData getHistoricalDataDenormalized (HistoricalData hd, float margin){
+		//mustn't getMaxAndMinValues(hd);
+		
+		hd.getMapHistorical().forEach(dt -> {
+			for (int i=0; i<dt.getAttributes().size(); i++){
+				enumAttributesOfData atr = dt.getAttributes().get(i);
+				if(atr.equals(enumAttributesOfData.volume))
+					dt.setVolume(getDenomarlizedValue(dt.getVolume(), minVolumeValue, maxVolumeValue, margin));
+				else
+					dt.setValue(atr, getDenomarlizedValue(dt.getValue(atr), minValue, maxValue, margin));
+			}
+		});
+		
+		return hd;
+		
+	}
 	
 	private void getMaxAndMinValues(HistoricalData hd){
 		ArrayList<Double> maxValues = new ArrayList<>();
 		ArrayList<Double> minValues = new ArrayList<>();
 		ArrayList<enumAttributesOfData> attr = hd.getMapHistorical().get(0).getAttributes();
-		enumAttributesOfData atrib;
 		
 		for (int i=0; i<attr.size(); i++){
-			//Add max from every attribute except volume
-			atrib = attr.get(i);
-			
 			//sort by attr
-			switch (atrib) {
+			switch (attr.get(i)) {
 			case closePrice:
 				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getClosePrice(), d2.getClosePrice()));
 				minValues.add(hd.getMapHistorical().get(0).getClosePrice());
@@ -71,14 +88,18 @@ public class Normalize {
 				break;
 			case volume:
 				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getVolume(), d2.getVolume()));
-				maxVolumeValue = hd.getMapHistorical().get(0).getVolume();
-				minVolumeValue = hd.getMapHistorical().get(hd.size).getVolume();
+				minVolumeValue = hd.getMapHistorical().get(0).getVolume();
+				maxVolumeValue = hd.getMapHistorical().get(hd.size).getVolume();
 				break;
 			}
 		}
 
-		maxValue = Collections.max(maxValues);
-		minValue = Collections.min(minValues);
+		this.maxValue = Collections.max(maxValues);
+		this.minValue = Collections.min(minValues);
+		
+		
+		//sort by date again
+		hd.getMapHistorical().sort(hd);
 	}
 	
  	public static double[][] normalizeValues (DataOLD data) throws IOException{
