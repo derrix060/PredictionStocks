@@ -6,6 +6,9 @@ import java.time.chrono.IsoChronology;
 
 import javax.swing.JOptionPane;
 
+import imports.Normalize;
+import types.HistoricalData;
+
 public class MainButtonAction implements ActionListener {
 	private final MainView mview;
 	public MainButtonAction(MainView view) { 
@@ -17,6 +20,12 @@ public class MainButtonAction implements ActionListener {
 		try{
 			checkDates();
 			checkStockAtribute();
+			
+			HistoricalData normalData = new HistoricalData(mview.getStock(), mview.getFrom(), mview.getTo(), mview.getDataInterval());
+			
+			Normalize normal = new Normalize();
+			
+			HistoricalData normalizedData = normal.getHistoricalDataNormalized(normalData, mview.getMargin());
 			
 			JOptionPane.showMessageDialog(null, "ok");
 		}

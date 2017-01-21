@@ -39,7 +39,7 @@ public class HistoricalData implements Comparator<Data>{
 				//for each date
 				
 				for (int k=0; k<attrSize; k++){
-					//for each day
+					//for each attribute
 					rtn[i][(j * attrSize) + k] = mapHistorical.get(i+j).getValue(attr.get(k));
 				}
 			}
@@ -48,6 +48,24 @@ public class HistoricalData implements Comparator<Data>{
 		
 		return rtn;
 		
+	}
+	
+	public double[][] toIdealOutput(){
+		int elementsQty = mapHistorical.size() - dateInterval;
+		ArrayList<enumAttributesOfData> attr = mapHistorical.get(0).getAttributes();
+		int attrSize = attr.size();
+		double[][] rtn = new double[elementsQty][attrSize];
+		
+		for (int i=0; i<elementsQty; i++){
+			//for each element (row)
+			
+			for (int j=0; j<attrSize; j++){
+				//for each attribute
+				rtn[i][j] = mapHistorical.get(dateInterval + i).getValue(attr.get(j));
+			}
+		}
+		
+		return rtn;
 	}
 
 	@Override
