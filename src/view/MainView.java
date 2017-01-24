@@ -424,7 +424,7 @@ public class MainView extends JFrame {
 	}
 
 	public Float getMargin() {
-		return (Float) txtMargin.getValue();
+		return (Float) txtMargin.getValue()/100f;
 	}
 
 	public enumTrainingType getTrainingType() {

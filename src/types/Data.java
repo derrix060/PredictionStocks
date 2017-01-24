@@ -62,15 +62,20 @@ public class Data {
 	public void setValue (enumAttributesOfData atr, double value){
 		switch (atr) {
 			case closePrice:
-				setClosePrice(value);		
+				setClosePrice(value);
+				break;
 			case highPrice:
 				setHighPrice(value);
+				break;
 			case lowPrice:
 				setLowPrice(value);
+				break;
 			case openPrice:
 				setOpenPrice(value);
+				break;
 			case volume:
 				setVolume(value);
+				break;
 		}
 	}
 	public Calendar getDate() {

@@ -2,10 +2,13 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import imports.Normalize;
 import types.HistoricalData;
+import types.Data.enumAttributesOfData;
 
 public class MainButtonAction implements ActionListener {
 	private final MainView mview;
@@ -21,11 +24,17 @@ public class MainButtonAction implements ActionListener {
 			checkDates();
 			checkStockAtribute();
 			
-			
+			ArrayList<enumAttributesOfData> attr = mview.getAtributes();
 			//datas
-			HistoricalData normalData = new HistoricalData(mview.getStock(), mview.getFrom(), mview.getTo(), mview.getDataInterval(), mview.getAtributes());
+			HistoricalData normalData = new HistoricalData(mview.getStock(), mview.getFrom(), mview.getTo(), mview.getDataInterval(), attr);
 			Normalize normal = new Normalize();
-			HistoricalData normalizedData = normal.getHistoricalDataNormalized(normalData, mview.getMargin());
+			double[][] testInput = normalData.toInput(attr);
+
+			normal.normalizeDatas(normalData, mview.getMargin());
+			testInput = normalData.toInput(attr);
+			
+			normal.denormalizeDatas(normalData, mview.getMargin());
+			testInput = normalData.toInput(attr);
 			
 			
 			

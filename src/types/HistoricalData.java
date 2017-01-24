@@ -21,16 +21,20 @@ public class HistoricalData implements Comparator<Data>{
 		this.size = mapHistorical.size();
 	}
 	
+	public HistoricalData (HistoricalData hd){
+		this.size = hd.size;
+		this.dateInterval = hd.dateInterval;
+		this.mapHistorical = hd.getMapHistorical();
+	}
+	
 	public ArrayList<Data> getMapHistorical() {
 		return mapHistorical;
 	}
 	
-	public double[][] toInput(){
+	public double[][] toInput(ArrayList<enumAttributesOfData> attr){
 		int elementsQty = mapHistorical.size() - dateInterval;
-		ArrayList<enumAttributesOfData> attr = mapHistorical.get(0).getAttributes();
 		int attrSize = attr.size();
 		int attQty = attrSize * dateInterval;
-		System.out.println("Teste attSize: " + attQty);
 		double[][] rtn = new double[elementsQty][attQty];
 		
 		for (int i=0; i<elementsQty; i++){
@@ -73,6 +77,7 @@ public class HistoricalData implements Comparator<Data>{
 	public int compare(Data o1, Data o2) {
 		return o1.getDate().compareTo(o2.getDate());
 	}
+	
 
 
 }

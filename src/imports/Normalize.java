@@ -24,7 +24,7 @@ public class Normalize {
 	private float margin;
 	
 	
-	public HistoricalData getHistoricalDataNormalized (HistoricalData hd, float margin){
+	public void normalizeDatas (HistoricalData hd, float margin){
 		getMaxAndMinValues(hd);
 		
 		hd.getMapHistorical().forEach(dt -> {
@@ -37,11 +37,9 @@ public class Normalize {
 			}
 		});
 		
-		return hd;
-		
 	}
 	
-	public HistoricalData getHistoricalDataDenormalized (HistoricalData hd, float margin){
+	public void denormalizeDatas (HistoricalData hd, float margin){
 		//mustn't getMaxAndMinValues(hd);
 		
 		hd.getMapHistorical().forEach(dt -> {
@@ -53,8 +51,6 @@ public class Normalize {
 					dt.setValue(atr, getDenomarlizedValue(dt.getValue(atr), minValue, maxValue, margin));
 			}
 		});
-		
-		return hd;
 		
 	}
 	
