@@ -16,7 +16,6 @@ public class MainButtonAction implements ActionListener {
 		mview = view;
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try{
@@ -28,13 +27,7 @@ public class MainButtonAction implements ActionListener {
 			//datas
 			HistoricalData normalData = new HistoricalData(mview.getStock(), mview.getFrom(), mview.getTo(), mview.getDataInterval(), attr);
 			Normalize normal = new Normalize();
-			double[][] testInput = normalData.toInput(attr);
-
 			normal.normalizeDatas(normalData, mview.getMargin());
-			testInput = normalData.toInput(attr);
-			
-			normal.denormalizeDatas(normalData, mview.getMargin());
-			testInput = normalData.toInput(attr);
 			
 			
 			
@@ -54,6 +47,7 @@ public class MainButtonAction implements ActionListener {
 			if(mview.getFrom().after(mview.getTo())) throw new Exception("In extract data section, 'from' cannot be after than 'to'!");
 		
 		//Training Section
+			/*
 			if(mview.getFromTraining().before(mview.getFrom())) 
 				throw new Exception("Training 'from' cannot be before than Extract data 'from'!");
 			
@@ -65,7 +59,7 @@ public class MainButtonAction implements ActionListener {
 			
 			if(mview.getFromTraining().after(mview.getToTraining())) 
 				throw new Exception("In training section, 'from' cannot be after than 'to'!");
-	
+			*/
 	}
 	
 	private void checkStockAtribute() throws Exception{
