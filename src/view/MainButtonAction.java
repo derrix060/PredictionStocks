@@ -25,10 +25,9 @@ public class MainButtonAction implements ActionListener {
 			checkDates();
 			checkStockAtribute();
 			
-			List<enumAttributesOfData> attributes = new ArrayList<>();
-			//continue
+			
 			//datas
-			HistoricalData normalData = new HistoricalData(mview.getStock(), mview.getFrom(), mview.getTo(), mview.getDataInterval());
+			HistoricalData normalData = new HistoricalData(mview.getStock(), mview.getFrom(), mview.getTo(), mview.getDataInterval(), mview.getAtributes());
 			Normalize normal = new Normalize();
 			HistoricalData normalizedData = normal.getHistoricalDataNormalized(normalData, mview.getMargin());
 			

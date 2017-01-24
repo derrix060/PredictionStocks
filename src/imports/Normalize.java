@@ -62,6 +62,7 @@ public class Normalize {
 		ArrayList<Double> maxValues = new ArrayList<>();
 		ArrayList<Double> minValues = new ArrayList<>();
 		ArrayList<enumAttributesOfData> attr = hd.getMapHistorical().get(0).getAttributes();
+		int lastItem = hd.size - 1;
 		
 		for (int i=0; i<attr.size(); i++){
 			//sort by attr
@@ -69,27 +70,27 @@ public class Normalize {
 			case closePrice:
 				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getClosePrice(), d2.getClosePrice()));
 				minValues.add(hd.getMapHistorical().get(0).getClosePrice());
-				maxValues.add(hd.getMapHistorical().get(hd.size).getClosePrice());
+				maxValues.add(hd.getMapHistorical().get(lastItem).getClosePrice());
 				break;
 			case highPrice:
 				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getHighPrice(), d2.getHighPrice()));
 				minValues.add(hd.getMapHistorical().get(0).getHighPrice());
-				maxValues.add(hd.getMapHistorical().get(hd.size).getHighPrice());
+				maxValues.add(hd.getMapHistorical().get(lastItem).getHighPrice());
 				break;
 			case lowPrice:
 				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getLowPrice(), d2.getLowPrice()));
 				minValues.add(hd.getMapHistorical().get(0).getLowPrice());
-				maxValues.add(hd.getMapHistorical().get(hd.size).getLowPrice());
+				maxValues.add(hd.getMapHistorical().get(lastItem).getLowPrice());
 				break;
 			case openPrice:
 				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getOpenPrice(), d2.getOpenPrice()));
 				minValues.add(hd.getMapHistorical().get(0).getOpenPrice());
-				maxValues.add(hd.getMapHistorical().get(hd.size).getOpenPrice());
+				maxValues.add(hd.getMapHistorical().get(lastItem).getOpenPrice());
 				break;
 			case volume:
 				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getVolume(), d2.getVolume()));
 				minVolumeValue = hd.getMapHistorical().get(0).getVolume();
-				maxVolumeValue = hd.getMapHistorical().get(hd.size).getVolume();
+				maxVolumeValue = hd.getMapHistorical().get(lastItem).getVolume();
 				break;
 			}
 		}

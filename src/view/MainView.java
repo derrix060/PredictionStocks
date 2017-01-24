@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,6 +30,7 @@ import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import process.ActivationFunctionFactory.enumActivationFuncion;
 import process.PropagationFactory.enumTrainingType;
+import types.Data.enumAttributesOfData;
 
 public class MainView extends JFrame {
 
@@ -359,6 +361,19 @@ public class MainView extends JFrame {
 	/**
 	 * Getter and setters
 	 */
+	
+	public ArrayList<enumAttributesOfData> getAtributes(){
+		ArrayList<enumAttributesOfData> rtn = new ArrayList<>();
+
+		if (isHighPrice()) rtn.add(enumAttributesOfData.highPrice);
+		if (isClosePrice()) rtn.add(enumAttributesOfData.closePrice);
+		if (isLowPrice()) rtn.add(enumAttributesOfData.lowPrice);
+		if (isOpenPrice()) rtn.add(enumAttributesOfData.openPrice);
+		if (isVolume()) rtn.add(enumAttributesOfData.volume);
+		
+		
+		return rtn;
+	}
 	
 	public Calendar getFrom() {
 		Calendar cal = Calendar.getInstance();
