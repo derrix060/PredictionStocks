@@ -1,4 +1,4 @@
-package imports;
+package types;
 
 public class Trainer {
 	

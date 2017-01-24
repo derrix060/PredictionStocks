@@ -7,6 +7,7 @@
 
 
 ##To do:
+*	Add learningRate in MainView (if ManhattanPropagation)
 *   Implement NN Class
 *   fix Trainer (make it manage train)
 *   test values

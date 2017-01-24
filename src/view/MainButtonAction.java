@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import org.encog.neural.networks.BasicNetwork;
 
 import imports.Normalize;
+import process.NetworkFactory;
 import types.HistoricalData;
 import types.Data.enumAttributesOfData;
 
@@ -32,7 +33,7 @@ public class MainButtonAction implements ActionListener {
 			normal.normalizeDatas(normalData, mview.getMargin());
 			
 			//Neural Network
-			BasicNetwork network = new BasicNetwork();
+			BasicNetwork network = NetworkFactory.newNetwork(mview.getLayers());
 			
 			
 			

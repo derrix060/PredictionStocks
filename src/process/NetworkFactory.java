@@ -29,7 +29,7 @@ public class NetworkFactory {
 		
 		//create layers
 		for (int i=0; i<layers.size(); i++){
-			network.addLayer(new BasicLayer(new ActivationFunctionFactory().create(activationFunction.get(i)), bias.get(i), layers.get(i), dropoutRate.get(i)));
+			network.addLayer(new BasicLayer(ActivationFunctionFactory.create(activationFunction.get(i)), bias.get(i), layers.get(i), dropoutRate.get(i)));
 		}
 		
 		network.getStructure().finalizeStructure();
@@ -38,6 +38,18 @@ public class NetworkFactory {
 		return network;
 	}
 	
+	public static BasicNetwork newNetwork(List<BasicLayer> layers){
+		BasicNetwork network = new BasicNetwork();
+		
+		//create layers
+		for (BasicLayer layer : layers)
+			network.addLayer(layer);
+		
+		network.getStructure().finalizeStructure();
+		network.reset();
+		
+		return network;
+	}
 	
 	
 }

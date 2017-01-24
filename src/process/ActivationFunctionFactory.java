@@ -22,7 +22,7 @@ public class ActivationFunctionFactory {
 		TANH; //[-1;1]
 	}
 	
-	public ActivationFunction create (enumActivationFuncion activationType){
+	public static ActivationFunction create (enumActivationFuncion activationType){
 		if (activationType.equals(enumActivationFuncion.BiPolar)) return new ActivationBiPolar();
 		if (activationType.equals(enumActivationFuncion.BipolarSteepenedSigmoid)) return new ActivationBipolarSteepenedSigmoid();
 		if (activationType.equals(enumActivationFuncion.ClippedLinear)) return new ActivationClippedLinear();

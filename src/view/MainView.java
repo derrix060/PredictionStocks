@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
@@ -24,10 +25,13 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import org.encog.neural.networks.layers.BasicLayer;
+
 import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import process.ActivationFunctionFactory;
 import process.ActivationFunctionFactory.enumActivationFuncion;
 import process.PropagationFactory.enumTrainingType;
 import types.Data.enumAttributesOfData;
@@ -344,7 +348,7 @@ public class MainView extends JFrame {
 				comboAct.addItem(enumActivationFuncion.TANH);
 		//Modify Activation Column
 			tableLayer.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboAct));
-		
+			
 			tableLayer.getColumnModel().getColumn(0).setResizable(false);
 			tableLayer.getColumnModel().getColumn(1).setResizable(false);
 			tableLayer.getColumnModel().getColumn(2).setResizable(false);
@@ -373,6 +377,23 @@ public class MainView extends JFrame {
 		
 		
 		return rtn;
+	}
+	
+	public List<BasicLayer> getLayers(){
+		List<BasicLayer> layers = new ArrayList<>();
+		
+		for (int i=0; i<tableLayer.getRowCount(); i++){
+			//for each row from table
+			Integer neurons = (Integer) tableLayer.getValueAt(i, 0);
+			Boolean hasBias = (Boolean) tableLayer.getValueAt(i, 1);
+			enumActivationFuncion actFct = (enumActivationFuncion) tableLayer.getValueAt(i, 2);
+			Double drop = (Double) tableLayer.getValueAt(i, 3);
+			
+			BasicLayer layer = new BasicLayer(ActivationFunctionFactory.create(actFct), hasBias, neurons, drop);
+			layers.add(layer);
+		}
+		
+		return layers;
 	}
 	
 	public Calendar getFrom() {

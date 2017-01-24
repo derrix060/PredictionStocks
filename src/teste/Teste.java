@@ -31,11 +31,11 @@ import org.encog.util.simple.EncogUtility;
 import org.omg.CORBA.TRANSACTION_MODE;
 
 import imports.Normalize;
-import imports.Trainer;
 import imports.YahooExtractor;
 import process.NetworkFactory;
 import process.ActivationFunctionFactory.enumActivationFuncion;
 import types.DataOLD;
+import types.Trainer;
 import types.Data;
 
 @SuppressWarnings("unused")
