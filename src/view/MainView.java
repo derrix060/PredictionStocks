@@ -382,6 +382,9 @@ public class MainView extends JFrame {
 	public List<BasicLayer> getLayers(){
 		List<BasicLayer> layers = new ArrayList<>();
 		
+		//inputLayer
+		
+		//hiddenLayer
 		for (int i=0; i<tableLayer.getRowCount(); i++){
 			//for each row from table
 			Integer neurons = (Integer) tableLayer.getValueAt(i, 0);
@@ -392,6 +395,8 @@ public class MainView extends JFrame {
 			BasicLayer layer = new BasicLayer(ActivationFunctionFactory.create(actFct), hasBias, neurons, drop);
 			layers.add(layer);
 		}
+		
+		//outputLayer
 		
 		return layers;
 	}
@@ -448,7 +453,7 @@ public class MainView extends JFrame {
 		return (Float) txtMargin.getValue()/100f;
 	}
 
-	public enumTrainingType getTrainingType() {
+	public enumTrainingType getRule() {
 		return (enumTrainingType) cmbTraining.getSelectedItem();
 	}
 

@@ -19,7 +19,7 @@ public class PropagationFactory {
 	public Propagation create(enumTrainingType type, BasicNetwork network, MLDataSet trainingSet){
 		return create(type, network, trainingSet, default_trainingRate);
 	}
-	public Propagation create(enumTrainingType type, BasicNetwork network, MLDataSet trainingSet, double learningRate){
+	public static Propagation create(enumTrainingType type, BasicNetwork network, MLDataSet trainingSet, double learningRate){
 		if (type.equals(enumTrainingType.ResilientPropagation)) return new ResilientPropagation(network, trainingSet);
 		if (type.equals(enumTrainingType.Backpropagation)) return new Backpropagation(network, trainingSet);
 		if (type.equals(enumTrainingType.QuickPropagation)) return new QuickPropagation(network, trainingSet);

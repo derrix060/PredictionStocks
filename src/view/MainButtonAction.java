@@ -11,6 +11,7 @@ import org.encog.neural.networks.BasicNetwork;
 import imports.Normalize;
 import process.NetworkFactory;
 import types.HistoricalData;
+import types.Trainer;
 import types.Data.enumAttributesOfData;
 
 public class MainButtonAction implements ActionListener {
@@ -35,8 +36,9 @@ public class MainButtonAction implements ActionListener {
 			//Neural Network
 			BasicNetwork network = NetworkFactory.newNetwork(mview.getLayers());
 			
-			
-			
+			//Train
+			Trainer.train(network, normalData, attr, mview.getRule(), mview.getMaxIteration(), mview.getMinError());
+
 			
 			JOptionPane.showMessageDialog(null, "ok");
 		}
