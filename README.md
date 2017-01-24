@@ -7,10 +7,8 @@
 
 
 ##To do:
-
+*   Implement NN Class
 *   fix Trainer (make it manage train)
-*   remove NNTrainer
-*   Create NN Class
 *   test values
 *   create graphic
 *   CRUD NN

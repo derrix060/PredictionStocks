@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import org.encog.neural.networks.BasicNetwork;
+
 import imports.Normalize;
 import types.HistoricalData;
 import types.Data.enumAttributesOfData;
@@ -28,6 +30,9 @@ public class MainButtonAction implements ActionListener {
 			HistoricalData normalData = new HistoricalData(mview.getStock(), mview.getFrom(), mview.getTo(), mview.getDataInterval(), attr);
 			Normalize normal = new Normalize();
 			normal.normalizeDatas(normalData, mview.getMargin());
+			
+			//Neural Network
+			BasicNetwork network = new BasicNetwork();
 			
 			
 			

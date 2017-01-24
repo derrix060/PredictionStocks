@@ -1,7 +1,6 @@
 package process;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.encog.neural.networks.BasicNetwork;
@@ -11,41 +10,32 @@ import process.ActivationFunctionFactory.enumActivationFuncion;
 
 public class NetworkFactory {
 
-	public BasicNetwork getNetwork(List<Integer> layers, List<Boolean> bias, double dropoutRate, List<enumActivationFuncion> activationFunction) throws IOException{
+	public BasicNetwork getNetwork(List<Integer> layers, List<Boolean> bias, List<Double> dropoutRate, List<enumActivationFuncion> activationFunction) throws IOException{
 		BasicNetwork network = new BasicNetwork();
 		
-		//Comparing size with layer and activationFunction
-		if (layers.size() != activationFunction.size()){
-			throw new IOException("Quantidade de camadas é diferente da de funções de ativacao");
-		}
+		int size = layers.size();
 		
-		//Comparing size with layer and bias
-		if (layers.size() != bias.size()){
-			throw new IOException("Quantidade de bias é diferente da de camadas!");
+		//Comparing sizes
+		if (bias.size() != size){
+			throw new IOException("Bias quantity is invalid!");
+		}
+		if (dropoutRate.size() != size){
+			throw new IOException("DropOut quantity is invalid!");
+		}
+		if (activationFunction.size() != size){
+			throw new IOException("ActivationFunction quantity is invalid!");
 		}
 		
 		
 		//create layers
 		for (int i=0; i<layers.size(); i++){
-			network.addLayer(new BasicLayer(new ActivationFunctionFactory().create(activationFunction.get(i)), bias.get(i), layers.get(i), dropoutRate));
+			network.addLayer(new BasicLayer(new ActivationFunctionFactory().create(activationFunction.get(i)), bias.get(i), layers.get(i), dropoutRate.get(i)));
 		}
 		
 		network.getStructure().finalizeStructure();
 		network.reset();
 		
 		return network;
-	}
-
-	public BasicNetwork getNetwork(List<Integer> layers, boolean hasBias, double dropoutRate, enumActivationFuncion actvFunction) throws IOException {
-		List<Boolean> bias = new ArrayList<>();
-		List<enumActivationFuncion> activation = new ArrayList<>();
-		
-		for (int i=0; i<layers.size(); i++){
-			bias.add(hasBias);
-			activation.add(actvFunction);
-		}
-		
-		return getNetwork(layers, bias, dropoutRate, activation);
 	}
 	
 	

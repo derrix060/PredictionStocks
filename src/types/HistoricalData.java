@@ -55,9 +55,8 @@ public class HistoricalData implements Comparator<Data>{
 		
 	}
 	
-	public double[][] toIdealOutput(){
+	public double[][] toIdealOutput(ArrayList<enumAttributesOfData> attr){
 		int elementsQty = mapHistorical.size() - dateInterval;
-		ArrayList<enumAttributesOfData> attr = mapHistorical.get(0).getAttributes();
 		int attrSize = attr.size();
 		double[][] rtn = new double[elementsQty][attrSize];
 		
