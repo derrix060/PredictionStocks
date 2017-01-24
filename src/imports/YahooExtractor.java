@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import process.ActivationFunctionFactory.enumActivationFuncion;
 import types.Data;
 import types.Data.enumAttributesOfData;
 import yahoofinance.Stock;

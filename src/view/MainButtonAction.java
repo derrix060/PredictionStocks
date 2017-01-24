@@ -2,15 +2,10 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.chrono.IsoChronology;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JOptionPane;
 
 import imports.Normalize;
 import types.HistoricalData;
-import types.Data.enumAttributesOfData;
 
 public class MainButtonAction implements ActionListener {
 	private final MainView mview;
@@ -18,6 +13,7 @@ public class MainButtonAction implements ActionListener {
 		mview = view;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try{
