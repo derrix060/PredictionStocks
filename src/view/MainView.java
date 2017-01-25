@@ -121,7 +121,8 @@ public class MainView extends JFrame {
 				JLabel lblStock = new JLabel("Stock");
 				lblStock.setBounds(10, 164, 159, 14);
 				panelExtactData.add(lblStock);
-				
+					
+					//cmbStock.addItem("PRIO3.SA");
 					cmbStock.addItem("BBDC4.SA");
 					cmbStock.addItem("ABEV3.SA");
 					cmbStock.addItem("PETR4.SA");
@@ -307,7 +308,7 @@ public class MainView extends JFrame {
 				panelTraining.add(lblMinError);
 				
 				txtMinError.setBounds(10, 231, 159, 20);
-				txtMinError.setValue(new Double(0.001));
+				txtMinError.setValue(new Double(0.00001));
 				panelTraining.add(txtMinError);
 		//End Training Panel	
 				
@@ -383,6 +384,8 @@ public class MainView extends JFrame {
 		List<BasicLayer> layers = new ArrayList<>();
 		
 		//inputLayer
+		BasicLayer layer = new BasicLayer(this.getAtributes().size() * this.getDataInterval());
+		layers.add(layer);
 		
 		//hiddenLayer
 		for (int i=0; i<tableLayer.getRowCount(); i++){
@@ -392,11 +395,13 @@ public class MainView extends JFrame {
 			enumActivationFuncion actFct = (enumActivationFuncion) tableLayer.getValueAt(i, 2);
 			Double drop = (Double) tableLayer.getValueAt(i, 3);
 			
-			BasicLayer layer = new BasicLayer(ActivationFunctionFactory.create(actFct), hasBias, neurons, drop);
+			layer = new BasicLayer(ActivationFunctionFactory.create(actFct), hasBias, neurons, drop);
 			layers.add(layer);
 		}
 		
 		//outputLayer
+		layer = new BasicLayer(this.getAtributes().size());
+		layers.add(layer);
 		
 		return layers;
 	}
