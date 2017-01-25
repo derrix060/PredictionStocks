@@ -1,12 +1,10 @@
 package imports;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import types.Data;
 import types.Data.enumAttributesOfData;
-import types.DataOLD;
 import types.HistoricalData;
 
 //example
@@ -101,31 +99,6 @@ public class Normalize {
 		
 		//sort by date again
 		hd.getMapHistorical().sort(hd);
-	}
-	
- 	public static double[][] normalizeValues (DataOLD data) throws IOException{
-		double[][] values = data.getValues();
-		double maxValue = data.getMaxValue();
-		double minValue = data.getMinValue();
-		float margin = data.getMargin();
-		
-		System.out.println("normalizeValues");
-		System.out.println("MaxValue: " + maxValue);
-		System.out.println("MinValue: " + minValue);
-		System.out.println("Margin: " + margin);
-		
-		if (maxValue == 0) throw new IOException("Valor máximo nulo");
-		
-		
-		for (int i=0; i<values.length; i++){
-			double[] atr = values[i];
-			
-			for (int j=0; j< atr.length; j++){
-				values[i][j] = getNormalizedValue(values[i][j], minValue, maxValue, margin);
-			}
-		}
-		
-		return values;
 	}
 	
 	

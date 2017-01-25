@@ -44,9 +44,16 @@ public class MainButtonAction implements ActionListener {
 			//Train
 			Trainer.train(network, normalTrainingData, attr, mview.getRule(), mview.getMaxIteration(), mview.getMinError(), normal);
 			
+			//Create NN data
 			HistoricalData nnData = Trainer.createNNHistoricalData(network, normalData, attr, normal);
 			
-			JOptionPane.showMessageDialog(null, "ok");
+			//Denormalize Data
+			normal.denormalizeDatas(normalData);
+			
+			ResultView rv = new ResultView(nnData, normalData);
+			rv.setVisible(true);
+		
+			mview.dispose();
 		}
 		catch (Exception ex){
 			ex.printStackTrace();
@@ -82,6 +89,5 @@ public class MainButtonAction implements ActionListener {
 			throw new Exception ("You must select at least one attribute of stock!");
 		
 	}
-	
 	
 }
