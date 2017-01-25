@@ -55,6 +55,9 @@ public class YahooExtractor {
 			historicals.add(tick);
 		}
 		
+		//order by date
+		historicals.sort((Data d1, Data d2) -> d1.getDate().compareTo(d2.getDate()));
+		
 		
 		return historicals;
 	}
