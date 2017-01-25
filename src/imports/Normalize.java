@@ -23,8 +23,12 @@ public class Normalize {
 	private double minVolumeValue;
 	private float margin;
 	
+	public Normalize (float margin){
+		this.margin = margin;
+	}
 	
-	public void normalizeDatas (HistoricalData hd, float margin){
+	
+	public void normalizeDatas (HistoricalData hd){
 		getMaxAndMinValues(hd);
 		
 		hd.getMapHistorical().forEach(dt -> {
@@ -39,7 +43,7 @@ public class Normalize {
 		
 	}
 	
-	public void denormalizeDatas (HistoricalData hd, float margin){
+	public void denormalizeDatas (HistoricalData hd){
 		//mustn't getMaxAndMinValues(hd);
 		
 		hd.getMapHistorical().forEach(dt -> {
