@@ -61,24 +61,43 @@ public class Trainer {
 		
 	}
 	
-	public static HistoricalData createHistoricalData(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalize normal){
+	public static HistoricalData createNNHistoricalData(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalize normal){
 		int size = normalizedData.size - normalizedData.getDateInterval();
 		HistoricalData rtn = new HistoricalData(size);
 		Data dt = new Data();
+		ArrayList<Data> datas = new ArrayList<>();
 		
-		dt.setAttributes(attr);
-		dt.setTicker(normalizedData.getMapHistorical().get(0).getTicker());
+		double[][] input = normalizedData.toInput(attr);
+		double[] calculatedData = new double[attr.size()];
+		double value = 0;
+		
 		
 		for (int i=normalizedData.getDateInterval(); i<normalizedData.size; i++){
+			//for each date
+			
+			dt = new Data();
+			dt.setAttributes(attr);
+			dt.setTicker(normalizedData.getMapHistorical().get(0).getTicker());
+			
+			
+			network.compute(input[i - normalizedData.getDateInterval()], calculatedData); //generate the calculatedData
+			
 			Data dtClone = normalizedData.getMapHistorical().get(i);
-			dt.setClosePrice(dtClone.getClosePrice());
 			dt.setDate(dtClone.getDate());
-			dt.setHighPrice(dtClone.getHighPrice());
-			dt.setLowPrice(dtClone.getLowPrice());
-			dt.setOpenPrice(dtClone.getOpenPrice());
-			dt.setVolume(dtClone.getVolume());
+			
+			for(int j=0; j<attr.size(); j++){
+				//for each atribute
+				
+				//Check: every time will be in order?
+				value = normal.getDenormalizedValueFrom(calculatedData[j]);
+				dt.setValue(attr.get(j), value);
+			}
+			
+			
+			datas.add(dt);
 		}
 		
+		rtn.setMapHistorical(datas);
 		
 		return rtn;
 	}

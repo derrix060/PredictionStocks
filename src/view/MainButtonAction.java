@@ -43,11 +43,13 @@ public class MainButtonAction implements ActionListener {
 			
 			//Train
 			Trainer.train(network, normalData, attr, mview.getRule(), mview.getMaxIteration(), mview.getMinError(), normal);
-
+			
+			HistoricalData nnData = Trainer.createNNHistoricalData(network, normalData, attr, normal);
 			
 			JOptionPane.showMessageDialog(null, "ok");
 		}
 		catch (Exception ex){
+			ex.printStackTrace();
 			JOptionPane.showMessageDialog(null, ex.getClass() + "\n\n" +  ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
 		}
 		
