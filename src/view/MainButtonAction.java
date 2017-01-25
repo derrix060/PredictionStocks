@@ -73,7 +73,7 @@ public class MainButtonAction implements ActionListener {
 				throw new Exception("Training 'from' cannot be before than Extract data 'from'!");
 			
 			if(mview.getToTraining().after(mview.getTo())) 
-				throw new Exception("Training 'to' cannot be after than Extract data 'to'!");
+				//throw new Exception("Training 'to' cannot be after than Extract data 'to'!");
 			
 			if(mview.getFromTraining().after(mview.getTo())) 
 				throw new Exception("Training 'from' cannot be after than Extract data 'to'!");

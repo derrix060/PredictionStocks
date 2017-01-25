@@ -31,15 +31,17 @@ public class HistoricalData implements Comparator<Data>{
 		Calendar actualDate = mapHistorical.get(0).getDate();
 		int i = 0;
 		Data oldData = new Data();
-		
-		while (actualDate.before(from)){
+				
+		while (actualDate.compareTo(from) <= 0){
 			i ++;
 			actualDate = mapHistorical.get(i).getDate();
 		}
 		
 		//actual is equal than from
+		i--;
 		
-		while (actualDate.before(to) || actualDate.equals(to)){
+		while (actualDate.before(to) && i < mapHistorical.size()){
+			actualDate = mapHistorical.get(i).getDate();
 			//for each date
 			
 			Data dt = new Data();
@@ -55,10 +57,10 @@ public class HistoricalData implements Comparator<Data>{
 			datas.add(dt);
 			
 			i ++;
-			actualDate = mapHistorical.get(i).getDate();
 		}
 		
 		HistoricalData rtn = new HistoricalData(datas.size());
+		rtn.dateInterval = this.dateInterval;
 		rtn.setMapHistorical(datas);
 		
 		return rtn;
