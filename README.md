@@ -7,7 +7,6 @@
 
 
 ##To do:
-*	Create HistoricalData produced by NN
 *	Add learningRate in MainView (if ManhattanPropagation)
 *   create graphic
 *   CRUD NN

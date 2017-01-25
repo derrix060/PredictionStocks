@@ -20,7 +20,6 @@ public class MainButtonAction implements ActionListener {
 		mview = view;
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try{
@@ -31,9 +30,8 @@ public class MainButtonAction implements ActionListener {
 			ArrayList<enumAttributesOfData> attr = mview.getAtributes();
 			//datas
 			HistoricalData normalData = new HistoricalData(mview.getStock(), mview.getFrom(), mview.getTo(), mview.getDataInterval(), attr);
-			double[][] input = normalData.toInput(attr);
-			double[][] out = normalData.toIdealOutput(attr);
 			
+			//Normalize
 			Normalize normal = new Normalize(mview.getMargin());
 			normal.normalizeDatas(normalData);
 			
@@ -44,7 +42,7 @@ public class MainButtonAction implements ActionListener {
 			
 			
 			//Train
-			Trainer.train(network, normalData, attr, mview.getRule(), mview.getMaxIteration(), mview.getMinError(), normal);
+			Trainer.train(network, normalTrainingData, attr, mview.getRule(), mview.getMaxIteration(), mview.getMinError(), normal);
 			
 			HistoricalData nnData = Trainer.createNNHistoricalData(network, normalData, attr, normal);
 			
