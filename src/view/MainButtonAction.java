@@ -20,6 +20,7 @@ public class MainButtonAction implements ActionListener {
 		mview = view;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try{
@@ -30,14 +31,18 @@ public class MainButtonAction implements ActionListener {
 			ArrayList<enumAttributesOfData> attr = mview.getAtributes();
 			//datas
 			HistoricalData normalData = new HistoricalData(mview.getStock(), mview.getFrom(), mview.getTo(), mview.getDataInterval(), attr);
-			Normalize normal = new Normalize();
-			normal.normalizeDatas(normalData, mview.getMargin());
+			double[][] input = normalData.toInput(attr);
+			double[][] out = normalData.toIdealOutput(attr);
+			
+			Normalize normal = new Normalize(mview.getMargin());
+			normal.normalizeDatas(normalData);
 			
 			//Neural Network
 			BasicNetwork network = NetworkFactory.newNetwork(mview.getLayers());
 			
+			
 			//Train
-			Trainer.train(network, normalData, attr, mview.getRule(), mview.getMaxIteration(), mview.getMinError());
+			Trainer.train(network, normalData, attr, mview.getRule(), mview.getMaxIteration(), mview.getMinError(), normal);
 
 			
 			JOptionPane.showMessageDialog(null, "ok");
