@@ -7,10 +7,8 @@
 
 
 ##To do:
+*	Create HistoricalData produced by NN
 *	Add learningRate in MainView (if ManhattanPropagation)
-*   Implement NN Class
-*   fix Trainer (make it manage train)
-*   test values
 *   create graphic
 *   CRUD NN
 
