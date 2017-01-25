@@ -14,6 +14,11 @@ public class HistoricalData implements Comparator<Data>{
 	public final int size;
 	private int dateInterval;
 	private ArrayList<Data> mapHistorical;
+	
+	public HistoricalData(int size){
+		this.size = size;
+		
+	}
 
 	public HistoricalData(String ticker, Calendar from, Calendar to, int dateInterval, List<enumAttributesOfData> attributes) throws IOException {
 		this.dateInterval = dateInterval;
@@ -27,9 +32,6 @@ public class HistoricalData implements Comparator<Data>{
 		this.mapHistorical = hd.getMapHistorical();
 	}
 	
-	public ArrayList<Data> getMapHistorical() {
-		return mapHistorical;
-	}
 	
 	public double[][] toInput(ArrayList<enumAttributesOfData> attr){
 		int elementsQty = mapHistorical.size() - dateInterval;
@@ -77,6 +79,18 @@ public class HistoricalData implements Comparator<Data>{
 		return o1.getDate().compareTo(o2.getDate());
 	}
 	
-
-
+	/**
+	 * Getter and setters
+	 */
+	public int getDateInterval(){
+		return this.dateInterval;
+	}
+	
+	public ArrayList<Data> getMapHistorical() {
+		return mapHistorical;
+	}
+	
+	public void setMapHistorical(ArrayList<Data> hist){
+		this.mapHistorical = hist;
+	}
 }
