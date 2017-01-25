@@ -37,6 +37,8 @@ public class MainButtonAction implements ActionListener {
 			Normalize normal = new Normalize(mview.getMargin());
 			normal.normalizeDatas(normalData);
 			
+			HistoricalData normalTrainingData = normalData.createTrainHistoricalData(attr, mview.getFromTraining(), mview.getToTraining());
+			
 			//Neural Network
 			BasicNetwork network = NetworkFactory.newNetwork(mview.getLayers());
 			
@@ -62,7 +64,6 @@ public class MainButtonAction implements ActionListener {
 			if(mview.getFrom().after(mview.getTo())) throw new Exception("In extract data section, 'from' cannot be after than 'to'!");
 		
 		//Training Section
-			/*
 			if(mview.getFromTraining().before(mview.getFrom())) 
 				throw new Exception("Training 'from' cannot be before than Extract data 'from'!");
 			
@@ -74,7 +75,6 @@ public class MainButtonAction implements ActionListener {
 			
 			if(mview.getFromTraining().after(mview.getToTraining())) 
 				throw new Exception("In training section, 'from' cannot be after than 'to'!");
-			*/
 	}
 	
 	private void checkStockAtribute() throws Exception{

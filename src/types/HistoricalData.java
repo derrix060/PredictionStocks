@@ -25,13 +25,44 @@ public class HistoricalData implements Comparator<Data>{
 		mapHistorical = YahooExtractor.getHistorical(ticker, from, to, attributes);
 		this.size = mapHistorical.size();
 	}
-	
-	public HistoricalData (HistoricalData hd){
-		this.size = hd.size;
-		this.dateInterval = hd.dateInterval;
-		this.mapHistorical = hd.getMapHistorical();
+		
+	public HistoricalData createTrainHistoricalData (ArrayList<enumAttributesOfData> attr, Calendar from, Calendar to){
+		ArrayList<Data> datas = new ArrayList<>();
+		Calendar actualDate = mapHistorical.get(0).getDate();
+		int i = 0;
+		Data oldData = new Data();
+		
+		while (actualDate.before(from)){
+			i ++;
+			actualDate = mapHistorical.get(i).getDate();
+		}
+		
+		//actual is equal than from
+		
+		while (actualDate.before(to) || actualDate.equals(to)){
+			//for each date
+			
+			Data dt = new Data();
+			dt.setTicker(mapHistorical.get(0).getTicker());
+			dt.setDate(actualDate);
+			oldData = mapHistorical.get(i);
+			
+			for (enumAttributesOfData atr : attr){
+				//for each attribute
+				dt.setValue(atr, oldData.getValue(atr));
+			}
+			
+			datas.add(dt);
+			
+			i ++;
+			actualDate = mapHistorical.get(i).getDate();
+		}
+		
+		HistoricalData rtn = new HistoricalData(datas.size());
+		rtn.setMapHistorical(datas);
+		
+		return rtn;
 	}
-	
 	
 	public double[][] toInput(ArrayList<enumAttributesOfData> attr){
 		int elementsQty = mapHistorical.size() - dateInterval;
