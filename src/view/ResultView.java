@@ -49,34 +49,19 @@ public class ResultView extends JFrame {
        
         lineChart.setTitle("Neural Network Test - " + realData.getMapHistorical().get(0).getTicker());
         
-        Series<String, Number> serie1 = new Series<>();
-        serie1.setName("NN Data");
+        Series<String, Number> nnSerie = new Series<>();
+        nnSerie.setName("NN Data");
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         
         for (types.Data dt : nnData.getMapHistorical()){
-        	serie1.getData().add(new Data<String, Number>(formatter.format(dt.getDate().getTime()), dt.getHighPrice()));
+        	nnSerie.getData().add(new Data<String, Number>(formatter.format(dt.getDate().getTime()), dt.getHighPrice()));
         }
         
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("Portfolio 1");
-        
-        series1.getData().add(new XYChart.Data("Jan", 23));
-        series1.getData().add(new XYChart.Data("Feb", 14));
-        series1.getData().add(new XYChart.Data("Mar", 15));
-        series1.getData().add(new XYChart.Data("Apr", 24));
-        series1.getData().add(new XYChart.Data("May", 34));
-        series1.getData().add(new XYChart.Data("Jun", 36));
-        series1.getData().add(new XYChart.Data("Jul", 22));
-        series1.getData().add(new XYChart.Data("Aug", 45));
-        series1.getData().add(new XYChart.Data("Sep", 43));
-        series1.getData().add(new XYChart.Data("Oct", 17));
-        series1.getData().add(new XYChart.Data("Nov", 29));
-        series1.getData().add(new XYChart.Data("Dec", 25));
         
         
         Scene scene  = new Scene(lineChart,554,435);       
-        lineChart.getData().addAll(serie1);
+        lineChart.getData().addAll(nnSerie);
         
         fxPanel.setScene(scene);
         //end test
