@@ -7,7 +7,7 @@
 
 
 ##To do:
+*	debug trainer -> the output is the same
 *	Add learningRate in MainView (if ManhattanPropagation)
-*   create graphic
 *   CRUD NN
 

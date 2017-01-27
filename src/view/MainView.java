@@ -64,7 +64,7 @@ public class MainView extends JFrame {
 			private JComboBox<enumTrainingType> cmbTraining = new JComboBox<>();
 			private JDatePicker txtToT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 			private JFormattedTextField txtMaxIteration = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
-			private JFormattedTextField txtMinError = NumberTextField.newField(Double.class, 0, 1);
+			private JFormattedTextField txtMinError = NumberTextField.newField(Double.class, 0d, 1d);
 	
 	/**
 	 * Launch the application.

@@ -122,7 +122,7 @@ public class Trainer {
 				//for each atribute
 				
 				//Check: every time will be in order?
-				value = normal.getDenormalizedValueFrom(calculatedData[a]);
+				value = calculatedData[a];
 				dt.setValue(attr.get(a), value);
 			}
 			
@@ -160,7 +160,7 @@ public class Trainer {
 				//for each atribute
 				
 				//Check: every time will be in order?
-				value = normal.getDenormalizedValueFrom(calculatedData[a]);
+				value = calculatedData[a];
 				dt.setValue(attr.get(a), value);
 			}
 			
@@ -169,6 +169,9 @@ public class Trainer {
 		}
 		
 		rtn.setMapHistorical(datas);
+		
+		//denormalizeValues
+		normal.denormalizeDatas(rtn);
 		
 		return rtn;
 	}

@@ -50,10 +50,10 @@ public class MainButtonAction implements ActionListener {
 			//Denormalize Data
 			normal.denormalizeDatas(normalData);
 			
-			ResultView rv = new ResultView(nnData, normalData, normal);
+			ResultView rv = new ResultView(nnData, normalData, normal, mview);
 			rv.setVisible(true);
 		
-			mview.dispose();
+			mview.setVisible(false);
 		}
 		catch (Exception ex){
 			ex.printStackTrace();

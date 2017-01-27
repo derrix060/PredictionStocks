@@ -28,7 +28,7 @@ public class ResultView extends JFrame {
 	 * Create the frame.
 	 */
 	@SuppressWarnings("unchecked")
-	public ResultView(HistoricalData nnData, HistoricalData realData, Normalize normal) {
+	public ResultView(HistoricalData nnData, HistoricalData realData, Normalize normal, MainView mview) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 590, 655);
 		contentPane = new JPanel();
@@ -39,7 +39,6 @@ public class ResultView extends JFrame {
 		JFXPanel fxPanel = new JFXPanel();
 		fxPanel.setBounds(10, 11, 554, 435);
 		
-		//test
 		final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis("Y-Axis", normal.getMinValue() * 0.9, normal.getMaxValue() * 1.1, 1.0);
         System.out.println("ResultView -> min Value: " + normal.getMinValue() + " | max Value: " + normal.getMaxValue());
@@ -54,8 +53,7 @@ public class ResultView extends JFrame {
         Series<String, Number> nnSerie = new Series<>();
 
 
-        //realSerie
-        // must be first!
+        //realSerie -> must be first!
         for (enumAttributesOfData attr : realData.getMapHistorical().get(0).getAttributes()){
         	nnSerie = new Series<>();
         	
@@ -76,7 +74,6 @@ public class ResultView extends JFrame {
             
         
         fxPanel.setScene(scene);
-        //end test
         
 		contentPane.add(fxPanel);
 	}
