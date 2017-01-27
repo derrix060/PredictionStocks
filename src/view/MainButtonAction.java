@@ -45,7 +45,7 @@ public class MainButtonAction implements ActionListener {
 			Trainer.train(network, normalTrainingData, attr, mview.getRule(), mview.getMaxIteration(), mview.getMinError(), normal);
 			
 			//Create NN data
-			HistoricalData nnData = Trainer.createNNHistoricalData(network, normalData, attr, normal);
+			HistoricalData nnData = Trainer.createNNHistoricalData(network, normalData, attr, normal, mview.getToTraining());
 			
 			//Denormalize Data
 			normal.denormalizeDatas(normalData);

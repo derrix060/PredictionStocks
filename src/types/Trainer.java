@@ -1,6 +1,7 @@
 package types;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.train.MLTrain;
@@ -9,6 +10,7 @@ import org.encog.neural.networks.BasicNetwork;
 import imports.Normalize;
 import process.PropagationFactory;
 import process.PropagationFactory.enumTrainingType;
+import sun.security.action.GetBooleanAction;
 import types.Data.enumAttributesOfData;
 
 public class Trainer {
@@ -61,18 +63,56 @@ public class Trainer {
 		
 	}
 	
-	public static HistoricalData createNNHistoricalData(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalize normal){
+	public static HistoricalData createNNHistoricalData(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalize normal, Calendar from){
 		int size = normalizedData.size - normalizedData.getDateInterval();
 		HistoricalData rtn = new HistoricalData(size);
 		Data dt = new Data();
 		ArrayList<Data> datas = new ArrayList<>();
 		
-		double[][] input = normalizedData.toInput(attr);
+		int i = 0;
+		int dateInterval = normalizedData.getDateInterval();
+		int attrSize = attr.size();
+		
+		double[][] inputData = normalizedData.toInput(attr);
+		double[] input = new double[attr.size() * dateInterval];
 		double[] calculatedData = new double[attr.size()];
 		double value = 0;
 		
+		while (normalizedData.getMapHistorical().get(i).getDate().compareTo(from) <= 0){
+			i ++;
+		}
+		i = i-1; //start generate from i
 		
-		for (int i=normalizedData.getDateInterval(); i<normalizedData.size; i++){
+		
+		
+		//first dateInterval times will have data from real
+		for (int t=0; t<dateInterval; t++){
+			//for each time until dateInterval times
+			
+			
+			//add real data
+			for (int d=0; d<dateInterval-t; d++){
+				for (int a=0; a<attrSize; a++){
+					//for each attribute
+					
+					input[(d  * attrSize) + a] = normalizedData.getMapHistorical().get(i + d).getValue(attr.get(a));
+				}
+				
+			}
+			
+			//add calculate data
+			for (int d=0; d<t; d++){
+				for (int a=0; a<attrSize; a++){
+					//for each attribute
+					
+					input[((dateInterval - t + d) * attrSize) + a] = datas.get(d).getValue(attr.get(a));
+				}
+					
+			}
+		}
+		
+		
+		for (i = i-1; i<normalizedData.size; i++){
 			//for each date
 			
 			dt = new Data();
@@ -80,7 +120,7 @@ public class Trainer {
 			dt.setTicker(normalizedData.getMapHistorical().get(0).getTicker());
 			
 			
-			network.compute(input[i - normalizedData.getDateInterval()], calculatedData); //generate the calculatedData
+			network.compute(inputData[i - normalizedData.getDateInterval()], calculatedData); //generate the calculatedData
 			
 			Data dtClone = normalizedData.getMapHistorical().get(i);
 			dt.setDate(dtClone.getDate());

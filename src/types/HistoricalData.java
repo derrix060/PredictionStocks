@@ -64,15 +64,15 @@ public class HistoricalData implements Comparator<Data>{
 		int attQty = attrSize * dateInterval;
 		double[][] rtn = new double[elementsQty][attQty];
 		
-		for (int i=0; i<elementsQty; i++){
+		for (int e=0; e<elementsQty; e++){
 			//for each element (row)
 			
-			for (int j=0; j<dateInterval; j ++){
+			for (int d=0; d<dateInterval; d ++){
 				//for each date
 				
-				for (int k=0; k<attrSize; k++){
+				for (int a=0; a<attrSize; a++){
 					//for each attribute
-					rtn[i][(j * attrSize) + k] = mapHistorical.get(i+j).getValue(attr.get(k));
+					rtn[e][(d * attrSize) + a] = mapHistorical.get(e+d).getValue(attr.get(a));
 				}
 			}
 		}
