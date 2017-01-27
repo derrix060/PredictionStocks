@@ -62,7 +62,6 @@ public class MainView extends JFrame {
 			private JFormattedTextField txtMargin = NumberTextField.newField(Float.class, Float.MIN_NORMAL, Float.MAX_VALUE);
 		//Training
 			private JComboBox<enumTrainingType> cmbTraining = new JComboBox<>();
-			private JDatePicker txtFromT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 			private JDatePicker txtToT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 			private JFormattedTextField txtMaxIteration = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
 			private JFormattedTextField txtMinError = NumberTextField.newField(Double.class, 0, 1);
@@ -280,34 +279,27 @@ public class MainView extends JFrame {
 					cmbTraining.addItem(enumTrainingType.ScaledConjugateGradient);
 				cmbTraining.setBounds(10, 44, 159, 20);
 				panelTraining.add(cmbTraining);
-			//From Training
-				JLabel lblFromT = new JLabel("From");
-				lblFromT.setBounds(10, 75, 159, 14);
-				panelTraining.add(lblFromT);
-				
-				((Component) txtFromT).setBounds(10, 93, 159, 29);
-				panelTraining.add((Component) txtFromT);
 			//To Training
 				JLabel lblToT = new JLabel("To");
-				lblToT.setBounds(10, 124, 159, 14);
+				lblToT.setBounds(10, 75, 159, 14);
 				panelTraining.add(lblToT);
 				
-				((Component) txtToT).setBounds(10, 138, 159, 29);
+				((Component) txtToT).setBounds(10, 89, 159, 29);
 				panelTraining.add((Component) txtToT);
 			//Max Iteration
 				JLabel lblMaxIteration = new JLabel("Max Iteration");
-				lblMaxIteration.setBounds(10, 169, 159, 14);
+				lblMaxIteration.setBounds(10, 129, 159, 14);
 				panelTraining.add(lblMaxIteration);
 				
-				txtMaxIteration.setBounds(10, 185, 159, 20);
+				txtMaxIteration.setBounds(10, 143, 159, 20);
 				txtMaxIteration.setValue(new Integer(5000));
 				panelTraining.add(txtMaxIteration);
 			//Min Error
 				JLabel lblMinError = new JLabel("Min Error");
-				lblMinError.setBounds(10, 216, 159, 14);
+				lblMinError.setBounds(10, 176, 159, 14);
 				panelTraining.add(lblMinError);
 				
-				txtMinError.setBounds(10, 231, 159, 20);
+				txtMinError.setBounds(10, 190, 159, 20);
 				txtMinError.setValue(new Double(0.00001));
 				panelTraining.add(txtMinError);
 		//End Training Panel	
@@ -460,12 +452,6 @@ public class MainView extends JFrame {
 
 	public enumTrainingType getRule() {
 		return (enumTrainingType) cmbTraining.getSelectedItem();
-	}
-
-	public Calendar getFromTraining() {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime((Date) txtFromT.getModel().getValue());
-		return cal;
 	}
 
 	public Calendar getToTraining() {

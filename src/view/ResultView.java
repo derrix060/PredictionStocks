@@ -1,21 +1,19 @@
 package view;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import imports.Normalize;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
+import types.Data.enumAttributesOfData;
 import types.HistoricalData;
 
 public class ResultView extends JFrame {
@@ -29,7 +27,8 @@ public class ResultView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ResultView(HistoricalData nnData, HistoricalData realData) {
+	@SuppressWarnings("unchecked")
+	public ResultView(HistoricalData nnData, HistoricalData realData, Normalize normal) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 590, 655);
 		contentPane = new JPanel();
@@ -42,30 +41,57 @@ public class ResultView extends JFrame {
 		
 		//test
 		final CategoryAxis xAxis = new CategoryAxis();
-        final NumberAxis yAxis = new NumberAxis();
-         xAxis.setLabel("Date");
+        final NumberAxis yAxis = new NumberAxis("Y-Axis", normal.getMinValue() * 0.9, normal.getMaxValue() * 1.1, 1.0);
+        System.out.println("ResultView -> min Value: " + normal.getMinValue() + " | max Value: " + normal.getMaxValue());
+        xAxis.setLabel("Date");
         final LineChart<String,Number> lineChart = 
                 new LineChart<String,Number>(xAxis,yAxis);
        
         lineChart.setTitle("Neural Network Test - " + realData.getMapHistorical().get(0).getTicker());
-        
-        Series<String, Number> nnSerie = new Series<>();
-        nnSerie.setName("NN Data");
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        
-        for (types.Data dt : nnData.getMapHistorical()){
-        	nnSerie.getData().add(new Data<String, Number>(formatter.format(dt.getDate().getTime()), dt.getHighPrice()));
+        Scene scene  = new Scene(lineChart,554,435);   
+
+        Series<String, Number> nnSerie = new Series<>();
+
+
+        //realSerie
+        // must be first!
+        for (enumAttributesOfData attr : realData.getMapHistorical().get(0).getAttributes()){
+        	nnSerie = new Series<>();
+        	
+        	nnSerie = createSeries(realData,attr, "Real - " + attr.toString());
+            lineChart.getData().addAll(nnSerie);
+        	
         }
         
+        //nnSerie
+        for (enumAttributesOfData attr : nnData.getMapHistorical().get(0).getAttributes()){
+        	nnSerie = new Series<>();
+        	
+        	nnSerie = createSeries(nnData,attr, "NN - " + attr.toString());
+            lineChart.getData().addAll(nnSerie);
+        	
+        }
         
-        
-        Scene scene  = new Scene(lineChart,554,435);       
-        lineChart.getData().addAll(nnSerie);
+            
         
         fxPanel.setScene(scene);
         //end test
         
 		contentPane.add(fxPanel);
+	}
+	
+	private Series<String,Number> createSeries (HistoricalData data, enumAttributesOfData attr, String name){
+		Series<String, Number> rtn = new Series<>();
+		
+		rtn.setName(name);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        
+		for (types.Data dt : data.getMapHistorical()){
+			rtn.getData().add(new Data<String, Number>(formatter.format(dt.getDate().getTime()), dt.getValue(attr)));
+		}
+		
+		return rtn;
 	}
 }

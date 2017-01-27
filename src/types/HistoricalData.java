@@ -26,19 +26,11 @@ public class HistoricalData implements Comparator<Data>{
 		this.size = mapHistorical.size();
 	}
 		
-	public HistoricalData createTrainHistoricalData (ArrayList<enumAttributesOfData> attr, Calendar from, Calendar to){
+	public HistoricalData createTrainHistoricalData (ArrayList<enumAttributesOfData> attr, Calendar to){
 		ArrayList<Data> datas = new ArrayList<>();
 		Calendar actualDate = mapHistorical.get(0).getDate();
 		int i = 0;
 		Data oldData = new Data();
-				
-		while (actualDate.compareTo(from) <= 0){
-			i ++;
-			actualDate = mapHistorical.get(i).getDate();
-		}
-		
-		//actual is equal than from
-		i--;
 		
 		while (actualDate.before(to) && i < mapHistorical.size()){
 			actualDate = mapHistorical.get(i).getDate();
