@@ -10,7 +10,6 @@ import org.encog.neural.networks.BasicNetwork;
 import imports.Normalize;
 import process.PropagationFactory;
 import process.PropagationFactory.enumTrainingType;
-import sun.security.action.GetBooleanAction;
 import types.Data.enumAttributesOfData;
 
 public class Trainer {
@@ -73,19 +72,18 @@ public class Trainer {
 		int dateInterval = normalizedData.getDateInterval();
 		int attrSize = attr.size();
 		
-		double[][] inputData = normalizedData.toInput(attr);
 		double[] input = new double[attr.size() * dateInterval];
 		double[] calculatedData = new double[attr.size()];
 		double value = 0;
 		
-		while (normalizedData.getMapHistorical().get(i).getDate().compareTo(from) <= 0){
+		while (normalizedData.getMapHistorical().get(i).getDate().compareTo(from) < 0){
 			i ++;
 		}
 		i = i-1; //start generate from i
+		int dtDif = i;
 		
 		
-		
-		//first dateInterval times will have data from real
+		//first dateInterval times will have data from real (mixed datas)
 		for (int t=0; t<dateInterval; t++){
 			//for each time until dateInterval times
 			
@@ -95,7 +93,7 @@ public class Trainer {
 				for (int a=0; a<attrSize; a++){
 					//for each attribute
 					
-					input[(d  * attrSize) + a] = normalizedData.getMapHistorical().get(i + d).getValue(attr.get(a));
+					input[(d  * attrSize) + a] = normalizedData.getMapHistorical().get(dtDif + d - dateInterval).getValue(attr.get(a));
 				}
 				
 			}
@@ -109,28 +107,61 @@ public class Trainer {
 				}
 					
 			}
-		}
-		
-		
-		for (i = i-1; i<normalizedData.size; i++){
-			//for each date
+			//now input is ok
+			
 			
 			dt = new Data();
 			dt.setAttributes(attr);
 			dt.setTicker(normalizedData.getMapHistorical().get(0).getTicker());
 			
-			
-			network.compute(inputData[i - normalizedData.getDateInterval()], calculatedData); //generate the calculatedData
-			
-			Data dtClone = normalizedData.getMapHistorical().get(i);
+			network.compute(input, calculatedData);
+			Data dtClone = normalizedData.getMapHistorical().get(dtDif + t);
 			dt.setDate(dtClone.getDate());
 			
-			for(int j=0; j<attr.size(); j++){
+			for(int a=0; a<attr.size(); a++){
 				//for each atribute
 				
 				//Check: every time will be in order?
-				value = normal.getDenormalizedValueFrom(calculatedData[j]);
-				dt.setValue(attr.get(j), value);
+				value = normal.getDenormalizedValueFrom(calculatedData[a]);
+				dt.setValue(attr.get(a), value);
+			}
+			
+			
+			datas.add(dt);
+		}
+		//end of mixed datas
+		
+		//now only calculated
+		for (i = dtDif + dateInterval; i<normalizedData.size; i++){
+			//for each date
+			
+			dt = new Data();
+			dt.setAttributes(attr);
+			dt.setTicker(normalizedData.getMapHistorical().get(0).getTicker());
+			Data dtClone = normalizedData.getMapHistorical().get(i);
+			dt.setDate(dtClone.getDate());
+			
+			//create input
+			for (int d=0; d<dateInterval; d++){
+				//for each date
+				
+				for (int a=0; a<attrSize; a++){
+					//for each attribute
+					
+					input[(d * attrSize) + a] = datas.get(i - dtDif - dateInterval + d).getValue(attr.get(a));
+				}
+			}
+			
+			network.compute(input, calculatedData); //generate the calculatedData
+			
+			
+			
+			for(int a=0; a<attr.size(); a++){
+				//for each atribute
+				
+				//Check: every time will be in order?
+				value = normal.getDenormalizedValueFrom(calculatedData[a]);
+				dt.setValue(attr.get(a), value);
 			}
 			
 			
