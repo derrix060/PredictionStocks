@@ -79,8 +79,7 @@ public class Trainer {
 		while (normalizedData.getMapHistorical().get(i).getDate().compareTo(from) < 0){
 			i ++;
 		}
-		i = i-1; //start generate from i
-		int dtDif = i;
+		int dtDif = i - 1; //start of day adjusted
 		
 		
 		//first dateInterval times will have data from real (mixed datas)
@@ -91,9 +90,9 @@ public class Trainer {
 			//add real data
 			for (int d=0; d<dateInterval-t; d++){
 				for (int a=0; a<attrSize; a++){
-					//for each attribute
+					//for each attributee
 					
-					input[(d  * attrSize) + a] = normalizedData.getMapHistorical().get(dtDif + d - dateInterval).getValue(attr.get(a));
+					input[(d  * attrSize) + a] = normalizedData.getMapHistorical().get(dtDif + t + d - dateInterval).getValue(attr.get(a));
 				}
 				
 			}

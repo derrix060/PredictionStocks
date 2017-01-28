@@ -27,7 +27,6 @@ public class ResultView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings("unchecked")
 	public ResultView(HistoricalData nnData, HistoricalData realData, Normalize normal, MainView mview) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 590, 655);
@@ -50,7 +49,18 @@ public class ResultView extends JFrame {
 
         Scene scene  = new Scene(lineChart,554,435);   
 
-        Series<String, Number> nnSerie = new Series<>();
+        populateSeries(nnData, realData, lineChart);
+        
+            
+        
+        fxPanel.setScene(scene);
+        
+		contentPane.add(fxPanel);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void populateSeries(HistoricalData nnData, HistoricalData realData, LineChart<String,Number> lineChart){
+		Series<String, Number> nnSerie = new Series<>();
 
 
         //realSerie -> must be first!
@@ -70,12 +80,6 @@ public class ResultView extends JFrame {
             lineChart.getData().addAll(nnSerie);
         	
         }
-        
-            
-        
-        fxPanel.setScene(scene);
-        
-		contentPane.add(fxPanel);
 	}
 	
 	private Series<String,Number> createSeries (HistoricalData data, enumAttributesOfData attr, String name){

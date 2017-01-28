@@ -467,9 +467,4 @@ public class MainView extends JFrame {
 	public Double getMinError() {
 		return (Double) txtMinError.getValue();
 	}
-
-	
-	
-	
-
 }
