@@ -3,19 +3,25 @@ package view;
 import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.EventHandler;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import imports.Normalize;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.embed.swing.JFXPanel;
+import javafx.event.Event;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import types.Data.enumAttributesOfData;
 import types.HistoricalData;
 
@@ -26,6 +32,7 @@ public class ResultView extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	final DoubleProperty zoomProperty = new SimpleDoubleProperty(200);
 
 	/**
 	 * Create the frame.
@@ -50,7 +57,25 @@ public class ResultView extends JFrame {
        
         lineChart.setTitle("Neural Network Test - " + realData.getMapHistorical().get(0).getTicker());
 
-        Scene scene  = new Scene(lineChart,554,435);   
+        Scene scene  = new Scene(lineChart,554,435);
+        
+        scene.addEventHandler(ScrollEvent.ANY, new javafx.event.EventHandler<Event>() {
+
+			public void handle(ScrollEvent event) {
+				// TODO Auto-generated method stub
+				 if (event.getDeltaY() > 0) {
+	                    zoomProperty.set(zoomProperty.get() * 1.1);
+	                } else if (event.getDeltaY() < 0) {
+	                    zoomProperty.set(zoomProperty.get() / 1.1);
+	                }
+			}
+
+			@Override
+			public void handle(Event event) {
+				handle((ScrollEvent) event);
+				
+			}
+		}); 
 
         populateSeries(nnData, realData, lineChart);
         fxPanel.setScene(scene);
