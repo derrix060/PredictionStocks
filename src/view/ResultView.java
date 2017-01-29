@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.Button;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -50,12 +53,29 @@ public class ResultView extends JFrame {
         Scene scene  = new Scene(lineChart,554,435);   
 
         populateSeries(nnData, realData, lineChart);
-        
-            
-        
         fxPanel.setScene(scene);
         
 		contentPane.add(fxPanel);
+		
+		
+		//Back button
+		Button btn = new Button("Back");
+		btn.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				closeFrame(mview);
+				
+			}
+		});
+		btn.setBounds(460,530,50,25);
+		
+		contentPane.add(btn);
+	}
+	
+	private void closeFrame(MainView mview){
+		this.dispose();
+		mview.setVisible(true);
 	}
 	
 	@SuppressWarnings("unchecked")
