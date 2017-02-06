@@ -2,15 +2,18 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import org.encog.neural.networks.BasicNetwork;
+import org.encog.persist.EncogDirectoryPersistence;
 
 import imports.Normalize;
 import process.NetworkFactory;
 import types.HistoricalData;
+import types.JavaToJson;
 import types.Trainer;
 import types.Data.enumAttributesOfData;
 
@@ -43,6 +46,8 @@ public class MainButtonAction implements ActionListener {
 			
 			//Train
 			Trainer.train(network, normalTrainingData, attr, mview.getRule(), mview.getMaxIteration(), mview.getMinError(), normal);
+			
+			EncogDirectoryPersistence.saveObject(new File("network.eg"), network);
 			
 			//Create NN data
 			HistoricalData nnData = Trainer.createNNHistoricalData(network, normalData, attr, normal, mview.getToTraining());
