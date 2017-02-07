@@ -13,7 +13,6 @@ import org.encog.persist.EncogDirectoryPersistence;
 import imports.Normalize;
 import process.NetworkFactory;
 import types.HistoricalData;
-import types.JavaToJson;
 import types.Trainer;
 import types.Data.enumAttributesOfData;
 
