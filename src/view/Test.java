@@ -171,9 +171,15 @@ public class Test extends JFrame {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						
+						//if don't have any row
+						if (tableLayer.getRowCount() == 0) return;
+						
 						try{
 							dtm.removeRow(tableLayer.getSelectedRow());
 						}
+						
+						//if nothing is selected -> remove the last one
 						catch (ArrayIndexOutOfBoundsException ae){
 							dtm.removeRow(tableLayer.getRowCount() -1);
 						}
