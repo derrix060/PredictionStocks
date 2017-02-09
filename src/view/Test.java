@@ -1,22 +1,30 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTabbedPane;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.awt.Color;
+
+import javax.swing.DefaultCellEditor;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
 import org.encog.neural.networks.layers.BasicLayer;
 
 import net.sourceforge.jdatepicker.JDatePicker;
@@ -28,18 +36,14 @@ import process.ActivationFunctionFactory.enumActivationFuncion;
 import process.PropagationFactory.enumTrainingType;
 import types.Data.enumAttributesOfData;
 
-import javax.swing.JScrollPane;
-import java.awt.Component;
-
-import javax.swing.DefaultCellEditor;
-import javax.swing.ImageIcon;
-import javax.swing.JTable;
-import javax.swing.JTree;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 public class Test extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	private JPanel 					contentPane;
 	private LayerTable 				dtm 			= new LayerTable();
 	private JTable 					tableLayer 		= new JTable();
@@ -131,6 +135,18 @@ public class Test extends JFrame {
 		JPanel createPanel = new JPanel();
 		createPanel.setLayout(null);
 		
+			//Name
+				JLabel lblName = new JLabel("Name:");
+				lblName.setBounds(10, 26, 45, 14);
+				createPanel.add(lblName);
+				
+				txtName = new JTextField();
+				txtName.setBounds(60, 23, 290, 20);
+				createPanel.add(txtName);
+				txtName.setColumns(10);
+				
+				
+		
 			//Add button
 				JButton btnAdd = new JButton("");
 				btnAdd.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
@@ -155,8 +171,12 @@ public class Test extends JFrame {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						dtm.removeRow(tableLayer.getSelectedRow());
-						
+						try{
+							dtm.removeRow(tableLayer.getSelectedRow());
+						}
+						catch (ArrayIndexOutOfBoundsException ae){
+							dtm.removeRow(tableLayer.getRowCount() -1);
+						}
 					}
 				});
 				createPanel.add(btnRemove);	
@@ -170,15 +190,8 @@ public class Test extends JFrame {
 				
 				createPanel.add(scrollPaneLayers);
 				
-				JLabel lblName = new JLabel("Name:");
-				lblName.setBounds(10, 26, 31, 14);
-				createPanel.add(lblName);
 				
-				txtName = new JTextField();
-				txtName.setBounds(51, 23, 300, 20);
-				createPanel.add(txtName);
-				txtName.setColumns(10);
-				
+			// Btns
 				JButton btnNewButton = new JButton("Create");
 				btnNewButton.setBounds(264, 478, 89, 23);
 				createPanel.add(btnNewButton);
