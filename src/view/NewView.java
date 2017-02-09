@@ -36,7 +36,7 @@ import process.ActivationFunctionFactory.enumActivationFuncion;
 import process.PropagationFactory.enumTrainingType;
 import types.Data.enumAttributesOfData;
 
-public class Test extends JFrame {
+public class NewView extends JFrame {
 
 	/**
 	 * 
@@ -87,7 +87,7 @@ public class Test extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Test frame = new Test();
+					NewView frame = new NewView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -99,7 +99,7 @@ public class Test extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Test() {
+	public NewView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 410, 600);
 		contentPane = new JPanel();
@@ -201,6 +201,14 @@ public class Test extends JFrame {
 				JButton btnNewButton = new JButton("Create");
 				btnNewButton.setBounds(264, 478, 89, 23);
 				createPanel.add(btnNewButton);
+				btnNewButton.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
 			
 			
 			return createPanel;
