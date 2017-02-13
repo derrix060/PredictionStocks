@@ -201,7 +201,7 @@ public class MainView extends JFrame {
 				panelNormalization.add(lblMargin);
 				
 				txtMargin.setBounds(10, 132, 159, 20);
-				txtMargin.setValue(new Float(99.9));
+				txtMargin.setValue(new Float(20.1));
 				panelNormalization.add(txtMargin);
 			
 		//End Normalization Panel
@@ -300,7 +300,7 @@ public class MainView extends JFrame {
 				panelTraining.add(lblMinError);
 				
 				txtMinError.setBounds(10, 190, 159, 20);
-				txtMinError.setValue(new Double(0.00001));
+				txtMinError.setValue(new Double(0.1));
 				panelTraining.add(txtMinError);
 		//End Training Panel	
 				

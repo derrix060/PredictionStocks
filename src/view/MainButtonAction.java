@@ -13,6 +13,7 @@ import org.encog.persist.EncogDirectoryPersistence;
 import imports.Normalize;
 import process.NetworkFactory;
 import types.HistoricalData;
+import types.NeuralNetwork;
 import types.Trainer;
 import types.Data.enumAttributesOfData;
 
@@ -42,6 +43,8 @@ public class MainButtonAction implements ActionListener {
 			//Neural Network
 			BasicNetwork network = NetworkFactory.newNetwork(mview.getLayers());
 			
+			NeuralNetwork net = new NeuralNetwork(network, attr, mview.getDataInterval(), mview.getStock());
+			net.save("TesteNN");
 			
 			//Train
 			Trainer.train(network, normalTrainingData, attr, mview.getRule(), mview.getMaxIteration(), mview.getMinError(), normal);
