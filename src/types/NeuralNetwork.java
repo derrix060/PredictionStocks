@@ -82,6 +82,10 @@ public class NeuralNetwork {
 		}
 		
 		reader.close();
+
+		if (stock.equals("")) throw new IllegalArgumentException("Can't find stock from " + name + ".json");
+		if (dateInterval == null) throw new IllegalArgumentException("Can't find dateInterval from " + name + ".json");
+		if (attributes.size() == 0) throw new IllegalArgumentException("Can't find attributes from " + name + ".json");
 		
 		return new NeuralNetwork(topology, attributes, dateInterval, stock);
 	}
