@@ -201,7 +201,7 @@ public class NewView extends JFrame {
 				JButton btnNewButton = new JButton("Create");
 				btnNewButton.setBounds(264, 478, 89, 23);
 				createPanel.add(btnNewButton);
-				btnNewButton.addActionListener(new CreateNNBtnAction(this));
+				btnNewButton.addActionListener(new CreateNNBtnAction(this, txtName.getText()));
 			
 			
 			return createPanel;
