@@ -101,7 +101,7 @@ public class NewView extends JFrame {
 	 */
 	public NewView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 410, 600);
+		setBounds(100, 100, 420, 600);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(204, 204, 204));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -136,7 +136,7 @@ public class NewView extends JFrame {
 		createPanel.setLayout(null);
 		
 			//Name
-				JLabel lblName = new JLabel("Name:");
+				JLabel lblName = new JLabel("Name");
 				lblName.setBounds(10, 26, 45, 14);
 				createPanel.add(lblName);
 				
@@ -145,6 +145,14 @@ public class NewView extends JFrame {
 				createPanel.add(txtName);
 				txtName.setColumns(10);
 				
+			//Attributes
+				
+				
+			//Date Interval
+				JLabel lblDtInterval = new JLabel("Date Interval");
+				lblDtInterval.setBounds(10, 50, 400, 15);
+				createPanel.add(lblDtInterval);
+			//Stock
 				
 		
 			//Add button
@@ -201,7 +209,7 @@ public class NewView extends JFrame {
 				JButton btnNewButton = new JButton("Create");
 				btnNewButton.setBounds(264, 478, 89, 23);
 				createPanel.add(btnNewButton);
-				btnNewButton.addActionListener(new CreateNNBtnAction(this, txtName.getText()));
+				btnNewButton.addActionListener(new CreateNNBtnAction(this));
 			
 			
 			return createPanel;
@@ -387,4 +395,11 @@ public class NewView extends JFrame {
 	public Double getMinError() {
 		return (Double) txtMinError.getValue();
 	}
+	
+	/**
+	 * TODO: implement getters and setters
+	 */
+	
+	
+	
 }
