@@ -35,6 +35,8 @@ import process.ActivationFunctionFactory;
 import process.ActivationFunctionFactory.enumActivationFuncion;
 import process.PropagationFactory.enumTrainingType;
 import types.Data.enumAttributesOfData;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class NewView extends JFrame {
 
@@ -72,6 +74,7 @@ public class NewView extends JFrame {
 				private JFormattedTextField txtMaxIteration = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
 				private JFormattedTextField txtMinError = NumberTextField.newField(Double.class, 0d, 1d);
 				private JTextField txtName;
+				private JTextField textField;
 	
 	
 	
@@ -109,7 +112,7 @@ public class NewView extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 368, 540);
+		tabbedPane.setBounds(10, 11, 384, 540);
 		contentPane.add(tabbedPane);
 
 		JPanel panelCreate = createCreatePanel();
@@ -137,11 +140,11 @@ public class NewView extends JFrame {
 		
 			//Name
 				JLabel lblName = new JLabel("Name");
-				lblName.setBounds(10, 26, 45, 14);
+				lblName.setBounds(10, 11, 150, 14);
 				createPanel.add(lblName);
 				
 				txtName = new JTextField();
-				txtName.setBounds(60, 23, 290, 20);
+				txtName.setBounds(10, 28, 167, 20);
 				createPanel.add(txtName);
 				txtName.setColumns(10);
 				
@@ -150,7 +153,7 @@ public class NewView extends JFrame {
 				
 			//Date Interval
 				JLabel lblDtInterval = new JLabel("Date Interval");
-				lblDtInterval.setBounds(10, 50, 400, 15);
+				lblDtInterval.setBounds(10, 59, 150, 15);
 				createPanel.add(lblDtInterval);
 			//Stock
 				
@@ -159,7 +162,7 @@ public class NewView extends JFrame {
 				JButton btnAdd = new JButton("");
 				btnAdd.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
 				btnAdd.setForeground(new Color(0, 128, 0));
-				btnAdd.setBounds(10, 65, 41, 23);
+				btnAdd.setBounds(84, 155, 41, 23);
 				btnAdd.addActionListener(new ActionListener() {
 					
 					@Override
@@ -174,7 +177,7 @@ public class NewView extends JFrame {
 			//Remove button
 				JButton btnRemove = new JButton("");
 				btnRemove.setIcon(new ImageIcon(MainView.class.getResource("/view/cancel.png")));
-				btnRemove.setBounds(61, 65, 41, 23);
+				btnRemove.setBounds(136, 155, 41, 23);
 				btnRemove.addActionListener(new ActionListener() {
 					
 					@Override
@@ -198,8 +201,8 @@ public class NewView extends JFrame {
 			//Start Layer Table
 				initializeLayerTable();
 				JScrollPane scrollPaneLayers = new JScrollPane(tableLayer);
-				scrollPaneLayers.setSize(341, 369);
-				scrollPaneLayers.setLocation(10, 99);
+				scrollPaneLayers.setSize(343, 279);
+				scrollPaneLayers.setLocation(10, 189);
 				tableLayer.setFillsViewportHeight(true);
 				
 				createPanel.add(scrollPaneLayers);
@@ -209,6 +212,49 @@ public class NewView extends JFrame {
 				JButton btnNewButton = new JButton("Create");
 				btnNewButton.setBounds(264, 478, 89, 23);
 				createPanel.add(btnNewButton);
+				
+				textField = new JTextField();
+				textField.setBounds(10, 76, 167, 20);
+				createPanel.add(textField);
+				textField.setColumns(10);
+				
+				JPanel panel = new JPanel();
+				panel.setLayout(null);
+				panel.setBorder(new TitledBorder(null, "Attributes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panel.setBounds(244, 11, 107, 160);
+				createPanel.add(panel);
+				
+				JCheckBox checkBox = new JCheckBox("Close Price");
+				checkBox.setBounds(6, 26, 96, 23);
+				panel.add(checkBox);
+				
+				JCheckBox checkBox_1 = new JCheckBox("High Price");
+				checkBox_1.setBounds(6, 52, 96, 23);
+				panel.add(checkBox_1);
+				
+				JCheckBox checkBox_2 = new JCheckBox("Low Price");
+				checkBox_2.setBounds(6, 78, 96, 23);
+				panel.add(checkBox_2);
+				
+				JCheckBox checkBox_3 = new JCheckBox("Open Price");
+				checkBox_3.setBounds(6, 104, 96, 23);
+				panel.add(checkBox_3);
+				
+				JCheckBox checkBox_4 = new JCheckBox("Volume");
+				checkBox_4.setBounds(6, 130, 96, 23);
+				panel.add(checkBox_4);
+				
+				JLabel label = new JLabel("Stock");
+				label.setBounds(10, 107, 150, 14);
+				createPanel.add(label);
+				
+				JComboBox<String> comboBox = new JComboBox<String>();
+				comboBox.setBounds(10, 124, 167, 20);
+				createPanel.add(comboBox);
+				
+				JLabel lblHiddenLayer = new JLabel("Hidden Layer");
+				lblHiddenLayer.setBounds(10, 164, 84, 14);
+				createPanel.add(lblHiddenLayer);
 				btnNewButton.addActionListener(new CreateNNBtnAction(this));
 			
 			
@@ -395,11 +441,4 @@ public class NewView extends JFrame {
 	public Double getMinError() {
 		return (Double) txtMinError.getValue();
 	}
-	
-	/**
-	 * TODO: implement getters and setters
-	 */
-	
-	
-	
 }
