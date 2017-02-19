@@ -376,7 +376,7 @@ public class MainView extends JFrame {
 		List<BasicLayer> layers = new ArrayList<>();
 		
 		//inputLayer
-		BasicLayer layer = new BasicLayer(this.getAtributes().size() * this.getDataInterval());
+		BasicLayer layer = new BasicLayer(ActivationFunctionFactory.create(enumActivationFuncion.Linear), false, this.getAtributes().size() * this.getDataInterval());
 		layers.add(layer);
 		
 		//hiddenLayer
@@ -392,7 +392,7 @@ public class MainView extends JFrame {
 		}
 		
 		//outputLayer
-		layer = new BasicLayer(this.getAtributes().size());
+		layer = new BasicLayer(ActivationFunctionFactory.create(enumActivationFuncion.Linear), false, this.getAtributes().size());
 		layers.add(layer);
 		
 		return layers;
