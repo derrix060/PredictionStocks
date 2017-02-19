@@ -23,7 +23,7 @@ public class NeuralNetwork {
 	 * Attributes
 	 */
 	private final transient static String path = "PredictionStocks/";
-	private final transient static String typology_name = "_network.eg";
+	private final transient static String topology_name = "_network.eg";
 	private transient BasicNetwork topology; //transient to dont parse to Json.
 	private ArrayList<enumAttributesOfData> attributes;
 	private Integer dateInterval;
@@ -43,7 +43,7 @@ public class NeuralNetwork {
 	
 	public void save(String name) throws IOException{
 		Gson gson = new Gson();
-		EncogDirectoryPersistence.saveObject(new File(path + name + typology_name), topology);
+		EncogDirectoryPersistence.saveObject(new File(path + name + topology_name), topology);
 		String json = gson.toJson(this);
 		
 		FileWriter writer = new FileWriter(path + name + ".json");
@@ -58,7 +58,7 @@ public class NeuralNetwork {
 		Integer dateInterval = null;
 		ArrayList<enumAttributesOfData> attributes = new ArrayList<>();
 		
-		BasicNetwork topology = (BasicNetwork) EncogDirectoryPersistence.loadObject(new File(path + name + typology_name));
+		BasicNetwork topology = (BasicNetwork) EncogDirectoryPersistence.loadObject(new File(path + name + topology_name));
 
 		BufferedReader br = new BufferedReader(new FileReader(path + name + ".json"));
 		
