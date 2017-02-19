@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.persist.EncogDirectoryPersistence;
@@ -13,6 +14,7 @@ import org.encog.persist.EncogDirectoryPersistence;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
+import imports.Normalizer;
 import types.Data.enumAttributesOfData;
 
 
@@ -89,7 +91,10 @@ public class NeuralNetwork {
 		return new NeuralNetwork(topology, attributes, dateInterval, stock);
 	}
 	
-	
+	public static HistoricalData createNNHistoricalData(NeuralNetwork netrowk, Normalizer normalizer, Calendar from, Calendar to){
+		// TODO: implement this
+		return null;
+	}
 	
 	/**
 	 * Getters

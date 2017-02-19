@@ -15,7 +15,7 @@ import types.Data.enumAttributesOfData;
 public class Trainer {
 	private final static double default_trainingRate = 0.1;
 	
-	public static void train(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, enumTrainingType rule, int maxIteration, double minError, Normalizer normal){
+	public static void train(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, enumTrainingType rule, int maxIteration, double maxError, Normalizer normal){
 		BasicMLDataSet trainingData = new BasicMLDataSet(normalizedData.toInput(attr), normalizedData.toIdealOutput(attr));
 		MLTrain rprop = PropagationFactory.create(rule, network, trainingData, default_trainingRate);
 		
@@ -25,7 +25,7 @@ public class Trainer {
 			rprop.iteration();
 			iteration ++;
 		}
-		while (iteration < maxIteration && rprop.getError() > minError);
+		while (iteration < maxIteration && rprop.getError() > maxError);
 		
 		/**
 		 * Should be called once training is complete and no more iterations are needed.
@@ -182,5 +182,11 @@ public class Trainer {
 		normal.denormalizeDatas(rtn);
 		
 		return rtn;
+	}
+	
+	//news
+	
+	public static void train(NeuralNetwork network, Normalizer normal, HistoricalData normalizedData, enumTrainingType rule, int maxIteration, double maxError){
+		//TODO: implement
 	}
 }
