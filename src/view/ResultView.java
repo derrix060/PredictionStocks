@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import imports.Normalize;
+import imports.Normalizer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.embed.swing.JFXPanel;
@@ -37,7 +37,7 @@ public class ResultView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ResultView(HistoricalData nnData, HistoricalData realData, Normalize normal, MainView mview) {
+	public ResultView(HistoricalData nnData, HistoricalData realData, Normalizer normal, MainView mview) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 590, 655);
 		contentPane = new JPanel();

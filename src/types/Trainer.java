@@ -7,7 +7,7 @@ import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.networks.BasicNetwork;
 
-import imports.Normalize;
+import imports.Normalizer;
 import process.PropagationFactory;
 import process.PropagationFactory.enumTrainingType;
 import types.Data.enumAttributesOfData;
@@ -15,7 +15,7 @@ import types.Data.enumAttributesOfData;
 public class Trainer {
 	private final static double default_trainingRate = 0.1;
 	
-	public static void train(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, enumTrainingType rule, int maxIteration, double minError, Normalize normal){
+	public static void train(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, enumTrainingType rule, int maxIteration, double minError, Normalizer normal){
 		BasicMLDataSet trainingData = new BasicMLDataSet(normalizedData.toInput(attr), normalizedData.toIdealOutput(attr));
 		MLTrain rprop = PropagationFactory.create(rule, network, trainingData, default_trainingRate);
 		
@@ -43,7 +43,7 @@ public class Trainer {
 		
 	}
 	
-	public static void printTeste(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalize normal){
+	public static void printTeste(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalizer normal){
 		double[][] input = normalizedData.toInput(attr);
 		double[][] idealOutput = normalizedData.toIdealOutput(attr);
 		
@@ -71,7 +71,7 @@ public class Trainer {
 		
 	}
 	
-	public static HistoricalData createNNHistoricalData(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalize normal, Calendar from){
+	public static HistoricalData createNNHistoricalData(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalizer normal, Calendar from){
 		int size = normalizedData.size - normalizedData.getDateInterval();
 		HistoricalData rtn = new HistoricalData(size);
 		Data dt = new Data();

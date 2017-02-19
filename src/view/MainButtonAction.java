@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.persist.EncogDirectoryPersistence;
 
-import imports.Normalize;
+import imports.Normalizer;
 import process.NetworkFactory;
 import types.HistoricalData;
 import types.NeuralNetwork;
@@ -35,7 +35,7 @@ public class MainButtonAction implements ActionListener {
 			HistoricalData normalData = new HistoricalData(mview.getStock(), mview.getFrom(), mview.getTo(), mview.getDataInterval(), attr);
 			
 			//Normalize
-			Normalize normal = new Normalize(mview.getMargin());
+			Normalizer normal = new Normalizer(mview.getMargin());
 			normal.normalizeDatas(normalData);
 			
 			HistoricalData normalTrainingData = normalData.createTrainHistoricalData(attr, mview.getToTraining());
