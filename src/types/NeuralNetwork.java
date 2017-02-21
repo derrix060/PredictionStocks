@@ -91,7 +91,7 @@ public class NeuralNetwork {
 		return new NeuralNetwork(topology, attributes, dateInterval, stock);
 	}
 
-	public HistoricalData createNNHistoricalData(Normalizer normalizer, Calendar from, Calendar to){
+	public HistoricalData createNNHistoricalData(Normalizer normalizer, Calendar from, Calendar to) throws IOException{
 		// TODO: implement this
 
 		// Create Historical Data from YahooExtractor

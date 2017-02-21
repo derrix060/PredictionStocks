@@ -35,7 +35,6 @@ import process.ActivationFunctionFactory;
 import process.ActivationFunctionFactory.enumActivationFuncion;
 import process.PropagationFactory.enumTrainingType;
 import types.Data.enumAttributesOfData;
-import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class NewView extends JFrame {
