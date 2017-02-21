@@ -29,8 +29,8 @@ public class NeuralNetwork {
 	private ArrayList<enumAttributesOfData> attributes;
 	private Integer dateInterval;
 	private String stock;
-	
-	
+
+
 	/**
 	 * Constructor
 	 */
@@ -40,34 +40,34 @@ public class NeuralNetwork {
 		this.dateInterval = dateInterval;
 		this.stock = stock;
 	}
-	
-	
+
+
 	public void save(String name) throws IOException{
 		Gson gson = new Gson();
 		EncogDirectoryPersistence.saveObject(new File(path + name + topology_name), topology);
 		String json = gson.toJson(this);
-		
+
 		FileWriter writer = new FileWriter(path + name + ".json");
-		
+
 		writer.write(json);
 		writer.close();
-		
+
 	}
-	
+
 	public static NeuralNetwork load(String name) throws IOException{
 		String stock = "";
 		Integer dateInterval = null;
 		ArrayList<enumAttributesOfData> attributes = new ArrayList<>();
-		
+
 		BasicNetwork topology = (BasicNetwork) EncogDirectoryPersistence.loadObject(new File(path + name + topology_name));
 
 		BufferedReader br = new BufferedReader(new FileReader(path + name + ".json"));
-		
+
 		JsonReader reader = new JsonReader(br);
 
 		while(reader.hasNext()){
 			String jsonName = reader.nextName();
-			
+
 			if (jsonName.equals("attributes")){
 				reader.beginArray();
 				while (reader.hasNext()){
@@ -81,21 +81,139 @@ public class NeuralNetwork {
 				stock = reader.nextString();
 			}
 		}
-		
+
 		reader.close();
 
 		if (stock.equals("")) throw new IllegalArgumentException("Can't find stock from " + name + ".json");
 		if (dateInterval == null) throw new IllegalArgumentException("Can't find dateInterval from " + name + ".json");
 		if (attributes.size() == 0) throw new IllegalArgumentException("Can't find attributes from " + name + ".json");
-		
+
 		return new NeuralNetwork(topology, attributes, dateInterval, stock);
 	}
-	
-	public static HistoricalData createNNHistoricalData(NeuralNetwork netrowk, Normalizer normalizer, Calendar from, Calendar to){
+
+	public static HistoricalData createNNHistoricalData(Normalizer normalizer, Calendar from, Calendar to){
 		// TODO: implement this
-		return null;
+
+		// Create Historical Data from YahooExtractor
+		HistoricalData rtn = new HistoricalData(this.stock, from, to, this.dateInterval, this.attributes);
+
+
+		return rtn;
 	}
-	
+
+	public static HistoricalData createNNHistoricalData(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalizer normal, Calendar from){
+		int size = normalizedData.size - normalizedData.getDateInterval();
+		HistoricalData rtn = new HistoricalData(size);
+		Data dt = new Data();
+		ArrayList<Data> datas = new ArrayList<>();
+
+		int i = 0;
+		int dateInterval = normalizedData.getDateInterval();
+		int attrSize = attr.size();
+
+		double[] input = new double[attr.size() * dateInterval];
+		double[] calculatedData = new double[attr.size()];
+		double value = 0;
+
+		while (normalizedData.getMapHistorical().get(i).getDate().compareTo(from) < 0){
+			i ++;
+		}
+		int dtDif = i - 1; //start of day adjusted
+
+
+		//first dateInterval times will have data from real (mixed datas)
+		for (int t=0; t<dateInterval; t++){
+			//for each time until dateInterval times
+
+
+			//add real data
+			for (int d=0; d<dateInterval-t; d++){
+				for (int a=0; a<attrSize; a++){
+					//for each attributee
+
+					input[(d  * attrSize) + a] = normalizedData.getMapHistorical().get(dtDif + t + d - dateInterval).getValue(attr.get(a));
+				}
+
+			}
+
+			//add calculate data
+			for (int d=0; d<t; d++){
+				for (int a=0; a<attrSize; a++){
+					//for each attribute
+
+					input[((dateInterval - t + d) * attrSize) + a] = datas.get(d).getValue(attr.get(a));
+				}
+
+			}
+			//now input is ok
+
+
+			dt = new Data();
+			dt.setAttributes(attr);
+			dt.setTicker(normalizedData.getMapHistorical().get(0).getTicker());
+
+			network.compute(input, calculatedData);
+			Data dtClone = normalizedData.getMapHistorical().get(dtDif + t);
+			dt.setDate(dtClone.getDate());
+
+			for(int a=0; a<attr.size(); a++){
+				//for each atribute
+
+				//Check: every time will be in order?
+				value = calculatedData[a];
+				dt.setValue(attr.get(a), value);
+			}
+
+
+			datas.add(dt);
+		}
+		//end of mixed datas
+
+		//now only calculated
+		for (i = dtDif + dateInterval; i<normalizedData.size; i++){
+			//for each date
+
+			dt = new Data();
+			dt.setAttributes(attr);
+			dt.setTicker(normalizedData.getMapHistorical().get(0).getTicker());
+			Data dtClone = normalizedData.getMapHistorical().get(i);
+			dt.setDate(dtClone.getDate());
+
+			//create input
+			for (int d=0; d<dateInterval; d++){
+				//for each date
+
+				for (int a=0; a<attrSize; a++){
+					//for each attribute
+
+					input[(d * attrSize) + a] = datas.get(i - dtDif - dateInterval + d).getValue(attr.get(a));
+				}
+			}
+
+			network.compute(input, calculatedData); //generate the calculatedData
+
+
+			for(int a=0; a<attr.size(); a++){
+				//for each atribute
+
+				//Check: every time will be in order?
+				value = calculatedData[a];
+				dt.setValue(attr.get(a), value);
+			}
+
+
+			datas.add(dt);
+		}
+
+		rtn.setMapHistorical(datas);
+
+		//denormalizeValues
+		normal.denormalizeDatas(rtn);
+
+		return rtn;
+	}
+
+
 	/**
 	 * Getters
 	 */
@@ -111,7 +229,7 @@ public class NeuralNetwork {
 	public String getStock() {
 		return stock;
 	}
-	
-	
-	
+
+
+
 }
