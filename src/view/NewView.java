@@ -69,12 +69,12 @@ public class NewView extends JFrame {
 				private JFormattedTextField txtMargin = NumberTextField.newField(Float.class, Float.MIN_NORMAL, Float.MAX_VALUE);
 			//Training
 				private JComboBox<enumTrainingType> cmbTraining = new JComboBox<>();
-				private JDatePicker txxFromT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 				private JDatePicker txtToT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 				private JFormattedTextField txtMaxIteration = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
 				private JFormattedTextField txtMinError = NumberTextField.newField(Double.class, 0d, 1d);
+			//Network
 				private JTextField txtName;
-				private JTextField textField;
+				private JTextField txtStock;
 	
 	
 	
@@ -157,115 +157,112 @@ public class NewView extends JFrame {
 				txtName.setColumns(10);
 				
 			//Attributes
+				JPanel panelAttr = new JPanel();
+				panelAttr.setLayout(null);
+				panelAttr.setBorder(new TitledBorder(null, "Attributes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panelAttr.setBounds(244, 11, 107, 160);
+				createPanel.add(panelAttr);
 				
+				JCheckBox chckbxClosePrice = new JCheckBox("Close Price");
+				JCheckBox chckbxHighPrice = new JCheckBox("High Price");
+				JCheckBox chckbxLowPrice = new JCheckBox("Low Price");
+				JCheckBox chckbxOpenPrice = new JCheckBox("Open Price");
+				JCheckBox chckbxVolume = new JCheckBox("Volume");
+				
+				chckbxClosePrice.setBounds(6, 26, 96, 23);
+				chckbxHighPrice.setBounds(6, 52, 96, 23);
+				chckbxLowPrice.setBounds(6, 78, 96, 23);
+				chckbxOpenPrice.setBounds(6, 104, 96, 23);
+				chckbxVolume.setBounds(6, 130, 96, 23);
+				
+				panelAttr.add(chckbxClosePrice);
+				panelAttr.add(chckbxHighPrice);				
+				panelAttr.add(chckbxLowPrice);				
+				panelAttr.add(chckbxOpenPrice);				
+				panelAttr.add(chckbxVolume);
 				
 			//Date Interval
 				JLabel lblDtInterval = new JLabel("Date Interval");
 				lblDtInterval.setBounds(10, 59, 150, 15);
 				createPanel.add(lblDtInterval);
+				
+
+				JFormattedTextField txtDateInterval = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
+				txtDateInterval.setBounds(10, 76, 167, 20);
+				createPanel.add(txtDateInterval);
+				
 			//Stock
+				JLabel label = new JLabel("Stock");
+				label.setBounds(10, 107, 150, 14);
+				createPanel.add(label);
 				
+				txtStock = new JTextField();
+				txtStock.setBounds(10, 124, 167, 20);
+				createPanel.add(txtStock);
 		
-			//Add button
-				JButton btnAdd = new JButton("");
-				btnAdd.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
-				btnAdd.setForeground(new Color(0, 128, 0));
-				btnAdd.setBounds(84, 155, 41, 23);
-				btnAdd.addActionListener(new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						dtm.addRow(emptyData);
-						tableLayer.setModel(dtm);
+			//Hidden Layer	
+				
+				JLabel lblHiddenLayer = new JLabel("Hidden Layer");
+				lblHiddenLayer.setBounds(10, 164, 84, 14);
+				createPanel.add(lblHiddenLayer);
+				
+				//Add button
+					JButton btnAdd = new JButton("");
+					btnAdd.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
+					btnAdd.setForeground(new Color(0, 128, 0));
+					btnAdd.setBounds(84, 155, 41, 23);
+					btnAdd.addActionListener(new ActionListener() {
 						
-					}
-				});
-				createPanel.add(btnAdd);
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							dtm.addRow(emptyData);
+							tableLayer.setModel(dtm);
+							
+						}
+					});
+					createPanel.add(btnAdd);
 			
-			//Remove button
-				JButton btnRemove = new JButton("");
-				btnRemove.setIcon(new ImageIcon(MainView.class.getResource("/view/cancel.png")));
-				btnRemove.setBounds(136, 155, 41, 23);
-				btnRemove.addActionListener(new ActionListener() {
+				//Remove button
+					JButton btnRemove = new JButton("");
+					btnRemove.setIcon(new ImageIcon(MainView.class.getResource("/view/cancel.png")));
+					btnRemove.setBounds(136, 155, 41, 23);
+					btnRemove.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							
+							//if don't have any row
+							if (tableLayer.getRowCount() == 0) return;
+							
+							try{
+								dtm.removeRow(tableLayer.getSelectedRow());
+							}
+							
+							//if nothing is selected -> remove the last one
+							catch (ArrayIndexOutOfBoundsException ae){
+								dtm.removeRow(tableLayer.getRowCount() -1);
+							}
+						}
+					});
+					createPanel.add(btnRemove);	
+				
+				//Start Layer Table
+					initializeLayerTable();
+					JScrollPane scrollPaneLayers = new JScrollPane(tableLayer);
+					scrollPaneLayers.setSize(343, 247);
+					scrollPaneLayers.setLocation(10, 189);
+					tableLayer.setFillsViewportHeight(true);
 					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						
-						//if don't have any row
-						if (tableLayer.getRowCount() == 0) return;
-						
-						try{
-							dtm.removeRow(tableLayer.getSelectedRow());
-						}
-						
-						//if nothing is selected -> remove the last one
-						catch (ArrayIndexOutOfBoundsException ae){
-							dtm.removeRow(tableLayer.getRowCount() -1);
-						}
-					}
-				});
-				createPanel.add(btnRemove);	
-				
-			//Start Layer Table
-				initializeLayerTable();
-				JScrollPane scrollPaneLayers = new JScrollPane(tableLayer);
-				scrollPaneLayers.setSize(343, 247);
-				scrollPaneLayers.setLocation(10, 189);
-				tableLayer.setFillsViewportHeight(true);
-				
-				createPanel.add(scrollPaneLayers);
+					createPanel.add(scrollPaneLayers);
 				
 				
 			// Btns
 				JButton btnNewButton = new JButton("Create");
 				btnNewButton.setBounds(264, 447, 89, 23);
 				createPanel.add(btnNewButton);
-				
-				textField = new JTextField();
-				textField.setBounds(10, 76, 167, 20);
-				createPanel.add(textField);
-				textField.setColumns(10);
-				
-				JPanel panel = new JPanel();
-				panel.setLayout(null);
-				panel.setBorder(new TitledBorder(null, "Attributes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panel.setBounds(244, 11, 107, 160);
-				createPanel.add(panel);
-				
-				JCheckBox checkBox = new JCheckBox("Close Price");
-				checkBox.setBounds(6, 26, 96, 23);
-				panel.add(checkBox);
-				
-				JCheckBox checkBox_1 = new JCheckBox("High Price");
-				checkBox_1.setBounds(6, 52, 96, 23);
-				panel.add(checkBox_1);
-				
-				JCheckBox checkBox_2 = new JCheckBox("Low Price");
-				checkBox_2.setBounds(6, 78, 96, 23);
-				panel.add(checkBox_2);
-				
-				JCheckBox checkBox_3 = new JCheckBox("Open Price");
-				checkBox_3.setBounds(6, 104, 96, 23);
-				panel.add(checkBox_3);
-				
-				JCheckBox checkBox_4 = new JCheckBox("Volume");
-				checkBox_4.setBounds(6, 130, 96, 23);
-				panel.add(checkBox_4);
-				
-				JLabel label = new JLabel("Stock");
-				label.setBounds(10, 107, 150, 14);
-				createPanel.add(label);
-				
-				JComboBox<String> comboBox = new JComboBox<String>();
-				comboBox.setBounds(10, 124, 167, 20);
-				createPanel.add(comboBox);
-				
-				JLabel lblHiddenLayer = new JLabel("Hidden Layer");
-				lblHiddenLayer.setBounds(10, 164, 84, 14);
-				createPanel.add(lblHiddenLayer);
 				btnNewButton.addActionListener(new CreateNNBtnAction(this));
-			
-			
+				
+				
 			return createPanel;
 	}
 	
