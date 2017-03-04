@@ -35,6 +35,8 @@ import process.ActivationFunctionFactory;
 import process.ActivationFunctionFactory.enumActivationFuncion;
 import process.PropagationFactory.enumTrainingType;
 import types.Data.enumAttributesOfData;
+import types.NeuralNetwork;
+
 import javax.swing.border.TitledBorder;
 
 public class NewView extends JFrame {
@@ -75,6 +77,7 @@ public class NewView extends JFrame {
 			//Network
 				private JTextField txtName;
 				private JTextField txtStock;
+				private NeuralNetwork activeNetwork = null;
 	
 	
 	
@@ -129,11 +132,11 @@ public class NewView extends JFrame {
 		tabbedPane.addTab("Report", null, panelReport, null);
 		
 		JLabel lblSelectedNetwork = new JLabel("Selected Network: ");
-		lblSelectedNetwork.setBounds(20, 536, 99, 14);
+		lblSelectedNetwork.setBounds(20, 536, 91, 14);
 		contentPane.add(lblSelectedNetwork);
 		
 		JLabel lblNetw = new JLabel("None");
-		lblNetw.setBounds(114, 536, 280, 14);
+		lblNetw.setBounds(128, 536, 266, 14);
 		contentPane.add(lblNetw);
 	}
 	
@@ -162,12 +165,7 @@ public class NewView extends JFrame {
 				panelAttr.setBorder(new TitledBorder(null, "Attributes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				panelAttr.setBounds(244, 11, 107, 160);
 				createPanel.add(panelAttr);
-				
-				JCheckBox chckbxClosePrice = new JCheckBox("Close Price");
-				JCheckBox chckbxHighPrice = new JCheckBox("High Price");
-				JCheckBox chckbxLowPrice = new JCheckBox("Low Price");
-				JCheckBox chckbxOpenPrice = new JCheckBox("Open Price");
-				JCheckBox chckbxVolume = new JCheckBox("Volume");
+			
 				
 				chckbxClosePrice.setBounds(6, 26, 96, 23);
 				chckbxHighPrice.setBounds(6, 52, 96, 23);
@@ -187,9 +185,8 @@ public class NewView extends JFrame {
 				createPanel.add(lblDtInterval);
 				
 
-				JFormattedTextField txtDateInterval = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
-				txtDateInterval.setBounds(10, 76, 167, 20);
-				createPanel.add(txtDateInterval);
+				txtDataInterval.setBounds(10, 76, 167, 20);
+				createPanel.add(txtDataInterval);
 				
 			//Stock
 				JLabel label = new JLabel("Stock");
@@ -454,5 +451,12 @@ public class NewView extends JFrame {
 
 	public Double getMinError() {
 		return (Double) txtMinError.getValue();
+	}
+	
+	public void setActiveNN(NeuralNetwork nn){
+		this.activeNetwork = nn;
+	}
+	public NeuralNetwork getActiveNN(){
+		return this.activeNetwork;
 	}
 }
