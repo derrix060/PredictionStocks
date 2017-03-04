@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.layers.BasicLayer;
 
@@ -29,25 +31,45 @@ public class CreateNNBtnAction implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		//attributes
+		//Check if has at least one attribute
+		attributes = view.getAtributes();
+		if (attributes.isEmpty()){
+			JOptionPane.showMessageDialog(null, "Please select at least one attribute!", "Error: Attribute not selected", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		//Check if has any value
+		
+		
+		//Get values from view
 		List<BasicLayer> layers = view.getLayers();
 		stock = view.getStock();
-		attributes = view.getAtributes();
 		dateInterval = view.getDataInterval();
 		name = view.getName();
 		topology = NetworkFactory.newNetwork(layers);
 		
+
+		
+		
+		
 		//create NN
 		NeuralNetwork nn = new NeuralNetwork(topology, attributes, dateInterval, stock);
 		
+		
+		//select the network
+		view.setActiveNN(nn);
+				
 		//save network
 		try {
 			nn.save(name);
 		} catch (IOException ex) {
-			// TODO Auto-generated catch block
-			ex.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Wasn't possible save the network. Please Try again.\n\nError: " + ex.getMessage(), "Error: Cannot save the network!", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		
+		
+		
 	}
+	
 
 }
