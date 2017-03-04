@@ -167,19 +167,6 @@ public class NewView extends JFrame {
 				panelAttr.setBounds(244, 11, 107, 160);
 				createPanel.add(panelAttr);
 
-			
-				
-				chckbxClosePrice.setBounds(6, 26, 96, 23);
-				chckbxHighPrice.setBounds(6, 52, 96, 23);
-				chckbxLowPrice.setBounds(6, 78, 96, 23);
-				chckbxOpenPrice.setBounds(6, 104, 96, 23);
-				chckbxVolume.setBounds(6, 130, 96, 23);
-		
-				JCheckBox chckbxClosePrice = new JCheckBox("Close Price");
-				JCheckBox chckbxHighPrice = new JCheckBox("High Price");
-				JCheckBox chckbxLowPrice = new JCheckBox("Low Price");
-				JCheckBox chckbxOpenPrice = new JCheckBox("Open Price");
-				JCheckBox chckbxVolume = new JCheckBox("Volume");
 				
 				chckbxClosePrice.setBounds(6, 26, 96, 23);
 				chckbxHighPrice.setBounds(6, 52, 96, 23);
@@ -202,9 +189,6 @@ public class NewView extends JFrame {
 				txtDataInterval.setBounds(10, 76, 167, 20);
 				createPanel.add(txtDataInterval);
 
-				JFormattedTextField txtDateInterval = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
-				txtDateInterval.setBounds(10, 76, 167, 20);
-				createPanel.add(txtDateInterval);
 
 				
 			//Stock
