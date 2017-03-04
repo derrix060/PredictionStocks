@@ -57,7 +57,6 @@ public class NewView extends JFrame {
 			//Data
 				private JDatePicker txtFrom = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 				private JDatePicker txtTo = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
-				private JComboBox<String> cmbStock = new JComboBox<>();
 				private JFormattedTextField txtDataInterval = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
 			//Stock attributes
 				private JCheckBox chckbxHighPrice = new JCheckBox("High Price");
@@ -399,7 +398,7 @@ public class NewView extends JFrame {
 	}
 
 	public String getStock() {
-		return (String) cmbStock.getSelectedItem();
+		return txtStock.getText();
 	}
 
 	public Integer getDataInterval() {
