@@ -44,12 +44,12 @@ public class MainButtonAction implements ActionListener {
 			BasicNetwork network = NetworkFactory.newNetwork(mview.getLayers());
 			
 			NeuralNetwork net = new NeuralNetwork(network, attr, mview.getDataInterval(), mview.getStock());
-			net.save("TesteNN");
+			//net.save("TesteNN");
 			
 			//Train
 			Trainer.train(network, normalTrainingData, attr, mview.getRule(), mview.getMaxIteration(), mview.getMinError(), normal);
 			
-			EncogDirectoryPersistence.saveObject(new File("network.eg"), network);
+			//EncogDirectoryPersistence.saveObject(new File("network.eg"), network);
 			
 			//Create NN data
 			HistoricalData nnData = Trainer.createNNHistoricalData(network, normalData, attr, normal, mview.getToTraining());

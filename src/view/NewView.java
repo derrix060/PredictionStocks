@@ -69,6 +69,7 @@ public class NewView extends JFrame {
 				private JFormattedTextField txtMargin = NumberTextField.newField(Float.class, Float.MIN_NORMAL, Float.MAX_VALUE);
 			//Training
 				private JComboBox<enumTrainingType> cmbTraining = new JComboBox<>();
+				private JDatePicker txxFromT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 				private JDatePicker txtToT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 				private JFormattedTextField txtMaxIteration = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
 				private JFormattedTextField txtMinError = NumberTextField.newField(Double.class, 0d, 1d);
@@ -111,7 +112,7 @@ public class NewView extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 384, 540);
+		tabbedPane.setBounds(10, 11, 384, 506);
 		contentPane.add(tabbedPane);
 
 		JPanel panelCreate = createCreatePanel();
@@ -126,6 +127,14 @@ public class NewView extends JFrame {
 		
 		JPanel panelReport = createReportPanel();
 		tabbedPane.addTab("Report", null, panelReport, null);
+		
+		JLabel lblSelectedNetwork = new JLabel("Selected Network: ");
+		lblSelectedNetwork.setBounds(20, 536, 99, 14);
+		contentPane.add(lblSelectedNetwork);
+		
+		JLabel lblNetw = new JLabel("None");
+		lblNetw.setBounds(114, 536, 280, 14);
+		contentPane.add(lblNetw);
 	}
 	
 	
@@ -200,7 +209,7 @@ public class NewView extends JFrame {
 			//Start Layer Table
 				initializeLayerTable();
 				JScrollPane scrollPaneLayers = new JScrollPane(tableLayer);
-				scrollPaneLayers.setSize(343, 279);
+				scrollPaneLayers.setSize(343, 247);
 				scrollPaneLayers.setLocation(10, 189);
 				tableLayer.setFillsViewportHeight(true);
 				
@@ -209,7 +218,7 @@ public class NewView extends JFrame {
 				
 			// Btns
 				JButton btnNewButton = new JButton("Create");
-				btnNewButton.setBounds(264, 478, 89, 23);
+				btnNewButton.setBounds(264, 447, 89, 23);
 				createPanel.add(btnNewButton);
 				
 				textField = new JTextField();
@@ -312,9 +321,18 @@ public class NewView extends JFrame {
 	
 	private JPanel createTrainPanel(){
 		JPanel trainPanel = new JPanel();
+		trainPanel.setLayout(null);
 		
-		((Component) txtFrom).setBounds(10, 43, 159, 29);
+		((Component) txtFrom).setBounds(10, 36, 202, 23);
 		trainPanel.add((Component) txtFrom);
+		
+		JLabel lblFrom = new JLabel("From");
+		lblFrom.setBounds(10, 11, 46, 14);
+		trainPanel.add(lblFrom);
+		
+		JLabel lblTo = new JLabel("To");
+		lblTo.setBounds(10, 70, 46, 14);
+		trainPanel.add(lblTo);
 		
 		
 		return trainPanel;
