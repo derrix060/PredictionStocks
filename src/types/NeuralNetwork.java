@@ -23,8 +23,9 @@ public class NeuralNetwork {
 	/**
 	 * Attributes
 	 */
-	private final transient static String PATH = "PredictionStocks/";
+	private final transient static String PATH = System.getProperty("user.dir") + System.getProperty("file.separator");
 	private final transient static String TOPOLOGY_NAME = "_network.eg";
+	private transient String name;
 	private transient BasicNetwork topology; //transient to dont parse to Json.
 	private ArrayList<enumAttributesOfData> attributes;
 	private Integer dateInterval;
@@ -43,6 +44,7 @@ public class NeuralNetwork {
 
 
 	public void save(String name) throws IOException{
+		this.setName(name);
 		Gson gson = new Gson();
 		EncogDirectoryPersistence.saveObject(new File(NeuralNetwork.PATH + name + TOPOLOGY_NAME) , topology);
 		String json = gson.toJson(this);
@@ -228,6 +230,16 @@ public class NeuralNetwork {
 	}
 	public String getStock() {
 		return stock;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 
