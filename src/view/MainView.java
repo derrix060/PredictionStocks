@@ -27,14 +27,14 @@ import javax.swing.border.LineBorder;
 
 import org.encog.neural.networks.layers.BasicLayer;
 
+import factories.ActivationFunctionFactory;
+import factories.ActivationFunctionFactory.enumActivationFuncion;
+import factories.PropagationFactory.enumTrainingType;
+import model.Data.enumAttributesOfData;
 import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
-import process.ActivationFunctionFactory;
-import process.ActivationFunctionFactory.enumActivationFuncion;
-import process.PropagationFactory.enumTrainingType;
-import types.Data.enumAttributesOfData;
 
 public class MainView extends JFrame {
 

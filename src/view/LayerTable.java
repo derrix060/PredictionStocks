@@ -2,7 +2,7 @@ package view;
 
 import javax.swing.table.DefaultTableModel;
 
-import process.ActivationFunctionFactory.enumActivationFuncion;
+import factories.ActivationFunctionFactory.enumActivationFuncion;
 
 public class LayerTable extends DefaultTableModel {
 

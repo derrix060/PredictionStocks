@@ -4,11 +4,11 @@ import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import imports.Normalizer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.embed.swing.JFXPanel;
@@ -20,8 +20,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.input.ScrollEvent;
-import types.Data.enumAttributesOfData;
-import types.HistoricalData;
+import model.Data.enumAttributesOfData;
+import model.HistoricalData;
+import model.Normalizer;
 
 public class ResultView extends JFrame {
 
@@ -132,7 +133,7 @@ public class ResultView extends JFrame {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         
-		for (types.Data dt : data.getMapHistorical()){
+		for (model.Data dt : data.getMapHistorical()){
 			rtn.getData().add(new Data<String, Number>(formatter.format(dt.getDate().getTime()), dt.getValue(attr)));
 		}
 		

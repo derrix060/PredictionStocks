@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,9 +11,10 @@ import javax.swing.JOptionPane;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.layers.BasicLayer;
 
-import process.NetworkFactory;
-import types.Data.enumAttributesOfData;
-import types.NeuralNetwork;
+import factories.NetworkFactory;
+import model.Data.enumAttributesOfData;
+import model.NeuralNetwork;
+import view.NNPanel;
 
 public class CreateNNBtnAction implements ActionListener {
 	private final NNPanel view;

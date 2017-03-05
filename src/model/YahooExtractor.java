@@ -1,12 +1,11 @@
-package imports;
+package model;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import types.Data;
-import types.Data.enumAttributesOfData;
+import model.Data.enumAttributesOfData;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;

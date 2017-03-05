@@ -1,4 +1,4 @@
-package process;
+package factories;
 
 import org.encog.ml.data.MLDataSet;
 import org.encog.neural.networks.BasicNetwork;

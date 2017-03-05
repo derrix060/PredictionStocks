@@ -1,4 +1,4 @@
-package types;
+package model;
 
 
 import java.io.BufferedReader;
@@ -15,8 +15,7 @@ import org.encog.persist.EncogDirectoryPersistence;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
-import imports.Normalizer;
-import types.Data.enumAttributesOfData;
+import model.Data.enumAttributesOfData;
 
 
 public class NeuralNetwork {

@@ -1,4 +1,4 @@
-package types;
+package model;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,8 +6,7 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
 
-import imports.YahooExtractor;
-import types.Data.enumAttributesOfData;
+import model.Data.enumAttributesOfData;
 
 public class HistoricalData implements Comparator<Data>{
 	

@@ -21,10 +21,11 @@ import javax.swing.border.TitledBorder;
 
 import org.encog.neural.networks.layers.BasicLayer;
 
-import process.ActivationFunctionFactory;
-import process.ActivationFunctionFactory.enumActivationFuncion;
-import types.Data.enumAttributesOfData;
-import types.NeuralNetwork;
+import controller.CreateNNBtnAction;
+import factories.ActivationFunctionFactory;
+import factories.ActivationFunctionFactory.enumActivationFuncion;
+import model.Data.enumAttributesOfData;
+import model.NeuralNetwork;
 
 public class NNPanel extends JPanel {
 

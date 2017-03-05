@@ -1,4 +1,4 @@
-package types;
+package model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -6,10 +6,10 @@ import java.util.Calendar;
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.networks.BasicNetwork;
-import imports.Normalizer;
-import process.PropagationFactory;
-import process.PropagationFactory.enumTrainingType;
-import types.Data.enumAttributesOfData;
+
+import factories.PropagationFactory;
+import factories.PropagationFactory.enumTrainingType;
+import model.Data.enumAttributesOfData;
 
 public class Trainer {
 	private final static double default_trainingRate = 0.1;

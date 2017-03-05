@@ -1,5 +1,21 @@
-package process;
-import org.encog.engine.network.activation.*;
+package factories;
+import org.encog.engine.network.activation.ActivationBiPolar;
+import org.encog.engine.network.activation.ActivationBipolarSteepenedSigmoid;
+import org.encog.engine.network.activation.ActivationClippedLinear;
+import org.encog.engine.network.activation.ActivationCompetitive;
+import org.encog.engine.network.activation.ActivationElliott;
+import org.encog.engine.network.activation.ActivationElliottSymmetric;
+import org.encog.engine.network.activation.ActivationFunction;
+import org.encog.engine.network.activation.ActivationGaussian;
+import org.encog.engine.network.activation.ActivationLOG;
+import org.encog.engine.network.activation.ActivationLinear;
+import org.encog.engine.network.activation.ActivationRamp;
+import org.encog.engine.network.activation.ActivationSIN;
+import org.encog.engine.network.activation.ActivationSigmoid;
+import org.encog.engine.network.activation.ActivationSoftMax;
+import org.encog.engine.network.activation.ActivationSteepenedSigmoid;
+import org.encog.engine.network.activation.ActivationStep;
+import org.encog.engine.network.activation.ActivationTANH;
 
 public class ActivationFunctionFactory {
 	

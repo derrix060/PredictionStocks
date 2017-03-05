@@ -1,11 +1,9 @@
-package imports;
+package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import types.Data;
-import types.Data.enumAttributesOfData;
-import types.HistoricalData;
+import model.Data.enumAttributesOfData;
 
 //example
 //https://github.com/surmenok/MNISTNeuralNetwork/tree/master/src/main/java/com/surmenok/pavel/mnist

@@ -2,20 +2,18 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import org.encog.neural.networks.BasicNetwork;
-import org.encog.persist.EncogDirectoryPersistence;
 
-import imports.Normalizer;
-import process.NetworkFactory;
-import types.HistoricalData;
-import types.NeuralNetwork;
-import types.Trainer;
-import types.Data.enumAttributesOfData;
+import factories.NetworkFactory;
+import model.Data.enumAttributesOfData;
+import model.HistoricalData;
+import model.NeuralNetwork;
+import model.Normalizer;
+import model.Trainer;
 
 public class MainButtonAction implements ActionListener {
 	private final MainView mview;

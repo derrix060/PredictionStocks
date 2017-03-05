@@ -1,4 +1,4 @@
-encog,BasicNetwork,java,3.4.0,1,1488720500481
+encog,BasicNetwork,java,3.4.0,1,1488720918407
 [BASIC]
 [BASIC:PARAMS]
 [BASIC:NETWORK]
@@ -8,15 +8,15 @@ contextTargetOffset=0,0
 contextTargetSize=0,0
 endTraining=1
 hasContext=f
-inputCount=5
-layerCounts=2,6
-layerFeedCounts=1,5
+inputCount=4
+layerCounts=2,5
+layerFeedCounts=1,4
 layerContextCount=0,0
 layerIndex=0,2
-output=0,1,0,0,0,0,0,1
+output=0,1,0,0,0,0,1
 outputCount=1
-weightIndex=0,6
-weights=-0.6070959892,0.851225163,0.135054241,-0.1393385702,-0.2556559171,0.3091137751
+weightIndex=0,5
+weights=-0.4368562156,-0.3781504815,0.5672251229,0.0972959362,0.8748032931
 biasActivation=1,1
 [BASIC:ACTIVATION]
 "org.encog.engine.network.activation.ActivationSigmoid"

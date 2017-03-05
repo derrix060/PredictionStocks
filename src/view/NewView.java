@@ -14,12 +14,12 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
+import factories.PropagationFactory.enumTrainingType;
+import model.NeuralNetwork;
 import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
-import process.PropagationFactory.enumTrainingType;
-import types.NeuralNetwork;
 
 public class NewView extends JFrame {
 
@@ -77,9 +77,11 @@ public class NewView extends JFrame {
 	 * Create the frame.
 	 */
 	public NewView() {
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 420, 600);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(204, 204, 204));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -93,9 +95,6 @@ public class NewView extends JFrame {
 		JPanel panelCreate = new NNPanel(this);
 		tabbedPane.addTab("Create", null, panelCreate, null);
 		
-			
-		JPanel panelChoose = createChoosePanel();
-		tabbedPane.addTab("Choose", null, panelChoose, null);
 		
 		JPanel panelTrain = createTrainPanel();
 		tabbedPane.addTab("Train", null, panelTrain, null);
@@ -118,14 +117,6 @@ public class NewView extends JFrame {
 	 */
 	
 	
-	private JPanel createChoosePanel(){
-		JPanel choosePanel = new JPanel();
-		choosePanel.setLayout(null);
-		
-		
-		
-		return choosePanel;
-	}
 	
 	private JPanel createTrainPanel(){
 		JPanel trainPanel = new JPanel();
