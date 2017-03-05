@@ -74,11 +74,16 @@ public class NeuralNetwork {
 
 	}
 
-	public static NeuralNetwork load(String name) throws IOException{
+	public static NeuralNetwork load(String name) throws IOException{		
 		String stock = "";
 		Integer dateInterval = null;
 		ArrayList<enumAttributesOfData> attributes = new ArrayList<>();
 
+		
+		// Check if file exist
+		
+		
+		
 		BasicNetwork topology = (BasicNetwork) EncogDirectoryPersistence.loadObject(new File(PATH + name + TOPOLOGY_NAME));
 
 		BufferedReader br = new BufferedReader(new FileReader(PATH + name + ".json"));
