@@ -18,11 +18,6 @@ import view.NNPanel;
 
 public class CreateNNBtnAction implements ActionListener {
 	private final NNPanel view;
-	private String name;
-	private BasicNetwork topology;
-	ArrayList<enumAttributesOfData> attributes;
-	private Integer dateInterval;
-	private String stock;
 	
 	
 	public CreateNNBtnAction(NNPanel nnPanel) { 
@@ -33,21 +28,21 @@ public class CreateNNBtnAction implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		//Check if has at least one attribute
-		attributes = view.getAtributes();
+		ArrayList<enumAttributesOfData> attributes = view.getAtributes();
 		if (attributes.isEmpty()){
 			JOptionPane.showMessageDialog(null, "Please select at least one attribute!", "Error: Attribute not selected", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
 		//Check if has any value
-		
+		// TODO: implement checks
 		
 		//Get values from view
 		List<BasicLayer> layers = view.getLayers();
-		stock = view.getStock();
-		dateInterval = view.getDataInterval();
-		name = view.getNNName();
-		topology = NetworkFactory.newNetwork(layers);
+		String stock = view.getStock();
+		Integer dateInterval = view.getDataInterval();
+		String name = view.getNNName();
+		BasicNetwork topology = NetworkFactory.newNetwork(layers);
 		
 
 		

@@ -1,4 +1,4 @@
-encog,BasicNetwork,java,3.4.0,1,1488720918407
+encog,BasicNetwork,java,3.4.0,1,1488723440872
 [BASIC]
 [BASIC:PARAMS]
 [BASIC:NETWORK]
@@ -16,7 +16,7 @@ layerIndex=0,2
 output=0,1,0,0,0,0,1
 outputCount=1
 weightIndex=0,5
-weights=-0.4368562156,-0.3781504815,0.5672251229,0.0972959362,0.8748032931
+weights=-0.2481089209,-0.5225304794,-0.5894685461,-0.9762978851,-0.2288881263
 biasActivation=1,1
 [BASIC:ACTIVATION]
 "org.encog.engine.network.activation.ActivationSigmoid"

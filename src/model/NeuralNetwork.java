@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.swing.JOptionPane;
+
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.persist.EncogDirectoryPersistence;
 
@@ -47,7 +49,22 @@ public class NeuralNetwork {
 	public void save(String name) throws IOException{
 		this.setName(name);
 		Gson gson = new Gson();
-		EncogDirectoryPersistence.saveObject(new File(NeuralNetwork.PATH + name + TOPOLOGY_NAME) , topology);
+		
+		// Check if file already exist
+		File netwFile = new File(NeuralNetwork.PATH + name + TOPOLOGY_NAME);
+		if (netwFile.exists()){
+			if (JOptionPane.showConfirmDialog(null, "This network already exists. Do you want overwrite?", "File exist!", JOptionPane.YES_NO_OPTION)
+					== JOptionPane.NO_OPTION){
+				JOptionPane.showMessageDialog(null, "Please change the name of network!");
+				return;
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "Ok, I will overwrite this network...");
+			}
+		}
+		
+		
+		EncogDirectoryPersistence.saveObject(netwFile , topology);
 		String json = gson.toJson(this);
 
 		FileWriter writer = new FileWriter(NeuralNetwork.PATH + name + ".json");

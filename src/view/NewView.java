@@ -93,7 +93,7 @@ public class NewView extends JFrame {
 		contentPane.add(tabbedPane);
 
 		JPanel panelCreate = new NNPanel(this);
-		tabbedPane.addTab("Create", null, panelCreate, null);
+		tabbedPane.addTab("NeuralNetwork", null, panelCreate, "Used to create or choose a Neural Network");
 		
 		
 		JPanel panelTrain = createTrainPanel();

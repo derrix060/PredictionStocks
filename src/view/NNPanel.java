@@ -21,6 +21,7 @@ import javax.swing.border.TitledBorder;
 
 import org.encog.neural.networks.layers.BasicLayer;
 
+import controller.ChooseNNBtnAction;
 import controller.CreateNNBtnAction;
 import factories.ActivationFunctionFactory;
 import factories.ActivationFunctionFactory.enumActivationFuncion;
@@ -176,11 +177,15 @@ public class NNPanel extends JPanel {
 		
 		
 	// Btns
-		JButton btnNewButton = new JButton("Create");
-		btnNewButton.setBounds(264, 447, 89, 23);
-		this.add(btnNewButton);
-		btnNewButton.addActionListener(new CreateNNBtnAction(this));
+		JButton btnCreateNN = new JButton("Create");
+		btnCreateNN.setBounds(264, 447, 90, 23);
+		this.add(btnCreateNN);
+		btnCreateNN.addActionListener(new CreateNNBtnAction(this));
 		
+		JButton btnChooseNN = new JButton("Choose");
+		btnChooseNN.setBounds(164, 447, 90, 23);
+		this.add(btnChooseNN);
+		btnChooseNN.addActionListener(new ChooseNNBtnAction(this));
 		
 	}
 	
