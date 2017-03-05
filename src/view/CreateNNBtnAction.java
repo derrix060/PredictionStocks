@@ -45,7 +45,7 @@ public class CreateNNBtnAction implements ActionListener {
 		List<BasicLayer> layers = view.getLayers();
 		stock = view.getStock();
 		dateInterval = view.getDataInterval();
-		name = view.getName();
+		name = view.getNNName();
 		topology = NetworkFactory.newNetwork(layers);
 		
 
