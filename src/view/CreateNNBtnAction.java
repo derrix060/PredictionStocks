@@ -53,8 +53,8 @@ public class CreateNNBtnAction implements ActionListener {
 		
 		
 		//create NN
-		NeuralNetwork nn = new NeuralNetwork(topology, attributes, dateInterval, stock);
-		
+		NeuralNetwork nn = new NeuralNetwork(topology, attributes, dateInterval, stock, name);
+
 		
 		//select the network
 		view.setActiveNN(nn);

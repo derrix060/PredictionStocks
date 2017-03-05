@@ -1,5 +1,6 @@
 package types;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -35,11 +36,12 @@ public class NeuralNetwork {
 	/**
 	 * Constructor
 	 */
-	public NeuralNetwork(BasicNetwork topology, ArrayList<enumAttributesOfData> attributes, Integer dateInterval, String stock){
+	public NeuralNetwork(BasicNetwork topology, ArrayList<enumAttributesOfData> attributes, Integer dateInterval, String stock, String name){
 		this.topology = topology;
 		this.attributes = attributes;
 		this.dateInterval = dateInterval;
 		this.stock = stock;
+		this.name = name;
 	}
 
 
@@ -90,7 +92,7 @@ public class NeuralNetwork {
 		if (dateInterval == null) throw new IllegalArgumentException("Can't find dateInterval from " + name + ".json");
 		if (attributes.size() == 0) throw new IllegalArgumentException("Can't find attributes from " + name + ".json");
 
-		return new NeuralNetwork(topology, attributes, dateInterval, stock);
+		return new NeuralNetwork(topology, attributes, dateInterval, stock, name);
 	}
 
 	public HistoricalData createNNHistoricalData(Normalizer normalizer, Calendar from, Calendar to) throws IOException{
