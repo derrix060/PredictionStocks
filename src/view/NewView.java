@@ -78,6 +78,7 @@ public class NewView extends JFrame {
 				private JTextField txtStock;
 
 				private NeuralNetwork activeNetwork = null;
+				private JLabel lblNetw = new JLabel("None");
 	
 	
 	
@@ -135,7 +136,7 @@ public class NewView extends JFrame {
 		lblSelectedNetwork.setBounds(20, 536, 91, 14);
 		contentPane.add(lblSelectedNetwork);
 		
-		JLabel lblNetw = new JLabel("None");
+		
 		lblNetw.setBounds(128, 536, 266, 14);
 		contentPane.add(lblNetw);
 	}
@@ -457,8 +458,13 @@ public class NewView extends JFrame {
 	
 	public void setActiveNN(NeuralNetwork nn){
 		this.activeNetwork = nn;
+		lblNetw.setText(nn.getName());
 	}
 	public NeuralNetwork getActiveNN(){
 		return this.activeNetwork;
+	}
+	
+	public String getNNName(){
+		return this.txtName.getText();
 	}
 }
