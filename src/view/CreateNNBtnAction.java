@@ -16,7 +16,7 @@ import types.Data.enumAttributesOfData;
 import types.NeuralNetwork;
 
 public class CreateNNBtnAction implements ActionListener {
-	private final NewView view;
+	private final NNPanel view;
 	private String name;
 	private BasicNetwork topology;
 	ArrayList<enumAttributesOfData> attributes;
@@ -24,8 +24,8 @@ public class CreateNNBtnAction implements ActionListener {
 	private String stock;
 	
 	
-	public CreateNNBtnAction(NewView view) { 
-		this.view = view;
+	public CreateNNBtnAction(NNPanel nnPanel) { 
+		this.view = nnPanel;
 	}
 
 	@Override
