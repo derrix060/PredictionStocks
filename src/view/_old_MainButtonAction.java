@@ -11,13 +11,12 @@ import org.encog.neural.networks.BasicNetwork;
 import factories.NetworkFactory;
 import model.Data.enumAttributesOfData;
 import model.HistoricalData;
-import model.NeuralNetwork;
 import model.Normalizer;
 import model.Trainer;
 
-public class MainButtonAction implements ActionListener {
-	private final MainView mview;
-	public MainButtonAction(MainView view) { 
+public class _old_MainButtonAction implements ActionListener {
+	private final _old_MainView mview;
+	public _old_MainButtonAction(_old_MainView view) { 
 		mview = view;
 	}
 
@@ -41,7 +40,7 @@ public class MainButtonAction implements ActionListener {
 			//Neural Network
 			BasicNetwork network = NetworkFactory.newNetwork(mview.getLayers());
 			
-			NeuralNetwork net = new NeuralNetwork(network, attr, mview.getDataInterval(), mview.getStock());
+			//NeuralNetwork net = new NeuralNetwork(network, attr, mview.getDataInterval(), mview.getStock(),"blabla");
 			//net.save("TesteNN");
 			
 			//Train
@@ -55,7 +54,7 @@ public class MainButtonAction implements ActionListener {
 			//Denormalize Data
 			normal.denormalizeDatas(normalData);
 			
-			ResultView rv = new ResultView(nnData, normalData, normal, mview);
+			_old_ResultView rv = new _old_ResultView(nnData, normalData, normal, mview);
 			rv.setVisible(true);
 		
 			mview.setVisible(false);

@@ -24,7 +24,7 @@ import model.Data.enumAttributesOfData;
 import model.HistoricalData;
 import model.Normalizer;
 
-public class ResultView extends JFrame {
+public class _old_ResultView extends JFrame {
 
 	/**
 	 * 
@@ -36,7 +36,7 @@ public class ResultView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ResultView(HistoricalData nnData, HistoricalData realData, Normalizer normal, MainView mview) {
+	public _old_ResultView(HistoricalData nnData, HistoricalData realData, Normalizer normal, _old_MainView mview) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 590, 655);
 		contentPane = new JPanel();
@@ -97,7 +97,7 @@ public class ResultView extends JFrame {
 		contentPane.add(btn);
 	}
 	
-	private void closeFrame(MainView mview){
+	private void closeFrame(_old_MainView mview){
 		this.dispose();
 		mview.setVisible(true);
 	}

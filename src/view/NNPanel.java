@@ -127,7 +127,7 @@ public class NNPanel extends JPanel {
 		
 		//Add button
 			JButton btnAdd = new JButton("");
-			btnAdd.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
+			btnAdd.setIcon(new ImageIcon(_old_MainView.class.getResource("/view/add.png")));
 			btnAdd.setForeground(new Color(0, 128, 0));
 			btnAdd.setBounds(90, 155, 41, 23);
 			btnAdd.addActionListener(new ActionListener() {
@@ -143,7 +143,7 @@ public class NNPanel extends JPanel {
 	
 		//Remove button
 			JButton btnRemove = new JButton("");
-			btnRemove.setIcon(new ImageIcon(MainView.class.getResource("/view/cancel.png")));
+			btnRemove.setIcon(new ImageIcon(_old_MainView.class.getResource("/view/cancel.png")));
 			btnRemove.setBounds(136, 155, 41, 23);
 			btnRemove.addActionListener(new ActionListener() {
 				

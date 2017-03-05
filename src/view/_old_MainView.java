@@ -36,7 +36,7 @@ import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
-public class MainView extends JFrame {
+public class _old_MainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel 					contentPane;
@@ -73,7 +73,7 @@ public class MainView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainView frame = new MainView();
+					_old_MainView frame = new _old_MainView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -85,7 +85,7 @@ public class MainView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainView() {
+	public _old_MainView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 590, 655);
 		contentPane = new JPanel();
@@ -219,7 +219,7 @@ public class MainView extends JFrame {
 	
 			//Add button
 				JButton btnAdd = new JButton("");
-				btnAdd.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
+				btnAdd.setIcon(new ImageIcon(_old_MainView.class.getResource("/view/add.png")));
 				btnAdd.setForeground(new Color(0, 128, 0));
 				btnAdd.setBounds(10, 27, 41, 23);
 				btnAdd.addActionListener(new ActionListener() {
@@ -234,7 +234,7 @@ public class MainView extends JFrame {
 				panelHiddenLayer.add(btnAdd);
 			//Remove button
 				JButton btnRemove = new JButton("");
-				btnRemove.setIcon(new ImageIcon(MainView.class.getResource("/view/cancel.png")));
+				btnRemove.setIcon(new ImageIcon(_old_MainView.class.getResource("/view/cancel.png")));
 				btnRemove.setBounds(61, 27, 41, 23);
 				btnRemove.addActionListener(new ActionListener() {
 					
@@ -307,7 +307,7 @@ public class MainView extends JFrame {
 				
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setBounds(395, 583, 89, 23);
-		btnNewButton.addActionListener(new MainButtonAction(this));
+		btnNewButton.addActionListener(new _old_MainButtonAction(this));
 		contentPane.add(btnNewButton);
 		
 	}
