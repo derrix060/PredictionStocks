@@ -157,6 +157,7 @@ public class NewView extends JFrame {
 				
 				txtName = new JTextField();
 				txtName.setBounds(10, 28, 167, 20);
+				txtName.setText("teste"); //test
 				createPanel.add(txtName);
 				txtName.setColumns(10);
 				
@@ -187,6 +188,7 @@ public class NewView extends JFrame {
 				
 
 				txtDataInterval.setBounds(10, 76, 167, 20);
+				txtDataInterval.setValue(4); //test
 				createPanel.add(txtDataInterval);
 
 
@@ -198,6 +200,7 @@ public class NewView extends JFrame {
 				
 				txtStock = new JTextField();
 				txtStock.setBounds(10, 124, 167, 20);
+				txtStock.setText("PETR4.SA"); //test
 				createPanel.add(txtStock);
 		
 			//Hidden Layer	
