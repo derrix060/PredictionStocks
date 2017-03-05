@@ -133,11 +133,11 @@ public class NewView extends JFrame {
 		tabbedPane.addTab("Report", null, panelReport, null);
 		
 		JLabel lblSelectedNetwork = new JLabel("Selected Network: ");
-		lblSelectedNetwork.setBounds(20, 536, 91, 14);
+		lblSelectedNetwork.setBounds(20, 536, 107, 14);
 		contentPane.add(lblSelectedNetwork);
 		
 		
-		lblNetw.setBounds(128, 536, 266, 14);
+		lblNetw.setBounds(132, 536, 262, 14);
 		contentPane.add(lblNetw);
 	}
 	
@@ -213,7 +213,7 @@ public class NewView extends JFrame {
 					JButton btnAdd = new JButton("");
 					btnAdd.setIcon(new ImageIcon(MainView.class.getResource("/view/add.png")));
 					btnAdd.setForeground(new Color(0, 128, 0));
-					btnAdd.setBounds(84, 155, 41, 23);
+					btnAdd.setBounds(90, 155, 41, 23);
 					btnAdd.addActionListener(new ActionListener() {
 						
 						@Override
