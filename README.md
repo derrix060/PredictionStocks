@@ -7,8 +7,4 @@
 
 
 ##To do:
-*	default_trainingRate in Trainer and PropagationFactory
-*	List<enumAttributesOfData> in NeuralNetwork, Data, HistoricalData, Trainer
-*	Add learningRate in MainView (if ManhattanPropagation)
-*   CRUD NN
-* 	teste
+*	Create new view to separate the responsibilities 
