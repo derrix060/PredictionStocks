@@ -19,7 +19,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.layers.BasicLayer;
+import org.encog.neural.networks.layers.Layer;
 
 import controller.ChooseNNBtnAction;
 import controller.CreateNNBtnAction;
@@ -305,5 +307,40 @@ public class NNPanel extends JPanel {
 	
 	public void setActiveNN(NeuralNetwork nn){
 		this.frame.setActiveNN(nn);
+	}
+	
+	/**
+	 * Populate fields in Panel with NN information
+	 * 
+	 * @param nn
+	 */
+	public void updateFields(NeuralNetwork nn){
+		this.txtDataInterval.setValue(nn.getDateInterval());
+		this.txtStock.setText(nn.getStock());
+		
+		// Attributes
+		ArrayList<enumAttributesOfData> attrs = nn.getAttributes();
+		this.chckbxClosePrice.setEnabled(attrs.contains(enumAttributesOfData.closePrice));
+		this.chckbxHighPrice.setEnabled(attrs.contains(enumAttributesOfData.highPrice));
+		this.chckbxLowPrice.setEnabled(attrs.contains(enumAttributesOfData.lowPrice));
+		this.chckbxOpenPrice.setEnabled(attrs.contains(enumAttributesOfData.openPrice));
+		this.chckbxVolume.setEnabled(attrs.contains(enumAttributesOfData.volume));
+	
+		
+		// Clean hidden layer table
+		while (dtm.getRowCount() > 0)
+			dtm.removeRow(0);
+		
+		
+		// Hidden Layers
+		BasicNetwork topology = nn.getTopology();
+		List<Layer> layers = topology.getStructure().getLayers();
+		
+		for (int i=1; i< layers.size() -1; i++){
+			Layer layer = layers.get(i);
+			// For each layer
+			Object[] data = {layer.getNeuronCount(), layer.hasBias() , layer.getActivationFunction(), new Double(0.3)};
+		}
+		//TODO: check if layers.
 	}
 }
