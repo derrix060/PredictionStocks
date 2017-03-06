@@ -38,7 +38,7 @@ public class NNPanel extends JPanel {
 	// Table
 	private LayerTable dtm = new LayerTable();
 	private JTable tableLayer = new JTable();
-	private Object[] emptyData = {Integer.valueOf(1), Boolean.TRUE, enumActivationFuncion.BiPolar, new Double(1.1)};
+	private Object[] emptyData = {Integer.valueOf(3), Boolean.TRUE, enumActivationFuncion.ElliottSymmetric, new Double(0.3)};
 	
 	// Date
 	private JFormattedTextField txtDataInterval = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
