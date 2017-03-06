@@ -2,9 +2,11 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import model.NeuralNetwork;
 import view.NNPanel;
 
 public class ChooseNNBtnAction implements ActionListener {
@@ -25,8 +27,21 @@ public class ChooseNNBtnAction implements ActionListener {
 		}
 		
 		
-		// Check if have the network
-	
+		// Check if don't have the network
+		if (!NeuralNetwork.existInSystem(name)){
+			JOptionPane.showMessageDialog(null, "The " + name + " network don't exist on system.", "Error: network not found!", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		try {
+			NeuralNetwork nn = NeuralNetwork.load(name);
+			view.setActiveNN(nn);
+			view.updateFields(nn);
+			
+		
+		} catch (IOException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error: network cannot be loaded!", JOptionPane.ERROR_MESSAGE);
+		}
 		
 	}
 
