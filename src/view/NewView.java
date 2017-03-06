@@ -24,12 +24,12 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 public class NewView extends JFrame {
 
 	/**
-	 * 
+	 * default serial version
 	 */
 	private static final long serialVersionUID = 1L;
 	
 	
-	private JPanel 					contentPane;
+	private JPanel contentPane;
 	
 	
 	//Necessary objects to control in other class
@@ -145,7 +145,7 @@ public class NewView extends JFrame {
 	}
 	
 	
-	/**
+	/*
 	 * Getter and setters
 	 */
 	
