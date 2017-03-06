@@ -51,8 +51,7 @@ public class NeuralNetwork {
 		Gson gson = new Gson();
 		
 		// Check if file already exist
-		File netwFile = new File(NeuralNetwork.PATH + name + TOPOLOGY_NAME);
-		if (netwFile.exists()){
+		if (existInSystem(name)){
 			if (JOptionPane.showConfirmDialog(null, "This network already exists. Do you want overwrite?", "File exist!", JOptionPane.YES_NO_OPTION)
 					== JOptionPane.NO_OPTION){
 				JOptionPane.showMessageDialog(null, "Please change the name of network!");
@@ -63,6 +62,7 @@ public class NeuralNetwork {
 			}
 		}
 		
+		File netwFile = new File(NeuralNetwork.PATH + name + TOPOLOGY_NAME);
 		
 		EncogDirectoryPersistence.saveObject(netwFile , topology);
 		String json = gson.toJson(this);
@@ -72,6 +72,17 @@ public class NeuralNetwork {
 		writer.write(json);
 		writer.close();
 
+	}
+	
+	/**
+	 * Check if exist any network with this name.
+	 * @param name
+	 * @return true: if exists. false: if not exist
+	 */
+	public static boolean existInSystem(String name){
+		File netwFile = new File(NeuralNetwork.PATH + name + TOPOLOGY_NAME);
+		
+		return netwFile.exists();
 	}
 
 	public static NeuralNetwork load(String name) throws IOException{		
