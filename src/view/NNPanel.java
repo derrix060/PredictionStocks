@@ -315,6 +315,11 @@ public class NNPanel extends JPanel {
 	 * @param nn
 	 */
 	public void updateFields(NeuralNetwork nn){
+		
+		// Clean old values
+		cleanFields();
+				
+				
 		this.txtDataInterval.setValue(nn.getDateInterval());
 		this.txtStock.setText(nn.getStock());
 		
@@ -342,5 +347,17 @@ public class NNPanel extends JPanel {
 			Object[] data = {layer.getNeuronCount(), layer.hasBias() , layer.getActivationFunction(), new Double(0.3)};
 		}
 		//TODO: check if layers.
+	private void cleanFields(){
+		this.txtDataInterval.setValue("");
+		this.txtStock.setText("");
+		
+		while (dtm.getRowCount() > 0)
+			dtm.removeRow(0);
+		
+		chckbxClosePrice.setSelected(false);
+		chckbxHighPrice.setSelected(false);
+		chckbxLowPrice.setSelected(false);
+		chckbxOpenPrice.setSelected(false);
+		chckbxVolume.setSelected(false);
 	}
 }
