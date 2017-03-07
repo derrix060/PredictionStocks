@@ -21,7 +21,7 @@ public class HistoricalData implements Comparator<Data>{
 
 	public HistoricalData(String ticker, Calendar from, Calendar to, int dateInterval, List<enumAttributesOfData> attributes) throws IOException {
 		this.dateInterval = dateInterval;
-		historicalValues = YahooExtractor.getHistorical(ticker, from, to, attributes);
+		historicalValues = DataExtractor.getHistorical(ticker, from, to, attributes);
 		this.size = historicalValues.size();
 	}
 	
