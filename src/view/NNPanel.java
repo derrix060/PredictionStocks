@@ -332,21 +332,22 @@ public class NNPanel extends JPanel {
 		this.chckbxVolume.setSelected(attrs.contains(enumAttributesOfData.volume));
 	
 		
-		// Clean hidden layer table
-		while (dtm.getRowCount() > 0)
-			dtm.removeRow(0);
-		
-		
 		// Hidden Layers
 		BasicNetwork topology = nn.getTopology();
 		List<Layer> layers = topology.getStructure().getLayers();
 		
-		for (int i=1; i< layers.size() -1; i++){
+		int size = layers.size();
+		
+		for (int i=1; i< size -1; i++){
 			Layer layer = layers.get(i);
 			// For each layer
 			Object[] data = {layer.getNeuronCount(), layer.hasBias() , layer.getActivationFunction(), new Double(0.3)};
+			dtm.addRow(data);
 		}
-		//TODO: check if layers.
+		
+		tableLayer.setModel(dtm);
+	}
+	
 	private void cleanFields(){
 		this.txtDataInterval.setValue("");
 		this.txtStock.setText("");
