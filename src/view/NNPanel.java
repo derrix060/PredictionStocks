@@ -325,11 +325,11 @@ public class NNPanel extends JPanel {
 		
 		// Attributes
 		ArrayList<enumAttributesOfData> attrs = nn.getAttributes();
-		this.chckbxClosePrice.setEnabled(attrs.contains(enumAttributesOfData.closePrice));
-		this.chckbxHighPrice.setEnabled(attrs.contains(enumAttributesOfData.highPrice));
-		this.chckbxLowPrice.setEnabled(attrs.contains(enumAttributesOfData.lowPrice));
-		this.chckbxOpenPrice.setEnabled(attrs.contains(enumAttributesOfData.openPrice));
-		this.chckbxVolume.setEnabled(attrs.contains(enumAttributesOfData.volume));
+		this.chckbxClosePrice.setSelected(attrs.contains(enumAttributesOfData.closePrice));
+		this.chckbxHighPrice.setSelected(attrs.contains(enumAttributesOfData.highPrice));
+		this.chckbxLowPrice.setSelected(attrs.contains(enumAttributesOfData.lowPrice));
+		this.chckbxOpenPrice.setSelected(attrs.contains(enumAttributesOfData.openPrice));
+		this.chckbxVolume.setSelected(attrs.contains(enumAttributesOfData.volume));
 	
 		
 		// Clean hidden layer table
