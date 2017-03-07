@@ -98,7 +98,7 @@ public class NeuralNetwork {
 		BasicNetwork topology = (BasicNetwork) EncogDirectoryPersistence.loadObject(new File(PATH + name + TOPOLOGY_NAME));
 
 		BufferedReader br = new BufferedReader(new FileReader(PATH + name + ".json"));
-
+		// bla bla
 		JsonReader reader = new JsonReader(br);
 
 		while(reader.hasNext()){
