@@ -155,6 +155,9 @@ public class Normalizer {
 		return vlr;
 	}
 
+	
+	
+	// Getters and setters
 	public double getMaxValue() {
 		return maxValue;
 	}
