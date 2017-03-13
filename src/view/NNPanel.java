@@ -19,9 +19,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import org.encog.neural.flat.FlatNetwork;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.layers.BasicLayer;
-import org.encog.neural.networks.layers.Layer;
 
 import controller.ChooseNNBtnAction;
 import controller.CreateNNBtnAction;
@@ -250,12 +250,16 @@ public class NNPanel extends JPanel {
 	public List<BasicLayer> getLayers(){
 		List<BasicLayer> layers = new ArrayList<>();
 		
-		//inputLayer
-		BasicLayer layer = new BasicLayer(this.getAtributes().size() * this.getDataInterval());
+		// Need to be in reverse order!!
+		// TODO: Check why.
+
+		//outputLayer
+		BasicLayer layer = new BasicLayer(this.getAtributes().size());
 		layers.add(layer);
 		
+		
 		//hiddenLayer
-		for (int i=0; i<tableLayer.getRowCount(); i++){
+		for (int i=tableLayer.getRowCount()-1; i>=0; i--){
 			//for each row from table
 			Integer neurons = (Integer) tableLayer.getValueAt(i, 0);
 			Boolean hasBias = (Boolean) tableLayer.getValueAt(i, 1);
@@ -265,10 +269,11 @@ public class NNPanel extends JPanel {
 			layer = new BasicLayer(ActivationFunctionFactory.create(actFct), hasBias, neurons, drop);
 			layers.add(layer);
 		}
-		
-		//outputLayer
-		layer = new BasicLayer(this.getAtributes().size());
+
+		//inputLayer
+		layer = new BasicLayer(this.getAtributes().size() * this.getDataInterval());
 		layers.add(layer);
+		
 		
 		return layers;
 	}
