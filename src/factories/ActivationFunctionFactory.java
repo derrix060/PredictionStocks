@@ -57,4 +57,44 @@ public class ActivationFunctionFactory {
 		if (activationType.equals(enumActivationFuncion.TANH)) return new ActivationTANH();
 		else return null;
 	}
+	
+	public static enumActivationFuncion fromString(String vlr){
+		switch (vlr.toLowerCase()) {
+			case "bipolar":
+				return enumActivationFuncion.BiPolar;
+			case "bipolar-steepenedsigmoid":
+				return enumActivationFuncion.BipolarSteepenedSigmoid;
+			case "clippedlinear":
+				return enumActivationFuncion.ClippedLinear;
+			case "competitive":
+				return enumActivationFuncion.Competitive;
+			case "elliott":
+				return enumActivationFuncion.Elliott;
+			case "elliottsymmetric":
+				return enumActivationFuncion.ElliottSymmetric;
+			case "gaussian":
+				return enumActivationFuncion.Gaussian;
+			case "linear":
+				return enumActivationFuncion.Linear;
+			case "log":
+				return enumActivationFuncion.LOG;
+			case "ramp":
+				return enumActivationFuncion.Ramp;
+			case "sigmoid":
+				return enumActivationFuncion.Sigmoid;
+			case "sin":
+				return enumActivationFuncion.SIN;
+			case "softmax":
+				return enumActivationFuncion.SoftMax;
+			case "steepenedsigmoid":
+				return enumActivationFuncion.SteepenedSigmoid;
+			case "step":
+				return enumActivationFuncion.Step;
+			case "tanh":
+				return enumActivationFuncion.TANH;
+			default:
+				return enumActivationFuncion.ElliottSymmetric;
+		}
+	}
+	
 }
