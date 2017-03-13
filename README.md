@@ -8,3 +8,4 @@
 
 ##To do:
 *	Create new view to separate the responsibilities 
+* 	Check why NN is saved in reversed order
