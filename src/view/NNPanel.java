@@ -343,7 +343,6 @@ public class NNPanel extends JPanel {
 		int size = layer.getLayerCounts().length;
 		
 		for (int i=2; i< (size-1); i++){
-			System.out.println(layer.getLayerFeedCounts()[i]);
 			// For each layer
 			Object[] data = {layer.getLayerFeedCounts()[i], layer.getBiasActivation()[i]==1.0 , ActivationFunctionFactory.fromString(layer.getActivationFunctions()[i].getLabel()), new Double(0.3)};
 			dtm.addRow(data);
