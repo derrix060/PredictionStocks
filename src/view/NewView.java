@@ -20,6 +20,8 @@ import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 
 public class NewView extends JFrame {
 
@@ -122,16 +124,82 @@ public class NewView extends JFrame {
 		JPanel trainPanel = new JPanel();
 		trainPanel.setLayout(null);
 		
-		((Component) txtFrom).setBounds(10, 36, 202, 23);
-		trainPanel.add((Component) txtFrom);
 		
 		JLabel lblFrom = new JLabel("From");
-		lblFrom.setBounds(10, 11, 46, 14);
+		lblFrom.setBounds(10, 11, 160, 14);
 		trainPanel.add(lblFrom);
 		
+		((Component) txtFrom).setBounds(10, 26, 160, 23);
+		trainPanel.add((Component) txtFrom);
+		
 		JLabel lblTo = new JLabel("To");
-		lblTo.setBounds(10, 70, 46, 14);
+		lblTo.setBounds(10, 61, 160, 14);
 		trainPanel.add(lblTo);
+		
+		((Component) txtTo).setBounds(10, 76, 160, 23);
+		trainPanel.add((Component) txtTo);
+		
+		JLabel lblLearningRule = new JLabel("Learning Rule");
+		lblLearningRule.setBounds(10, 111, 160, 14);
+		trainPanel.add(lblLearningRule);
+		
+		JComboBox<enumTrainingType> cmbLearningRule = new JComboBox<enumTrainingType>();
+		cmbLearningRule.setBounds(10, 130, 160, 20);
+		trainPanel.add(cmbLearningRule);
+		
+		JLabel lblMaxIteration = new JLabel("Max Iteration");
+		lblMaxIteration.setBounds(10, 162, 160, 14);
+		trainPanel.add(lblMaxIteration);
+		
+		JFormattedTextField txtMaxIteration2 = new JFormattedTextField();
+		txtMaxIteration2.setBounds(10, 179, 160, 20);
+		trainPanel.add(txtMaxIteration2);
+		
+		JLabel lblMaxError = new JLabel("Max Error");
+		lblMaxError.setBounds(10, 205, 160, 14);
+		trainPanel.add(lblMaxError);
+		
+		JFormattedTextField txtMaxError2 = new JFormattedTextField();
+		txtMaxError2.setBounds(10, 221, 160, 20);
+		trainPanel.add(txtMaxError2);
+		
+		JPanel panelNormalization = new JPanel();
+		panelNormalization.setLayout(null);
+		panelNormalization.setBorder(BorderFactory.createTitledBorder("Normalization"));
+		panelNormalization.setBounds(207, 10, 160, 173);
+		trainPanel.add(panelNormalization);
+		
+		JLabel lblInferiorLimit = new JLabel("Inferior Limit");
+		lblInferiorLimit.setBounds(10, 25, 138, 14);
+		panelNormalization.add(lblInferiorLimit);
+		
+		JFormattedTextField txtInferiorLimit2 = new JFormattedTextField();
+		txtInferiorLimit2.setBounds(10, 40, 138, 20);
+		panelNormalization.add(txtInferiorLimit2);
+		
+		JLabel label_2 = new JLabel("Superior Limit");
+		label_2.setBounds(10, 69, 138, 14);
+		panelNormalization.add(label_2);
+		
+		JFormattedTextField txtSuperiorLimit2 = new JFormattedTextField();
+		txtSuperiorLimit2.setBounds(10, 84, 138, 20);
+		panelNormalization.add(txtSuperiorLimit2);
+		
+		JLabel label_3 = new JLabel("Margin %");
+		label_3.setBounds(10, 116, 138, 14);
+		panelNormalization.add(label_3);
+		
+		JFormattedTextField txtMargin2 = new JFormattedTextField();
+		txtMargin2.setBounds(10, 130, 138, 20);
+		panelNormalization.add(txtMargin2);
+		
+		JButton btnTrain = new JButton("Train");
+		btnTrain.setBounds(240, 205, 98, 26);
+		trainPanel.add(btnTrain);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 253, 357, 213);
+		trainPanel.add(panel);
 		
 		
 		return trainPanel;
