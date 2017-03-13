@@ -26,6 +26,10 @@ public class CreateNNBtnAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//Check if current network already exists
+		//if (!NeuralNetwork.existInSystem(name + ".json")){
+			
+		//}
 		
 		//Check if has at least one attribute
 		ArrayList<enumAttributesOfData> attributes = view.getAtributes();
@@ -58,6 +62,7 @@ public class CreateNNBtnAction implements ActionListener {
 		//save network
 		try {
 			nn.save(name);
+			JOptionPane.showMessageDialog(null, "Create!", "Success!", JOptionPane.INFORMATION_MESSAGE);
 		} catch (IOException ex) {
 			JOptionPane.showMessageDialog(null, "Wasn't possible save the network. Please Try again.\n\nError: " + ex.getMessage(), "Error: Cannot save the network!", JOptionPane.ERROR_MESSAGE);
 			return;

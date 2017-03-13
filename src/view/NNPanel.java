@@ -339,14 +339,13 @@ public class NNPanel extends JPanel {
 		
 		// Hidden Layers
 		BasicNetwork topology = nn.getTopology();
-		List<Layer> layers = topology.getStructure().getLayers();
+		FlatNetwork layer = topology.getStructure().getFlat();
+		int size = layer.getLayerCounts().length;
 		
-		int size = layers.size();
-		
-		for (int i=1; i< size -1; i++){
-			Layer layer = layers.get(i);
+		for (int i=2; i< (size-1); i++){
+			System.out.println(layer.getLayerFeedCounts()[i]);
 			// For each layer
-			Object[] data = {layer.getNeuronCount(), layer.hasBias() , layer.getActivationFunction(), new Double(0.3)};
+			Object[] data = {layer.getLayerFeedCounts()[i], layer.getBiasActivation()[i]==1.0 , ActivationFunctionFactory.fromString(layer.getActivationFunctions()[i].getLabel()), new Double(0.3)};
 			dtm.addRow(data);
 		}
 		
@@ -354,7 +353,7 @@ public class NNPanel extends JPanel {
 	}
 	
 	private void cleanFields(){
-		this.txtDataInterval.setValue("");
+		this.txtDataInterval.setValue(0);
 		this.txtStock.setText("");
 		
 		while (dtm.getRowCount() > 0)

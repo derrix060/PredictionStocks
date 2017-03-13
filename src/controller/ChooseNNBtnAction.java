@@ -26,13 +26,6 @@ public class ChooseNNBtnAction implements ActionListener {
 			return;
 		}
 		
-		
-		// Check if don't have the network
-		if (!NeuralNetwork.existInSystem(name)){
-			JOptionPane.showMessageDialog(null, "The " + name + " network don't exist on system.", "Error: network not found!", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		
 		try {
 			NeuralNetwork nn = NeuralNetwork.load(name);
 			view.setActiveNN(nn);

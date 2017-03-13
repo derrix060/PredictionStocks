@@ -80,11 +80,11 @@ public class NeuralNetwork {
 	 * @return true: if exists. false: if not exist
 	 */
 	public static boolean existInSystem(String name){
-		File netwFile = new File(NeuralNetwork.PATH + name + TOPOLOGY_NAME);
-		
+		File netwFile = new File(NeuralNetwork.PATH + name);
 		return netwFile.exists();
 	}
 
+	
 	public static NeuralNetwork load(String name) throws IOException{		
 		String stock = "";
 		Integer dateInterval = null;
@@ -92,7 +92,9 @@ public class NeuralNetwork {
 
 		
 		// Check if file exist
-		
+		if (!existInSystem(name + TOPOLOGY_NAME) || !existInSystem(name + ".json")){
+			throw new IOException("File " + name + " don't exists!");
+		}
 		
 		
 		BasicNetwork topology = (BasicNetwork) EncogDirectoryPersistence.loadObject(new File(PATH + name + TOPOLOGY_NAME));
@@ -100,15 +102,16 @@ public class NeuralNetwork {
 		BufferedReader br = new BufferedReader(new FileReader(PATH + name + ".json"));
 		// bla bla
 		JsonReader reader = new JsonReader(br);
-
+		reader.beginObject();
+		
 		while(reader.hasNext()){
 			String jsonName = reader.nextName();
-
 			if (jsonName.equals("attributes")){
 				reader.beginArray();
 				while (reader.hasNext()){
 					attributes.add(enumAttributesOfData.valueOf(reader.nextString()));
 				}
+				reader.endArray();
 			}
 			else if (jsonName.equals("dateInterval")){
 				dateInterval = reader.nextInt();
