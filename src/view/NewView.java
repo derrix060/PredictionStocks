@@ -2,23 +2,14 @@ package view;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.util.Calendar;
-import java.util.Date;
 
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
-import factories.PropagationFactory.enumTrainingType;
 import model.NeuralNetwork;
-import net.sourceforge.jdatepicker.JDatePicker;
-import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
-import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
-import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 public class NewView extends JFrame {
 
@@ -29,31 +20,8 @@ public class NewView extends JFrame {
 	
 	
 	private JPanel contentPane;
-	
-	
-	//Necessary objects to control in other class
-		private JDatePicker txtFrom = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
-		private JDatePicker txtTo = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
-	
-		//normalization
-				private JFormattedTextField txtSuperiorLimit = NumberTextField.newField(Double.class, 0, 1);
-				private JFormattedTextField txtInferiorLimit = NumberTextField.newField(Double.class, -1, 0);
-				private JFormattedTextField txtMargin = NumberTextField.newField(Float.class, Float.MIN_NORMAL, Float.MAX_VALUE);
-			//Training
-				private JComboBox<enumTrainingType> cmbTraining = new JComboBox<>();
-				private JDatePicker txtToT = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
-				private JFormattedTextField txtMaxIteration = NumberTextField.newField(Integer.class, 1, Integer.MAX_VALUE);
-				private JFormattedTextField txtMinError = NumberTextField.newField(Double.class, 0d, 1d);
-			
-
-				private NeuralNetwork activeNetwork = null;
-				private JLabel lblNetw = new JLabel("None");
-	
-	
-	
-	
-	
-	
+	private NeuralNetwork activeNetwork = null;
+	private JLabel lblNetw = new JLabel("None");
 	
 	
 	/**
@@ -132,54 +100,6 @@ public class NewView extends JFrame {
 	/*
 	 * Getter and setters
 	 */
-	
-	
-	
-	
-	
-	public Calendar getFrom() {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime((Date) txtFrom.getModel().getValue());
-		return cal;
-	}
-
-	public Calendar getTo() {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime((Date) txtTo.getModel().getValue());
-		return cal;
-	}
-
-	
-
-	public Double getSuperiorLimit() {
-		return (Double) txtSuperiorLimit.getValue();
-	}
-
-	public Double getInferiorLimit() {
-		return (Double) txtInferiorLimit.getValue();
-	}
-
-	public Float getMargin() {
-		return (Float) txtMargin.getValue()/100f;
-	}
-
-	public enumTrainingType getRule() {
-		return (enumTrainingType) cmbTraining.getSelectedItem();
-	}
-
-	public Calendar getToTraining() {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime((Date) txtToT.getModel().getValue());
-		return cal;
-	}
-
-	public Integer getMaxIteration() {
-		return (Integer) txtMaxIteration.getValue();
-	}
-
-	public Double getMinError() {
-		return (Double) txtMinError.getValue();
-	}
 	
 	public void setActiveNN(NeuralNetwork nn){
 		this.activeNetwork = nn;
