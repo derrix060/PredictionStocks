@@ -203,22 +203,9 @@ public class NNPanel extends JPanel {
 		
 		//comboBox Activation
 			JComboBox<enumActivationFuncion> comboAct = new JComboBox<>();
-				comboAct.addItem(enumActivationFuncion.BiPolar);
-				comboAct.addItem(enumActivationFuncion.BipolarSteepenedSigmoid);
-				comboAct.addItem(enumActivationFuncion.ClippedLinear);
-				comboAct.addItem(enumActivationFuncion.Competitive);
-				comboAct.addItem(enumActivationFuncion.Elliott);
-				comboAct.addItem(enumActivationFuncion.ElliottSymmetric);
-				comboAct.addItem(enumActivationFuncion.Gaussian);
-				comboAct.addItem(enumActivationFuncion.Linear);
-				comboAct.addItem(enumActivationFuncion.LOG);
-				comboAct.addItem(enumActivationFuncion.Ramp);
-				comboAct.addItem(enumActivationFuncion.Sigmoid);
-				comboAct.addItem(enumActivationFuncion.SIN);
-				comboAct.addItem(enumActivationFuncion.SoftMax);
-				comboAct.addItem(enumActivationFuncion.SteepenedSigmoid);
-				comboAct.addItem(enumActivationFuncion.Step);
-				comboAct.addItem(enumActivationFuncion.TANH);
+			for(enumActivationFuncion func : enumActivationFuncion.values()){
+				comboAct.addItem(func);
+			}
 		//Modify Activation Column
 			tableLayer.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboAct));
 			
