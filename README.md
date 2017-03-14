@@ -7,5 +7,6 @@
 
 
 ##To do:
-*	Create new view to separate the responsibilities 
-* 	Check why NN is saved in reversed order
+*	Create new view to separate the responsibilities;
+* 	Check why NN is saved in reversed order;
+*	Implement Normalizer constructor with inferior and superior values;
