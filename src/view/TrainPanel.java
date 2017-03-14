@@ -9,6 +9,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.TrainNNBtnAction;
 import factories.PropagationFactory.enumTrainingType;
 import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -27,7 +28,13 @@ public class TrainPanel extends JPanel {
 		private JDatePicker txtTo = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 		NewView view;
 		
-		JComboBox<enumTrainingType> cmbLearningRule;
+		
+		private JFormattedTextField txtMaxIteration;
+		private JFormattedTextField txtMaxError;		
+		private JComboBox<enumTrainingType> cmbLearningRule;
+		private JFormattedTextField txtInferiorLimit;
+		private JFormattedTextField txtSuperiorLimit;
+		private JFormattedTextField txtMargin;
 
 	/**
 	 * Constructor
@@ -65,17 +72,17 @@ public class TrainPanel extends JPanel {
 		lblMaxIteration.setBounds(10, 162, 160, 14);
 		this.add(lblMaxIteration);
 		
-		JFormattedTextField txtMaxIteration2 = new JFormattedTextField();
-		txtMaxIteration2.setBounds(10, 179, 160, 20);
-		this.add(txtMaxIteration2);
+		txtMaxIteration = new JFormattedTextField();
+		txtMaxIteration.setBounds(10, 179, 160, 20);
+		this.add(txtMaxIteration);
 		
 		JLabel lblMaxError = new JLabel("Max Error");
 		lblMaxError.setBounds(10, 205, 160, 14);
 		this.add(lblMaxError);
 		
-		JFormattedTextField txtMaxError2 = new JFormattedTextField();
-		txtMaxError2.setBounds(10, 221, 160, 20);
-		this.add(txtMaxError2);
+		txtMaxError = new JFormattedTextField();
+		txtMaxError.setBounds(10, 221, 160, 20);
+		this.add(txtMaxError);
 		
 		JPanel panelNormalization = new JPanel();
 		panelNormalization.setLayout(null);
@@ -87,29 +94,30 @@ public class TrainPanel extends JPanel {
 		lblInferiorLimit.setBounds(10, 25, 138, 14);
 		panelNormalization.add(lblInferiorLimit);
 		
-		JFormattedTextField txtInferiorLimit2 = new JFormattedTextField();
-		txtInferiorLimit2.setBounds(10, 40, 138, 20);
-		panelNormalization.add(txtInferiorLimit2);
+		txtInferiorLimit = new JFormattedTextField();
+		txtInferiorLimit.setBounds(10, 40, 138, 20);
+		panelNormalization.add(txtInferiorLimit);
 		
-		JLabel label_2 = new JLabel("Superior Limit");
-		label_2.setBounds(10, 69, 138, 14);
-		panelNormalization.add(label_2);
+		JLabel lblSuperiorLimit = new JLabel("Superior Limit");
+		lblSuperiorLimit.setBounds(10, 69, 138, 14);
+		panelNormalization.add(lblSuperiorLimit);
 		
-		JFormattedTextField txtSuperiorLimit2 = new JFormattedTextField();
-		txtSuperiorLimit2.setBounds(10, 84, 138, 20);
-		panelNormalization.add(txtSuperiorLimit2);
+		txtSuperiorLimit = new JFormattedTextField();
+		txtSuperiorLimit.setBounds(10, 84, 138, 20);
+		panelNormalization.add(txtSuperiorLimit);
 		
-		JLabel label_3 = new JLabel("Margin %");
-		label_3.setBounds(10, 116, 138, 14);
-		panelNormalization.add(label_3);
+		JLabel lblMargin = new JLabel("Margin %");
+		lblMargin.setBounds(10, 116, 138, 14);
+		panelNormalization.add(lblMargin);
 		
-		JFormattedTextField txtMargin2 = new JFormattedTextField();
-		txtMargin2.setBounds(10, 130, 138, 20);
-		panelNormalization.add(txtMargin2);
+		txtMargin = new JFormattedTextField();
+		txtMargin.setBounds(10, 130, 138, 20);
+		panelNormalization.add(txtMargin);
 		
 		JButton btnTrain = new JButton("Train");
 		btnTrain.setBounds(240, 205, 98, 26);
 		this.add(btnTrain);
+		btnTrain.addActionListener(new TrainNNBtnAction(this));
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 253, 357, 213);
@@ -124,8 +132,30 @@ public class TrainPanel extends JPanel {
 			cmbLearningRule.addItem(type);
 		}
 	}
-
 	
-
+	public float getMargin(){
+		return (float) this.txtMargin.getValue();
+	}
+	
+	public enumTrainingType getLearningRule(){
+		return (enumTrainingType) cmbLearningRule.getSelectedItem();
+	}
+	
+	public int getMaxIteration(){
+		return (int) txtMaxIteration.getValue();
+	}
+	
+	public double getMaxError(){
+		return (double) txtMaxError.getValue();
+	}
+	
+	public double getInferiorLimit(){
+		return (double) txtInferiorLimit.getValue();
+	}
+	
+	public double getSuperiorLimit(){
+		return (double) txtSuperiorLimit.getValue();
+	}
+	
 
 }
