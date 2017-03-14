@@ -26,6 +26,8 @@ public class TrainPanel extends JPanel {
 		private JDatePicker txtFrom = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 		private JDatePicker txtTo = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 		NewView view;
+		
+		JComboBox<enumTrainingType> cmbLearningRule;
 
 	/**
 	 * Constructor
@@ -54,8 +56,9 @@ public class TrainPanel extends JPanel {
 		lblLearningRule.setBounds(10, 111, 160, 14);
 		this.add(lblLearningRule);
 		
-		JComboBox<enumTrainingType> cmbLearningRule = new JComboBox<enumTrainingType>();
+		cmbLearningRule = new JComboBox<enumTrainingType>();
 		cmbLearningRule.setBounds(10, 130, 160, 20);
+		populateLearningRule();
 		this.add(cmbLearningRule);
 		
 		JLabel lblMaxIteration = new JLabel("Max Iteration");
@@ -111,6 +114,15 @@ public class TrainPanel extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 253, 357, 213);
 		this.add(panel);
+	}
+	
+	/**
+	 * Add every Learning Rule avalible to cmbLearningRule
+	 */
+	public void populateLearningRule(){
+		for(enumTrainingType type :  enumTrainingType.values()){
+			cmbLearningRule.addItem(type);
+		}
 	}
 
 	
