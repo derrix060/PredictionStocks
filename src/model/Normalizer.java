@@ -10,8 +10,11 @@ import model.Data.enumAttributesOfData;
 
 public class Normalizer {
 	
-	private final static double maxLimit = 1;
-	private final static double minLimit = 0;
+	private static final double DEFAUT_MAX_LIMIT = 1;
+	private static final double DEFAUT_MIN_LIMIT = 0;
+	
+	private double maxLimit;
+	private double minLimit;
 
 	private double maxValue;
 	private double minValue;
@@ -20,10 +23,21 @@ public class Normalizer {
 	private float margin;
 	
 	public Normalizer (float margin){
-		this.margin = margin;
+		this(margin, DEFAUT_MAX_LIMIT, DEFAUT_MIN_LIMIT);
 	}
 	
+	public Normalizer (float margin, double maxLimit, double minLimit){
+		this.margin = margin;
+		this.maxLimit = maxLimit;
+		this.minLimit = minLimit;
+	}
 	
+	/**
+	 * Normalize values from Historical Data
+	 * 
+	 * important: the Historical Data will be modified!
+	 * @param hd - Historical Data
+	 */
 	public void normalizeDatas (HistoricalData hd){
 		updateMaxAndMinValues(hd);
 		
@@ -31,9 +45,9 @@ public class Normalizer {
 			for (int i=0; i<dt.getAttributes().size(); i++){
 				enumAttributesOfData atr = dt.getAttributes().get(i);
 				if(atr.equals(enumAttributesOfData.volume))
-					dt.setVolume(getNormalizedValue(dt.getVolume(), minVolumeValue, maxVolumeValue, margin));
+					dt.setVolume(getNormalizedValue(dt.getVolume(), minVolumeValue, maxVolumeValue, margin, maxLimit, minLimit));
 				else
-					dt.setValue(atr, getNormalizedValue(dt.getValue(atr), minValue, maxValue, margin));
+					dt.setValue(atr, getNormalizedValue(dt.getValue(atr), minValue, maxValue, margin, maxLimit, minLimit));
 			}
 		});
 		
@@ -46,9 +60,9 @@ public class Normalizer {
 			for (int i=0; i<dt.getAttributes().size(); i++){
 				enumAttributesOfData atr = dt.getAttributes().get(i);
 				if(atr.equals(enumAttributesOfData.volume))
-					dt.setVolume(getDenomarlizedValue(dt.getVolume(), minVolumeValue, maxVolumeValue, margin));
+					dt.setVolume(getDenomarlizedValue(dt.getVolume(), minVolumeValue, maxVolumeValue, margin, maxLimit, minLimit));
 				else
-					dt.setValue(atr, getDenomarlizedValue(dt.getValue(atr), minValue, maxValue, margin));
+					dt.setValue(atr, getDenomarlizedValue(dt.getValue(atr), minValue, maxValue, margin, maxLimit, minLimit));
 			}
 		});
 		
@@ -100,7 +114,7 @@ public class Normalizer {
 	}
 	
 	
-	private static double getNormalizedValue(double oldValue, double minValue, double maxValue, float margin){
+	private static double getNormalizedValue(double oldValue, double minValue, double maxValue, float margin, double maxLimit, double minLimit){
 		/*
 		 *      (X - Xmin) (D2 - D1)  
 		 * Y =	--------------------   +  D1
@@ -121,7 +135,7 @@ public class Normalizer {
 		return norm;
 	}
 	
-	public static double getDenomarlizedValue(double normalizedValue, double minValue, double maxValue, float margin){
+	public static double getDenomarlizedValue(double normalizedValue, double minValue, double maxValue, float margin, double maxLimit, double minLimit){
 		/*
 		 *       Y (Xmax - Xmin) - D1
 		 * X =  --------------------   +  Xmin
@@ -145,7 +159,7 @@ public class Normalizer {
 	
 	//not static
 	public double getDenormalizedValueFrom (double normalizedValue){
-		double vlr =  Normalizer.getDenomarlizedValue(normalizedValue, getMinValue(), getMaxValue(), getMargin());
+		double vlr =  Normalizer.getDenomarlizedValue(normalizedValue, getMinValue(), getMaxValue(), getMargin(), maxLimit, minLimit);
 		
 		//round in 2 precision
 		vlr *= 100;
