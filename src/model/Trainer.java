@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -12,6 +13,21 @@ import factories.PropagationFactory.enumTrainingType;
 import model.Data.enumAttributesOfData;
 
 public class Trainer {
+	private Normalizer normal;
+	
+	public Trainer(float margin, double inferiorLimit, double superiorLimit){
+		this.normal = new Normalizer(margin, superiorLimit, inferiorLimit);
+		
+	}
+	
+	public void train(NeuralNetwork network, enumTrainingType rule, int maxIteration, double maxError, Calendar from, Calendar to) throws IOException{
+		HistoricalData hd = new HistoricalData(network.getStock(), from, to, network.getDateInterval(), network.getAttributes());
+		
+		normal.normalizeDatas(hd);
+	}
+	
+	
+	
 	private final static double default_trainingRate = 0.1;
 
 	public static void train(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, enumTrainingType rule, int maxIteration, double maxError, Normalizer normal){
@@ -188,4 +204,6 @@ public class Trainer {
 		//TODO: implement
 
 	}
+	
+	
 }
