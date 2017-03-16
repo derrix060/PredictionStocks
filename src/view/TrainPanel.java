@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Component;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -160,5 +162,17 @@ public class TrainPanel extends JPanel {
 	public NewView getView(){
 		return this.view;
 	}
+	
+	public Calendar getFrom(){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime((Date) txtFrom.getModel().getValue());
+		return cal;
+	}
+	public Calendar getTo(){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime((Date) txtTo.getModel().getValue());
+		return cal;
+	}
+	
 
 }
