@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import model.NeuralNetwork;
+import model.Trainer;
 import view.TrainPanel;
 
 public class TrainNNBtnAction implements ActionListener {
@@ -15,11 +16,14 @@ public class TrainNNBtnAction implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
 	public void actionPerformed(ActionEvent ae) {
 		// TODO Auto-generated method stub
 		NeuralNetwork nn = panel.getView().getActiveNN();
 		
+		Trainer trainer = new Trainer(panel.getMargin(), panel.getInferiorLimit(), panel.getSuperiorLimit());
+		
+		
+		trainer.train(nn, panel.getLearningRule(), panel.getMaxIteration(), panel.getMaxError(), panel.getFrom, to);
 	}
 
 }
