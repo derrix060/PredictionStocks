@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import model.NeuralNetwork;
 import view.TrainPanel;
 
 public class TrainNNBtnAction implements ActionListener {
@@ -15,7 +16,9 @@ public class TrainNNBtnAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent ae) {
 		// TODO Auto-generated method stub
+		NeuralNetwork nn = panel.getView().getActiveNN();
 		
 	}
 

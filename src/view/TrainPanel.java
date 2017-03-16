@@ -26,7 +26,7 @@ public class TrainPanel extends JPanel {
 	//Training
 		private JDatePicker txtFrom = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
 		private JDatePicker txtTo = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
-		NewView view;
+		private NewView view;
 		
 		
 		private JFormattedTextField txtMaxIteration;
@@ -157,5 +157,8 @@ public class TrainPanel extends JPanel {
 		return (double) txtSuperiorLimit.getValue();
 	}
 	
+	public NewView getView(){
+		return this.view;
+	}
 
 }
