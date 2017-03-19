@@ -35,6 +35,8 @@ import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import view.util.LayerTable;
+import view.util.NumberTextField;
 
 public class _old_MainView extends JFrame {
 
