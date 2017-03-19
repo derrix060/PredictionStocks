@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,14 +10,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
 import model.NeuralNetwork;
-import net.sourceforge.jdatepicker.JDatePicker;
-import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
-import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
-import net.sourceforge.jdatepicker.impl.UtilDateModel;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 
 public class NewView extends JFrame {
 
@@ -75,7 +66,7 @@ public class NewView extends JFrame {
 		JPanel panelTrain = new TrainPanel(this);
 		tabbedPane.addTab("Train", null, panelTrain, "Used to train a Neural Network");
 		
-		JPanel panelReport = createReportPanel();
+		JPanel panelReport = new ReportPanel(this);
 		tabbedPane.addTab("Report", null, panelReport, "Used to see the performance of Neural Network");
 		
 		JLabel lblSelectedNetwork = new JLabel("Selected Network: ");
@@ -85,85 +76,6 @@ public class NewView extends JFrame {
 		
 		lblNetw.setBounds(132, 536, 262, 14);
 		contentPane.add(lblNetw);
-	}
-	
-	
-	/*
-	 * Create Panels
-	 */
-	
-	
-	private JPanel createReportPanel(){
-		JPanel reportPanel = new JPanel();
-		reportPanel.setLayout(null);
-		
-		// Dates
-			JDatePicker txtFrom = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
-			JDatePicker txtTo = new JDatePickerImpl(new JDatePanelImpl(new UtilDateModel()));
-			
-			JLabel lblFrom = new JLabel("From");
-			lblFrom.setBounds(10, 11, 160, 14);
-			reportPanel.add(lblFrom);
-			
-			((Component) txtFrom).setBounds(10, 26, 160, 27);
-			reportPanel.add((Component) txtFrom);
-			
-			JLabel lblTo = new JLabel("To");
-			lblTo.setBounds(10, 61, 160, 14);
-			reportPanel.add(lblTo);
-			
-			((Component) txtTo).setBounds(10, 76, 160, 27);
-			reportPanel.add((Component) txtTo);
-		
-		// Button
-			JButton btnCreateReport = new JButton("Create Report");
-			btnCreateReport.setBounds(10, 134, 159, 26);
-			reportPanel.add(btnCreateReport);
-		
-		
-		// Normalization Panel
-			JFormattedTextField txtInferiorLimit;
-			JFormattedTextField txtSuperiorLimit;
-			JFormattedTextField txtMargin;
-		
-			JPanel panelNormalization = new JPanel();
-			panelNormalization.setLayout(null);
-			panelNormalization.setBorder(BorderFactory.createTitledBorder("Normalization"));
-			panelNormalization.setBounds(207, 10, 160, 150);
-			reportPanel.add(panelNormalization);
-			
-			JLabel lblInferiorLimit = new JLabel("Inferior Limit");
-			lblInferiorLimit.setBounds(10, 25, 138, 14);
-			panelNormalization.add(lblInferiorLimit);
-			
-			txtInferiorLimit = new JFormattedTextField();
-			txtInferiorLimit.setBounds(10, 40, 138, 20);
-			panelNormalization.add(txtInferiorLimit);
-			
-			JLabel lblSuperiorLimit = new JLabel("Superior Limit");
-			lblSuperiorLimit.setBounds(10, 65, 138, 14);
-			panelNormalization.add(lblSuperiorLimit);
-			
-			txtSuperiorLimit = new JFormattedTextField();
-			txtSuperiorLimit.setBounds(10, 80, 138, 20);
-			panelNormalization.add(txtSuperiorLimit);
-			
-			JLabel lblMargin = new JLabel("Margin %");
-			lblMargin.setBounds(10, 104, 138, 14);
-			panelNormalization.add(lblMargin);
-			
-			txtMargin = new JFormattedTextField();
-			txtMargin.setBounds(10, 118, 138, 20);
-			panelNormalization.add(txtMargin);
-			
-		// Graph
-			JPanel panelGraph = new JPanel();
-			panelGraph.setBounds(10, 172, 357, 294);
-			reportPanel.add(panelGraph);
-
-		
-		return reportPanel;
-		
 	}
 	
 	
