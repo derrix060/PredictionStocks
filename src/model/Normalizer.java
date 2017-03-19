@@ -33,9 +33,9 @@ public class Normalizer {
 	}
 	
 	/**
-	 * Normalize values from Historical Data
+	 * Normalize values from Historical Data.
 	 * 
-	 * important: the Historical Data will be modified!
+	 * Warning: the Historical Data will be modified!
 	 * @param hd - Historical Data
 	 */
 	public void normalizeDatas (HistoricalData hd){
