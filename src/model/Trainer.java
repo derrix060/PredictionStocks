@@ -61,13 +61,11 @@ public class Trainer {
 	}
 	
 	
-	
-	private final static double default_trainingRate = 0.1;
 
 	//TODO: remove
 	public static void train(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, enumTrainingType rule, int maxIteration, double maxError, Normalizer normal){
 		BasicMLDataSet trainingData = new BasicMLDataSet(normalizedData.toInput(attr), normalizedData.toIdealOutput(attr));
-		MLTrain rprop = PropagationFactory.create(rule, network, trainingData, default_trainingRate);
+		MLTrain rprop = PropagationFactory.create(rule, network, trainingData, PropagationFactory.DEFAULT_TRAINING_RATE);
 
 		int iteration = 0;
 
