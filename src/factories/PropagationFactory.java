@@ -10,14 +10,14 @@ import org.encog.neural.networks.training.propagation.resilient.ResilientPropaga
 
 public class PropagationFactory {
 	
-	private final double default_trainingRate = 0.1;
+	public static final double DEFAULT_TRAINING_RATE = 0.1;
 
 	public enum enumTrainingType{
 		ResilientPropagation, Backpropagation, QuickPropagation, ScaledConjugateGradient, ManhattanPropagation;
 	}
 	
 	public Propagation create(enumTrainingType type, BasicNetwork network, MLDataSet trainingSet){
-		return create(type, network, trainingSet, default_trainingRate);
+		return create(type, network, trainingSet, DEFAULT_TRAINING_RATE);
 	}
 	public static Propagation create(enumTrainingType type, BasicNetwork network, MLDataSet trainingSet, double learningRate){
 		if (type.equals(enumTrainingType.ResilientPropagation)) return new ResilientPropagation(network, trainingSet);

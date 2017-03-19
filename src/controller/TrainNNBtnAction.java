@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 import model.NeuralNetwork;
 import model.Trainer;
@@ -23,7 +24,16 @@ public class TrainNNBtnAction implements ActionListener {
 		Trainer trainer = new Trainer(panel.getMargin(), panel.getInferiorLimit(), panel.getSuperiorLimit());
 		
 		
-		trainer.train(nn, panel.getLearningRule(), panel.getMaxIteration(), panel.getMaxError(), panel.getFrom, to);
+		try {
+			trainer.train(nn, panel.getLearningRule(), panel.getMaxIteration(), panel.getMaxError(), panel.getFrom(), panel.getTo());
+			JOptionPane.showMessageDialog(null, "Network trained with success!");
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Error! - " + e.getMessage());
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

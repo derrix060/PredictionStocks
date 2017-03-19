@@ -3,6 +3,7 @@ package model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.InvalidPropertiesFormatException;
 
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.train.MLTrain;
@@ -20,16 +21,50 @@ public class Trainer {
 		
 	}
 	
-	public void train(NeuralNetwork network, enumTrainingType rule, int maxIteration, double maxError, Calendar from, Calendar to) throws IOException{
+	/**
+	 * Train the network
+	 * @param network - The network to be trained
+	 * @param rule - Wich rule will be use to train (eg: Backpropagation)
+	 * @param maxIteration - Max number of how many times it will be iterate
+	 * @param maxError - Max number of error to stop train
+	 * @param from - Date to start train
+	 * @param to - Date to stop train
+	 * @throws IOException When cannot create new Historical Data
+	 * @throws InvalidPropertiesFormatException Dates is wrong!
+	 */
+	public void train(NeuralNetwork network, enumTrainingType rule, int maxIteration, double maxError, Calendar from, Calendar to) throws IOException, InvalidPropertiesFormatException{
+		if (from.after(to)) throw new InvalidPropertiesFormatException("'From' date must be befor than 'to' date!");
+		
 		HistoricalData hd = new HistoricalData(network.getStock(), from, to, network.getDateInterval(), network.getAttributes());
 		
 		normal.normalizeDatas(hd);
+		
+		BasicMLDataSet trainingData = new BasicMLDataSet(hd.toInput(network.getAttributes()), hd.toIdealOutput(network.getAttributes()));
+		MLTrain rprop = PropagationFactory.create(rule, network.getTopology(), trainingData, PropagationFactory.DEFAULT_TRAINING_RATE);
+		
+		int iteration = 0;
+		
+		do{
+			rprop.iteration();
+			iteration ++;
+		}
+		while (iteration < maxIteration && rprop.getError() > maxError);
+		
+		rprop.finishTraining();
+		
+
+		System.out.println("Rede treinada!\nIteracoes: " + iteration +"\nErro: " + rprop.getError());
+		
+
+		//print Teste
+		Trainer.printTeste(network.getTopology(), hd, network.getAttributes(), normal);
 	}
 	
 	
 	
 	private final static double default_trainingRate = 0.1;
 
+	//TODO: remove
 	public static void train(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, enumTrainingType rule, int maxIteration, double maxError, Normalizer normal){
 		BasicMLDataSet trainingData = new BasicMLDataSet(normalizedData.toInput(attr), normalizedData.toIdealOutput(attr));
 		MLTrain rprop = PropagationFactory.create(rule, network, trainingData, default_trainingRate);
