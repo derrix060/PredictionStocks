@@ -64,10 +64,10 @@ public class NewView extends JFrame {
 		
 		
 		JPanel panelTrain = createTrainPanel();
-		tabbedPane.addTab("Train", null, panelTrain, null);
+		tabbedPane.addTab("Train", null, panelTrain, "Used to train a Neural Network");
 		
 		JPanel panelReport = createReportPanel();
-		tabbedPane.addTab("Report", null, panelReport, null);
+		tabbedPane.addTab("Report", null, panelReport, "Used to see the performance of Neural Network");
 		
 		JLabel lblSelectedNetwork = new JLabel("Selected Network: ");
 		lblSelectedNetwork.setBounds(20, 536, 107, 14);
