@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import javafx.embed.swing.JFXPanel;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import model.HistoricalData;
 import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -95,7 +97,20 @@ public class ReportPanel extends JPanel {
 	}
 	
 	public void populateGraph(HistoricalData nnData, HistoricalData realData){
+		double minValue;
+		double maxValue;
 		
+		final CategoryAxis xAxis = new CategoryAxis();
+		final NumberAxis yAxis = new NumberAxis("Y-Axis", normal.getMinValue() * 0.9, normal.getMaxValue() * 1.1, 1.0);
+        
+	}
+	
+	private double getMinValue(HistoricalData d1, HistoricalData d2){
+		double rtn = 0;
+		
+		double minD1 = d1.getMapHistorical().stream().min();
+		
+		return rtn;
 	}
 
 }
