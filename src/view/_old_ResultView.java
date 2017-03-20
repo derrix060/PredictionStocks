@@ -61,7 +61,6 @@ public class _old_ResultView extends JFrame {
         scene.addEventHandler(ScrollEvent.ANY, new javafx.event.EventHandler<Event>() {
 
 			public void handle(ScrollEvent event) {
-				// TODO Auto-generated method stub
 				 if (event.getDeltaY() > 0) {
 	                    zoomProperty.set(zoomProperty.get() * 1.1);
 	                } else if (event.getDeltaY() < 0) {

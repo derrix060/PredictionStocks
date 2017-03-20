@@ -7,7 +7,12 @@ import model.Data.enumAttributesOfData;
 
 //example
 //https://github.com/surmenok/MNISTNeuralNetwork/tree/master/src/main/java/com/surmenok/pavel/mnist
-
+/**
+ * Values modifier to be usefull to Neural Network
+ * and return to meaningful value
+ * @author mario
+ *
+ */
 public class Normalizer {
 	
 	private static final double DEFAUT_MAX_LIMIT = 1;
