@@ -24,6 +24,7 @@ import javafx.scene.chart.XYChart.Series;
 import javafx.scene.input.ScrollEvent;
 import model.Data.enumAttributesOfData;
 import model.HistoricalData;
+import model.Normalizer;
 import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -270,6 +271,35 @@ public class ReportPanel extends JPanel {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime((Date) txtTo.getModel().getValue());
 		return cal;
+	}
+	
+	/**
+	 * Create a normalizer with values from Panel
+	 * @return - A normalizer
+	 */
+	public Normalizer getNormalizer(){
+		return new Normalizer((float) txtMargin.getValue(), (double) txtSuperiorLimit.getValue(), (double) txtInferiorLimit.getValue());
+	}
+	
+	/**
+	 * Check if all fields were filled correctly.
+	 * It include if weren't filled and if
+	 * dates are right.
+	 * @return 
+	 */
+	public boolean valuesCorrects(){
+		if(txtInferiorLimit.getValue().equals("")) return false;
+		if(txtSuperiorLimit.getValue().equals("")) return false;
+		if(txtMargin.getValue().equals("")) return false;
+		if(txtTo.getModel().getValue() == null) return false;
+		
+		//Date
+			if(getTo().before(getFrom())) return false;
+			Calendar tempDate = Calendar.getInstance();
+			tempDate.add(Calendar.DAY_OF_MONTH, -2);
+			if(getTo().before(tempDate)) return false;
+		
+		return true;
 	}
 
 }
