@@ -10,9 +10,13 @@ import model.Data.enumAttributesOfData;
 
 public class HistoricalData implements Comparator<Data>{
 	
-	public final int size;
+	public int size;
 	private int dateInterval;
 	private ArrayList<Data> historicalValues;
+	
+	public HistoricalData(){
+		this.size = 0;
+	}
 	
 	public HistoricalData(int size){
 		this.size = size;
@@ -25,17 +29,6 @@ public class HistoricalData implements Comparator<Data>{
 		this.size = historicalValues.size();
 	}
 	
-	public HistoricalData createTrainHistoricalData (ArrayList<enumAttributesOfData>attr, Calendar from, Calendar to){
-		ArrayList<Data> datas = new ArrayList<>();
-		Calendar actualDate = from;
-		int i = 0;
-		Data tempData = new Data();
-		
-		//while (actualDate.before(to) && i <)
-		
-		//TODO: change this!
-		return null;
-	}
 	
 	public HistoricalData createTrainHistoricalData (ArrayList<enumAttributesOfData> attr, Calendar to){
 		ArrayList<Data> datas = new ArrayList<>();
@@ -128,5 +121,10 @@ public class HistoricalData implements Comparator<Data>{
 	
 	public void setMapHistorical(ArrayList<Data> hist){
 		this.historicalValues = hist;
+	}
+	
+	public void addData(Data dt){
+		this.historicalValues.add(dt);
+		this.size ++;
 	}
 }
