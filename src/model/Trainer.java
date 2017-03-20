@@ -230,13 +230,4 @@ public class Trainer {
 
 		return rtn;
 	}
-
-	//news
-
-	public static void train(NeuralNetwork network, Normalizer normal, HistoricalData normalizedData, enumTrainingType rule, int maxIteration, double maxError){
-		//TODO: implement
-
-	}
-	
-	
 }
