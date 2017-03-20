@@ -137,6 +137,8 @@ public class NeuralNetwork {
 
 	/**
 	 * Predict historical data using his knowledgement.
+	 * Warning: the value is not normalized
+	 * 
 	 * @param normalizer - Normalizer
 	 * @param from - Date to begin his predictionn
 	 * @param to - Date to end his predictio
@@ -145,14 +147,24 @@ public class NeuralNetwork {
 	 */
 	public HistoricalData createNNHistoricalData(Normalizer normalizer, Calendar from, Calendar to) throws IOException{
 		// TODO: implement this
+		
+		
+		// Get data from a lot of days before, to be very cautious
+		Calendar tempFrom = from;
+		tempFrom.add(Calendar.DAY_OF_MONTH, this.dateInterval * -1);
+		tempFrom.add(Calendar.MONTH, -1);
 
-		// Create Historical Data from YahooExtractor
-		HistoricalData rtn = new HistoricalData(this.stock, from, to, this.dateInterval, this.attributes);
-
+		// Create Historical Data from DataExtractor
+		HistoricalData rtn = new HistoricalData(this.stock, tempFrom, to, this.dateInterval, this.attributes);
+		
+		
+		
+		
 
 		return rtn;
 	}
-
+	
+	//TODO: remove?
 	public static HistoricalData createNNHistoricalData(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalizer normal, Calendar from){
 		int size = normalizedData.size - normalizedData.getDateInterval();
 		HistoricalData rtn = new HistoricalData(size);
