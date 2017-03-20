@@ -12,8 +12,8 @@ import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
 /**
+ * Data extractor from stocks markets
  * @author mario
- *
  */
 public class DataExtractor {
 	

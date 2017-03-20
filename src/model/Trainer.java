@@ -30,7 +30,7 @@ public class Trainer {
 	 * @param from - Date to start train
 	 * @param to - Date to stop train
 	 * @throws IOException When cannot create new Historical Data
-	 * @throws InvalidPropertiesFormatException Dates is wrong!
+	 * @throws InvalidPropertiesFormatException When dates is wrong!
 	 */
 	public void train(NeuralNetwork network, enumTrainingType rule, int maxIteration, double maxError, Calendar from, Calendar to) throws IOException, InvalidPropertiesFormatException{
 		if (from.after(to)) throw new InvalidPropertiesFormatException("'From' date must be befor than 'to' date!");

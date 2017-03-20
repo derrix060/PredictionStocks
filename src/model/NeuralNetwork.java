@@ -22,9 +22,6 @@ import model.Data.enumAttributesOfData;
 
 public class NeuralNetwork {
 
-	/**
-	 * Attributes
-	 */
 	private final transient static String PATH = System.getProperty("user.dir") + System.getProperty("file.separator");
 	private final transient static String TOPOLOGY_NAME = "_network.eg";
 	private transient String name;
@@ -34,9 +31,6 @@ public class NeuralNetwork {
 	private String stock;
 
 
-	/**
-	 * Constructor
-	 */
 	public NeuralNetwork(BasicNetwork topology, ArrayList<enumAttributesOfData> attributes, Integer dateInterval, String stock, String name){
 		this.topology = topology;
 		this.attributes = attributes;
@@ -46,6 +40,12 @@ public class NeuralNetwork {
 	}
 
 
+	/**
+	 * Save this network in 2 files: .eg (nn structure)
+	 * and .json (some attributes)
+	 * @param name - name to file.
+	 * @throws IOException - Cannot write the file.
+	 */
 	public void save(String name) throws IOException{
 		this.setName(name);
 		Gson gson = new Gson();
@@ -84,7 +84,12 @@ public class NeuralNetwork {
 		return netwFile.exists();
 	}
 
-	
+	/**
+	 * Load NN from file
+	 * @param name - name from file
+	 * @return - NN from file
+	 * @throws IOException - Cannot acess file, or file not exist
+	 */
 	public static NeuralNetwork load(String name) throws IOException{		
 		String stock = "";
 		Integer dateInterval = null;
@@ -130,6 +135,14 @@ public class NeuralNetwork {
 		return new NeuralNetwork(topology, attributes, dateInterval, stock, name);
 	}
 
+	/**
+	 * Predict historical data using his knowledgement.
+	 * @param normalizer - Normalizer
+	 * @param from - Date to begin his predictionn
+	 * @param to - Date to end his predictio
+	 * @return - HistoricalData from values predicteds
+	 * @throws IOException
+	 */
 	public HistoricalData createNNHistoricalData(Normalizer normalizer, Calendar from, Calendar to) throws IOException{
 		// TODO: implement this
 
