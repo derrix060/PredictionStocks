@@ -167,11 +167,21 @@ public class TrainPanel extends JPanel {
 		return this.view;
 	}
 	
+	/**
+	 * Get the trainning's end date from Panel
+	 * @return - End date
+	 */
 	public Calendar getFrom(){
 		Calendar cal = Calendar.getInstance();
 		cal.setTime((Date) txtFrom.getModel().getValue());
 		return cal;
 	}
+	
+
+	/**
+	 * Get the trainning's begin date from Panel
+	 * @return - Begin date
+	 */
 	public Calendar getTo(){
 		Calendar cal = Calendar.getInstance();
 		cal.setTime((Date) txtTo.getModel().getValue());
