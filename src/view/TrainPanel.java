@@ -78,6 +78,7 @@ public class TrainPanel extends JPanel {
 			
 			txtMaxIteration = new JFormattedTextField();
 			txtMaxIteration.setBounds(10, 179, 160, 20);
+			txtMaxIteration.setValue("500");
 			this.add(txtMaxIteration);
 			
 			JLabel lblMaxError = new JLabel("Max Error");
@@ -86,6 +87,7 @@ public class TrainPanel extends JPanel {
 			
 			txtMaxError = new JFormattedTextField();
 			txtMaxError.setBounds(10, 221, 160, 20);
+			txtMaxError.setValue("0.01");
 			this.add(txtMaxError);
 		
 		// Panel Normalization
@@ -101,6 +103,7 @@ public class TrainPanel extends JPanel {
 			
 			txtInferiorLimit = new JFormattedTextField();
 			txtInferiorLimit.setBounds(10, 40, 138, 20);
+			txtInferiorLimit.setValue("-1");
 			panelNormalization.add(txtInferiorLimit);
 			
 			JLabel lblSuperiorLimit = new JLabel("Superior Limit");
@@ -109,6 +112,7 @@ public class TrainPanel extends JPanel {
 			
 			txtSuperiorLimit = new JFormattedTextField();
 			txtSuperiorLimit.setBounds(10, 84, 138, 20);
+			txtSuperiorLimit.setValue("1");
 			panelNormalization.add(txtSuperiorLimit);
 			
 			JLabel lblMargin = new JLabel("Margin %");
@@ -117,6 +121,7 @@ public class TrainPanel extends JPanel {
 			
 			txtMargin = new JFormattedTextField();
 			txtMargin.setBounds(10, 130, 138, 20);
+			txtMargin.setValue("20");
 			panelNormalization.add(txtMargin);
 		
 		// Train button
