@@ -145,7 +145,7 @@ public class TrainPanel extends JPanel {
 	}
 	
 	public float getMargin(){
-		return (float) this.txtMargin.getValue();
+		return Float.parseFloat((String) this.txtMargin.getValue()) / 100f;
 	}
 	
 	public enumTrainingType getLearningRule(){
@@ -153,19 +153,19 @@ public class TrainPanel extends JPanel {
 	}
 	
 	public int getMaxIteration(){
-		return (int) txtMaxIteration.getValue();
+		return Integer.parseInt((String) txtMaxIteration.getValue());
 	}
 	
 	public double getMaxError(){
-		return (double) txtMaxError.getValue();
+		return Double.parseDouble((String) txtMaxError.getValue());
 	}
 	
 	public double getInferiorLimit(){
-		return (double) txtInferiorLimit.getValue();
+		return Double.parseDouble((String) txtInferiorLimit.getValue());
 	}
 	
 	public double getSuperiorLimit(){
-		return (double) txtSuperiorLimit.getValue();
+		return Double.parseDouble((String) txtSuperiorLimit.getValue());
 	}
 	
 	public NewView getView(){
