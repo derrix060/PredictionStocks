@@ -146,8 +146,14 @@ public class NeuralNetwork {
 	 * @throws IOException
 	 */
 	public HistoricalData createNNHistoricalData(Normalizer normalizer, Calendar from, Calendar to) throws IOException{
-		// TODO: implement this
-		
+		// TODO: test this
+		int attrSize = this.attributes.size();
+		double[] input = new double[this.attributes.size() * dateInterval];
+		double[] calculatedData = new double[attrSize];
+
+		Data dt = new Data();
+		ArrayList<Data> datas = new ArrayList<>();
+		double value = 0;
 		
 		// Get data from a lot of days before, to be very cautious
 		Calendar tempFrom = from;
@@ -155,11 +161,100 @@ public class NeuralNetwork {
 		tempFrom.add(Calendar.MONTH, -1);
 
 		// Create Historical Data from DataExtractor
-		HistoricalData rtn = new HistoricalData(this.stock, tempFrom, to, this.dateInterval, this.attributes);
+		HistoricalData hd = new HistoricalData(this.stock, tempFrom, to, this.dateInterval, this.attributes);
+		HistoricalData rtn = new HistoricalData();
+		
+		// Normalize Historaical Data, to be meaningful to NN
+		normalizer.normalizeDatas(hd);
+		
+		int i=0;
+		
+		// Index of the 'from' Date
+		while(hd.getMapHistorical().get(i).getDate().compareTo(from) < 0){
+			i ++;
+		}
+		
+		int inicialDate = i-1; //adjusted because HD uses time with 0h 
 		
 		
 		
-		
+		//first dateInterval times will have data from real (mixed datas)
+		for (int t=0; t<dateInterval; t++){
+			//for each time until dateInterval times
+
+			//add real data
+			for (int d=0; d<dateInterval-t; d++){
+				for (int a=0; a<attrSize; a++){
+					//for each attributee
+					input[(d  * attrSize) + a] = hd.getMapHistorical().get(inicialDate + t + d - dateInterval).getValue(this.attributes.get(a));
+				}
+			}
+
+			//add calculate data
+			for (int d=0; d<t; d++){
+				for (int a=0; a<attrSize; a++){
+					//for each attribute
+					input[((dateInterval - t + d) * attrSize) + a] = datas.get(d).getValue(this.attributes.get(a));
+				}
+			}
+			//now input is ok
+
+			//Create Data
+			dt = new Data();
+			dt.setAttributes(this.attributes);
+			dt.setTicker(this.getStock());
+
+			this.getTopology().compute(input, calculatedData);
+			Data dtClone = hd.getMapHistorical().get(inicialDate + t);
+			dt.setDate(dtClone.getDate());
+
+			for(int a=0; a<this.attributes.size(); a++){
+				//for each atribute
+
+				//Check: every time will be in order?
+				value = calculatedData[a];
+				dt.setValue(this.attributes.get(a), value);
+			}
+			
+			datas.add(dt);
+		}
+		//end of mixed datas
+
+		//now only calculated
+		for (i = inicialDate + dateInterval; i<hd.size; i++){
+			//for each date
+
+			dt = new Data();
+			dt.setAttributes(this.attributes);
+			dt.setTicker(this.getStock());
+			Data dtClone = hd.getMapHistorical().get(i);
+			dt.setDate(dtClone.getDate());
+
+			//create input
+			for (int d=0; d<dateInterval; d++){
+				//for each date
+
+				for (int a=0; a<attrSize; a++){
+					//for each attribute
+					input[(d * attrSize) + a] = datas.get(i - inicialDate - dateInterval + d).getValue(this.attributes.get(a));
+				}
+			}
+
+			this.getTopology().compute(input, calculatedData); //generate the calculatedData
+
+
+			for(int a=0; a<this.attributes.size(); a++){
+				//for each atribute
+				value = calculatedData[a];
+				dt.setValue(this.attributes.get(a), value);
+			}
+			datas.add(dt);
+		}
+
+		rtn.setMapHistorical(datas);
+
+		//denormalizeValues
+		normalizer.denormalizeDatas(rtn);
 
 		return rtn;
 	}
