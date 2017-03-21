@@ -278,7 +278,10 @@ public class ReportPanel extends JPanel {
 	 * @return - A normalizer
 	 */
 	public Normalizer getNormalizer(){
-		return new Normalizer((float) txtMargin.getValue(), (double) txtSuperiorLimit.getValue(), (double) txtInferiorLimit.getValue());
+		return new Normalizer(
+				Float.parseFloat((String) txtMargin.getValue()) / 100f,
+				Double.parseDouble((String) txtSuperiorLimit.getValue()),
+				Double.parseDouble((String) txtInferiorLimit.getValue()));
 	}
 	
 	/**

@@ -48,6 +48,8 @@ public class ReportNNBtnAction  implements ActionListener{
 			HistoricalData realData = new HistoricalData(nn.getStock(), from, to, nn.getDateInterval(), nn.getAttributes());
 			HistoricalData nnData = nn.createNNHistoricalData(norm, from, to);
 			
+			this.panel.populateGraph(nnData, realData);
+			
 			
 		} catch (IOException e1) {
 			JOptionPane.showMessageDialog(null, "Error! - " + e1.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
