@@ -121,10 +121,14 @@ public class HistoricalData implements Comparator<Data>{
 	
 	public void setMapHistorical(ArrayList<Data> hist){
 		this.historicalValues = hist;
+		this.size = hist.size();
 	}
 	
 	public void addData(Data dt){
 		this.historicalValues.add(dt);
 		this.size ++;
+	}
+	public void setDateInterval(int interval){
+		this.dateInterval = interval;
 	}
 }
