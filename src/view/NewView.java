@@ -92,6 +92,11 @@ public class NewView extends JFrame {
 	}
 	
 	public String getNNName(){
-		return this.getActiveNN().getName();
+		try{
+			return this.getActiveNN().getName();
+		}
+		catch (NullPointerException ex){
+			return "";
+		}
 	}
 }

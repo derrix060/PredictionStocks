@@ -27,7 +27,7 @@ public class ReportNNBtnAction  implements ActionListener{
 		String name = panel.getView().getNNName();
 		
 		if (name.isEmpty()){
-			JOptionPane.showMessageDialog(null, "Please insert the name of network to choose them!", "Error: don't have name", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Please choose your neural network!", "Error: don't have name", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
@@ -48,7 +48,7 @@ public class ReportNNBtnAction  implements ActionListener{
 			HistoricalData realData = new HistoricalData(nn.getStock(), from, to, nn.getDateInterval(), nn.getAttributes());
 			HistoricalData nnData = nn.createNNHistoricalData(norm, from, to);
 			
-			this.panel.populateGraph(nnData, realData);
+			this.panel.populateGraph(nnData, realData, this.panel.panelGraph);
 			
 			
 		} catch (IOException e1) {
@@ -58,3 +58,8 @@ public class ReportNNBtnAction  implements ActionListener{
 
 	}
 }
+
+
+
+
+

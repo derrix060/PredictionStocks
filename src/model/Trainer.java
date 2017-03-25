@@ -50,6 +50,7 @@ public class Trainer {
 		}
 		while (iteration < maxIteration && rprop.getError() > maxError);
 		
+		// Need call this because of multithread
 		rprop.finishTraining();
 		
 

@@ -11,6 +11,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.ReportNNBtnAction;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.embed.swing.JFXPanel;
@@ -49,6 +50,7 @@ public class ReportPanel extends JPanel {
 	private JFormattedTextField txtInferiorLimit;
 	private JFormattedTextField txtSuperiorLimit;
 	private JFormattedTextField txtMargin;
+	public JFXPanel panelGraph;
 	
 
 	private final DoubleProperty zoomProperty = new SimpleDoubleProperty(200);
@@ -80,6 +82,7 @@ public class ReportPanel extends JPanel {
 		// Button
 			JButton btnCreateReport = new JButton("Create Report");
 			btnCreateReport.setBounds(10, 134, 159, 26);
+			btnCreateReport.addActionListener(new ReportNNBtnAction(this));
 			this.add(btnCreateReport);
 		
 		
@@ -96,6 +99,7 @@ public class ReportPanel extends JPanel {
 			
 			txtInferiorLimit = new JFormattedTextField();
 			txtInferiorLimit.setBounds(10, 40, 138, 20);
+			txtInferiorLimit.setValue("");
 			panelNormalization.add(txtInferiorLimit);
 			
 			JLabel lblSuperiorLimit = new JLabel("Superior Limit");
@@ -104,6 +108,7 @@ public class ReportPanel extends JPanel {
 			
 			txtSuperiorLimit = new JFormattedTextField();
 			txtSuperiorLimit.setBounds(10, 80, 138, 20);
+			txtSuperiorLimit.setValue("");
 			panelNormalization.add(txtSuperiorLimit);
 			
 			JLabel lblMargin = new JLabel("Margin %");
@@ -112,10 +117,11 @@ public class ReportPanel extends JPanel {
 			
 			txtMargin = new JFormattedTextField();
 			txtMargin.setBounds(10, 118, 138, 20);
+			txtMargin.setValue("");
 			panelNormalization.add(txtMargin);
 			
 		// Graph
-			JFXPanel panelGraph = new JFXPanel();
+			panelGraph = new JFXPanel();
 			panelGraph.setBounds(10, 172, 357, 294);
 			this.add(panelGraph);
 	}
@@ -125,11 +131,15 @@ public class ReportPanel extends JPanel {
 	 * @param nnData
 	 * @param realData
 	 */
-	public void populateGraph(HistoricalData nnData, HistoricalData realData){
+	public void populateGraph(HistoricalData nnData, HistoricalData realData, JFXPanel panel){
 		final CategoryAxis xAxis = new CategoryAxis();
-		final NumberAxis yAxis = new NumberAxis("Y-Axis", getMinValue(nnData, realData) * 0.9, getMaxValue(nnData, realData)  * 1.1, 1.0);
+		final NumberAxis yAxis = new NumberAxis();
+		yAxis.setForceZeroInRange(false);
+		//final NumberAxis yAxis = new NumberAxis("Y-Axis", getMinValue(nnData, realData) * 0.9, getMaxValue(nnData, realData)  * 1.1, 1.0);
         
 		xAxis.setLabel("Date");
+		
+		
 		
 		final LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
 		
@@ -154,6 +164,12 @@ public class ReportPanel extends JPanel {
 		});
 		
 		populateSeries(nnData, realData, lineChart);
+
+		//yAxis.setLowerBound(getMinValue(nnData, realData) * 0.95);
+		//yAxis.setUpperBound(getMaxValue(nnData, realData) * 1.05);
+		
+		
+		panel.setScene(scene);
 	}
 	
 	/**
@@ -184,6 +200,8 @@ public class ReportPanel extends JPanel {
             lineChart.getData().addAll(nnSerie);
         	
         }
+        
+        
 	}
 	
 	/**
@@ -291,18 +309,33 @@ public class ReportPanel extends JPanel {
 	 * @return 
 	 */
 	public boolean valuesCorrects(){
-		if(txtInferiorLimit.getValue().equals("")) return false;
-		if(txtSuperiorLimit.getValue().equals("")) return false;
-		if(txtMargin.getValue().equals("")) return false;
-		if(txtTo.getModel().getValue() == null) return false;
-		
-		//Date
-			if(getTo().before(getFrom())) return false;
-			Calendar tempDate = Calendar.getInstance();
-			tempDate.add(Calendar.DAY_OF_MONTH, -2);
-			if(getTo().before(tempDate)) return false;
-		
-		return true;
+		try{
+			String valueTemp;
+			valueTemp = txtInferiorLimit.getValue().toString();
+			if(valueTemp.equals("")) return false;
+
+			valueTemp = (String) txtSuperiorLimit.getValue();
+			if(valueTemp.equals("")) return false;
+
+			valueTemp = (String) txtMargin.getValue();
+			if(valueTemp.equals("")) return false;
+
+			
+			if(txtTo.getModel().getValue() == null) return false;
+			if(txtFrom.getModel().getValue() == null) return false;
+			
+			//Date
+				if(getTo().before(getFrom())) return false;
+				Calendar tempDate = Calendar.getInstance();
+				tempDate.add(Calendar.DAY_OF_MONTH, -2);
+				if(getTo().after(tempDate)) return false;
+			
+			return true;
+		}
+		catch (NullPointerException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }
