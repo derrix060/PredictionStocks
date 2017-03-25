@@ -156,7 +156,7 @@ public class NeuralNetwork {
 		double value = 0;
 		
 		// Get data from a lot of days before, to be very cautious
-		Calendar tempFrom = from;
+		Calendar tempFrom = (Calendar) from.clone();
 		tempFrom.add(Calendar.DAY_OF_MONTH, this.dateInterval * -1);
 		tempFrom.add(Calendar.MONTH, -1);
 
@@ -252,10 +252,12 @@ public class NeuralNetwork {
 		}
 
 		rtn.setMapHistorical(datas);
+		rtn.setDateInterval(this.dateInterval);
 
 		//denormalizeValues
 		normalizer.denormalizeDatas(rtn);
-
+		
+		
 		return rtn;
 	}
 	
