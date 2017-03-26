@@ -265,36 +265,6 @@ public class NNPanel extends JPanel {
 		return layers;
 	}
 	
-	public List<BasicLayer> getLayersReversed(){
-		List<BasicLayer> layers = new ArrayList<>();
-		
-		// Need to be in reverse order!!
-		// TODO: Check why.
-
-		//outputLayer
-		BasicLayer layer = new BasicLayer(this.getAtributes().size());
-		layers.add(layer);
-		
-		
-		//hiddenLayer
-		for (int i=tableLayer.getRowCount()-1; i>=0; i--){
-			//for each row from table
-			Integer neurons = (Integer) tableLayer.getValueAt(i, 0);
-			Boolean hasBias = (Boolean) tableLayer.getValueAt(i, 1);
-			enumActivationFuncion actFct = (enumActivationFuncion) tableLayer.getValueAt(i, 2);
-			Double drop = (Double) tableLayer.getValueAt(i, 3);
-			
-			layer = new BasicLayer(ActivationFunctionFactory.create(actFct), hasBias, neurons, drop);
-			layers.add(layer);
-		}
-
-		//inputLayer
-		layer = new BasicLayer(this.getAtributes().size() * this.getDataInterval());
-		layers.add(layer);
-		
-		
-		return layers;
-	}
 	
 	public String getStock() {
 		return txtStock.getText();
@@ -360,7 +330,8 @@ public class NNPanel extends JPanel {
 		FlatNetwork layer = topology.getStructure().getFlat();
 		int size = layer.getLayerCounts().length;
 		
-		for (int i=2; i< (size-1); i++){
+		// Need to be in reversed order
+		for (int i=(size-2); i>=1; i--){
 			// For each layer
 			Object[] data = {layer.getLayerFeedCounts()[i], layer.getBiasActivation()[i]==1.0 , ActivationFunctionFactory.fromString(layer.getActivationFunctions()[i].getLabel()), new Double(0.3)};
 			dtm.addRow(data);
