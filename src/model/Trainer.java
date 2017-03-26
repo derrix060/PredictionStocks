@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InvalidPropertiesFormatException;
 
+import javax.naming.directory.InvalidAttributeValueException;
+
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.networks.BasicNetwork;
@@ -31,16 +33,20 @@ public class Trainer {
 	 * @param to - Date to stop train
 	 * @throws IOException When cannot create new Historical Data
 	 * @throws InvalidPropertiesFormatException When dates is wrong!
+	 * @throws InvalidAttributeValueException When data lengh is smaller than dateInterval
 	 */
-	public void train(NeuralNetwork network, enumTrainingType rule, int maxIteration, double maxError, Calendar from, Calendar to) throws IOException, InvalidPropertiesFormatException{
+	public void train(NeuralNetwork network, enumTrainingType rule, int maxIteration, double maxError, Calendar from, Calendar to) throws IOException, InvalidPropertiesFormatException, InvalidAttributeValueException{
 		if (from.after(to)) throw new InvalidPropertiesFormatException("'From' date must be befor than 'to' date!");
-		
 		HistoricalData hd = new HistoricalData(network.getStock(), from, to, network.getDateInterval(), network.getAttributes());
+		
+		if(hd.size < hd.getDateInterval()) throw new InvalidAttributeValueException("Data lengh is smaller than NN's dateInterval");
 		
 		normal.normalizeDatas(hd);
 		
-		BasicMLDataSet trainingData = new BasicMLDataSet(hd.toInput(network.getAttributes()), hd.toIdealOutput(network.getAttributes()));
+		BasicMLDataSet trainingData = new BasicMLDataSet(hd.toInput(network.getAttributes()), hd.toIdealOutput(network.getAttributes()));		
+		
 		MLTrain rprop = PropagationFactory.create(rule, network.getTopology(), trainingData, PropagationFactory.DEFAULT_TRAINING_RATE);
+		
 		
 		int iteration = 0;
 		
