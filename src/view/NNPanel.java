@@ -238,6 +238,35 @@ public class NNPanel extends JPanel {
 	
 	public List<BasicLayer> getLayers(){
 		List<BasicLayer> layers = new ArrayList<>();
+
+		//inputLayer
+		BasicLayer layer = new BasicLayer(this.getAtributes().size() * this.getDataInterval());
+		layers.add(layer);
+
+		
+		
+		//hiddenLayer
+		for (int i=0; i<tableLayer.getRowCount(); i++){
+			//for each row from table
+			Integer neurons = (Integer) tableLayer.getValueAt(i, 0);
+			Boolean hasBias = (Boolean) tableLayer.getValueAt(i, 1);
+			enumActivationFuncion actFct = (enumActivationFuncion) tableLayer.getValueAt(i, 2);
+			Double drop = (Double) tableLayer.getValueAt(i, 3);
+			
+			layer = new BasicLayer(ActivationFunctionFactory.create(actFct), hasBias, neurons, drop);
+			layers.add(layer);
+		}
+
+		//outputLayer
+		layer = new BasicLayer(this.getAtributes().size());
+		layers.add(layer);
+		
+		
+		return layers;
+	}
+	
+	public List<BasicLayer> getLayersReversed(){
+		List<BasicLayer> layers = new ArrayList<>();
 		
 		// Need to be in reverse order!!
 		// TODO: Check why.
