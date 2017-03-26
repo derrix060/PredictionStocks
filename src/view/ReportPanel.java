@@ -57,7 +57,7 @@ public class ReportPanel extends JPanel {
 	
 	/**
 	 * Constructor to Report Panel.
-	 * @param view - Wich view called this panel.
+	 * @param view - Which view called this panel.
 	 */
 	public ReportPanel(NewView view) {
 		this.view = view;
