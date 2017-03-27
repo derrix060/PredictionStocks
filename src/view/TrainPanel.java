@@ -203,6 +203,10 @@ public class TrainPanel extends JPanel {
 		return cal;
 	}
 	
+	/**
+	 *  Populate train graph
+	 * @param errors - Errors from trainning
+	 */
 	public void populateGraph(ArrayList<Double> errors){
 		final NumberAxis xAxis = new NumberAxis();
 		final NumberAxis yAxis = new NumberAxis();
