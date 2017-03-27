@@ -135,8 +135,8 @@ public class ReportPanel extends JPanel {
 		final CategoryAxis xAxis = new CategoryAxis();
 		final NumberAxis yAxis = new NumberAxis();
 		yAxis.setForceZeroInRange(false);
-		//final NumberAxis yAxis = new NumberAxis("Y-Axis", getMinValue(nnData, realData) * 0.9, getMaxValue(nnData, realData)  * 1.1, 1.0);
-        
+		
+		yAxis.setLabel("Prices");
 		xAxis.setLabel("Date");
 		
 		
@@ -144,8 +144,8 @@ public class ReportPanel extends JPanel {
 		final LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
 		
 		lineChart.setTitle("Neural Network report - " + view.getActiveNN().getStock());
-	
-		Scene scene = new Scene(lineChart, 357, 294);
+		
+		Scene scene = new Scene(lineChart, panel.getWidth(), panel.getHeight());
 		
 		scene.addEventHandler(ScrollEvent.ANY, new javafx.event.EventHandler<Event>(){
 
