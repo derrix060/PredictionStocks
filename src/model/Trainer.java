@@ -53,6 +53,7 @@ public class Trainer {
 		do{
 			rprop.iteration();
 			iteration ++;
+			System.out.println("Error: " + rprop.getError());
 		}
 		while (iteration < maxIteration && rprop.getError() > maxError);
 		
