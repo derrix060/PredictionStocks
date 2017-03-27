@@ -28,9 +28,9 @@ import controller.CreateNNBtnAction;
 import factories.ActivationFunctionFactory;
 import factories.ActivationFunctionFactory.enumActivationFuncion;
 import model.Data.enumAttributesOfData;
+import model.NeuralNetwork;
 import view.util.LayerTable;
 import view.util.NumberTextField;
-import model.NeuralNetwork;
 
 public class NNPanel extends JPanel {
 
@@ -78,7 +78,7 @@ public class NNPanel extends JPanel {
 		
 		txtNNName = new JTextField();
 		txtNNName.setBounds(10, 28, 167, 20);
-		txtNNName.setText("teste"); //test
+		txtNNName.setText("");
 		this.add(txtNNName);
 		txtNNName.setColumns(10);
 		
@@ -109,7 +109,7 @@ public class NNPanel extends JPanel {
 		
 
 		txtDataInterval.setBounds(10, 76, 167, 20);
-		txtDataInterval.setValue(4); //test
+		txtDataInterval.setValue(5);
 		this.add(txtDataInterval);
 
 
@@ -121,7 +121,7 @@ public class NNPanel extends JPanel {
 		
 		txtStock = new JTextField();
 		txtStock.setBounds(10, 124, 167, 20);
-		txtStock.setText("PETR4.SA"); //test
+		txtStock.setText("");
 		this.add(txtStock);
 
 	//Hidden Layer	
@@ -300,6 +300,15 @@ public class NNPanel extends JPanel {
 	
 	public void setActiveNN(NeuralNetwork nn){
 		this.frame.setActiveNN(nn);
+	}
+	
+	public boolean isFieldsValid(){
+		if (this.getNNName().length() == 0) return false;
+		if (this.getStock().length() == 0) return false;
+		if (this.getAtributes().size() == 0) return false;
+		
+		
+		return true;
 	}
 	
 	/**
