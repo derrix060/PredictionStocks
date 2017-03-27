@@ -225,43 +225,6 @@ public class ReportPanel extends JPanel {
 		return rtn;
 	}
 	
-	/**
-	 * Get min value for all attributes from two Historical Datas
-	 * @param d1 - One Historical Data
-	 * @param d2 - Other Historical Data
-	 * @return - min value
-	 */
-	private double getMinValue(HistoricalData d1, HistoricalData d2){
-		double rtn = 0;
-		double temp;
-		
-		for(enumAttributesOfData attr : view.getActiveNN().getAttributes()){
-			temp = d1.getMapHistorical().stream().min((model.Data dt1, model.Data dt2) -> Double.compare(dt1.getValue(attr), dt2.getValue(attr))).get().getValue(attr);
-			
-			rtn = temp<rtn?temp:rtn;
-		}
-		
-		return rtn;
-	}
-
-	/**
-	 * Get max value for all attributes from two Historical Datas
-	 * @param d1 - One Historical Data
-	 * @param d2 - Other Historical Data
-	 * @return - max value
-	 */
-	private double getMaxValue(HistoricalData d1, HistoricalData d2){
-		double rtn = 0;
-		double temp;
-		
-		for(enumAttributesOfData attr : view.getActiveNN().getAttributes()){
-			temp = d1.getMapHistorical().stream().max((model.Data dt1, model.Data dt2) -> Double.compare(dt1.getValue(attr), dt2.getValue(attr))).get().getValue(attr);
-			
-			rtn = temp>rtn?temp:rtn;
-		}
-		
-		return rtn;
-	}
 
 	/**
 	 * Get the view where it panel belongs to.
