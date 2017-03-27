@@ -22,10 +22,11 @@ import model.Data.enumAttributesOfData;
 
 public class NeuralNetwork {
 
+	//transient dont parse to Json.
 	private final transient static String PATH = System.getProperty("user.dir") + System.getProperty("file.separator");
 	private final transient static String TOPOLOGY_NAME = "_network.eg";
 	private transient String name;
-	private transient BasicNetwork topology; //transient to dont parse to Json.
+	private transient BasicNetwork topology; 
 	private ArrayList<enumAttributesOfData> attributes;
 	private Integer dateInterval;
 	private String stock;
