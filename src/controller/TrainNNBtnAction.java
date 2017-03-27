@@ -31,6 +31,7 @@ public class TrainNNBtnAction implements ActionListener {
 		
 		
 		try {
+			panel.getView().progressBar.setVisible(true);
 			Trainer trainer = new Trainer(panel.getMargin(), panel.getInferiorLimit(), panel.getSuperiorLimit());
 			
 			ArrayList<Double> errors = trainer.train(nn, panel.getLearningRule(), panel.getMaxIteration(), panel.getMaxError(), panel.getFrom(), panel.getTo());
@@ -45,7 +46,9 @@ public class TrainNNBtnAction implements ActionListener {
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error! - " + e.getMessage());
 			e.printStackTrace();
-		} 
+		}
+		
+		panel.getView().progressBar.setVisible(false);
 	}
 
 }

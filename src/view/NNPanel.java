@@ -362,4 +362,8 @@ public class NNPanel extends JPanel {
 		chckbxOpenPrice.setSelected(false);
 		chckbxVolume.setSelected(false);
 	}
+	
+	public NewView getView(){
+		return this.frame;
+	}
 }

@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
@@ -22,6 +23,7 @@ public class NewView extends JFrame {
 	private JPanel contentPane;
 	private NeuralNetwork activeNetwork = null;
 	private JLabel lblNetw = new JLabel("None");
+	public JProgressBar progressBar;
 	
 	
 	/**
@@ -76,6 +78,14 @@ public class NewView extends JFrame {
 		
 		lblNetw.setBounds(132, 536, 262, 14);
 		contentPane.add(lblNetw);
+		
+		progressBar = new JProgressBar();
+		progressBar.setBounds(10, 560, 384, 14);
+		
+		progressBar.setIndeterminate(true);
+		progressBar.setVisible(false);
+		this.add(progressBar);
+		
 	}
 	
 	
