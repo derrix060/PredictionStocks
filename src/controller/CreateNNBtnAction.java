@@ -26,28 +26,31 @@ public class CreateNNBtnAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//Check if current network already exists
-		//if (!NeuralNetwork.existInSystem(name + ".json")){
-			
-		//}
-		
-		//Check if has at least one attribute
-		ArrayList<enumAttributesOfData> attributes = view.getAtributes();
-		if (attributes.isEmpty()){
-			JOptionPane.showMessageDialog(null, "Please select at least one attribute!", "Error: Attribute not selected", JOptionPane.ERROR_MESSAGE);
+
+		if (!view.isFieldsValid()){
+			JOptionPane.showMessageDialog(null, "Please complete with valid datas!!", "Error: Invalid datas", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
-		//Check if has any value
-		// TODO: implement checks
+		
+		String name = view.getNNName();
+		
+		//Check if has already this NN
+		if (NeuralNetwork.existInSystem(name + ".json")){
+			if (JOptionPane.showConfirmDialog(null, "This NN already have in system. Do you want overwrite them?") != JOptionPane.YES_OPTION){
+				JOptionPane.showMessageDialog(null, "Okay! Please change the name or choose this network.");
+				return;
+			}
+		}
 		
 		//Get values from view
 		List<BasicLayer> layers = view.getLayers();
 		String stock = view.getStock();
 		Integer dateInterval = view.getDataInterval();
-		String name = view.getNNName();
 		BasicNetwork topology = NetworkFactory.newNetwork(layers);
+		ArrayList<enumAttributesOfData> attributes = view.getAtributes();
 		
+
 
 		
 		
