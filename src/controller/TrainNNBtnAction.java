@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -32,7 +33,9 @@ public class TrainNNBtnAction implements ActionListener {
 		try {
 			Trainer trainer = new Trainer(panel.getMargin(), panel.getInferiorLimit(), panel.getSuperiorLimit());
 			
-			trainer.train(nn, panel.getLearningRule(), panel.getMaxIteration(), panel.getMaxError(), panel.getFrom(), panel.getTo());
+			ArrayList<Double> errors = trainer.train(nn, panel.getLearningRule(), panel.getMaxIteration(), panel.getMaxError(), panel.getFrom(), panel.getTo());
+			panel.populateGraph(errors);
+			
 			JOptionPane.showMessageDialog(null, "Network trained with success!");
 			
 		} catch (UnknownHostException ex){

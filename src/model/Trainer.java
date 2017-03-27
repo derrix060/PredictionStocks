@@ -35,7 +35,9 @@ public class Trainer {
 	 * @throws InvalidPropertiesFormatException When dates is wrong!
 	 * @throws InvalidAttributeValueException When data lengh is smaller than dateInterval
 	 */
-	public void train(NeuralNetwork network, enumTrainingType rule, int maxIteration, double maxError, Calendar from, Calendar to) throws IOException, InvalidPropertiesFormatException, InvalidAttributeValueException{
+	public ArrayList<Double> train(NeuralNetwork network, enumTrainingType rule, int maxIteration, double maxError, Calendar from, Calendar to) throws IOException, InvalidPropertiesFormatException, InvalidAttributeValueException{
+		ArrayList<Double> errors = new ArrayList<>();
+		
 		if (from.after(to)) throw new InvalidPropertiesFormatException("'From' date must be befor than 'to' date!");
 		HistoricalData hd = new HistoricalData(network.getStock(), from, to, network.getDateInterval(), network.getAttributes());
 		
@@ -53,9 +55,11 @@ public class Trainer {
 		do{
 			rprop.iteration();
 			iteration ++;
-			System.out.println("Error: " + rprop.getError());
+			errors.add(rprop.getError());
+			System.out.println("Epoch #" + iteration + " Error:"+ rprop.getError());
 		}
 		while (iteration < maxIteration && rprop.getError() > maxError);
+
 		
 		// Need call this because of multithread
 		rprop.finishTraining();
@@ -66,6 +70,8 @@ public class Trainer {
 
 		//print Teste
 		Trainer.printTeste(network.getTopology(), hd, network.getAttributes(), normal);
+		
+		return errors;
 	}
 	
 	
