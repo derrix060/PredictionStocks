@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,6 +14,12 @@ import javax.swing.JPanel;
 
 import controller.TrainNNBtnAction;
 import factories.PropagationFactory.enumTrainingType;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart.Data;
+import javafx.scene.chart.XYChart.Series;
 import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -37,6 +44,8 @@ public class TrainPanel extends JPanel {
 		private JFormattedTextField txtInferiorLimit;
 		private JFormattedTextField txtSuperiorLimit;
 		private JFormattedTextField txtMargin;
+		
+		public JFXPanel panelGraph;
 
 	/**
 	 * Constructor
@@ -130,9 +139,10 @@ public class TrainPanel extends JPanel {
 			this.add(btnTrain);
 			btnTrain.addActionListener(new TrainNNBtnAction(this));
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 253, 357, 213);
-		this.add(panel);
+		// Graph
+			panelGraph = new JFXPanel();
+			panelGraph.setBounds(10, 253, 357, 213);
+			this.add(panelGraph);
 	}
 	
 	/**
@@ -192,6 +202,40 @@ public class TrainPanel extends JPanel {
 		cal.setTime((Date) txtTo.getModel().getValue());
 		return cal;
 	}
+	
+	public void populateGraph(ArrayList<Double> errors){
+		final NumberAxis xAxis = new NumberAxis();
+		final NumberAxis yAxis = new NumberAxis();
+		yAxis.setForceZeroInRange(false);
+		
+		yAxis.setLabel("Error");
+		xAxis.setLabel("Epoch");
+		
+		final LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+		
+		Scene scene = new Scene(lineChart, panelGraph.getWidth(), panelGraph.getHeight());
+		
+		populateSeries(errors, lineChart);
+		
+		panelGraph.setScene(scene);
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void populateSeries(ArrayList<Double> errors, LineChart<Number,Number> lineChart){
+		Series<Number, Number> nnSerie = new Series<>();
+		
+		nnSerie.setName("Error");
+		
+		for (int i=0; i<errors.size();i++){
+			nnSerie.getData().add(new Data<Number, Number>(i, errors.get(i)));
+		}
+		
+		lineChart.getData().addAll(nnSerie);
+	}
+	
+	
+	
 	
 
 }
