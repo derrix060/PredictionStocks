@@ -236,11 +236,18 @@ public class NNPanel extends JPanel {
 		return rtn;
 	}
 	
+	/**
+	 * Retun layers from NN Panel, using size of attributes x dataInterval for
+	 * the first layer and attributes for the last layer, both using Linear as
+	 * a activaction function.
+	 * @return List of layers for all network
+	 */
 	public List<BasicLayer> getLayers(){
 		List<BasicLayer> layers = new ArrayList<>();
 
 		//inputLayer
-		BasicLayer layer = new BasicLayer(this.getAtributes().size() * this.getDataInterval());
+		BasicLayer layer = new BasicLayer(ActivationFunctionFactory.create(enumActivationFuncion.Linear), 
+				false, this.getAtributes().size() * this.getDataInterval());
 		layers.add(layer);
 
 		
@@ -258,7 +265,8 @@ public class NNPanel extends JPanel {
 		}
 
 		//outputLayer
-		layer = new BasicLayer(this.getAtributes().size());
+		layer = new BasicLayer(ActivationFunctionFactory.create(enumActivationFuncion.Linear), 
+				false, this.getAtributes().size());
 		layers.add(layer);
 		
 		
