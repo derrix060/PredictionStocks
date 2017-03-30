@@ -187,7 +187,8 @@ public class NeuralNetwork {
 			for (int d=0; d<dateInterval-t; d++){
 				for (int a=0; a<attrSize; a++){
 					//for each attributee
-					input[(d  * attrSize) + a] = hd.getMapHistorical().get(inicialDate + t + d - dateInterval).getValue(this.attributes.get(a));
+					input[(d  * attrSize) + a] = hd.getMapHistorical().get(inicialDate + t + d - dateInterval)
+							.getValue(this.attributes.get(a));
 				}
 			}
 
@@ -237,12 +238,14 @@ public class NeuralNetwork {
 
 				for (int a=0; a<attrSize; a++){
 					//for each attribute
-					input[(d * attrSize) + a] = datas.get(i - inicialDate - dateInterval + d).getValue(this.attributes.get(a));
+					input[(d * attrSize) + a] = datas
+							.get(i - inicialDate - dateInterval + d)
+							.getValue(this.attributes.get(a));
 				}
 			}
-
-			this.getTopology().compute(input, calculatedData); //generate the calculatedData
-
+			
+			//generate the calculatedData
+			this.getTopology().compute(input, calculatedData);
 
 			for(int a=0; a<this.attributes.size(); a++){
 				//for each atribute
