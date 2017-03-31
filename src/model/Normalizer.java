@@ -47,12 +47,15 @@ public class Normalizer {
 		updateMaxAndMinValues(hd);
 		
 		hd.getMapHistorical().forEach(dt -> {
-			for (int i=0; i<dt.getAttributes().size(); i++){
-				enumAttributesOfData atr = dt.getAttributes().get(i);
+			for (enumAttributesOfData atr : dt.getAttributes()){
+				
 				if(atr.equals(enumAttributesOfData.volume))
-					dt.setVolume(getNormalizedValue(dt.getVolume(), minVolumeValue, maxVolumeValue, margin, maxLimit, minLimit));
+					dt.setVolume(getNormalizedValue(dt.getVolume(),
+							minVolumeValue, maxVolumeValue, margin, maxLimit, minLimit));
+				
 				else
-					dt.setValue(atr, getNormalizedValue(dt.getValue(atr), minValue, maxValue, margin, maxLimit, minLimit));
+					dt.setValue(atr, getNormalizedValue(dt.getValue(atr),
+							minValue, maxValue, margin, maxLimit, minLimit));
 			}
 		});
 		
@@ -79,9 +82,9 @@ public class Normalizer {
 		ArrayList<enumAttributesOfData> attr = hd.getMapHistorical().get(0).getAttributes();
 		int lastItem = hd.size - 1;
 		
-		for (int i=0; i<attr.size(); i++){
+		for (enumAttributesOfData atr : attr){
 			//sort by attr
-			switch (attr.get(i)) {
+			switch (atr) {
 			case closePrice:
 				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getClosePrice(), d2.getClosePrice()));
 				minValues.add(hd.getMapHistorical().get(0).getClosePrice());
