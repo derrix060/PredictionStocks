@@ -134,6 +134,7 @@ public class Trainer {
 
 	}
 
+	//TODO: check if can be removed
 	public static HistoricalData createNNHistoricalData(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalizer normal, Calendar from){
 		int size = normalizedData.size - normalizedData.getDateInterval();
 		HistoricalData rtn = new HistoricalData(size);
