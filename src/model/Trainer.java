@@ -105,6 +105,7 @@ public class Trainer {
 
 	}
 
+	//TODO: remove
 	public static void printTeste(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalizer normal){
 		double[][] input = normalizedData.toInput(attr);
 		double[][] idealOutput = normalizedData.toIdealOutput(attr);
