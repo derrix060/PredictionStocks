@@ -121,12 +121,22 @@ public class Normalizer {
 		hd.getMapHistorical().sort(hd);
 	}
 	
-	
-	private static double getNormalizedValue(double oldValue, double minValue, double maxValue, float margin, double maxLimit, double minLimit){
+	/**
+	 * Normalize value using margin.
+	 * @param oldValue - value to be normalized
+	 * @param minValue - minimum value for the serie
+	 * @param maxValue - maximum value for the serie
+	 * @param margin - margin to be considerated
+	 * @param maxLimit - maximum value to be used in NN
+	 * @param minLimit - minimum value to be used in NN
+	 * @return - old value normalized
+	 */
+	private static double getNormalizedValue(double oldValue, double minValue,
+			double maxValue, float margin, double maxLimit, double minLimit){
 		/*
-		 *      (X - Xmin) (D2 - D1)  
-		 * Y =	--------------------   +  D1
-		 * 		    (Xmax - Xmin)
+		       (X - Xmin) (D2 - D1)  
+		  Y =	--------------------   +  D1
+		  		    (Xmax - Xmin)
 		 */
 		
 		//Adjuste margin when it's 100 %
@@ -143,7 +153,8 @@ public class Normalizer {
 		return norm;
 	}
 	
-	public static double getDenomarlizedValue(double normalizedValue, double minValue, double maxValue, float margin, double maxLimit, double minLimit){
+	public static double getDenomarlizedValue(double normalizedValue, double minValue,
+			double maxValue, float margin, double maxLimit, double minLimit){
 		/*
 		 *       Y (Xmax - Xmin) - D1
 		 * X =  --------------------   +  Xmin
