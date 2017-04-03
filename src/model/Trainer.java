@@ -25,12 +25,14 @@ public class Trainer {
 	
 	/**
 	 * Train the network
+	 * 
 	 * @param network - The network to be trained
 	 * @param rule - Wich rule will be use to train (eg: Backpropagation)
 	 * @param maxIteration - Max number of how many times it will be iterate
 	 * @param maxError - Max number of error to stop train
 	 * @param from - Date to start train
 	 * @param to - Date to stop train
+	 * 
 	 * @throws IOException When cannot create new Historical Data
 	 * @throws InvalidPropertiesFormatException When dates is wrong!
 	 * @throws InvalidAttributeValueException When data lengh is smaller than dateInterval
