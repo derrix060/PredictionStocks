@@ -7,7 +7,7 @@
 
 ## To do:
 
-#### Diagrams (in Portuguese)
+### Diagrams (in Portuguese)
 - caso de uso
 - realização de caso de uso
 - regras de negócio
@@ -16,3 +16,16 @@
 - prototipo 
 - classe de análise
 - arquitetura (implantacao)
+
+#### Class diagrams
+- Model (ok)
+- Generate Report
+- Manage RNA
+- Train RNA
+
+#### Sequence diagrams
+- Generate Report
+- Manage RNA
+- Train RNA
+
+#### Review classes in Astah!
