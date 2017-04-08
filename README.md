@@ -8,14 +8,14 @@
 ## To do:
 
 ### Diagrams (in Portuguese)
-- caso de uso
+- caso de uso - ok
 - realização de caso de uso
-- regras de negócio
-- requisitos funcionais (diagrama e especificacoes)
-- req nao funcionais
-- prototipo 
-- classe de análise
-- arquitetura (implantacao)
+- regras de negócio - ok
+- requisitos funcionais (diagrama e especificacoes) - ok
+- req nao funcionais - ok
+- prototipo - ok
+- classe de análise - ok
+- arquitetura (implantacao) - ok
 
 #### Class diagrams
 - Model (ok)
