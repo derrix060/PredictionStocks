@@ -6,6 +6,13 @@
 
 
 ## To do:
-*	Create graph to show train (epochs x error²)
-*	Create new view to separate the responsibilities;
-* 	Check why NN is saved in reversed order;
+
+#### Diagrams (in Portuguese)
+- caso de uso
+- realização de caso de uso
+- regras de negócio
+- requisitos funcionais (diagrama e especificacoes)
+- req nao funcionais
+- prototipo 
+- classe de análise
+- arquitetura (implantacao)
