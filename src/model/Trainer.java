@@ -9,11 +9,9 @@ import javax.naming.directory.InvalidAttributeValueException;
 
 import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.train.MLTrain;
-import org.encog.neural.networks.BasicNetwork;
 
 import factories.PropagationFactory;
 import factories.PropagationFactory.enumTrainingType;
-import model.Data.enumAttributesOfData;
 
 public class Trainer {
 	private Normalizer normal;

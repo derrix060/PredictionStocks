@@ -18,48 +18,11 @@ public class HistoricalData implements Comparator<Data>{
 		this.size = 0;
 	}
 	
-	public HistoricalData(int size){
-		this.size = size;
-		
-	}
 
 	public HistoricalData(String ticker, Calendar from, Calendar to, int dateInterval, List<enumAttributesOfData> attributes) throws IOException {
 		this.dateInterval = dateInterval;
 		historicalValues = DataExtractor.getHistorical(ticker, from, to, attributes);
 		this.size = historicalValues.size();
-	}
-	
-	
-	public HistoricalData createTrainHistoricalData (ArrayList<enumAttributesOfData> attr, Calendar to){
-		ArrayList<Data> datas = new ArrayList<>();
-		Calendar actualDate = historicalValues.get(0).getDate();
-		int i = 0;
-		Data oldData = new Data();
-		
-		while (actualDate.before(to) && i < historicalValues.size()){
-			actualDate = historicalValues.get(i).getDate();
-			//for each date
-			
-			Data dt = new Data();
-			dt.setTicker(historicalValues.get(0).getTicker());
-			dt.setDate(actualDate);
-			oldData = historicalValues.get(i);
-			
-			for (enumAttributesOfData atr : attr){
-				//for each attribute
-				dt.setValue(atr, oldData.getValue(atr));
-			}
-			
-			datas.add(dt);
-			
-			i ++;
-		}
-		
-		HistoricalData rtn = new HistoricalData(datas.size());
-		rtn.dateInterval = this.dateInterval;
-		rtn.setMapHistorical(datas);
-		
-		return rtn;
 	}
 	
 	public double[][] toInput(ArrayList<enumAttributesOfData> attr){
@@ -124,6 +87,7 @@ public class HistoricalData implements Comparator<Data>{
 		this.size = hist.size();
 	}
 	
+	// TODO: remove?
 	public void addData(Data dt){
 		this.historicalValues.add(dt);
 		this.size ++;
