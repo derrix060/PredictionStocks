@@ -15,9 +15,6 @@ import model.Data.enumAttributesOfData;
  */
 public class Normalizer {
 	
-	private static final double DEFAUT_MAX_LIMIT = 1;
-	private static final double DEFAUT_MIN_LIMIT = 0;
-	
 	private double maxLimit;
 	private double minLimit;
 
@@ -149,7 +146,7 @@ public class Normalizer {
 		return norm;
 	}
 	
-	public static double getDenomarlizedValue(double normalizedValue, double minValue,
+	private static double getDenomarlizedValue(double normalizedValue, double minValue,
 			double maxValue, float margin, double maxLimit, double minLimit){
 		/*
 		 *       Y (Xmax - Xmin) - D1
@@ -172,30 +169,4 @@ public class Normalizer {
 		return denorm;
 	}
 	
-	
-	// Getters and setters
-	public double getMaxValue() {
-		return maxValue;
-	}
-
-	public void setMaxValue(double maxValue) {
-		this.maxValue = maxValue;
-	}
-
-	public float getMargin() {
-		return margin;
-	}
-
-	public void setMargin(float margin) {
-		this.margin = margin;
-	}
-
-	public double getMinValue() {
-		return minValue;
-	}
-
-	public void setMinValue(double minValue) {
-		this.minValue = minValue;
-	}
-
 }

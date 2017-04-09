@@ -66,6 +66,8 @@ public class HistoricalData implements Comparator<Data>{
 		return rtn;
 	}
 
+
+	//TODO: remove?
 	@Override
 	public int compare(Data o1, Data o2) {
 		return o1.getDate().compareTo(o2.getDate());
