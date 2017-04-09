@@ -26,11 +26,7 @@ public class Normalizer {
 	private double maxVolumeValue;
 	private double minVolumeValue;
 	private float margin;
-	
-	public Normalizer (float margin){
-		this(margin, DEFAUT_MAX_LIMIT, DEFAUT_MIN_LIMIT);
-	}
-	
+		
 	public Normalizer (float margin, double maxLimit, double minLimit){
 		this.margin = margin;
 		this.maxLimit = maxLimit;
