@@ -172,19 +172,6 @@ public class Normalizer {
 		return denorm;
 	}
 	
-	//not static
-	public double getDenormalizedValueFrom (double normalizedValue){
-		double vlr =  Normalizer.getDenomarlizedValue(normalizedValue, getMinValue(), getMaxValue(), getMargin(), maxLimit, minLimit);
-		
-		//round in 2 precision
-		vlr *= 100;
-		vlr = Math.round(vlr);
-		vlr /= 100;
-		
-		return vlr;
-	}
-
-	
 	
 	// Getters and setters
 	public double getMaxValue() {

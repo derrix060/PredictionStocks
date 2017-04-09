@@ -70,40 +70,9 @@ public class Trainer {
 		System.out.println("Rede treinada!\nIteracoes: " + iteration +"\nErro: " + rprop.getError());
 		
 
-		//print Teste
-		printTeste(network.getTopology(), hd, network.getAttributes(), normal);
-		
 		return errors;
 	}
 	
 
-	//TODO: remove
-	private void printTeste(BasicNetwork network, HistoricalData normalizedData, ArrayList<enumAttributesOfData> attr, Normalizer normal){
-		double[][] input = normalizedData.toInput(attr);
-		double[][] idealOutput = normalizedData.toIdealOutput(attr);
-
-		double[] output = new double[attr.size()];
-
-		for (int i=0; i<input.length; i++){
-			//for each data
-
-			network.compute(input[i], output);
-
-				System.out.println("Data " + i + "->");
-				System.out.println("ideal: ");
-				for (int j=0; j<attr.size(); j++)
-					System.out.println(normal.getDenormalizedValueFrom(idealOutput[i][j]));
-
-				System.out.println();
-
-				System.out.println("output: ");
-				for (int j=0; j<attr.size(); j++)
-					System.out.println(normal.getDenormalizedValueFrom(output[j]));
-
-				System.out.println("---------------------------------\n");
-
-		}
-
-	}
 
 }
