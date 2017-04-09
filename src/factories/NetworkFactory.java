@@ -1,12 +1,10 @@
 package factories;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.layers.BasicLayer;
 
-import factories.ActivationFunctionFactory.enumActivationFuncion;
 
 public class NetworkFactory {
 
