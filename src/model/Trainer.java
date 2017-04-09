@@ -43,11 +43,9 @@ public class Trainer {
 		
 		if(hd.size < hd.getDateInterval()) throw new InvalidAttributeValueException("Data lengh is smaller than NN's dateInterval");
 		
-		normal.normalizeDatas(hd);
+		normal.normalizeDatas(hd);	
 		
-		BasicMLDataSet trainingData = new BasicMLDataSet(hd.toInput(network.getAttributes()), hd.toIdealOutput(network.getAttributes()));		
-		
-		MLTrain rprop = PropagationFactory.create(rule, network.getTopology(), trainingData, PropagationFactory.DEFAULT_TRAINING_RATE);
+		MLTrain rprop = PropagationFactory.create(rule, network, hd, PropagationFactory.DEFAULT_TRAINING_RATE);
 		
 		
 		int iteration = 0;
