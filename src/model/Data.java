@@ -136,4 +136,10 @@ public class Data {
 		this.attributes = attributes;
 	}
 	
+	public static int compareByClosePrice(Data d1, Data d2){
+		return Double.compare(d1.getClosePrice(), d2.getClosePrice());
+	}
+	
+	
+	
 }

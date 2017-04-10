@@ -26,21 +26,24 @@ public class NewView extends JFrame {
 	public JProgressBar progressBar;
 	
 	
+	
+
+
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+		EventQueue.invokeLater(() -> {
 				try {
 					NewView frame = new NewView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
 		});
 	}
+	
+	
 	
 
 	/**

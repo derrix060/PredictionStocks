@@ -8,9 +8,12 @@
 package view;
 	
 	import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 	
 	public class _oldTeste {
 		
+		@SuppressWarnings("unused")
 		public static void main (String args[]){
 			ArrayList<Person> persons = new ArrayList<>();
 			Person person = new Person();
@@ -21,6 +24,27 @@ package view;
 			persons.add(person);
 			
 			System.out.println(persons);
+			
+			
+			List<Person> santos = new ArrayList<>();
+
+			Person santo = new Person();
+			santo.name = "Maria";
+			santos.add(santo);
+			santo = new Person();
+			santo.name = "Pedro";
+			santos.add(santo);
+			santo = new Person();
+			santo.name = "Paulo";
+			santos.add(santo);
+			
+			
+			santos.forEach((sant) -> {
+				sant.printName();
+			});
+			
+			santos.forEach(Person::printName);
+			
 		}
 	}
 	
@@ -29,11 +53,26 @@ package view;
 		
 		Person(){}
 		
+		public void printName(){
+			System.out.println(name);
+		}
+		
 		@Override
 		public String toString(){
 			return name;
 		}
 	}
+	
+	
+	class Carrinho{}
+	
+	class Item{}
+	
+	
+	
+	
+	
+	
 	
 
 

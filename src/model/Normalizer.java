@@ -75,10 +75,12 @@ public class Normalizer {
 		ArrayList<enumAttributesOfData> attr = hd.getMapHistorical().get(0).getAttributes();
 		int lastItem = hd.size - 1;
 		
+		
 		for (enumAttributesOfData atr : attr){
 			//sort by attr
 			switch (atr) {
 			case closePrice:
+				hd.getMapHistorical().sort(Data::compareByClosePrice);
 				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getClosePrice(), d2.getClosePrice()));
 				minValues.add(hd.getMapHistorical().get(0).getClosePrice());
 				maxValues.add(hd.getMapHistorical().get(lastItem).getClosePrice());
