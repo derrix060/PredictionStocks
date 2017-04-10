@@ -41,6 +41,7 @@ public class NewView extends JFrame {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the frame.

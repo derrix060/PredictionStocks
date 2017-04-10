@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,39 +133,35 @@ public class NNPanel extends JPanel {
 			btnAdd.setIcon(new ImageIcon(this.frame.getClass().getResource("/view/util/add.png")));
 			btnAdd.setForeground(new Color(0, 128, 0));
 			btnAdd.setBounds(90, 155, 41, 23);
-			btnAdd.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					dtm.addRow(emptyData);
-					tableLayer.setModel(dtm);
-					
-				}
+			
+			// With lambda Expression
+			btnAdd.addActionListener((event) -> {
+				dtm.addRow(emptyData);
+				tableLayer.setModel(dtm);
 			});
+			
+			
 			this.add(btnAdd);
 	
 		//Remove button
 			JButton btnRemove = new JButton("");
 			btnRemove.setIcon(new ImageIcon(this.frame.getClass().getResource("/view/util/cancel.png")));
 			btnRemove.setBounds(136, 155, 41, 23);
-			btnRemove.addActionListener(new ActionListener() {
+			
+			btnRemove.addActionListener((event) -> {
+				//if don't have any row
+				if (tableLayer.getRowCount() == 0) return;
 				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					
-					//if don't have any row
-					if (tableLayer.getRowCount() == 0) return;
-					
-					try{
-						dtm.removeRow(tableLayer.getSelectedRow());
-					}
-					
-					//if nothing is selected -> remove the last one
-					catch (ArrayIndexOutOfBoundsException ae){
-						dtm.removeRow(tableLayer.getRowCount() -1);
-					}
+				try{
+					dtm.removeRow(tableLayer.getSelectedRow());
+				}
+				
+				//if nothing is selected -> remove the last one
+				catch (ArrayIndexOutOfBoundsException ae){
+					dtm.removeRow(tableLayer.getRowCount() -1);
 				}
 			});
+			
 			this.add(btnRemove);	
 		
 		//Start Layer Table
