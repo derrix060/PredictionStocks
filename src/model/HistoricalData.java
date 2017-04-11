@@ -3,12 +3,11 @@ package model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.List;
 
 import model.Data.enumAttributesOfData;
 
-public class HistoricalData implements Comparator<Data>{
+public class HistoricalData{
 	
 	public int size;
 	private int dateInterval;
@@ -67,12 +66,6 @@ public class HistoricalData implements Comparator<Data>{
 	}
 
 
-	//TODO: remove?
-	@Override
-	public int compare(Data o1, Data o2) {
-		return o1.getDate().compareTo(o2.getDate());
-	}
-	
 	/**
 	 * Getter and setters
 	 */
@@ -89,11 +82,6 @@ public class HistoricalData implements Comparator<Data>{
 		this.size = hist.size();
 	}
 	
-	// TODO: remove?
-	public void addData(Data dt){
-		this.historicalValues.add(dt);
-		this.size ++;
-	}
 	public void setDateInterval(int interval){
 		this.dateInterval = interval;
 	}

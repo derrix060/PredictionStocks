@@ -136,8 +136,27 @@ public class Data {
 		this.attributes = attributes;
 	}
 	
+	
+	// comparators
 	public static int compareByClosePrice(Data d1, Data d2){
 		return Double.compare(d1.getClosePrice(), d2.getClosePrice());
+	}
+	
+	public static int compareByHighPrice(Data d1, Data d2){
+		return Double.compare(d1.getHighPrice(), d2.getHighPrice());
+	}
+	
+	/**
+	 * Compare two datas using volume field.
+	 * @param d1 - One Data
+	 * @param d2 - Other Data
+	 */
+	public static int compareByVolume(Data d1, Data d2){
+		return Double.compare(d1.getVolume(), d2.getVolume());
+	}
+	
+	public static int compareByDate(Data d1, Data d2){
+		return d1.getDate().compareTo(d2.getDate());
 	}
 	
 	

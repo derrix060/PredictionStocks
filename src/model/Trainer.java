@@ -7,7 +7,6 @@ import java.util.InvalidPropertiesFormatException;
 
 import javax.naming.directory.InvalidAttributeValueException;
 
-import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.train.MLTrain;
 
 import factories.PropagationFactory;

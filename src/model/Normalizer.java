@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import model.Data.enumAttributesOfData;
 
@@ -76,22 +78,21 @@ public class Normalizer {
 		int lastItem = hd.size - 1;
 		
 		
-		for (enumAttributesOfData atr : attr){
+		attr.forEach(atr -> {
 			//sort by attr
 			switch (atr) {
 			case closePrice:
 				hd.getMapHistorical().sort(Data::compareByClosePrice);
-				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getClosePrice(), d2.getClosePrice()));
 				minValues.add(hd.getMapHistorical().get(0).getClosePrice());
 				maxValues.add(hd.getMapHistorical().get(lastItem).getClosePrice());
 				break;
 			case highPrice:
-				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getHighPrice(), d2.getHighPrice()));
+				hd.getMapHistorical().sort(Data::compareByHighPrice);
 				minValues.add(hd.getMapHistorical().get(0).getHighPrice());
 				maxValues.add(hd.getMapHistorical().get(lastItem).getHighPrice());
 				break;
 			case lowPrice:
-				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getLowPrice(), d2.getLowPrice()));
+				hd.getMapHistorical().sort((d1, d2) -> Double.compare(d1.getLowPrice(), d2.getLowPrice()));
 				minValues.add(hd.getMapHistorical().get(0).getLowPrice());
 				maxValues.add(hd.getMapHistorical().get(lastItem).getLowPrice());
 				break;
@@ -101,19 +102,41 @@ public class Normalizer {
 				maxValues.add(hd.getMapHistorical().get(lastItem).getOpenPrice());
 				break;
 			case volume:
-				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getVolume(), d2.getVolume()));
+				
+				/*
+				// Sort with inner class
+				hd.getMapHistorical().sort(new Comparator<Data>() {
+
+					@Override
+					public int compare(Data d1, Data d2) {
+						return Data.compareByVolume(d1, d2);
+					}
+					
+				});
+				
+				// Sort with lambda expressions
+				hd.getMapHistorical().sort((d1, d2) -> 
+							Data.compareByVolume(d1, d2)
+						);
+				*/
+				// Sort with Method Reference
+				hd.getMapHistorical().sort(Data::compareByVolume);
+
+
+				
+				
 				minVolumeValue = hd.getMapHistorical().get(0).getVolume();
 				maxVolumeValue = hd.getMapHistorical().get(lastItem).getVolume();
 				break;
 			}
-		}
+		});
 
 		this.maxValue = Collections.max(maxValues);
 		this.minValue = Collections.min(minValues);
 		
 		
 		//sort by date again
-		hd.getMapHistorical().sort(hd);
+		hd.getMapHistorical().sort(Data::compareByDate);
 	}
 	
 	/**

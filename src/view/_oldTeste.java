@@ -6,14 +6,14 @@
 
 
 package view;
-	
-	import java.util.ArrayList;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-	
+
+	@SuppressWarnings("unused")	
 	public class _oldTeste {
 		
-		@SuppressWarnings("unused")
 		public static void main (String args[]){
 			ArrayList<Person> persons = new ArrayList<>();
 			Person person = new Person();
