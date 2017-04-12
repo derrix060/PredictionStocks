@@ -34,7 +34,13 @@ public class Data {
 	@Override
 	public String toString(){
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		return "Ticker: " + getTicker() + " Date: " + format.format(getDate().getTime())+ " openPrice: " + getOpenPrice() + " highPrice: " + getHighPrice() + " lowPrice: " + getLowPrice() + " closePrice: " + getClosePrice() + " Volume: " + getVolume();
+		return "Ticker: " + getTicker() 
+			+ " Date: " + format.format(getDate().getTime())
+			+ " openPrice: " + getOpenPrice() 
+			+ " highPrice: " + getHighPrice() 
+			+ " lowPrice: " + getLowPrice() 
+			+ " closePrice: " + getClosePrice() 
+			+ " Volume: " + getVolume();
 	}
 	
 	private void addToAttributes(enumAttributesOfData atr){
