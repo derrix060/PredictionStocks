@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.OptionalDouble;
 
+import model.Data;
 import model.Data.enumAttributesOfData;
 import model.HistoricalData;
 
@@ -21,42 +23,7 @@ import model.HistoricalData;
 		
 		public static void main (String args[]) throws IOException{
 			
-			exemploStream1();
-			
-			/*
-			ArrayList<Person> persons = new ArrayList<>();
-			Person person = new Person();
-	
-			person.name = "a";
-			persons.add(person);
-			person.name = "b";
-			persons.add(person);
-			
-			System.out.println(persons);
-			
-			
-			List<Person> santos = new ArrayList<>();
-
-			Person santo = new Person();
-			santo.name = "Maria";
-			santos.add(santo);
-			santo = new Person();
-			santo.name = "Pedro";
-			santos.add(santo);
-			santo = new Person();
-			santo.name = "Paulo";
-			santos.add(santo);
-			
-			
-			santos.forEach((sant) -> {
-				sant.printName();
-			});
-			
-			santos.forEach(Person::printName);
-			*/
-			
-			
-			
+			exemploParallel();			
 		}
 		
 		
@@ -73,36 +40,48 @@ import model.HistoricalData;
 			attr.add(enumAttributesOfData.highPrice);
 			attr.add(enumAttributesOfData.volume);
 			
-			HistoricalData historical = new HistoricalData(ticker, from, to, dateInterval, attr);
+			HistoricalData historical = new HistoricalData(ticker,
+					from, to, dateInterval, attr);
 			
-			historical.getMapHistorical().forEach(System.out::println);
+			ArrayList<Data> historicalDatas = historical.getMapHistorical();
+			
+			//historicalDatas.forEach(System.out::println);
+			
+			Double media = historicalDatas
+				.parallelStream()
+				.filter(dt -> dt.getVolume() > 60000000.0)
+				.mapToDouble(Data::getClosePrice)
+				.average()
+				.getAsDouble();
+			
+			System.out.println("\n\nMedia: " + media);
+		}
+		
+		public static void exemploParallel(){
+			ArrayList<Integer> numeros = new ArrayList<>();
+			
+			for (int i=1; i<=10; i++){
+				numeros.add(i);
+			}
+			
+			System.out.println("\nLista com stream sequencial:");
+			numeros
+				.stream()
+				.forEach(num -> System.out.print(num + " "));
+
+			System.out.println("\n\nLista com parallelStream:");
+			numeros
+				.parallelStream()
+				.forEach(num -> System.out.print(num + " "));
+
+			System.out.println("\n\nMesma lista com outro parallelStream:");
+			numeros
+				.parallelStream()
+				.forEach(num -> System.out.print(num + " "));
+			
 		}
 		
 	}
-	
-	class Person{
-		String name;
-		
-		Person(){}
-		
-		public void printName(){
-			System.out.println(name);
-		}
-		
-		@Override
-		public String toString(){
-			return name;
-		}
-	}
-	
-	
-	class Carrinho{}
-	
-	class Item{}
-	
-	
-	
-	
 	
 	
 	
