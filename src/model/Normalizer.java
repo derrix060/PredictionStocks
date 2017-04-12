@@ -3,7 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.stream.DoubleStream;
+import java.util.stream.Stream;
 
 import model.Data.enumAttributesOfData;
 
@@ -78,55 +81,40 @@ public class Normalizer {
 		int lastItem = hd.size - 1;
 		
 		
+		Stream<Data> stream = hd.getMapHistorical().parallelStream();
+		
 		attr.forEach(atr -> {
-			//sort by attr
+			DoubleSummaryStatistics datas;
+			
 			switch (atr) {
 			case closePrice:
-				hd.getMapHistorical().sort(Data::compareByClosePrice);
-				minValues.add(hd.getMapHistorical().get(0).getClosePrice());
-				maxValues.add(hd.getMapHistorical().get(lastItem).getClosePrice());
+				datas = stream.mapToDouble(Data::getClosePrice).summaryStatistics();
+				minValues.add(datas.getMin());
+				maxValues.add(datas.getMax());
 				break;
+				
 			case highPrice:
-				hd.getMapHistorical().sort(Data::compareByHighPrice);
-				minValues.add(hd.getMapHistorical().get(0).getHighPrice());
-				maxValues.add(hd.getMapHistorical().get(lastItem).getHighPrice());
+				datas = stream.mapToDouble(Data::getHighPrice).summaryStatistics();
+				minValues.add(datas.getMin());
+				maxValues.add(datas.getMax());
 				break;
+				
 			case lowPrice:
-				hd.getMapHistorical().sort((d1, d2) -> Double.compare(d1.getLowPrice(), d2.getLowPrice()));
-				minValues.add(hd.getMapHistorical().get(0).getLowPrice());
-				maxValues.add(hd.getMapHistorical().get(lastItem).getLowPrice());
+				datas = stream.mapToDouble(Data::getLowPrice).summaryStatistics();
+				minValues.add(datas.getMin());
+				maxValues.add(datas.getMax());
 				break;
+				
 			case openPrice:
-				hd.getMapHistorical().sort((Data d1, Data d2) -> Double.compare(d1.getOpenPrice(), d2.getOpenPrice()));
-				minValues.add(hd.getMapHistorical().get(0).getOpenPrice());
-				maxValues.add(hd.getMapHistorical().get(lastItem).getOpenPrice());
+				datas = stream.mapToDouble(Data::getOpenPrice).summaryStatistics();
+				minValues.add(datas.getMin());
+				maxValues.add(datas.getMax());
 				break;
+				
 			case volume:
-				
-				/*
-				// Sort with inner class
-				hd.getMapHistorical().sort(new Comparator<Data>() {
-
-					@Override
-					public int compare(Data d1, Data d2) {
-						return Data.compareByVolume(d1, d2);
-					}
-					
-				});
-				
-				// Sort with lambda expressions
-				hd.getMapHistorical().sort((d1, d2) -> 
-							Data.compareByVolume(d1, d2)
-						);
-				*/
-				// Sort with Method Reference
-				hd.getMapHistorical().sort(Data::compareByVolume);
-
-
-				
-				
-				minVolumeValue = hd.getMapHistorical().get(0).getVolume();
-				maxVolumeValue = hd.getMapHistorical().get(lastItem).getVolume();
+				datas = stream.mapToDouble(Data::getVolume).summaryStatistics();
+				minVolumeValue = (datas.getMin());
+				maxVolumeValue = (datas.getMax());
 				break;
 			}
 		});
