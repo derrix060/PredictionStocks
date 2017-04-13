@@ -31,7 +31,7 @@ public class ChooseNNBtnAction implements ActionListener {
 			NeuralNetwork nn = NeuralNetwork.load(name);
 			view.setActiveNN(nn);
 			view.updateFields(nn);
-			
+			JOptionPane.showMessageDialog(null, "Loaded!");
 		
 		} catch (IOException ex) {
 			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error: network cannot be loaded!", JOptionPane.ERROR_MESSAGE);

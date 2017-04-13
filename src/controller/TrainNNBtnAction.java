@@ -43,7 +43,11 @@ public class TrainNNBtnAction implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Error! - Network not fouded! ");
 			ex.printStackTrace();
 			
-		} catch (Exception e) {
+		} catch (NullPointerException nEx){
+			JOptionPane.showMessageDialog(null, "Error! - Please select datas!");
+		}
+		
+		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error! - " + e.getMessage());
 			e.printStackTrace();
 		}
