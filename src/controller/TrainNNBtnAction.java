@@ -44,7 +44,7 @@ public class TrainNNBtnAction implements ActionListener {
 			ex.printStackTrace();
 			
 		} catch (NullPointerException nEx){
-			JOptionPane.showMessageDialog(null, "Error! - Please select datas!");
+			JOptionPane.showMessageDialog(null, "Error! - Please select dates!");
 		}
 		
 		catch (Exception e) {

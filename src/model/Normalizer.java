@@ -78,41 +78,43 @@ public class Normalizer {
 		ArrayList<Double> maxValues = new ArrayList<>();
 		ArrayList<Double> minValues = new ArrayList<>();
 		ArrayList<enumAttributesOfData> attr = hd.getMapHistorical().get(0).getAttributes();
-		int lastItem = hd.size - 1;
 		
-		
-		Stream<Data> stream = hd.getMapHistorical().parallelStream();
 		
 		attr.forEach(atr -> {
 			DoubleSummaryStatistics datas;
 			
 			switch (atr) {
 			case closePrice:
-				datas = stream.mapToDouble(Data::getClosePrice).summaryStatistics();
+				datas = hd.getMapHistorical().parallelStream()
+					.mapToDouble(Data::getClosePrice).summaryStatistics();
 				minValues.add(datas.getMin());
 				maxValues.add(datas.getMax());
 				break;
 				
 			case highPrice:
-				datas = stream.mapToDouble(Data::getHighPrice).summaryStatistics();
+				datas = hd.getMapHistorical().parallelStream()
+					.mapToDouble(Data::getHighPrice).summaryStatistics();
 				minValues.add(datas.getMin());
 				maxValues.add(datas.getMax());
 				break;
 				
 			case lowPrice:
-				datas = stream.mapToDouble(Data::getLowPrice).summaryStatistics();
+				datas = hd.getMapHistorical().parallelStream()
+					.mapToDouble(Data::getLowPrice).summaryStatistics();
 				minValues.add(datas.getMin());
 				maxValues.add(datas.getMax());
 				break;
 				
 			case openPrice:
-				datas = stream.mapToDouble(Data::getOpenPrice).summaryStatistics();
+				datas = hd.getMapHistorical().parallelStream()
+					.mapToDouble(Data::getOpenPrice).summaryStatistics();
 				minValues.add(datas.getMin());
 				maxValues.add(datas.getMax());
 				break;
 				
 			case volume:
-				datas = stream.mapToDouble(Data::getVolume).summaryStatistics();
+				datas = hd.getMapHistorical().parallelStream()
+					.mapToDouble(Data::getVolume).summaryStatistics();
 				minVolumeValue = (datas.getMin());
 				maxVolumeValue = (datas.getMax());
 				break;
