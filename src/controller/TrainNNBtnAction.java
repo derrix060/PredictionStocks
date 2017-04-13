@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
@@ -45,9 +46,9 @@ public class TrainNNBtnAction implements ActionListener {
 			
 		} catch (NullPointerException nEx){
 			JOptionPane.showMessageDialog(null, "Error! - Please select dates!");
-		}
-		
-		catch (Exception e) {
+		} catch (FileNotFoundException fEx){
+			JOptionPane.showMessageDialog(null, "Error! - Don't exist data from selected dates!");
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error! - " + e.getMessage());
 			e.printStackTrace();
 		}

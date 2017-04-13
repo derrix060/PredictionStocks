@@ -27,7 +27,7 @@ public class ReportNNBtnAction  implements ActionListener{
 		String name = panel.getView().getNNName();
 		
 		if (name.isEmpty()){
-			JOptionPane.showMessageDialog(null, "Please choose your neural network!", "Error: don't have name", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Please choose your neural network!", "Error: don't have NN selected", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		

@@ -37,7 +37,7 @@ public class Trainer {
 	public ArrayList<Double> train(NeuralNetwork network, enumTrainingType rule, int maxIteration, double maxError, Calendar from, Calendar to) throws IOException, InvalidPropertiesFormatException, InvalidAttributeValueException{
 		ArrayList<Double> errors = new ArrayList<>();
 		
-		if (from.after(to)) throw new InvalidPropertiesFormatException("'From' date must be befor than 'to' date!");
+		if (from.after(to)) throw new InvalidPropertiesFormatException("'From' date must be before than 'to' date!");
 		HistoricalData hd = new HistoricalData(network.getStock(), from, to, network.getDateInterval(), network.getAttributes());
 		
 		if(hd.size < hd.getDateInterval()) throw new InvalidAttributeValueException("Data lengh is smaller than NN's dateInterval");
