@@ -7,25 +7,19 @@
 
 ## To do:
 
-### Diagrams (in Portuguese)
-- caso de uso - ok
-- realização de caso de uso
-- regras de negócio - ok
-- requisitos funcionais (diagrama e especificacoes) - ok
-- req nao funcionais - ok
-- prototipo - ok
-- classe de análise - ok
-- arquitetura (implantacao) - ok
+### State diagram
+- start training
+- training
+- exit because NN is trained with success
+- exit because NN get some limit
+- NN trained
 
-#### Class diagrams
-- Model (ok)
-- Generate Report
-- Manage RNA
-- Train RNA
+### Ativity diagram
+- get historical prices
+- train
+- exit
 
-#### Sequence diagrams
-- Generate Report
-- Manage RNA
-- Train RNA
-
-#### Review classes in Astah!
+### Tests plan
+- compare training alghs with same topology
+- spec with topology, how much training, get average.
+- create comparing grade
