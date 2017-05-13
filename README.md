@@ -7,19 +7,11 @@
 
 ## To do:
 
-### State diagram
-- start training
-- training
-- exit because NN is trained with success
-- exit because NN get some limit
-- NN trained
-
-### Ativity diagram
-- get historical prices
-- train
-- exit
 
 ### Tests plan
 - compare training alghs with same topology
 - spec with topology, how much training, get average.
 - create comparing grade
+
+### Tests script
+
