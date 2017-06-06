@@ -40,7 +40,7 @@ public class Trainer {
 		if (from.after(to)) throw new InvalidPropertiesFormatException("'From' date must be before than 'to' date!");
 		HistoricalData hd = new HistoricalData(network.getStock(), from, to, network.getDateInterval(), network.getAttributes());
 		
-		if(hd.size < hd.getDateInterval()) throw new InvalidAttributeValueException("Data lengh is smaller than NN's dateInterval");
+		if(hd.size < hd.getDateInterval()) throw new InvalidAttributeValueException("Data lengh (" + hd.size + ") is smaller than NN's dateInterval (" + hd.getDateInterval() + ")");
 		
 		normal.normalizeDatas(hd);	
 		
