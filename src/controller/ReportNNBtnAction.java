@@ -53,7 +53,12 @@ public class ReportNNBtnAction  implements ActionListener{
 			
 		} catch (IOException e1) {
 			JOptionPane.showMessageDialog(null, "Error! - " + e1.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
-			return;
+		}
+		catch (NullPointerException ne){
+			JOptionPane.showMessageDialog(null, "Sorry, It has a problem! - Null Pointer Exception");
+		}
+		catch (Exception ex){
+			JOptionPane.showMessageDialog(null, ex.toString() + "\n" + ex.getMessage());
 		}
 
 	}
