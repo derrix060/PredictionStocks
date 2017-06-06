@@ -237,9 +237,5 @@ public class TrainPanel extends JPanel {
 		
 		lineChart.getData().addAll(nnSerie);
 	}
-	
-	
-	
-	
 
 }
