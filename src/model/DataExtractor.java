@@ -31,27 +31,32 @@ public class DataExtractor {
 			tick.setTicker(ticker);
 			tick.setDate(quote.getDate());
 			
-			for(enumAttributesOfData atr : attributes){
-				switch (atr) {
-				case openPrice:
-					tick.setOpenPrice(quote.getOpen().doubleValue());
-					break;
-				case closePrice:
-					tick.setClosePrice(quote.getAdjClose().doubleValue());
-					break;
-				case highPrice:
-					tick.setHighPrice(quote.getHigh().doubleValue());
-					break;
-				case lowPrice:
-					tick.setLowPrice(quote.getLow().doubleValue());
-					break;
-				case volume:
-					tick.setVolume(quote.getVolume().doubleValue());
-					break;
+			try{
+				for(enumAttributesOfData atr : attributes){
+					switch (atr) {
+					case openPrice:
+						tick.setOpenPrice(quote.getOpen().doubleValue());
+						break;
+					case closePrice:
+						tick.setClosePrice(quote.getAdjClose().doubleValue());
+						break;
+					case highPrice:
+						tick.setHighPrice(quote.getHigh().doubleValue());
+						break;
+					case lowPrice:
+						tick.setLowPrice(quote.getLow().doubleValue());
+						break;
+					case volume:
+						tick.setVolume(quote.getVolume().doubleValue());
+						break;
+					}
+					
 				}
-				
+				historicals.add(tick);
 			}
-			historicals.add(tick);
+			catch (NullPointerException e){
+				System.out.println("Didn't find values from " + tick.getTicker() + ", " + tick.getDate());
+			}
 		}
 		
 		//order by date
