@@ -182,21 +182,21 @@ public class ReportPanel extends JPanel {
 	private void populateSeries(HistoricalData nnData, HistoricalData realData, LineChart<String,Number> lineChart){
 		Series<String, Number> nnSerie = new Series<>();
 
-
-        //realSerie -> must be first!
-        for (enumAttributesOfData attr : this.view.getActiveNN().getAttributes()){
-        	nnSerie = new Series<>();
-        	
-        	nnSerie = createSeries(realData,attr, "Real - " + attr.toString());
-            lineChart.getData().addAll(nnSerie);
-        	
-        }
         
         //nnSerie
         for (enumAttributesOfData attr : this.view.getActiveNN().getAttributes()){
         	nnSerie = new Series<>();
         	
         	nnSerie = createSeries(nnData,attr, "NN - " + attr.toString());
+            lineChart.getData().addAll(nnSerie);
+        	
+        }
+
+        //realSerie -> must be first!
+        for (enumAttributesOfData attr : this.view.getActiveNN().getAttributes()){
+        	nnSerie = new Series<>();
+        	
+        	nnSerie = createSeries(realData,attr, "Real - " + attr.toString());
             lineChart.getData().addAll(nnSerie);
         	
         }
