@@ -6,12 +6,7 @@
 
 
 ## To do:
+- Update presentation
+- Update "consideracoes finais"
 
-
-### Tests plan
-- compare training alghs with same topology
-- spec with topology, how much training, get average.
-- create comparing grade
-
-### Tests script
 
