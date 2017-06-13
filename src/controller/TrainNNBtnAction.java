@@ -33,6 +33,10 @@ public class TrainNNBtnAction implements ActionListener, PropertyChangeListener 
     			
     			ArrayList<Double> errors = trainer.train(nn, panel.getLearningRule(), panel.getMaxIteration(), panel.getMaxError(), panel.getFrom(), panel.getTo());
     			panel.populateGraph(errors);
+    			
+    			//save NN
+    			nn.save(nn.getName(), true);
+    			
     			JOptionPane.showMessageDialog(null, "Network trained with success!");
     			
         	} catch (UnknownHostException ex){

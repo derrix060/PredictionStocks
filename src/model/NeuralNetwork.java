@@ -75,6 +75,27 @@ public class NeuralNetwork {
 
 	}
 	
+	public void save(String name, boolean forceReplace) throws IOException{
+		
+		if(forceReplace){
+			Gson gson = new Gson();
+	
+			File netwFile = new File(NeuralNetwork.PATH + name + TOPOLOGY_NAME);
+			
+			EncogDirectoryPersistence.saveObject(netwFile , topology);
+			String json = gson.toJson(this);
+	
+			FileWriter writer = new FileWriter(NeuralNetwork.PATH + name + ".json");
+	
+			writer.write(json);
+			writer.close();
+		}
+		else{
+			save(name);
+		}
+		
+	}
+	
 	/**
 	 * Check if exist any network with this name.
 	 * @param name
