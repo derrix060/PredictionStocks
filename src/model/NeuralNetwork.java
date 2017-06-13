@@ -94,6 +94,8 @@ public class NeuralNetwork {
 			save(name);
 		}
 		
+		System.out.println("Network saved with success!!");
+		
 	}
 	
 	/**
