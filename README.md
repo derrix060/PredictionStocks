@@ -6,7 +6,6 @@
 
 
 ## To do:
-- Update presentation
-- Update "consideracoes finais"
+- do some corrections
 
 
