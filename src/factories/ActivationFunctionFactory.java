@@ -40,7 +40,7 @@ public class ActivationFunctionFactory {
 		private final Class<? extends ActivationFunction> clazz;
 		
 		/**
-		 * Enum activaction Function constructor
+		 * Enum activation Function constructor
 		 * @param activationFunction
 		 */
 		private enumActivationFuncion(Class<? extends ActivationFunction> activationFunction) {
