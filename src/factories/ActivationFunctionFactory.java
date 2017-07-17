@@ -20,42 +20,46 @@ import org.encog.engine.network.activation.ActivationTANH;
 public class ActivationFunctionFactory {
 	
 	public enum enumActivationFuncion{
-		BiPolar, //-1 or 1
-		BipolarSteepenedSigmoid, 
-		ClippedLinear, 
-		Competitive, //?
-		Elliott, 
-		ElliottSymmetric, 
-		Gaussian, 
-		Linear, //any - return the parameter
-		LOG, //any
-		Ramp, 
-		Sigmoid, // [-1;1]
-		SIN, 
-		SoftMax, //?
-		SteepenedSigmoid, 
-		Step, 
-		TANH; //[-1;1]
+		BiPolar(ActivationBiPolar.class),
+		BipolarSteepenedSigmoid(ActivationBipolarSteepenedSigmoid.class), 
+		ClippedLinear(ActivationClippedLinear.class), 
+		Competitive(ActivationCompetitive.class),
+		Elliott(ActivationElliott.class), 
+		ElliottSymmetric(ActivationElliottSymmetric.class), 
+		Gaussian(ActivationGaussian.class), 
+		Linear(ActivationLinear.class),
+		LOG(ActivationLOG.class),
+		Ramp(ActivationRamp.class), 
+		Sigmoid(ActivationSigmoid.class),
+		SIN(ActivationSIN.class), 
+		SoftMax(ActivationSoftMax.class),
+		SteepenedSigmoid(ActivationSteepenedSigmoid.class), 
+		Step(ActivationStep.class), 
+		TANH(ActivationTANH.class);
+		
+		private final Class<? extends ActivationFunction> clazz;
+		
+		/**
+		 * Enum activaction Function constructor
+		 * @param activationFunction
+		 */
+		private enumActivationFuncion(Class<? extends ActivationFunction> activationFunction) {
+			this.clazz = activationFunction;
+		}
 	}
 	
-	public static ActivationFunction create (enumActivationFuncion activationType){
-		if (activationType.equals(enumActivationFuncion.BiPolar)) return new ActivationBiPolar();
-		if (activationType.equals(enumActivationFuncion.BipolarSteepenedSigmoid)) return new ActivationBipolarSteepenedSigmoid();
-		if (activationType.equals(enumActivationFuncion.ClippedLinear)) return new ActivationClippedLinear();
-		if (activationType.equals(enumActivationFuncion.Competitive)) return new ActivationCompetitive();
-		if (activationType.equals(enumActivationFuncion.Elliott)) return new ActivationElliott();
-		if (activationType.equals(enumActivationFuncion.ElliottSymmetric)) return new ActivationElliottSymmetric();
-		if (activationType.equals(enumActivationFuncion.Gaussian)) return new ActivationGaussian();
-		if (activationType.equals(enumActivationFuncion.Linear)) return new ActivationLinear();
-		if (activationType.equals(enumActivationFuncion.LOG)) return new ActivationLOG();
-		if (activationType.equals(enumActivationFuncion.Ramp)) return new ActivationRamp();
-		if (activationType.equals(enumActivationFuncion.Sigmoid)) return new ActivationSigmoid();
-		if (activationType.equals(enumActivationFuncion.SIN)) return new ActivationSIN();
-		if (activationType.equals(enumActivationFuncion.SoftMax)) return new ActivationSoftMax();
-		if (activationType.equals(enumActivationFuncion.SteepenedSigmoid)) return new ActivationSteepenedSigmoid();
-		if (activationType.equals(enumActivationFuncion.Step)) return new ActivationStep();
-		if (activationType.equals(enumActivationFuncion.TANH)) return new ActivationTANH();
-		else return null;
+	/**
+	 * Create activationFunction from an enum
+	 * @param enumAct
+	 * @return activationFunction
+	 */
+	public static ActivationFunction create (enumActivationFuncion enumAct){
+		try {
+			return enumAct.clazz.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public static enumActivationFuncion fromString(String vlr){
