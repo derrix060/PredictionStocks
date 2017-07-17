@@ -7,5 +7,6 @@
 
 ## To do:
 - do some corrections
+- add NN comparisons as the same of presentation
 
 
